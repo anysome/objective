@@ -107,8 +107,8 @@ const style = StyleSheet.create({
     container: {
         flexDirection: 'column',
         flex: 1,
-        marginLeft: 16,
-        marginRight: 16,
+        marginLeft: 10,
+        marginRight: 10,
         marginBottom: 8,
         backgroundColor: colors.light1,
         //borderTopWidth: 1,

@@ -146,28 +146,6 @@ export default class Inbox extends Component {
         section.push(rowData);
     }
 
-    _renderRow(rowData, sectionId, rowId) {
-        if ( sectionId === 1 ) {
-            return (
-                <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
-                    <Icon size={28} name='ios-compose-outline' color={colors.border} onPress={() => this._toProject(rowData)} />
-                    <Text style={[styles.title, style.body]}>{rowData.title}</Text>
-                    <Text style={styles.hint}>{rowData.countTodo} / {rowData.countTotal}</Text>
-                </TouchableOpacity>
-            );
-        } else {
-            return (
-                <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
-                    <Icon size={28} name='ios-calendar-outline' color={colors.border} onPress={() => this._toArrange(rowData)} />
-                    <View style={style.body}>
-                        <Text style={styles.title}>{rowData.title}</Text>
-                        <Text style={styles.text}>{rowData.detail}</Text>
-                    </View>
-                </TouchableOpacity>
-            );
-        }
-    }
-
     _toProject(rowData) {
         this.props.navigator.push({
             title: '修改清单',
@@ -264,6 +242,28 @@ export default class Inbox extends Component {
         this.props.navigator.pop();
     }
 
+    _renderRow(rowData, sectionId, rowId) {
+        if ( sectionId === 1 ) {
+            return (
+                <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
+                    <Icon size={28} name='ios-compose-outline' style={style.icon} color={colors.border} onPress={() => this._toProject(rowData)} />
+                    <Text style={[styles.title, style.body]}>{rowData.title}</Text>
+                    <Text style={styles.hint}>{rowData.countTodo} / {rowData.countTotal}</Text>
+                </TouchableOpacity>
+            );
+        } else {
+            return (
+                <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
+                    <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border} onPress={() => this._toArrange(rowData)} />
+                    <View style={style.body}>
+                        <Text style={styles.title}>{rowData.title}</Text>
+                        <Text style={styles.text}>{rowData.detail}</Text>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+    }
+
     _renderSectionHeader(sectionData, sectionId) {
         return <ListSectionView data={sectionData} />;
     }
@@ -300,14 +300,17 @@ const style = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flex: 1,
-        paddingLeft: 16,
         paddingRight: 16,
         paddingTop: 5,
         paddingBottom: 5,
+        alignItems: 'center',
         backgroundColor: colors.light1
     },
+    icon: {
+        paddingLeft: 16,
+        paddingRight: 10,
+    },
     body: {
-        flex: 1,
-        marginLeft: 10
+        flex: 1
     }
 });

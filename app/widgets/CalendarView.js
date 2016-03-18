@@ -18,7 +18,7 @@ class CalendarHeader extends Component {
             <View style={ [styles.header] }>
                 {week.map((day, i) =>
                     <View key={i} style={ [styles.headerCell] }>
-                        <Text style={ [styles.headerText, {color: i === 0 || i === 6 ? colors.border : colors.dark1 }] }>
+                        <Text style={ [styles.headerText, {color: colors.dark1 }] }>
                             {day}
                         </Text>
                     </View>
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         color: colors.dark3
     },
     disabledText: {
-        color: colors.dark1,
+        color: colors.border,
     },
 
     // header
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     },
     monthHeaderText: {
         fontSize: 16,
-        color: colors.dark1
+        color: colors.border
     },
 
     // month body
