@@ -1,0 +1,79 @@
+{
+  "public": {
+    "login": "pub/sign.json",
+    "taste": "pub/try.json",
+    "auth": "pub/authorize.json",
+    "resetPassword": "pub/repassword.json"
+  },
+  "agenda": {
+    "list": "agenda/recent.json",
+    "add": "agenda/todo/add.json",
+    "update": "agenda/todo/update.json",
+    "remove": "agenda/todo/delete.json",
+    "schedule": "agenda/todo/redate.json",
+    "done": "agenda/todo/fulfill.json"
+  },
+  "inbox": {
+    "list": "chaos/chore/total.json",
+    "add": "chaos/chore/add.json",
+    "update": "chaos/chore/update.json",
+    "remove": "chaos/chore/drop.json",
+    "arrange": "chaos/chore/arrange.json",
+    "clean": "chaos/chore/trash/clean.json"
+  },
+  "project": {
+    "list": "project/topic.json",
+    "add": "project/topic/add.json",
+    "update": "project/topic/update.json",
+    "remove": "project/topic/delete.json",
+    "move": "chaos/chore/move/topic.json",
+    "plot": "chaos/chore/plot.json"
+  },
+  "check": {
+    "list": "check/today.json",
+    "arrange": "check/roll/arrange.json"
+  },
+  "target": {
+    "read": "check/target/get.json",
+    "stat": "check/target/stat.json",
+    "update": "check/target/update.json",
+    "add": "check/target/add.json",
+    "remove": "check/target/delete.json",
+    "punch": "check/target/punch.json",
+    "track": "check/target/track.json",
+    "punchs": "check/target/punchs.json"
+  },
+  "me": {
+    "reward": "reward/agenda.json"
+  },
+  "feedback": {
+    "list": "conta/feedback/mime.json",
+    "add": "conta/feedback/add.json",
+    "fellow": "conta/feedback/fellow.json",
+    "remove": "conta/feedback/delete.json",
+    "answer": "conta/feedback/answer.json"
+  },
+  "content": {
+    "list": {
+      "user": "social/content/user.json",
+      "public": "social/content/public.json"
+    },
+    "detail": {
+      "likes": "social/content/like/list.json",
+      "like": "social/content/like.json",
+      "unlike": "social/content/unlike.json",
+      "comments": "social/content/comment/list.json",
+      "comment": "social/content/comment/add.json",
+      "uncomment": "social/content/comment/delete.json"
+    }
+  },
+  "discover": {
+    "follows": "social/user/followers.json",
+    "fans": "social/user/fans.json",
+    "user": {
+      "read": "social/user/get.json",
+      "follow": "social/user/follow.json",
+      "unfollow": "social/user/unfollow.json"
+    }
+  }
+}

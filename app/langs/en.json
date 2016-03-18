@@ -1,0 +1,159 @@
+{
+  "banner": {
+    "me": {
+      "follows": "关注"
+    }
+  },
+  "error": {
+    "request": {
+      "param": "网络请求参数错误",
+      "auth": "未授权,请重新登录"
+    },
+    "network": {
+      "offline": "无网络连接",
+      "server": "服务器异常"
+    },
+    "user": {
+      "password": "密码错误,请重新输入",
+      "login": {
+        "email": "邮箱错误"
+      }
+    },
+    "schedule": {
+      "past": "只能安排到今日以后"
+    },
+    "title": {
+      "required": "还说得说点什么"
+    },
+    "punch": {
+      "invalid": "你确定完成了吗?"
+    }
+  },
+  "objective": {
+    "priority": {
+      "none": "无",
+      "ordinary": "一般",
+      "medium": "要紧",
+      "emphasis": "重点",
+      "emergency": "极其重要",
+      "frog": "最最重要"
+    },
+    "unit": {
+      "check": "次",
+      "tomato": "番茄",
+      "paper": "篇",
+      "piece": "个",
+      "km": "公里",
+      "item": "串"
+    },
+    "frequency": {
+      "daily": "每天",
+      "weekly": "每周",
+      "monthly": "每月",
+      "totally": "累计"
+    }
+  },
+
+  "banner.me.follows": "我的关注",
+  "text.common.yes": "是",
+  "text.common.no": "否",
+  "text.common.none": "无",
+  "text.common.unknown": "未知",
+  "text.common.cancel": "取消",
+  "text.common.success": "操作成功",
+  "text.alarm.info": "每日9、14、21正点提醒已开启",
+  "text.alarm.cancel": "每日提醒已关闭",
+  "error.user.login.account": "登录名或密码错误",
+  "error.user.register.exist": "登录名已被注册",
+  "error.server.inner": ":( 服务器出错了，稍后尝试",
+  "error.server.offline": "暂时无法访问服务器，请稍候",
+  "error.request.reauth": "正在重新检验用户信息，请重试",
+  "error.request.param": "输入数据有误，操作失败",
+  "error.network.offline": "当前无可用网络连接",
+  "error.response.format": "通信数据错误，请重试",
+  "error.email.format": "邮箱地址有误",
+  "error.password.inconsistent": "密码不一致",
+  "text.loading.common": "加载中...",
+  "text.loading.net": "正在加载",
+  "press.again.exit": "再按一次退出",
+  "text.check.input": "请输入数量",
+  "error.check.deadline": "超过打卡截止时限",
+  "error.arrange.limited": "超过打卡截止时限",
+  "error.user.login.email": "邮箱错误",
+  "error.user.authcode": "授权码错误或已过期",
+  "error.arrange.already": "已安排，请刷新",
+  "error.punch.duplicate": "已打卡，请刷新",
+  "error.done.duplicate": "已完成，请刷新",
+  "error.plot.removed": "事项已不存在",
+  "error.schedule.past": "只能安排到今日以后",
+  "error.share.social": "请先到广场申请社交ID",
+  "error.social.register": "注册用户才有社交ID",
+  "error.social.target.join.already": "您早已参与该目标",
+  "error.punch.invalid": "完成数至少为1",
+
+  "text.check.success": "打卡成功",
+  "text.arrange.success": "已安排",
+  "text.done.success": "已完成",
+  "dialog.logout.title": "登出帐户",
+  "text.logout.message": "确定要登出吗？",
+  "dialog.logout.button": "登出",
+  "dialog.pause.title": "暂停",
+  "target.pause.message": "目标 {0} 暂时不打卡？",
+  "dialog.delete.title": "删除",
+  "topic.delete.message": "包含任务，确定要删除吗？",
+  "dialog.delete.message": "确定要删除吗？",
+  "dialog.delete.button": "删除",
+  "dialog.done.message": "确认已完成？",
+  "dialog.done.button": "完成",
+  "dialog.check.button": "打卡",
+  "dialog.precede.message": "提前到今日？",
+  "dialog.precede.button": "提前",
+  "text.target.everydayCheck": "每天打卡",
+  "text.building": "开发中，请稍候",
+  "text.done.nopriority": "完成的无需调整优先级",
+  "text.past.nopriority": "过期的不能调整优先级",
+  "error.topic.close": "有任务未完成，不能关闭",
+  "error.account.secure": "他方帐户异常，无法登录",
+  "text.common.thanks": "非常感谢",
+  "dialog.update.title": "下载更新？",
+  "dialog.update.message": "发现新版本 {0}",
+  "dialog.update.button": "更新",
+  "text.update.already": "已是最新版本",
+  "auth.check.email": "已发放，请查收邮件",
+  "dialog.theme.change": "立即应用",
+  "text.theme.message": "重载界面还是等待重进应用？",
+  "text.share.info": "允许分享打卡到广场",
+  "text.share.cancel": "取消分享",
+  "text.share.limp": "非打卡待办暂不能分享",
+  "text.share.change": "修正时不能分享",
+  "text.wifi.view": "wifi下再打开网页",
+  "user.social.anti": "非社交用户不可查看",
+  "user.follow.excess": "关注太多眼睛会花",
+  "target.punch.check": "请在检查单或待办里完成",
+  "user.uid.absent": "没找到该社交ID用户",
+
+  "tip.common.success": "操作成功",
+  "tip.network.error": "网络不稳定，稍后再试试",
+  "tip.target.share": "分享处理中，请等候2天",
+  "tip.target.copy": "成功复制该目标",
+  "tip.target.unclosable": "到期后执行80%以上才可完成",
+  "tip.offline.cache": "网络不稳定，数据未更新",
+  "tip.user.follow": "关注成功",
+  "tip.user.unfollow": "已取消关注",
+  "tip.user.follow.already": "早已关注",
+  "tip.comment.success": "已评论",
+
+  "dialog.target.share": "分享目标给大家",
+  "message.target.share": "分享后将不能修改目标",
+  "dialog.share.button": "分享",
+  "dialog.welcome.title": "欢迎加入",
+  "message.help.recruit": "是否先看看帮助说明呢？",
+  "dialog.share.delete": "删除分享的内容",
+
+  "dialog.confirm.title": "确认",
+  "dialog.confirm.message": "执行该操作 ?",
+  "message.agenda.clean": "清除后昨天的打卡将无法补打",
+  "message.trash.clean": "清空回收站的所有事项？",
+  "tip.agenda.noclean": "太洁癖的不要哦",
+
+}

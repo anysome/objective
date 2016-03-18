@@ -1,0 +1,45 @@
+{
+    "banner": {
+        "me": {
+            "follows": "关注"
+        }
+    },
+    "error": {
+        "user": {
+            "password": "密码错误,请重新输入",
+            "login": {
+                "email": "邮箱错误"
+            }
+        },
+        "schedule": {
+            "past": "只能安排到今日以后"
+        },
+        "title": {
+            "required": "还说得说点什么"
+        }
+    },
+    "objective": {
+        "priority": {
+            "none": "无",
+            "ordinary": "一般",
+            "medium": "要紧",
+            "emphasis": "重点",
+            "emergency": "极其重要",
+            "frog": "最最重要"
+        },
+        "unit": {
+            "check": "次",
+            "tomato": "番茄",
+            "paper": "篇",
+            "piece": "个",
+            "km": "公里",
+            "item": "串"
+        },
+        "frequency": {
+            "daily": "每天",
+            "weekly": "每周",
+            "monthly": "每月",
+            "totally": "累计"
+        }
+    }
+}
