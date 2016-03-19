@@ -247,7 +247,7 @@ export default class Inbox extends Component {
             return (
                 <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
                     <Icon size={28} name='ios-compose-outline' style={style.icon} color={colors.border} onPress={() => this._toProject(rowData)} />
-                    <Text style={[styles.title, style.body]}>{rowData.title}</Text>
+                    <Text style={styles.title}>{rowData.title}</Text>
                     <Text style={styles.hint}>{rowData.countTodo} / {rowData.countTotal}</Text>
                 </TouchableOpacity>
             );
@@ -309,8 +309,5 @@ const style = StyleSheet.create({
     icon: {
         paddingLeft: 16,
         paddingRight: 10,
-    },
-    body: {
-        flex: 1
     }
 });

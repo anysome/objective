@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
         fontSize: 14
     },
     title: {
+        flex: 1,
         paddingTop: 4,
         paddingBottom: 4,
         color: colors.dark3,

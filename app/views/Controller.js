@@ -32,7 +32,6 @@ export default class Controller extends Component {
     }
 
     forward(route) {
-        route.transiting = true;
         this.props.navigator.push(route);
     }
 
@@ -76,16 +75,12 @@ export default class Controller extends Component {
         console.log(`-------- "${this.constructor.name}" unmounting`);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if ( new Date().getTime() - this.today > 86400000 ) {
-            // new day is arrival,
-            this.today += 86400000;
-            return true;
-        }
-        let route = nextProps.navigator.navigationContext.currentRoute;
-        let isTransiting = route && route.transiting;
-        console.log(`-------- "${this.constructor.name}" should update is ${!isTransiting}`);
-        return !isTransiting;
-    }
+    //shouldComponentUpdate(nextProps, nextState) {
+    //    if ( new Date().getTime() - this.today > 86400000 ) {
+    //        // new day is arrival,
+    //        this.today += 86400000;
+    //    }
+    //    return true;
+    //}
 
 }

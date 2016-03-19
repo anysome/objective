@@ -155,7 +155,7 @@ export default class Content extends Component {
                                 <Text style={styles.hint}>{data.uid}</Text>
                             </View>
                             <View style={style.container}>
-                                <Text style={styles.text}>{checkDaily.title}</Text>
+                                <Text style={style.text}>{checkDaily.title}</Text>
                                 <Text style={styles.hint}>
                                     {`${checkDaily.total} + ${checkDaily.times} ${objective.getUnitName(checkDaily.unit)}`}
                                 </Text>
@@ -179,9 +179,7 @@ export default class Content extends Component {
                               renderFooter={this._renderFooter}
                     />
                     <View style={[style.bottom, {bottom: this.state.visibleBottom}]}>
-                        <TouchableOpacity onPress={() => this._close()}>
-                            <Icon size={32} name='android-close' color={colors.border} style={style.close} />
-                        </TouchableOpacity>
+                        <Icon size={32} name='android-close' color={colors.border} style={style.close} onPress={() => this._close()} />
                         <TextField value={this.state.comment} style={style.input}
                                    placeholder="也说两句..."
                                    onChangeText={text => this.setState({comment: text})}
@@ -225,6 +223,11 @@ const style = StyleSheet.create({
         padding: 8,
         margin: 5
     },
+    text: {
+        flex: 1,
+        color: colors.dark1,
+        fontSize: 14
+    },
     timeline: {
         flexDirection:'row',
         padding: 2,
@@ -252,12 +255,19 @@ const style = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         height: 50,
-        left: 16,
-        right: 16,
-        borderTopWidth: 1 / PixelRatio.get(),
-        borderTopColor: colors.border,
+        left: 0,
+        right: 0,
+        paddingRight: 16,
+        //borderTopWidth: 1 / PixelRatio.get(),
+        //borderTopColor: colors.border,
+        backgroundColor: colors.light2,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    close: {
+        paddingLeft: 16,
+        paddingRight: 8,
+        backgroundColor: 'transparent'
     },
     input: {
         flex: 1,
@@ -269,9 +279,5 @@ const style = StyleSheet.create({
         backgroundColor: colors.light1,
         flex: 1,
         flexDirection: 'row'
-    },
-    close: {
-        paddingRight: 8,
-        backgroundColor: 'transparent'
     }
 });

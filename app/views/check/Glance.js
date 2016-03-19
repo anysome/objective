@@ -143,7 +143,7 @@ export default class Glance extends Component {
     render() {
         return (
             <ScrollView style={style.container}>
-                <Text style={style.title}>{this.checkDaily.title}</Text>
+
                 <View>
                     <View style={styles.containerC}>
                         <AnimatedCircularProgress
@@ -170,11 +170,10 @@ export default class Glance extends Component {
                     </Button>
                 </View>
                 <View style={style.row}>
+                    <Text style={styles.title}>{this.checkDaily.title}</Text>
                     <Text style={style.summary}>{this.state.summary}</Text>
                 </View>
-                <View style={style.row}>
-                    <Text style={styles.text}>{this.checkDaily.detail}</Text>
-                </View>
+                <Text style={styles.text}>{this.checkDaily.detail}</Text>
                 {this.checkDaily.closed &&
                 <View style={styles.row}>
                     <Text style={style.hint}>
@@ -221,21 +220,19 @@ const style = StyleSheet.create({
     },
     row: {
         marginTop: 10,
+        marginBottom: 5,
         paddingTop: 4,
-        flexDirection: 'row',
-        borderTopWidth: 1 / PixelRatio.get(),
-        borderTopColor: colors.border
+        paddingBottom: 4,
+        flexDirection: 'column',
+        borderTopWidth: 1,
+        borderTopColor: colors.border,
+        borderBottomWidth: 1 / PixelRatio.get(),
+        borderBottomColor: colors.border
     },
     link: {
         fontSize: 12,
         textAlign: 'center',
         color: colors.accent
-    },
-    title: {
-        paddingBottom: 5,
-        color: colors.dark2,
-        fontWeight: 'bold',
-        fontSize: 20
     },
     summary: {
         paddingTop: 5,

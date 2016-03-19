@@ -93,8 +93,7 @@ export default class Anything extends Component {
     async _saveToday(title, detail) {
         let agenda = {
             title: title,
-            detail: detail,
-            today: new Date()
+            detail: detail
         };
         let result = await airloy.net.httpPost(api.agenda.add, agenda);
         if ( result.success ) {

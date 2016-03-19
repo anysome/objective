@@ -121,7 +121,7 @@ export default class Discover extends Controller {
                             <Text style={styles.hint}>{rowData.uid}</Text>
                         </View>
                         <View style={style.container}>
-                            <Text style={styles.text}>{checkDaily.title}</Text>
+                            <Text style={style.text}>{checkDaily.title}</Text>
                             <Text style={styles.hint}>
                                 {`${checkDaily.total} + ${checkDaily.times} ${objective.getUnitName(checkDaily.unit)}`}
                             </Text>
@@ -192,6 +192,11 @@ const style = StyleSheet.create({
         backgroundColor: colors.light1,
         padding: 8,
         margin: 5
+    },
+    text: {
+        flex: 1,
+        color: colors.dark1,
+        fontSize: 14
     },
     avatar: {
         marginRight:16,

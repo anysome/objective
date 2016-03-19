@@ -45,6 +45,7 @@ export default class Check extends Controller {
             };
         }
         airloy.event.on('target.change', () => {
+            console.log(' check is visible ? = ' + this.visible);
             this.visible ? this.reload() : this.markStale();
         });
         airloy.event.on('target.punch', (done) => {
@@ -180,10 +181,6 @@ export default class Check extends Controller {
         return <ListSectionView data={sectionData} />;
     }
 
-    _renderFooter() {
-        return <View style={styles.spaceV} />;
-    }
-
     _toAdd(type) {
         this.forward({
             title: '添加',
@@ -202,7 +199,6 @@ export default class Check extends Controller {
                           dataSource={this.state.dataSource}
                           renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
                           renderSectionHeader={this._renderSectionHeader}
-                          renderFooter={this._renderFooter}
                           refreshControl={
                           <RefreshControl
                             refreshing={this.state.isRefreshing}

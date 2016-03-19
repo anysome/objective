@@ -98,7 +98,7 @@ export default class ContentList extends Component {
             <TouchableOpacity style={style.row} onPress={() => this._pressRow(rowData)}>
                 {log && <Text style={styles.title}>{rowData.log}</Text>}
                 <View style={style.container}>
-                    <Text style={styles.text}>{checkDaily.title}</Text>
+                    <Text style={style.text}>{checkDaily.title}</Text>
                     <Text style={styles.hint}>
                         {`${checkDaily.total} + ${checkDaily.times} ${objective.getUnitName(checkDaily.unit)}`}
                     </Text>
@@ -164,6 +164,11 @@ const style = StyleSheet.create({
     separator: {
         height: 10,
         backgroundColor: colors.light3,
+    },
+    text: {
+        flex: 1,
+        color: colors.dark1,
+        fontSize: 14
     },
     icon: {
         marginLeft: 8,

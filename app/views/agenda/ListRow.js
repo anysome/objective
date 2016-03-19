@@ -84,7 +84,6 @@ const style = StyleSheet.create({
         marginLeft: 5
     },
     body: {
-        flex: 1,
         marginLeft: 10,
         marginRight: 10
     },
