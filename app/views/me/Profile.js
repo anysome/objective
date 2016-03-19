@@ -5,7 +5,7 @@
 
 import React, {Component, ScrollView, View, Text} from 'react-native';
 
-import {styles, colors} from '/../app/app';
+import {styles, colors, toast} from '/../app/app';
 
 export default class Profile extends Component {
 
@@ -13,9 +13,13 @@ export default class Profile extends Component {
         super(props);
     }
 
+    _showTip() {
+        toast('test');
+    }
+
     render() {
         return <ScrollView>
-            <Text>hello</Text>
+            <Text onPress={this._showTip}>hello</Text>
         </ScrollView>;
     }
 }

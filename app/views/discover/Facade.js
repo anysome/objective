@@ -79,7 +79,8 @@ export default class Facade extends Component {
             <ScrollView>
                 <View style={style.row}>
                     <Image style={{width:100, height:100, marginRight: 16}}
-                           source={{uri:`${config.host.avatar + this.user.id}-100`}}  />
+                           source={{uri:`${config.host.avatar + this.user.id}-100`}}
+                           defaultSource={require('/../resources/images/avatar.png')}/>
                     <View style={style.info}>
                         <View style={styles.containerF}>
                             <Text style={styles.title}>{this.user.name}</Text>

@@ -48,7 +48,7 @@ var util = new class {
 function toast(message) {
     Toast.show(message, {
         duration: Toast.durations.SHORT,
-        position: Toast.positions.BOTTOM,
+        position: -70,//Toast.positions.BOTTOM,
         shadow: false,
         animation: true,
         hideOnPress: true,

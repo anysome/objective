@@ -255,7 +255,7 @@ export default class Inbox extends Component {
             return (
                 <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
                     <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border} onPress={() => this._toArrange(rowData)} />
-                    <View style={style.body}>
+                    <View style={styles.flex}>
                         <Text style={styles.title}>{rowData.title}</Text>
                         <Text style={styles.text}>{rowData.detail}</Text>
                     </View>

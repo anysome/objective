@@ -113,8 +113,8 @@ export default class Agenda extends Controller {
 
     _sortList() {
         let section0 = new ListSectionView.DataSource({id: 0, name: moment(this.today).format('D日（ddd）')});
-        let section1 = new ListSectionView.DataSource({id: 1, name: '未来'});
-        let section2 = new ListSectionView.DataSource({id: 2, name: '完成'});
+        let section1 = new ListSectionView.DataSource({id: 1, name: '计划内'});
+        let section2 = new ListSectionView.DataSource({id: 2, name: '今日完成'});
         for(let rowData of this.listSource) {
             this._sortRow(rowData, section0, section1, section2);
         }

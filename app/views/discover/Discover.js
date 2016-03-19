@@ -113,7 +113,8 @@ export default class Discover extends Controller {
                 <View style={style.header}>
                     <TouchableOpacity onPress={() => this._toUser(rowData.userId)}>
                         <Image style={style.avatar}
-                               source={{uri:`${config.host.avatar + rowData.userId}-100`}} />
+                               source={{uri:`${config.host.avatar + rowData.userId}-100`}}
+                               defaultSource={require('/../resources/images/avatar.png')}/>
                     </TouchableOpacity>
                     <View style={styles.containerV}>
                         <View style={styles.containerF}>

@@ -77,7 +77,7 @@ export default class UserList extends Component {
         return (
             <TouchableOpacity style={style.row} onPress={() => this._pressRow(user)}>
                 <Image style={style.avatar} source={{uri: `${config.host.avatar + user.id}-60`}}
-                       defaultSource={{uri: '/../resources/images/avatar.png'}} />
+                       defaultSource={require('/../resources/images/avatar.png')} />
                 <View style={styles.containerV}>
                     <Text>{user.name}</Text>
                     <Text style={style.hint}>{user.signature}</Text>

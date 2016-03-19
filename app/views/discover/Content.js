@@ -31,24 +31,24 @@ export default class Content extends Component {
         };
     }
 
-    componentDidMount() {
-        airloy.event.on('keyboardWillShow', (e) => {
-            this.setState({
-                isKeyboardOpened: true,
-                visibleBottom: e.endCoordinates.height
-            });
-        });
-        airloy.event.on('keyboardWillHide', (e) => {
-            this.setState({
-                isKeyboardOpened: false,
-                visibleBottom: 0
-            });
-        });
-    }
-
-    componentWillUnmount() {
-        airloy.event.off('keyboardWillShow', 'keyboardWillHide');
-    }
+    //componentDidMount() {
+    //    airloy.event.on('keyboardWillShow', (e) => {
+    //        this.setState({
+    //            isKeyboardOpened: true,
+    //            visibleBottom: e.endCoordinates.height
+    //        });
+    //    });
+    //    airloy.event.on('keyboardWillHide', (e) => {
+    //        this.setState({
+    //            isKeyboardOpened: false,
+    //            visibleBottom: 0
+    //        });
+    //    });
+    //}
+    //
+    //componentWillUnmount() {
+    //    airloy.event.off('keyboardWillShow', 'keyboardWillHide');
+    //}
 
     componentWillUpdate(props, state) {
         if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
@@ -60,6 +60,26 @@ export default class Content extends Component {
         if ( this.props.data !== nextProps.data ) {
             this.setState({data: nextProps.data});
             this.reload(nextProps.data);
+        }
+        if ( nextProps.visible ) {
+            airloy.event.on('keyboardWillShow', (e) => {
+                this.setState({
+                    isKeyboardOpened: true,
+                    visibleBottom: e.endCoordinates.height
+                });
+            });
+            airloy.event.on('keyboardWillHide', (e) => {
+                this.setState({
+                    isKeyboardOpened: false,
+                    visibleBottom: 0
+                });
+            });
+        } else {
+            airloy.event.off('keyboardWillShow', 'keyboardWillHide');
+            this.setState({
+                isKeyboardOpened: false,
+                visibleBottom: 0
+            });
         }
     }
 
@@ -148,7 +168,8 @@ export default class Content extends Component {
                 <View style={styles.window}>
                     <View style={style.header}>
                         <Image style={style.avatar}
-                               source={{uri:`${config.host.avatar + data.userId}-100`}}  />
+                               source={{uri:`${config.host.avatar + data.userId}-100`}}
+                               defaultSource={require('/../resources/images/avatar.png')}/>
                         <View style={styles.containerV}>
                             <View style={styles.containerF}>
                                 <Text style={styles.text}>{data.userName}</Text>
