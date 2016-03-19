@@ -8,7 +8,7 @@ import React, {Component, StyleSheet, RefreshControl, ListView,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import app, {airloy, styles, colors, api, L} from '/../app/app';
+import {airloy, styles, colors, api, toast, L} from '/../app/app';
 
 import ListSource from '/../app/logic/ListSource';
 import ListSectionView from '/../app/widgets/ListSectionView';
@@ -168,6 +168,7 @@ export default class Inbox extends Component {
                 rightButtonIcon: this.props.plusIcon,
                 passProps: {
                     data: rowData,
+                    nextIcon: this.rightButtonIcon,
                     onUpdated: (rowData) => this.updateRow(rowData),
                     onDeleted: (rowData) => this.deleteRow(rowData)
                 }
@@ -276,7 +277,7 @@ export default class Inbox extends Component {
         return (
             <ListView
                 initialListSize={10}
-                pageSize={10}
+                pageSize={5}
                 dataSource={this.state.dataSource}
                 renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
                 renderSectionHeader={this._renderSectionHeader}

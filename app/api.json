@@ -27,7 +27,11 @@
     "update": "project/topic/update.json",
     "remove": "project/topic/delete.json",
     "move": "chaos/chore/move/topic.json",
-    "plot": "chaos/chore/plot.json"
+    "plot": "chaos/chore/plot.json",
+    "item": {
+      "list": "project/topic/item.json",
+      "add": "project/topic/item/add.json"
+    }
   },
   "check": {
     "list": "check/today.json",
