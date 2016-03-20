@@ -19,12 +19,31 @@ export default class Project extends Component {
         super(others);
         this.listSource = new ListSource();
         this.project = data;
+        this.countChanged = false;
         this.state = {
             isRefreshing: true,
             dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2
+                getSectionHeaderData: (dataBlob, sectionId) => this.project,
+                rowHasChanged: (row1, row2) => row1 !== row2,
+                sectionHeaderHasChanged: (s1, s2) => s1 !== s2
             })
         };
+    }
+
+    componentWillMount() {
+        let route = this.props.navigator.navigationContext.currentRoute;
+        route.onRightButtonPress = () => {
+            this.props.navigator.push({
+                title: '添加子任务',
+                component: EditItem,
+                passProps: {
+                    projectId: this.project.id,
+                    editable: true,
+                    onUpdated: (rowData) => this.updateRow(rowData)
+                }
+            });
+        };
+        this.props.navigator.replace(route);
     }
 
     componentDidMount() {
@@ -40,8 +59,10 @@ export default class Project extends Component {
         if ( result.success ) {
             this.listSource = new ListSource(result.info);
             this.setState({
-                isRefreshing: false,
                 dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+            });
+            this.setState({
+                isRefreshing: false
             });
         } else {
             result.message !== 'error.request.auth' && this.setState({
@@ -84,9 +105,28 @@ export default class Project extends Component {
         }
     }
 
+    updateRow(rowData) {
+        this.listSource.update(rowData);
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+        });
+        this.props.navigator.pop();
+    }
+
+    deleteRow(rowData) {
+        this.listSource.remove(rowData);
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+        });
+        this.project.countTotal--;
+        rowData.status === '0' && this.project.countTodo--;
+        this.countChanged = true;
+        this.props.navigator.pop();
+    }
+
     _pressRow(rowData, editable) {
         this.props.navigator.push({
-            title: editable ? '修改' : '查看子任务',
+            title: editable ? '修改子任务' : '查看子任务',
             component: EditItem,
             rightButtonIcon: this.props.nextIcon,
             passProps: {
@@ -139,10 +179,10 @@ export default class Project extends Component {
         return <View key={rowId + '_separator'} style={styles.hr}></View>
     }
 
-    _renderHeader() {
+    _renderSectionHeader(sectionData, sectionId) {
         return <View style={style.header}>
-            <Text style={styles.title}>{this.props.data.title}</Text>
-            <Text style={styles.text}>{this.project.detail}</Text>
+            <Text style={styles.title}>{sectionData.title}</Text>
+            <Text style={styles.text}>{sectionData.detail}</Text>
         </View>;
     }
 
@@ -154,7 +194,7 @@ export default class Project extends Component {
                 dataSource={this.state.dataSource}
                 renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
                 renderSeparator={this._renderSeparator}
-                renderHeader={() => this._renderHeader()}
+                renderSectionHeader={this._renderSectionHeader}
                 refreshControl={
                           <RefreshControl
                             refreshing={this.state.isRefreshing}
@@ -172,12 +212,13 @@ export default class Project extends Component {
 
 const style = StyleSheet.create({
     header: {
-        marginTop: 10,
+        paddingTop: 10,
         paddingLeft: 16,
         paddingRight: 16,
         paddingBottom: 4,
         borderBottomWidth: 1 / PixelRatio.get(),
-        borderBottomColor: colors.border
+        borderBottomColor: colors.border,
+        backgroundColor: colors.light2
     },
     container: {
         flexDirection: 'row',

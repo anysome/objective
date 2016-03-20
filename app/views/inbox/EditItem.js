@@ -15,7 +15,7 @@ export default class EditItem extends Component{
         var {data, sectionId, ...others} = props;
         super(others);
         this._title = null;
-        this.data = data || {title: '', detail: ''};
+        this.data = data || {title: '', detail: '', arranged: false};
         this.state = {
             title: this.data.title,
             detail: this.data.detail
@@ -25,44 +25,44 @@ export default class EditItem extends Component{
     componentWillMount() {
         let route = this.props.navigator.navigationContext.currentRoute;
         if ( route.rightButtonIcon ) {
-            if ( this.props.sectionId === 1 ) {
-                // edit project
-                route.onRightButtonPress = async () => {
-                    console.log('two button confirm if has total > 0 ');
-                    let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
-                    if ( result.success) {
-                        this.props.onDeleted(this.data);
-                    } else {
-                        toast(L(result.message));
-                    }
-                };
-            } else {
-                // edit chore
-                route.onRightButtonPress = () => this._showOptions();
-            }
+            route.onRightButtonPress = async () => {
+                let result = await airloy.net.httpGet(api.project.item.remove, {id: this.data.itemId});
+                if ( result.success) {
+                    this.props.onDeleted(this.data);
+                } else {
+                    toast(L(result.message));
+                }
+            };
             this.props.navigator.replace(route);
         }
     }
 
     async _save() {
         let result;
-        this.data.detail = this.state.detail;
-        if ( this.data.id ) {
-            if ( this._title.value.length > 0 ) {
-                this.data.title = this.state.title;
-            }
-            let url = this.props.sectionId === 1 ? api.project.update : api.inbox.update;
-            result = await airloy.net.httpPost(url, this.data);
-        } else {
+        if ( this.props.projectId ) {
             if ( this._title.value.length < 1 ) {
                 this._title.focus();
                 return ;
             }
-            this.data.title = this.state.title;
-            let url = this.props.sectionId === 1 ? api.project.add : api.inbox.add;
-            result = await airloy.net.httpPost(url, this.data);
+            let item = {
+                topicId: this.props.projectId,
+                title: this.state.title,
+                detail: this.state.detail
+            };
+            result = await airloy.net.httpPost(api.project.item.add, item);
+        } else {
+            let chore = {
+                id: this.data.choreId,
+                title: this.data.title,
+                detail: this.state.detail
+            };
+            if ( this._title.value.length > 0 ) {
+                chore.title = this.state.title;
+            }
+            result = await airloy.net.httpPost(api.inbox.update, chore);
         }
         if ( result.success ) {
+            this.data.arranged && airloy.event.emit('agenda.change');
             this.props.onUpdated(result.info);
         } else {
             toast(L(result.message));

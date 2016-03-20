@@ -168,9 +168,8 @@ export default class Inbox extends Component {
                 rightButtonIcon: this.props.plusIcon,
                 passProps: {
                     data: rowData,
-                    nextIcon: this.rightButtonIcon,
-                    onUpdated: (rowData) => this.updateRow(rowData),
-                    onDeleted: (rowData) => this.deleteRow(rowData)
+                    nextIcon: this.props.trashIcon,
+                    onUpdated: (rowData) => this.updateRow(rowData)
                 }
             });
         } else {
@@ -221,14 +220,18 @@ export default class Inbox extends Component {
     updateRow(rowData) {
         // also for add
         this.listSource.update(rowData);
-        this._sortList();
         this.props.navigator.pop();
+        this._sortList();
     }
 
     deleteRow(rowData) {
         this.listSource.remove(rowData);
-        this._sortList();
         this.props.navigator.pop();
+        if ( rowData.countTotal ) {
+            this.reload();
+        } else {
+            this._sortList();
+        }
     }
 
     async updateProjects(rowData) {

@@ -30,7 +30,8 @@
     "plot": "chaos/chore/plot.json",
     "item": {
       "list": "project/topic/item.json",
-      "add": "project/topic/item/add.json"
+      "add": "project/item/add.json",
+      "remove": "project/item/delete.json"
     }
   },
   "check": {
