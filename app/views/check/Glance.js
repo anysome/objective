@@ -224,7 +224,7 @@ const style = StyleSheet.create({
         paddingTop: 4,
         paddingBottom: 4,
         flexDirection: 'column',
-        borderTopWidth: 1,
+        borderTopWidth: 1 / PixelRatio.get(),
         borderTopColor: colors.border,
         borderBottomWidth: 1 / PixelRatio.get(),
         borderBottomColor: colors.border

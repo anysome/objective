@@ -15,7 +15,7 @@ import React, {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
-import {styles, colors, airloy, config, L} from '/../app/app';
+import {styles, colors, airloy, config, api, toast, L} from '/../app/app';
 
 import Controller from '../Controller';
 import Profile from './Profile';
@@ -31,7 +31,29 @@ export default class Me extends Controller {
     constructor(props) {
         super(props);
         this.user = airloy.auth.getUser();
-        this.state = {isRefreshing: true};
+        this.state = {
+            accountType: this.user.accountType,
+            name: this.user.name,
+            uid: this.user.uid
+        };
+    }
+
+    componentDidMount() {
+        // if accountType != astmp and uid === 0  then open social
+        if ( this.user.accountType !== 'astmp' && this.user.uid === 0 ) {
+            this._openSocial();
+        }
+    }
+
+    async _openSocial() {
+        let result = await airloy.net.httpGet(api.me.open);
+        if ( result.success ) {
+            this.user.uid = result.info;
+            this.setState({
+                uid: result.info
+            });
+            airloy.auth.updateUser(this.user);
+        }
     }
 
     _toFeedback() {
@@ -57,7 +79,7 @@ export default class Me extends Controller {
         });
     }
 
-    toFollow() {
+    _toFollow() {
         this.forward({
             title: '我关注的',
             component: UserList,
@@ -69,7 +91,7 @@ export default class Me extends Controller {
         });
     }
 
-    toFan() {
+    _toFan() {
         this.forward({
             title: '我的粉丝',
             component: UserList,
@@ -80,6 +102,48 @@ export default class Me extends Controller {
                 keepRoute: true
             }
         });
+    }
+
+    _toProfile() {
+        if ( this.user.accountType === 'astmp' ) {
+            this._toUpgrade();
+        } else {
+            this.forward({
+                title: '个人信息',
+                component: Profile,
+                navigationBarHidden: false,
+                passProps: {
+                    onUpdated: (name) => this.updateUser(name)
+                }
+            });
+        }
+    }
+
+    updateUser(name) {
+        this.setState({name: name});
+        this.props.navigator.pop();
+    }
+
+    _toUpgrade() {
+        this.forward({
+            title: '升级帐号',
+            component: Upgrade,
+            navigationBarHidden: false,
+            passProps: {
+                onUpgraded: () => this.upgradeUser()
+            }
+        });
+    }
+
+    upgradeUser() {
+        this.user = airloy.auth.getUser();
+        this.state = {
+            accountType: this.user.accountType,
+            name: this.user.name,
+            uid: this.user.uid
+        };
+        this._openSocial();
+        this.props.navigator.pop();
     }
 
     _forward(title: String, component: Component) {
@@ -102,13 +166,13 @@ export default class Me extends Controller {
         console.log(' render me page');
         return (
             <ScrollView>
-                <TouchableOpacity style={[styles.row, {marginTop: 0}]} onPress={() => this._forward('个人信息', Profile)}>
+                <TouchableOpacity style={[styles.row, {marginTop: 0}]} onPress={() => this._toProfile()}>
                     <Image style={{width:100, height:100, marginTop: 20, marginRight: 16}}
-                           source={{uri:`${config.host.avatar + this.user.id}-100`}}  />
-                    <View style={styles.section}>
-                        <Text style={styles.sectionRow}>{this.user.name}</Text>
-                        <Text style={styles.sectionRow}>{this.user.uid}</Text>
-                        <Text style={styles.sectionRow}>水果总数</Text>
+                           source={{uri:`${config.host.avatar + this.user.id}-100`}}
+                           defaultSource={require('/../resources/images/avatar.png')} />
+                    <View style={styles.containerV}>
+                        <Text style={styles.sectionRow}>{this.state.name}</Text>
+                        <Text style={styles.sectionRow}>{this.state.uid}</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.section}>
@@ -117,9 +181,9 @@ export default class Me extends Controller {
                         <Icon size={20} name="ios-arrow-right" color={colors.border} />
                     </TouchableOpacity>
                 </View>
-                { this.user.accountType === 'astmp' ?
-                    <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('升级帐号', Upgrade)}>
-                        <Text>数据同步</Text>
+                { this.state.accountType === 'astmp' ?
+                    <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toUpgrade()}>
+                        <Text>安家落户</Text>
                         <Icon size={20} name="ios-arrow-right" color={colors.border} />
                     </TouchableOpacity>
                     :
@@ -129,12 +193,12 @@ export default class Me extends Controller {
                             <Icon size={20} name="ios-arrow-right" color={colors.border}/>
                         </TouchableOpacity>
                         <View style={styles.hr}/>
-                        <TouchableOpacity style={styles.sectionRow} onPress={() => this.toFollow()}>
+                        <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFollow()}>
                             <Text>{L('banner.me.follows')}</Text>
                             <Icon size={20} name="ios-arrow-right" color={colors.border}/>
                         </TouchableOpacity>
                         <View style={styles.hr}/>
-                        <TouchableOpacity style={styles.sectionRow} onPress={() => this.toFan()}>
+                        <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFan()}>
                             <Text>粉丝</Text>
                             <Icon size={20} name="ios-arrow-right" color={colors.border}/>
                         </TouchableOpacity>

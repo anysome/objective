@@ -52,6 +52,10 @@ export default class Auth {
         passport && (this._passport = passport);
     }
 
+    async updateUser(user) {
+
+    }
+
     async setup() {
         return true;
     }

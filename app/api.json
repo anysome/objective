@@ -49,7 +49,9 @@
     "punchs": "check/target/punchs.json"
   },
   "me": {
-    "reward": "reward/agenda.json"
+    "reward": "reward/agenda.json",
+    "upgrade": "user/upgrade.json",
+    "open": "social/open.json"
   },
   "feedback": {
     "list": "conta/feedback/mime.json",
@@ -78,7 +80,8 @@
     "user": {
       "read": "social/user/get.json",
       "follow": "social/user/follow.json",
-      "unfollow": "social/user/unfollow.json"
+      "unfollow": "social/user/unfollow.json",
+      "info": "social/user/info.json"
     }
   }
 }

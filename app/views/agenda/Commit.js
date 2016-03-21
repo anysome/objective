@@ -92,7 +92,7 @@ export default class Commit extends Component {
         return (
             <Modal animated={true} transparent={true} visible={this.props.visible}>
                 <View style={style.container}>
-                    <Text style={styles.title}>{this.props.data.title}</Text>
+                    <Text style={style.title}>{this.props.data.title}</Text>
                     <TextArea placeholder={this.state.tip}
                               value={this.state.remark}
                               onChangeText={text => this.setState({remark: text})} />
@@ -132,6 +132,12 @@ const style = StyleSheet.create({
         height: 220,
         padding: 20,
         backgroundColor: colors.light1
+    },
+    title: {
+        paddingTop: 4,
+        paddingBottom: 4,
+        color: colors.dark3,
+        fontSize: 18
     },
     input: {
         flex: 1,

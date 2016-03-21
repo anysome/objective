@@ -88,6 +88,11 @@ export default class DevAuth extends Auth{
         return this._logined;
     }
 
+    async updateUser(user) {
+        this.user = user;
+        this._store.setItem('user.info', JSON.stringify(this.user));
+    }
+
     revoke() {
         console.log('----- revoke passport ------------ ' + this._passport);
         this._passport = '';
