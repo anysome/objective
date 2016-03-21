@@ -5,10 +5,23 @@
         }
     },
     "error": {
+        "request": {
+            "param": "网络请求参数错误",
+            "auth": "未授权,请重新登录"
+        },
+        "network": {
+            "offline": "无网络连接",
+            "server": "服务器异常"
+        },
         "user": {
             "password": "密码错误,请重新输入",
             "login": {
-                "email": "邮箱错误"
+                "email": "邮箱错误,请输入正确邮箱",
+                "account": "帐号异常,请换个",
+                "user": "用户状态异常,无法登录"
+            },
+            "register": {
+                "exist": "帐号已存在,请换个"
             }
         },
         "schedule": {
@@ -16,6 +29,9 @@
         },
         "title": {
             "required": "还说得说点什么"
+        },
+        "punch": {
+            "invalid": "你确定完成了吗?"
         }
     },
     "objective": {
@@ -42,4 +58,5 @@
             "totally": "累计"
         }
     }
+
 }

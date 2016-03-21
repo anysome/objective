@@ -24,7 +24,7 @@ export default class ListRow extends Component {
     _transform(data) {
         if ( this.done ) {
             return {
-                icon: {size: 28, name: 'android-checkbox', color: colors.light3},
+                icon: {name: 'android-checkbox', color: colors.light3},
                 priority: data.priority,
                 title: data.title,
                 detail: data.detail,
@@ -32,18 +32,20 @@ export default class ListRow extends Component {
             };
         } else if ( this.future ) {
             return {
-                icon: {size: 32, name: 'arrow-up-c', color: objective.getPriorityColor(data.priority)},
+                icon: {name: 'arrow-up-c', color: objective.getPriorityColor(data.priority)},
                 priority: data.priority,
                 title: data.title,
                 detail: data.detail,
+                reminder: data.reminder,
                 arrangeDate: moment(data.today).format('M月 D日')
             };
         } else {
             return {
-                icon: {size: 28, color: objective.getPriorityColor(data.priority), name: 'android-checkbox-outline-blank'},
+                icon: {color: objective.getPriorityColor(data.priority), name: 'android-checkbox-outline-blank'},
                 priority: data.priority,
                 title: data.title,
                 detail: data.detail,
+                reminder: data.reminder,
                 arrangeDate: this.today === data.today ? false : moment(data.today).fromNow()
             };
         }
@@ -52,8 +54,8 @@ export default class ListRow extends Component {
     render() {
         var transform = this._transform(this.props.data);
         return (
-            <TouchableOpacity style={style.container} onPress={this.props.onPress}>
-                <Icon size={transform.icon.size} style={style.icon} name={transform.icon.name} color={transform.icon.color} onPress={this.props.onIconClick} />
+            <TouchableOpacity style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
+                <Icon size={28} style={style.icon} name={transform.icon.name} color={transform.icon.color} onPress={this.props.onIconClick} />
                 { transform.priority > 8 &&
                 <Icon size={20} name='alert' color={transform.icon.color} style={style.alert}/> }
                 { transform.priority > 3 &&
@@ -61,7 +63,8 @@ export default class ListRow extends Component {
                 <Text style={[styles.title, style.body]}>
                     {transform.title}
                 </Text>
-                {transform.arrangeDate && <Text style={styles.hint}>{transform.arrangeDate}</Text>}
+                {transform.reminder && <Icon size={20} name='ios-bell-outline' color={colors.dark1} />}
+                {transform.arrangeDate && <Text style={[styles.hint, style.alert]}>{transform.arrangeDate}</Text>}
             </TouchableOpacity>
         );
     }

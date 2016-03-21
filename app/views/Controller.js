@@ -14,9 +14,6 @@ export default class Controller extends Component {
         this.frame = frame;
         this.loading = false;
         this.stale = false;
-        let now = new Date();
-        now.setHours(0, 0,0,0);
-        this.today = now.getTime();
     }
 
     get route() {
@@ -25,6 +22,10 @@ export default class Controller extends Component {
 
     get visible() {
         return this.frame.isPageActive(this.constructor.name);
+    }
+
+    get today() {
+        return this.frame.getToday();
     }
 
     getIcon(iconName) {

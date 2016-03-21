@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component} from 'react-native';
+import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component, PushNotificationIOS, AppStateIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import app from '/../app/app';
@@ -27,6 +27,10 @@ export default class Frame extends Component {
 			currentPage: 'Me'
 		};
 		this.icons = new Map();
+		let now = new Date();
+		now.setHours(0, 0,0,0);
+		this.today = now.getTime();
+		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 	}
 
 	componentWillMount() {
@@ -34,10 +38,50 @@ export default class Frame extends Component {
 		['ios-box-outline', 'ios-more-outline', 'ios-plus-empty', 'ios-compose-outline', 'ios-trash-outline'].forEach(name => {
 			Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
+		PushNotificationIOS.addEventListener('notification', this._onNotification);
+		AppStateIOS.addEventListener('change', this._handleAppStateChange);
 	}
 
 	componentWillUnmount() {
+		PushNotificationIOS.removeEventListener('notification', this._onNotification);
+		AppStateIOS.removeEventListener('change', this._handleAppStateChange);
 		console.log(`-------- Frame unmounting`);
+	}
+
+	_sendNotification() {
+		require('RCTDeviceEventEmitter').emit('remoteNotificationReceived', {
+			aps: {
+				alert: 'Sample notification',
+				badge: '+1',
+				sound: 'default',
+				category: 'REACT_NATIVE'
+			},
+		});
+	}
+
+	_handleAppStateChange(currentAppState) {
+		console.log(' current state = ' + currentAppState);
+		if ( currentAppState === 'active') {
+			if ( new Date().getTime() - this.today > 86400000 ) {
+				this.today = this.today + 86400000;
+			}
+		}
+	}
+
+	getToday() {
+		return this.today;
+	}
+
+	_onNotification(notification) {
+		console.log(JSON.stringify(notification));
+		Alert.alert(
+			'Notification Received',
+			'Alert message: ' + notification.getMessage(),
+			[{
+				text: 'Dismiss',
+				onPress: null,
+			}]
+		);
 	}
 
 	_selectTab(tabPage) {

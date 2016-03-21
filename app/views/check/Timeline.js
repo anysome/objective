@@ -39,7 +39,7 @@ export default class Timeline extends Component {
         return (
             <View style={style.row}>
                 <Text style={style.progress}>+ {rowData.times}</Text>
-                <Text style={style.progress}>{rowData.progress}</Text>
+                <Text style={style.progress}>{rowData.total}</Text>
                 <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
             </View>
         );

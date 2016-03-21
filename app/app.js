@@ -45,10 +45,10 @@ var util = new class {
     }
 } ();
 
-function toast(message) {
+function toast(message, position =  -70) {
     Toast.show(message, {
         duration: Toast.durations.SHORT,
-        position: -70,//Toast.positions.BOTTOM,
+        position: position,//Toast.positions.BOTTOM,
         shadow: false,
         animation: true,
         hideOnPress: true,

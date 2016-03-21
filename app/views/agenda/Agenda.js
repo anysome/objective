@@ -3,19 +3,13 @@
  */
 'use strict';
 
-import React, {
-    StyleSheet,
-    Component,
-    View,
-    Text,
-    ListView,
-    RefreshControl
-} from 'react-native';
+import React, {StyleSheet, Component, View, Text, ListView, RefreshControl, ActionSheetIOS} from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import app, {airloy, styles, colors, api, L, toast} from '/../app/app';
+import app, {airloy, styles, colors, api, util, L, toast} from '/../app/app';
 import ListSource from '/../app/logic/ListSource';
+import LocalNotifications from '/../app/logic/LocalNotifications';
 
 import Controller from '../Controller';
 import ListSectionView from '/../app/widgets/ListSectionView';
@@ -23,6 +17,7 @@ import ListRow from './ListRow';
 import Edit from './Edit';
 import Commit from './Commit';
 import Inbox from './../inbox/Inbox';
+import Timer from './Timer';
 
 
 export default class Agenda extends Controller {
@@ -32,7 +27,8 @@ export default class Agenda extends Controller {
         this.listSource = null;
         this.state = {
             isRefreshing: true,
-            showModal: false,
+            showCommit: false,
+            showTimer: false,
             selectedRow: {},
             dataSource: new ListView.DataSource({
                 getSectionHeaderData: (dataBlob, sectionId) => dataBlob[sectionId],
@@ -144,7 +140,8 @@ export default class Agenda extends Controller {
     _renderRow(rowData, sectionId, rowId) {
         return <ListRow data={rowData} sectionId={sectionId} today={this.today}
                         onPress={() => this._pressRow(rowData)}
-                        onIconClick={() => this._pressRowIcon(rowData, sectionId)} />;
+                        onIconClick={() => this._pressRowIcon(rowData, sectionId)}
+                        onLongPress={() => this._longPressRow(rowData, sectionId)} />;
     }
 
     _pressRow(rowData) {
@@ -186,22 +183,49 @@ export default class Agenda extends Controller {
                 }
             } else {
                 this.setState({
-                    showModal: true,
+                    showCommit: true,
                     selectedRow: rowData
                 });
             }
         }
     }
 
+    _longPressRow(rowData, sectionId) {
+        if ( sectionId !== 2 ) {
+            if ( rowData.today < this.today ) {
+                toast('过期的待办不能设置提醒');
+                return;
+            }
+            let BUTTONS = ['定时提醒', '取消'];
+            ActionSheetIOS.showActionSheetWithOptions({
+                    options: BUTTONS,
+                    cancelButtonIndex: 1,
+                    destructiveButtonIndex: 0,
+                    tintColor: colors.dark1
+                },
+                (buttonIndex) => {
+                    if ( buttonIndex === 0 ) {
+                        this.setState({
+                            showTimer: true,
+                            selectedRow: rowData
+                        });
+                    }
+                }
+            );
+        }
+    }
+
     updateRow(rowData) {
         //let newClone = JSON.parse(JSON.stringify(rowData));
         //console.log(JSON.stringify(rowData));
+        LocalNotifications.scheduleAgenda(rowData);
         this.listSource.update(rowData);
         this._sortList();
         this.backward();
     }
 
     deleteRow(rowData) {
+        LocalNotifications.cancelAgenda(rowData.id);
         this.listSource.remove(rowData);
         this._sortList();
         this.backward();
@@ -213,7 +237,19 @@ export default class Agenda extends Controller {
             this._sortList();
         }
         this.setState({
-            showModal: false
+            showCommit: false
+        });
+    }
+
+    updateTimer(rowData) {
+        if ( rowData ) {
+            // add notification
+            LocalNotifications.scheduleAgenda(rowData);
+            this.listSource.update(util.clone(rowData));
+            this._sortList();
+        }
+        this.setState({
+            showTimer: false
         });
     }
 
@@ -246,7 +282,8 @@ export default class Agenda extends Controller {
                             progressBackgroundColor="#EBEBEB"
                           />}
                 />
-                <Commit data={this.state.selectedRow} visible={this.state.showModal} onFeedback={(agenda) => this.commitRow(agenda)} />
+                <Commit data={this.state.selectedRow} visible={this.state.showCommit} onFeedback={(agenda) => this.commitRow(agenda)} />
+                <Timer data={this.state.selectedRow} visible={this.state.showTimer} onFeedback={(agenda) => this.updateTimer(agenda)} />
             </View>
 
         );
