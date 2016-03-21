@@ -25,7 +25,6 @@ export default class Timer extends Component {
         if ( this.data !== nextProps.data ) {
             this.data = nextProps.data;
             if ( this.data.reminder ) {
-                console.log(JSON.stringify(nextProps.data));
                 this.setState({
                     date: new Date(nextProps.data.reminder)
                 });
@@ -34,7 +33,6 @@ export default class Timer extends Component {
                     date: moment().add(1, 'hour').toDate()
                 });
             }
-            console.log(' reminder = ' + this.state.date);
         }
     }
 
@@ -47,8 +45,6 @@ export default class Timer extends Component {
     }
 
     _onSelectedDate(date) {
-        console.log(' old reminder = ' + this.state.date);
-        console.log(' new reminder = ' + date);
         this.setState({
             date: date
         });

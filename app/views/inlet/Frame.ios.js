@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component, PushNotificationIOS, AppStateIOS} from 'react-native';
+import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component, PushNotificationIOS, AppStateIOS, AlertIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import app from '/../app/app';
@@ -48,23 +48,12 @@ export default class Frame extends Component {
 		console.log(`-------- Frame unmounting`);
 	}
 
-	_sendNotification() {
-		require('RCTDeviceEventEmitter').emit('remoteNotificationReceived', {
-			aps: {
-				alert: 'Sample notification',
-				badge: '+1',
-				sound: 'default',
-				category: 'REACT_NATIVE'
-			},
-		});
-	}
-
 	_handleAppStateChange(currentAppState) {
-		console.log(' current state = ' + currentAppState);
 		if ( currentAppState === 'active') {
 			if ( new Date().getTime() - this.today > 86400000 ) {
 				this.today = this.today + 86400000;
 			}
+			console.log(' current time = ' + this.today );
 		}
 	}
 
@@ -74,11 +63,11 @@ export default class Frame extends Component {
 
 	_onNotification(notification) {
 		console.log(JSON.stringify(notification));
-		Alert.alert(
-			'Notification Received',
-			'Alert message: ' + notification.getMessage(),
+		AlertIOS.alert(
+			'新的消息',
+			notification.getMessage(),
 			[{
-				text: 'Dismiss',
+				text: '知道了',
 				onPress: null,
 			}]
 		);

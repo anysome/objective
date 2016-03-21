@@ -14,9 +14,9 @@ export default class LocalNotifications {
         if ( agenda.reminder ) {
             let fireDate = new Date(agenda.today + agenda.reminder);
             PushNotificationIOS.scheduleLocalNotification({
-                fireDate: fireDate,
+                fireDate: fireDate.toISOString(),
                 alertBody: agenda.title,
-                //soundName
+                soundName: 'default',
                 userInfo: {agenda: agenda.id}
             });
         }
