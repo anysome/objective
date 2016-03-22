@@ -20,7 +20,7 @@ export default class Controller extends Component {
         return this.props.navigator.navigationContext.currentRoute;
     }
 
-    get visible() {
+    isVisible() {
         return this.frame.isPageActive(this.constructor.name);
     }
 

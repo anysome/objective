@@ -45,8 +45,7 @@ export default class Check extends Controller {
             };
         }
         airloy.event.on('target.change', () => {
-            console.log(' check is visible ? = ' + this.visible);
-            this.visible ? this.reload() : this.markStale();
+            this.isVisible() ? this.reload() : this.markStale();
         });
         airloy.event.on('target.punch', (done) => {
             let rowData = this.listSource.read(done.id);
