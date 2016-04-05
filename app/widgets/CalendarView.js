@@ -164,7 +164,7 @@ class CalendarView extends Component {
         })
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         this.props.scrollTo && this._list.scrollTo(this.props.scrollTo);
     }
 
@@ -179,7 +179,7 @@ class CalendarView extends Component {
                     showsVerticalScrollIndicator={false}
                     dataSource={this.state.dataSource}
                     renderSectionHeader={this.renderSectionHeader}
-                    renderRow={this.renderRow.bind(this)}
+                    renderRow={(rowData) => this._renderRow(rowData)}
                     renderFooter={this._renderFooter}
                 />
             </View>
@@ -190,10 +190,10 @@ class CalendarView extends Component {
         return <View style={styles.spaceV} />;
     }
 
-    renderRow(rowData) {
-        const year = Number(rowData.split(',')[0]),
-            month = Number(rowData.split(',')[1])
-
+    _renderRow(rowData) {
+        let ym = rowData.split(',');
+        const year = Number(ym[0]),
+            month = Number(ym[1])
         return (
             <View>
                 <MonthBody year={year} month={month} {...this.props}/>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         overflow: 'hidden',
         borderBottomWidth: 1 / PixelRatio.get(),
-        borderBottomColor: colors.border,
+        borderBottomColor: colors.light3,
         backgroundColor: colors.light2
     },
     monthHeaderText: {

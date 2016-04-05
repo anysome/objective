@@ -154,7 +154,7 @@ export default class Glance extends Component {
                             backgroundColor={colors.light1}>
                         </AnimatedCircularProgress>
                     </View>
-                    <View style={style.posistionC}>
+                    <View style={style.positionC}>
                         <Text style={style.progress}>{this.state.progress.toFixed(1)}</Text>
                         <Text style={style.hint}>{this.state.progressText}</Text>
                     </View>
@@ -199,7 +199,7 @@ const style = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16
     },
-    posistionC: {
+    positionC: {
         position: 'absolute',
         height: 200,
         top: 0,

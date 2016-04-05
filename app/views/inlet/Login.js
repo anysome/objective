@@ -104,7 +104,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={style.window}>
-                <View style={[style.container, {height: this.state.visibleHeight}]}>
+                <View style={[styles.containerC, {height: this.state.visibleHeight}]}>
                     <View style={style.body}>
                         <Text style={{alignSelf:'center', color:colors.dark1, margin: 10}}>HELP TO DO,  NOT TO NOTE!</Text>
                         <TextField
@@ -148,11 +148,6 @@ const style = StyleSheet.create({
     window: {
         flex: 1,
         backgroundColor: colors.light3
-    },
-    container:{
-        flexDirection: 'row',
-        alignItems:'center',
-        justifyContent:'center'
     },
     body: {
         flex: 1,

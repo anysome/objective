@@ -4,6 +4,7 @@
 'use strict';
 
 import React, {StyleSheet, Component, ScrollView, View, Text} from 'react-native';
+import Spinner from 'react-native-spinkit';
 import CalendarView from '/../app/widgets/CalendarView';
 import moment from 'moment';
 
@@ -20,10 +21,10 @@ export default class Calendar extends Component {
         this.endDay = moment().endOf('month');
         this.today = moment();
         this.actives = new Map();
+        this.notes = new Map();
         this.actives.set(new Date().getTime(), 'border');
         this.state = {
-            actives: this.actives,
-            notes: new Map(),
+            loaded: false
         };
     }
 
@@ -39,11 +40,14 @@ export default class Calendar extends Component {
         if ( result.success ) {
             for(let punch of result.info) {
                 this.actives.set(punch.checkTime, 'fill');
-                this.checkDaily.unit !== '0' && this.state.notes.set(punch.checkTime, punch.times);
+                if ( this.checkDaily.unit === '0') {
+                    punch.times > 1 && this.notes.set(punch.checkTime, punch.times);
+                } else {
+                    this.notes.set(punch.checkTime, punch.times);
+                }
             }
             this.setState({
-                actives: this.actives,
-                notes: this.state.notes
+                loaded: true
             });
         } else {
             toast(L(result.message));
@@ -54,13 +58,18 @@ export default class Calendar extends Component {
         return (
             <View style={[styles.flex, {top: this.fixTop}]}>
                 <Text style={style.title}>{this.checkDaily.title}</Text>
-                <CalendarView
-                    active={this.state.actives}
-                    note={this.state.notes}
-                    startDay={this.startDay}
-                    endDay={this.endDay}
-                    scrollTo={{x:0, y:760}}
-                />
+                {this.state.loaded ?
+                    <CalendarView
+                        active={this.actives}
+                        note={this.notes}
+                        startDay={this.startDay}
+                        endDay={this.endDay}
+                        scrollTo={{x:0, y:760}}
+                    /> :
+                    <View style={[styles.containerC, {flex: 1, marginBottom: 100}]}>
+                        <Spinner isVisible={!this.state.loaded} size={100} type={'ChasingDots'} color={colors.accent}/>
+                    </View>
+                }
             </View>
         );
     }

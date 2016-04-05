@@ -75,7 +75,7 @@ const style = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         alignItems: 'center',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1 / PixelRatio.get(),
         borderBottomColor: colors.light2,
         backgroundColor: colors.light1
     },
