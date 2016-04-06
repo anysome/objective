@@ -76,7 +76,7 @@ export default class Login extends Component {
             await airloy.auth.saveUser(result.info);
             this.onSigned();
         } else {
-            toast(L(result.message));
+            toast(L(result.message), 70);
         }
     }
 
@@ -87,7 +87,7 @@ export default class Login extends Component {
             await airloy.auth.saveUser(result.info);
             this.onSigned();
         } else {
-            toast(L(result.message));
+            toast(L(result.message), 70);
         }
     }
 

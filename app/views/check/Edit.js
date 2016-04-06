@@ -51,12 +51,14 @@ export default class Edit extends Component {
                     this.target.priority = 2;
                     this.target.times = 100;
                     this.target.dateEnd = moment().add(299, 'days').toDate();
+                    this.target.frequency = '4';
                     break;
                 case '5':
                     this.target.priority = 3;
                     this.target.times = 1000;
                     this.target.dateEnd = moment().add(999, 'days').toDate();
                     this.target.unit = '1';
+                    this.target.frequency = '4';
                     break;
                 default :
                     this.target.times = 10;

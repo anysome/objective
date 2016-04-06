@@ -100,7 +100,7 @@ export default class Anything extends Component {
             airloy.event.emit('agenda.add', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 
@@ -115,7 +115,7 @@ export default class Anything extends Component {
             airloy.event.emit('agenda.add', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 
@@ -129,7 +129,7 @@ export default class Anything extends Component {
             airloy.event.emit('chore.add', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 
@@ -153,7 +153,7 @@ export default class Anything extends Component {
             airloy.event.emit('agenda.change');
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 
@@ -174,7 +174,7 @@ export default class Anything extends Component {
             airloy.event.emit('target.change', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 
@@ -195,7 +195,7 @@ export default class Anything extends Component {
             airloy.event.emit('target.change', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
         } else {
-            toast(L(result.message));
+            alert(L(result.message));
         }
     }
 

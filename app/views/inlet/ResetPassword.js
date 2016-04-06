@@ -40,9 +40,9 @@ export default class ResetPassword extends Component {
             email: this._email.value
         });
         if ( result.success ) {
-            toast('请收取邮件获取授权码');
+            toast('请收取邮件获取授权码', 70);
         } else {
-            toast(L(result.message));
+            toast(L(result.message), 70);
         }
     }
 
@@ -78,10 +78,10 @@ export default class ResetPassword extends Component {
             password: this._pwd1.value
         });
         if ( result.success ) {
-            toast('修改成功.');
+            toast('修改成功.', 70);
             this.props.onBack();
         } else {
-            toast(L(result.message));
+            toast(L(result.message), 70);
         }
     }
 
