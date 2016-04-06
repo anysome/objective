@@ -69,7 +69,7 @@ export default class Agenda extends Controller {
         }
         airloy.event.on('agenda.change', ()=> {
             // call network request or mark stale until page visible
-            this.isVisible() ? this.reload() : super.markStale();
+            this.isVisible('Agenda') ? this.reload() : super.markStale();
         });
         airloy.event.on('agenda.add', (agenda)=> {
             this.listSource.add(agenda);

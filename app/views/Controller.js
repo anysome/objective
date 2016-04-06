@@ -20,7 +20,13 @@ export default class Controller extends Component {
         return this.props.navigator.navigationContext.currentRoute;
     }
 
-    isVisible() {
+    isVisible(controllerName) {
+        return this.frame.isPageActive(controllerName);
+    }
+
+    get visible() {
+        // simulator works well, fuck on real ios device, this.constructor.name = 't'
+        //alert('controller name = ' + this.constructor.name);
         return this.frame.isPageActive(this.constructor.name);
     }
 
