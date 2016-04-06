@@ -14,20 +14,16 @@ export default class Controller extends Component {
         this.frame = frame;
         this.loading = false;
         this.stale = false;
+        this.name = 'Controller';
     }
 
     get route() {
         return this.props.navigator.navigationContext.currentRoute;
     }
 
-    isVisible(controllerName) {
-        return this.frame.isPageActive(controllerName);
-    }
-
     get visible() {
-        // simulator works well, fuck on real ios device, this.constructor.name = 't'
-        //alert('controller name = ' + this.constructor.name);
-        return this.frame.isPageActive(this.constructor.name);
+        // DO NOT USE this.constructor.name , minify js bundle will get wrong name.
+        return this.frame.isPageActive(this.name);
     }
 
     get today() {
@@ -65,7 +61,7 @@ export default class Controller extends Component {
 
     componentDidMount() {
         app.airloy.event.on('tab.change', (tabPage)=> {
-            if ( this.stale && tabPage === this.constructor.name ) {
+            if ( this.stale && tabPage === this.name ) {
                 console.log(`stale tab "${tabPage}" reload while showing`);
                 this.reload();
             }
@@ -79,7 +75,7 @@ export default class Controller extends Component {
     }
 
     componentWillUnmount() {
-        console.log(`-------- "${this.constructor.name}" unmounting`);
+        console.log(`-------- "${this.name}" unmounting`);
     }
 
     //shouldComponentUpdate(nextProps, nextState) {

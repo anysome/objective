@@ -24,6 +24,7 @@ export default class Agenda extends Controller {
 
     constructor(props) {
         super(props);
+        this.name = 'Agenda';
         this.listSource = null;
         this.state = {
             isRefreshing: true,
@@ -69,14 +70,14 @@ export default class Agenda extends Controller {
         }
         airloy.event.on('agenda.change', ()=> {
             // call network request or mark stale until page visible
-            this.isVisible('Agenda') ? this.reload() : super.markStale();
+            this.visible ? this.reload() : this.markStale();
         });
         airloy.event.on('agenda.add', (agenda)=> {
             this.listSource.add(agenda);
             this._sortList();
             // TODO treat view stale differently to data stale, currently not support data stale.
             // reload list or mark stale until page visible
-            //this.isVisible() ? this._sortList() : this.stale = true;
+            //this.visible ? this._sortList() : this.markStale();
         });
     }
 

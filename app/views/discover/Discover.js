@@ -20,6 +20,7 @@ export default class Discover extends Controller {
 
     constructor(props) {
         super(props);
+        this.name = 'Discover';
         this.state = {
             isRefreshing: true,
             dataSource: new ListView.DataSource({

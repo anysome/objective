@@ -21,6 +21,7 @@ export default class Check extends Controller {
 
     constructor(props) {
         super(props);
+        this.name = 'Check';
         this.listSource = null;
         this.state = {
             isRefreshing: true,
@@ -45,7 +46,7 @@ export default class Check extends Controller {
             };
         }
         airloy.event.on('target.change', () => {
-            this.isVisible('Check') ? this.reload() : this.markStale();
+            this.visible ? this.reload() : this.markStale();
         });
         airloy.event.on('target.punch', (done) => {
             let rowData = this.listSource.read(done.id);

@@ -30,6 +30,7 @@ import Upgrade from './Upgrade';
 export default class Me extends Controller {
     constructor(props) {
         super(props);
+        this.name = 'Me';
         this.user = airloy.auth.getUser();
         this.state = {
             accountType: this.user.accountType,

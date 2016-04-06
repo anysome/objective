@@ -35,7 +35,7 @@ export default class Main extends Component {
     }
 
     componentWillUnmount() {
-        console.log(`-------- ${this.constructor.name} unmounting`);
+        console.log(`-------- ${this.name} unmounting`);
     }
 
     selectTab(tabPage) {
