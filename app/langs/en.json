@@ -36,8 +36,8 @@
   },
   "objective": {
     "priority": {
-      "none": "无",
-      "ordinary": "一般",
+      "none": "None",
+      "ordinary": "Ordinary",
       "medium": "要紧",
       "emphasis": "重点",
       "emergency": "极其重要",
