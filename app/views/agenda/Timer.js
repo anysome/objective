@@ -71,8 +71,14 @@ export default class Timer extends Component {
                     <View style={style.bg} />
                 </TouchableWithoutFeedback>
                 <View style={style.container}>
-                    <Text style={style.title}>{this.props.data.reminder ?
-                        moment(this.props.data.reminder).format('当前提醒时间为  H:mm') : '暂未设置提醒'}</Text>
+                    {this.props.data.reminder ?
+                        <Text style={style.title}>
+                            <Text style={styles.hint}>已设置提醒时间: </Text>
+                            {moment(this.props.data.today).format(' M月D日 ') + moment(this.props.data.reminder).format('h:mm A') }
+                        </Text>
+                        :
+                        <Text style={style.title}>暂未设置提醒</Text>
+                    }
                     <DatePickerIOS
                         date={this.state.date}
                         mode="time"
@@ -80,17 +86,23 @@ export default class Timer extends Component {
                         onDateChange={date => this._onSelectedDate(date)}
                     />
                     <View style={style.bar}>
+                        <Icon.Button name='close' color={colors.light3}
+                                     underlayColor={colors.light1}
+                                     backgroundColor={colors.light2}
+                                     onPress={() => this.props.onFeedback()} >
+                            <Text style={styles.text}>取消</Text>
+                        </Icon.Button>
                         <Icon.Button name='android-notifications-off' color={colors.accent}
-                                     underlayColor={colors.accent}
-                                     backgroundColor={colors.light3}
+                                     underlayColor={colors.light1}
+                                     backgroundColor={colors.light2}
                                      onPress={()=> this._cancel()} >
-                            <Text style={styles.link}>取消提醒</Text>
+                            <Text style={styles.link}>删除提醒</Text>
                         </Icon.Button>
                         <Icon.Button name='android-notifications' color={colors.light1}
                                      underlayColor={colors.light1}
                                      backgroundColor={colors.accent}
                                      onPress={()=> this._setup()} >
-                            <Text style={styles.buttonText}>设置</Text>
+                            <Text style={styles.buttonText}>设定提醒</Text>
                         </Icon.Button>
                     </View>
                 </View>
@@ -111,8 +123,6 @@ const style = StyleSheet.create({
     },
     bar: {
         height: 40,
-        paddingLeft: 30,
-        paddingRight: 30,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'

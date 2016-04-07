@@ -6,7 +6,7 @@
 import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component, PushNotificationIOS, AppStateIOS, AlertIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import app from '/../app/app';
+import {airloy, colors} from '/../app/app';
 
 
 import Agenda from '../agenda/Agenda';
@@ -34,9 +34,10 @@ export default class Frame extends Component {
 	}
 
 	componentWillMount() {
-		// draw icon image for later use case
-		['ios-box-outline', 'ios-more-outline', 'ios-plus-empty', 'ios-compose-outline', 'ios-trash-outline'].forEach(name => {
-			Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
+		// draw icon images for later use case
+		['ios-box-outline', 'ios-more-outline', 'ios-plus-empty',
+			'ios-compose-outline', 'ios-trash-outline'].forEach(name => {
+				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
 		AppStateIOS.addEventListener('change', this._handleAppStateChange);
@@ -52,6 +53,9 @@ export default class Frame extends Component {
 		if ( currentAppState === 'active') {
 			if ( new Date().getTime() - this.today > 86400000 ) {
 				this.today = this.today + 86400000;
+				airloy.event.emit('target.change');
+				airloy.event.emit('agenda.change');
+				airloy.event.emit('me.change');
 			}
 			console.log(' current time = ' + this.today );
 		}
@@ -79,7 +83,7 @@ export default class Frame extends Component {
 		} else {
 			this.setState({currentPage: tabPage});
 			this.lastPage = null;
-			app.airloy.event.emit('tab.change', tabPage);
+			airloy.event.emit('tab.change', tabPage);
 		}
 	}
 
@@ -106,11 +110,11 @@ export default class Frame extends Component {
 		return <NavigatorIOS
 			style={{flex:1}}
 			navigationBarHidden={hideBar}
-			titleTextColor={app.colors.dark1}
-			tintColor={app.colors.accent}
+			titleTextColor={colors.dark1}
+			tintColor={colors.accent}
 			translucent={true}
 			includeOpaqueBars={false}
-			navTintColor={app.colors.light1}
+			navTintColor={colors.light1}
 			itemWrapperStyle={style.navigation}
 			initialRoute={{
 				component: component,
@@ -124,7 +128,7 @@ export default class Frame extends Component {
 
 	render() {
 		return (
-			<TabBarIOS tintColor={app.colors.accent}
+			<TabBarIOS tintColor={colors.accent}
 					   translucent={true}>
 				<Icon.TabBarItem
 					title="待办"
@@ -174,6 +178,6 @@ export default class Frame extends Component {
 
 const style = StyleSheet.create({
 	navigation: {
-		backgroundColor: app.colors.light2
+		backgroundColor: colors.light2
 	}
 });
