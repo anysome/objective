@@ -1,51 +1,76 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Created by Layman(http://github.com/anysome) on 16/4/7.
  */
-'use strict';
+
 import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    Component,
+    StyleSheet,
+    NavigatorIOS,
+    Text,
+    View
 } from 'react-native';
 
-class objective extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
+import SplashPage from './app/views/inlet/Splash';
+//import IntroPage from './app/views/inlet/Intro';
+import LoginPage from './app/views/inlet/Login';
+import MainPage from './app/views/inlet/Frame';
+
+import {airloy, config} from '/../app/app';
+
+class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            loading: true,
+            firstTime: false,
+            logined: false
+        };
+    }
+
+    componentDidMount() {
+        this._init();
+    }
+
+    async _init() {
+        let oldVersion = await airloy.store.getItem('app_version');
+        let version = config.objective.version;
+        let newInstall = version !== oldVersion;
+        var isAuth = false;
+        if ( newInstall ) {
+            airloy.store.setItem('app_version', version);
+        } else {
+            isAuth = await airloy.auth.setup();
+        }
+        this.setState({
+            loading: false,
+            //firstTime: newInstall,
+            logined: isAuth
+        });
+        // forward to login page if necessary
+        airloy.event.on(airloy.event.authRequiredEvent, ()=> {
+            this.setState({logined: false});
+        });
+        airloy.event.on(airloy.event.logoutEvent, ()=> {
+            this.setState({logined: false});
+        });
+    }
+
+    signed() {
+        //AppRegistry.unmountApplicationComponentAtRootTag(1);
+        //AppRegistry.runApplication('objective', {rootTag:1, initialProps:{}});
+        //AppRegistry.registerComponent('objective', () => App);
+        this.setState({
+            logined: true
+        });
+    }
+
+    render() {
+        return this.state.loading ? <SplashPage /> :
+            //this.state.firstTime ? <IntroPage /> :
+            this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()} />;
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('objective', () => objective);
+AppRegistry.registerComponent('objective', () => App);

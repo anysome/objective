@@ -7,11 +7,11 @@ import React, {
     StyleSheet,
     Navigator,
     Component,
+    Modal,
     Text,
     View,
     Button
 } from 'react-native';
-var Modal   = require('react-native-modalbox');
 
 import app from '/../app/app';
 

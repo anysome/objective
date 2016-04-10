@@ -1,6 +1,7 @@
 rootProject.name = 'objective'
 
-include ':app'
+include ':react-native-modal-android', ':app'
+project(':react-native-modal-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-modal-android')
 include ':react-native-device-info'
 project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
 include ':react-native-i18n'
