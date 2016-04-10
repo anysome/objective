@@ -10,8 +10,11 @@ import React, {
     Modal,
     Text,
     View,
-    Button
+    Button,
+    TouchableOpacity
 } from 'react-native';
+
+import Tabbar, { Tab, RawContent, IconWithBar, RawIcon, glypyMapMaker} from 'react-native-tabbar';
 
 import app from '/../app/app';
 
@@ -22,16 +25,23 @@ import Discover from '../discover/Discover';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const iconSize = 28;
+const iconFont = 'Ionicons';
+const glypy = glypyMapMaker({
+    Agenda: 'f4b2',
+    Check: 'f375',
+    Add: 'f217',
+    Me: 'f47d',
+    Discover: 'f46d'
+});
 
 export default class Main extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            swipeToClose: true,
             currentPage: Agenda
         };
+        this.toggle = false;
     }
 
     componentWillUnmount() {
@@ -50,7 +60,13 @@ export default class Main extends Component {
         console.log("todo open add anything view");
     }
 
+    tabbarToggle() {
+        this.refs['myTabbar'].getBarRef().show(this.toggle);
+        this.toggle = !this.toggle;
+    }
+
     _renderNavigator(component, title, hideBar = false){
+        console.log(' init navigarot ' + title);
         return <Navigator
             style={{flex:1}}
             navigationBarHidden={hideBar}
@@ -67,78 +83,57 @@ export default class Main extends Component {
 					frame: this,
 			  	}
         	}}
+            renderScene={(route, navigator) => {
+                console.log(' init route ' + route.title);
+                return <route.component title={route.title} navigator={navigator} />
+             }}
         />;
-    }
-
-    onClose() {
-        console.log('Modal just closed');
-    }
-    onOpen() {
-        console.log('Modal just openned');
-    }
-    onClosingState(state) {
-        console.log('the open/close of the swipeToClose just changed');
-    }
-    toggleSwipeToClose() {
-        this.setState({swipeToClose: !this.state.swipeToClose});
     }
 
     render() {
         return (
-            <View >
-                <TabBarIOS tintColor={app.colors.accent}
-                           barTintColor={app.colors.dark1}
-                           translucent={true}>
-                    <Icon.TabBarItem
-                        title="待办"
-                        iconName="ios-star-outline"
-                        selectedIconName="ios-star"
-                        iconSize={iconSize}
-                        selected={this.state.currentPage === Agenda}
-                        onPress={() => this.selectTab(Agenda)}>
-                        {this._renderNavigator(Agenda, "今日待办")}
-                    </Icon.TabBarItem>
-                    <Icon.TabBarItem
-                        title="检查"
-                        iconName="ios-checkmark-outline"
-                        selectedIconName="ios-checkmark"
-                        iconSize={iconSize}
-                        selected={this.state.currentPage === Check}
-                        onPress={() => this.selectTab(Check)}>
-                        {this._renderNavigator(Check, "检查单")}
-                    </Icon.TabBarItem>
-                    <Icon.TabBarItem iconName="ios-plus-outline" title={null} iconSize={36}
-                                     style={{flex:1, paddingTop:20}}
-                                     onPress={() => this._toAdd()}>
-                    </Icon.TabBarItem>
-                    <Icon.TabBarItem
-                        title="我"
-                        iconName="ios-person-outline"
-                        selectedIconName="ios-person"
-                        iconSize={iconSize}
-                        selected={this.state.currentPage === Me}
-                        onPress={() => this.selectTab(Me)}>
-                        {this._renderNavigator(Me, "个人", true)}
-                    </Icon.TabBarItem>
-                    <Icon.TabBarItem
-                        title="发现"
-                        iconName="ios-world-outline"
-                        selectedIconName="ios-world"
-                        iconSize={iconSize}
-                        selected={this.state.currentPage === Discover}
-                        onPress={() => this.selectTab(Discover)}>
-                        {this._renderNavigator(Discover, "广场")}
-                    </Icon.TabBarItem>
-                </TabBarIOS>
-                <Modal style={styles.modal}
-                       swipeToClose={this.state.swipeToClose}
-                       onClosed={this.onClose}
-                       onOpened={this.onOpen}
-                       onClosingState={this.onClosingState}>
-                    <Text style={styles.text}>Basic modal</Text>
-                    <Button onPress={() =>this.toggleSwipeToClose()} style={styles.btn}>Disable swipeToClose({this.state.swipeToClose ? "true" : "false"})</Button>
-                </Modal>
-            </View>
+            <Tabbar ref="myTabbar" barColor={'gray'}>
+                <Tab name="home">
+                    <IconWithBar label="待办" type={glypy.Agenda} from={iconFont}/>
+                    <RawContent>
+                        <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+                            <Text onPress={()=>this.tabbarToggle()}>Toggle Tabbar</Text>
+                        </View>
+                    </RawContent>
+                </Tab>
+                <Tab name="camera">
+                    <IconWithBar label="检查单" type={glypy.Check} from={iconFont}/>
+                    <RawContent>
+                        <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+                            <Text onPress={()=>console.log('camera')}>Camera</Text>
+                        </View>
+                    </RawContent>
+                </Tab>
+                <Tab name="stats">
+                    <RawIcon>
+                        <Icon style={{flex:1, alignSelf:'center', marginTop: 7}} name="plus-round" size={36} color='red'/>
+                    </RawIcon>
+                    <RawContent>
+                        <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+                            <Text onPress={()=>console.log('stats')}>Stats</Text>
+                        </View>
+                    </RawContent>
+                </Tab>
+                <Tab name="favorite">
+                    <IconWithBar label="我" type={glypy.Me} from={iconFont}/>
+                    <RawContent>
+                        {this._renderNavigator(Me, "我", true)}
+                    </RawContent>
+                </Tab>
+                <Tab name="settings">
+                    <IconWithBar label="发现" type={glypy.Discover} from={iconFont}/>
+                    <RawContent>
+                        <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+                            <Text onPress={()=>console.log('settings')}>Settings</Text>
+                        </View>
+                    </RawContent>
+                </Tab>
+            </Tabbar>
         );
     }
 }

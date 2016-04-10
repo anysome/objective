@@ -2,14 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/4/7.
  */
 
-import React, {
-    AppRegistry,
-    Component,
-    StyleSheet,
-    NavigatorIOS,
-    Text,
-    View
-} from 'react-native';
+import React, {AppRegistry, Component} from 'react-native';
 
 import SplashPage from './app/views/inlet/Splash';
 //import IntroPage from './app/views/inlet/Intro';

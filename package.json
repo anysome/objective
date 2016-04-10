@@ -20,6 +20,7 @@
     "react-native-modal-android": "0.0.1",
     "react-native-root-toast": "1.0.1",
     "react-native-spinkit": "0.0.7",
+    "react-native-tabbar": "0.3.5",
     "react-native-vector-icons": "1.3.2",
     "react-timer-mixin": "0.13.3"
   }
