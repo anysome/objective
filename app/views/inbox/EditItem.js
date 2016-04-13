@@ -2,7 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/3/19.
  */
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS} from 'react-native';
+import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
+    ActionSheetIOS, Platform} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast} from '../../app';
 
@@ -33,7 +34,10 @@ export default class EditItem extends Component{
                     toast(L(result.message));
                 }
             };
-            this.props.navigator.replace(route);
+            // so many bugs on android T_T
+            Platform.OS === 'android' ?
+                this.props.navigator.replaceAtIndex(route, -1) :
+                    this.props.navigator.replace(route);
         }
     }
 

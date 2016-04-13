@@ -30,9 +30,9 @@ export default class NavigatorWithBar extends React.Component {
                     }
                 }}
                 renderScene={(route, navigator) => {
-                return <View style={[style.scene, route.navigationBarHidden && style.sceneHidden]}>
-                    <route.component title={route.title} navigator={navigator} {...route.passProps}/>
-                </View>
+                    return <View style={[style.scene, route.navigationBarHidden && style.sceneHidden]}>
+                        <route.component title={route.title} navigator={navigator} {...route.passProps}/>
+                    </View>
              }}
             />
         );

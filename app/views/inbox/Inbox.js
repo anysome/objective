@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {Component, StyleSheet, RefreshControl, ListView,
+import React, {Component, StyleSheet, RefreshControl, ListView, Platform,
         View, Text, LayoutAnimation, TouchableOpacity, ActionSheetIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
@@ -82,7 +82,7 @@ export default class Inbox extends Component {
                 }
             );
         };
-        this.props.navigator.replace(route);
+        Platform.OS === 'android' ? this.props.navigator.replacePrevious(route) : this.props.navigator.replace(route);
     }
 
     componentDidMount() {

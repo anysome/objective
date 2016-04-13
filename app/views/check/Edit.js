@@ -3,7 +3,8 @@
  */
 'use strict';
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, LayoutAnimation} from 'react-native';
+import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
+    LayoutAnimation, Platform} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast} from '../../app';
 import Objective from '../../logic/Objective';
@@ -637,7 +638,10 @@ export default class Edit extends Component {
         let route = this.props.navigator.navigationContext.currentRoute;
         if ( route.rightButtonIcon ) {
             route.onRightButtonPress = () => this._toDelete();
-            this.props.navigator.replace(route);
+            // so many bugs on android T_T
+            Platform.OS === 'android' ?
+                this.props.navigator.replaceAtIndex(route, -1) :
+                    this.props.navigator.replace(route);
         }
     }
 }

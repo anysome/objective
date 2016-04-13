@@ -3,7 +3,7 @@
  */
 
 import React, {StyleSheet, Component, ListView, RefreshControl, View, Text,
-    TouchableOpacity, PixelRatio, ActionSheetIOS} from 'react-native';
+    TouchableOpacity, PixelRatio, ActionSheetIOS, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -43,7 +43,10 @@ export default class Project extends Component {
                 }
             });
         };
-        this.props.navigator.replace(route);
+        // so many bugs on android T_T
+        Platform.OS === 'android' ?
+            this.props.navigator.replaceAtIndex(route, -1) :
+                this.props.navigator.replace(route);
     }
 
     componentDidMount() {

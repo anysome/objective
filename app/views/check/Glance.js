@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
+import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio, Platform} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Button from 'react-native-button';
 
@@ -44,7 +44,10 @@ export default class Glance extends Component {
                 }
             });
         };
-        this.props.navigator.replace(route);
+        // so many bugs on android T_T
+        Platform.OS === 'android' ?
+            this.props.navigator.replaceAtIndex(route, -1) :
+                this.props.navigator.replace(route);
         this.reload();
     }
 

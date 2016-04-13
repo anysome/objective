@@ -2,7 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/3/13.
  */
 
-import React, { StyleSheet, Component, ScrollView, View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { StyleSheet, Component, ScrollView, View, Text, Image,
+    TouchableOpacity, Platform} from 'react-native';
 
 import app, {config, airloy, styles, colors, api, L, toast} from '../../app';
 
@@ -20,7 +21,7 @@ export default class Facade extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let route = this.props.navigator.navigationContext.currentRoute;
         if ( this.user.followed ) {
             route.rightButtonTitle = '取消关注';
@@ -47,7 +48,10 @@ export default class Facade extends Component {
                 }
             };
         }
-        this.props.navigator.replace(route);
+        // so many bugs on android T_T
+        Platform.OS === 'android' ?
+            this.props.navigator.replaceAtIndex(route, -1) :
+                this.props.navigator.replace(route);
     }
 
     _renderList() {

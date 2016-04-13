@@ -130,7 +130,7 @@ export default class Anything extends Component {
             title: title,
             detail: detail
         };
-        let result = await airloy.net.httpPost(api.chore.add, chore);
+        let result = await airloy.net.httpPost(api.inbox.add, chore);
         if ( result.success ) {
             airloy.event.emit('chore.add', result.info);
             this._cleanCloseOrContinuous(`"${title}" 已添加.`);
