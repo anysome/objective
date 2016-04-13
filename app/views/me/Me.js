@@ -15,7 +15,7 @@ import React, {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
-import {styles, colors, airloy, config, api, toast, L} from '/../app/app';
+import {styles, colors, airloy, config, api, toast, L} from '../../app';
 
 import Controller from '../Controller';
 import Profile from './Profile';
@@ -170,7 +170,7 @@ export default class Me extends Controller {
                 <TouchableOpacity style={[styles.row, {marginTop: 0}]} onPress={() => this._toProfile()}>
                     <Image style={{width:100, height:100, marginTop: 20, marginRight: 16}}
                            source={{uri:`${config.host.avatar + this.user.id}-100`}}
-                           defaultSource={require('/../resources/images/avatar.png')} />
+                           defaultSource={require('../../../resources/images/avatar.png')} />
                     <View style={styles.containerV}>
                         <Text style={styles.sectionRow}>{this.state.name}</Text>
                         <Text style={styles.sectionRow}>{this.state.uid}</Text>

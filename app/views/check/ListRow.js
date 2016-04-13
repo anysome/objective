@@ -6,8 +6,8 @@
 import React, { Component, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 
-import {colors, styles} from '/../app/app';
-import objective from '/../app/logic/Objective';
+import {colors, styles} from '../../app';
+import objective from '../../logic/Objective';
 
 export default class ListRow extends Component {
 

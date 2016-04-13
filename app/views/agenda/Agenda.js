@@ -7,12 +7,12 @@ import React, {StyleSheet, Component, View, Text, ListView, RefreshControl, Acti
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import app, {airloy, styles, colors, api, util, L, toast} from '/../app/app';
-import ListSource from '/../app/logic/ListSource';
-import LocalNotifications from '/../app/logic/LocalNotifications';
+import app, {airloy, styles, colors, api, util, L, toast} from '../../app';
+import ListSource from '../../logic/ListSource';
+import LocalNotifications from '../../logic/LocalNotifications';
 
 import Controller from '../Controller';
-import ListSectionView from '/../app/widgets/ListSectionView';
+import ListSectionView from '../../widgets/ListSectionView';
 import ListRow from './ListRow';
 import Edit from './Edit';
 import Commit from './Commit';
@@ -266,6 +266,7 @@ export default class Agenda extends Controller {
         return (
             <View style={styles.flex}>
                 <ListView
+                    enableEmptySections={true}
                     initialListSize={10}
                     pageSize={10}
                     dataSource={this.state.dataSource}

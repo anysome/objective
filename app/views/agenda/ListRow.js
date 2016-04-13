@@ -3,12 +3,12 @@
  */
 'use strict';
 
-import React, { Component, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, { Component, StyleSheet, View, Text, TouchableOpacity, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {colors, styles} from '/../app/app';
-import objective from '/../app/logic/Objective';
+import {colors, styles} from '../../app';
+import objective from '../../logic/Objective';
 
 
 export default class ListRow extends Component {
@@ -81,6 +81,7 @@ const style = StyleSheet.create({
         backgroundColor: colors.light1
     },
     icon: {
+        marginLeft: Platform.OS === 'android' ? 16 : 0,
         paddingLeft: 16
     },
     alert: {

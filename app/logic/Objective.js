@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import {L} from '/../app/app';
+import {L} from '../app';
 
 const colors = {
     priority1: "#55EFCB",

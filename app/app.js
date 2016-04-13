@@ -8,7 +8,7 @@ import Toast from 'react-native-root-toast';
 import moment from 'moment';
 require('moment/locale/zh-cn');
 
-import config from '/../config.json';
+import config from '../config.json';
 import api from './api.json';
 import airloy, {init} from './libs/airloy';
 import MyAuth from './libs/dev/DevAuth';

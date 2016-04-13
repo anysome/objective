@@ -8,9 +8,9 @@ import React, { StyleSheet, Component, View, Text, Image, TouchableOpacity,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import objective from '/../app/logic/Objective';
-import {config, airloy, styles, colors, util, api, L, toast} from '/../app/app';
-import ListSource from '/../app/logic/ListSource';
+import objective from '../../logic/Objective';
+import {config, airloy, styles, colors, util, api, L, toast} from '../../app';
+import ListSource from '../../logic/ListSource';
 
 import Controller from '../Controller';
 import Content from './Content';
@@ -31,6 +31,9 @@ export default class Discover extends Controller {
         };
         this.listSource = new ListSource();
         this._renderRow = this._renderRow.bind(this);
+    }
+
+    componentWillMount() {
     }
 
     async reload() {
@@ -115,7 +118,7 @@ export default class Discover extends Controller {
                     <TouchableOpacity onPress={() => this._toUser(rowData.userId)}>
                         <Image style={style.avatar}
                                source={{uri:`${config.host.avatar + rowData.userId}-100`}}
-                               defaultSource={require('/../resources/images/avatar.png')}/>
+                               defaultSource={require('../../../resources/images/avatar.png')}/>
                     </TouchableOpacity>
                     <View style={styles.containerV}>
                         <View style={styles.containerF}>

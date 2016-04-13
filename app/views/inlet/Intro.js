@@ -16,7 +16,7 @@ export default class Intro extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-	        	<Image source={require('/../resources/images/splash.png')} style={styles.backgroundImage}/>
+	        	<Image source={require('../../../resources/images/avatar.png')} style={styles.backgroundImage}/>
 	      	</View>
 		);
 	}

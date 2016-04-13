@@ -7,7 +7,7 @@ import React, {StyleSheet, Component, ListView, RefreshControl,
     Image, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, styles, colors, config, api, toast, L} from '/../app/app';
+import {airloy, styles, colors, config, api, toast, L} from '../../app';
 
 import Facade from '../discover/Facade';
 
@@ -77,7 +77,7 @@ export default class UserList extends Component {
         return (
             <TouchableOpacity style={style.row} onPress={() => this._pressRow(user)}>
                 <Image style={style.avatar} source={{uri: `${config.host.avatar + user.id}-60`}}
-                       defaultSource={require('/../resources/images/avatar.png')} />
+                       defaultSource={require('../../../resources/images/avatar.png')} />
                 <View style={styles.containerV}>
                     <Text>{user.name}</Text>
                     <Text style={style.hint}>{user.signature}</Text>
@@ -92,7 +92,8 @@ export default class UserList extends Component {
     }
 
     render() {
-        return <ListView initialListSize={10}
+        return <ListView enableEmptySections={true}
+                         initialListSize={10}
                          pageSize={5}
                          dataSource={this.state.dataSource}
                          renderRow={this._renderRow}

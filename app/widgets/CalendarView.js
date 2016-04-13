@@ -8,7 +8,7 @@
 import React, {Component, StyleSheet, Text, View, PixelRatio, Dimensions, TouchableOpacity, ListView} from 'react-native'
 import moment from 'moment'
 
-import {colors} from '/../app/app';
+import {colors} from '../app';
 
 class CalendarHeader extends Component {
     render() {

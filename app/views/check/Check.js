@@ -7,11 +7,11 @@ import React, { StyleSheet, Component, View, ScrollView, ListView,
     RefreshControl, TouchableOpacity, Text, ActionSheetIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import app, {airloy, styles, colors, api, L, toast} from '/../app/app';
-import ListSource from '/../app/logic/ListSource';
+import app, {airloy, styles, colors, api, L, toast} from '../../app';
+import ListSource from '../../logic/ListSource';
 
 import Controller from '../Controller';
-import ListSectionView from '/../app/widgets/ListSectionView';
+import ListSectionView from '../../widgets/ListSectionView';
 import ListRow from './ListRow';
 import Glance from './Glance';
 import Edit from './Edit';
@@ -195,7 +195,8 @@ export default class Check extends Controller {
         console.log(' render check page');
         return (
             <View style={styles.flex}>
-                <ListView initialListSize={10} pageSize={5}
+                <ListView enableEmptySections={true}
+                          initialListSize={10} pageSize={5}
                           dataSource={this.state.dataSource}
                           renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
                           renderSectionHeader={this._renderSectionHeader}

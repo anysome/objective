@@ -5,14 +5,14 @@
 
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, LayoutAnimation} from 'react-native';
 import moment from 'moment';
-import {styles, colors, airloy, api, L, toast} from '/../app/app';
-import Objective from '/../app/logic/Objective';
+import {styles, colors, airloy, api, L, toast} from '../../app';
+import Objective from '../../logic/Objective';
 
-import TextField from '/../app/widgets/TextField';
-import TextArea from '/../app/widgets/TextArea';
-import PriorityPicker from '/../app/widgets/PriorityPicker';
-import DatePicker from '/../app/widgets/DatePicker';
-import OptionsPicker from '/../app/widgets/OptionsPicker';
+import TextField from '../../widgets/TextField';
+import TextArea from '../../widgets/TextArea';
+import PriorityPicker from '../../widgets/PriorityPicker';
+import DatePicker from '../../widgets/DatePicker';
+import OptionsPicker from '../../widgets/OptionsPicker';
 
 
 export default class Edit extends Component {

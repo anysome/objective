@@ -6,10 +6,10 @@
 import React, {Component, View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {styles, colors, airloy, api, L, toast} from '/../app/app';
+import {styles, colors, airloy, api, L, toast} from '../../app';
 
-import TextField from '/../app/widgets/TextField';
-import TextArea from '/../app/widgets/TextArea';
+import TextField from '../../widgets/TextField';
+import TextArea from '../../widgets/TextArea';
 
 export default class Punch extends Component {
 

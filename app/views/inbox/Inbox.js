@@ -8,10 +8,10 @@ import React, {Component, StyleSheet, RefreshControl, ListView,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {airloy, styles, colors, api, toast, L} from '/../app/app';
+import {airloy, styles, colors, api, toast, L} from '../../app';
 
-import ListSource from '/../app/logic/ListSource';
-import ListSectionView from '/../app/widgets/ListSectionView';
+import ListSource from '../../logic/ListSource';
+import ListSectionView from '../../widgets/ListSectionView';
 import Edit from './Edit';
 import Project from './Project';
 

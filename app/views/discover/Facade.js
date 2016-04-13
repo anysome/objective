@@ -4,7 +4,7 @@
 
 import React, { StyleSheet, Component, ScrollView, View, Text, Image, TouchableOpacity} from 'react-native';
 
-import app, {config, airloy, styles, colors, api, L, toast} from '/../app/app';
+import app, {config, airloy, styles, colors, api, L, toast} from '../../app';
 
 import ContentList from './ContentList';
 import UserList from './UserList';
@@ -80,7 +80,7 @@ export default class Facade extends Component {
                 <View style={style.row}>
                     <Image style={{width:100, height:100, marginRight: 16}}
                            source={{uri:`${config.host.avatar + this.user.id}-100`}}
-                           defaultSource={require('/../resources/images/avatar.png')}/>
+                           defaultSource={require('../../../resources/images/avatar.png')}/>
                     <View style={style.info}>
                         <View style={styles.containerF}>
                             <Text style={styles.title}>{this.user.name}</Text>

@@ -5,7 +5,7 @@
 
 import React, {Component, Picker} from 'react-native';
 
-import Objective from '/../app/logic/Objective';
+import Objective from '../logic/Objective';
 
 export default class PriorityPicker extends Component {
 

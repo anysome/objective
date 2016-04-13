@@ -5,7 +5,7 @@
 
 import React, {StyleSheet, Component, TouchableOpacity, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {colors} from '/../app/app';
+import {colors} from '../app';
 
 class DataSource {
 

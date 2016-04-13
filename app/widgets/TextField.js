@@ -5,7 +5,7 @@
 
 import React, {Component, TextInput, StyleSheet} from 'react-native'
 
-import {colors} from '/../app/app';
+import {colors} from '../app';
 
 export default class TextField extends Component {
 

@@ -5,7 +5,7 @@
 import React, {StyleSheet, Component, ScrollView, View, Text, ListView, PixelRatio} from 'react-native';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, toast, L} from '/../app/app';
+import {styles, colors, airloy, api, toast, L} from '../../app';
 
 export default class Timeline extends Component {
 

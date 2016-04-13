@@ -6,8 +6,8 @@
 import React, {Component, StyleSheet, Modal, View} from 'react-native';
 import Button from 'react-native-button';
 
-import {styles, colors, airloy, api, L, toast} from '/../app/app';
-import TextField from '/../app/widgets/TextField';
+import {styles, colors, airloy, api, L, toast} from '../../app';
+import TextField from '../../widgets/TextField';
 
 
 

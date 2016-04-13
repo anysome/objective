@@ -5,10 +5,10 @@
 
 import React, {StyleSheet, Component, ScrollView, View, Text} from 'react-native';
 import Spinner from 'react-native-spinkit';
-import CalendarView from '/../app/widgets/CalendarView';
+import CalendarView from '../../widgets/CalendarView';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, toast, L} from '/../app/app';
+import {styles, colors, airloy, api, toast, L} from '../../app';
 
 export default class Calendar extends Component {
 

@@ -4,10 +4,10 @@
 
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS} from 'react-native';
 import moment from 'moment';
-import {styles, colors, airloy, api, L, toast} from '/../app/app';
+import {styles, colors, airloy, api, L, toast} from '../../app';
 
-import TextField from '/../app/widgets/TextField';
-import TextArea from '/../app/widgets/TextArea';
+import TextField from '../../widgets/TextField';
+import TextArea from '../../widgets/TextArea';
 
 export default class EditItem extends Component{
 

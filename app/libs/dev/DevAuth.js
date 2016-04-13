@@ -80,9 +80,11 @@ export default class DevAuth extends Auth{
             _loginTime = await this._store.getItem('user.lastlogin');
             this._passport = await this._store.getItem('user.passport');
             console.log('----------- passport ------------ ' + this._passport);
+            console.log('---- key = ' + _loginTime);
             _auth = this._makeAuth();
             //console.debug("------------------------ auth = " + _auth);
             let str = await this._store.getItem('user.info') || '{}';
+            console.log('---- user = ' + str);
             this.user = JSON.parse(str);
         }
         return this._logined;

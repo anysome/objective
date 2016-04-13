@@ -13,10 +13,10 @@ import React, {
 } from 'react-native';
 import Button from 'react-native-button';
 
-import TextField from '/../app/widgets/TextField';
+import TextField from '../../widgets/TextField';
 import ResetPassword from './ResetPassword';
 
-import app, {colors, styles, api, airloy, L, toast} from '/../app/app';
+import app, {colors, styles, api, airloy, L, toast} from '../../app';
 
 
 

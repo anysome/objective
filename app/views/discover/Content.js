@@ -3,14 +3,14 @@
  */
 
 import React, {StyleSheet, Component, ScrollView, View, Text, Modal, Image,
-    TouchableOpacity, LayoutAnimation, ListView, PixelRatio} from 'react-native';
+    TouchableOpacity, LayoutAnimation, ListView, PixelRatio, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {config, styles, colors, airloy, api, L, toast} from '/../app/app';
-import objective from '/../app/logic/Objective';
+import {config, styles, colors, airloy, api, L, toast} from '../../app';
+import objective from '../../logic/Objective';
 
-import TextField from '/../app/widgets/TextField';
+import TextField from '../../widgets/TextField';
 
 
 export default class Content extends Component {
@@ -169,7 +169,7 @@ export default class Content extends Component {
                     <View style={style.header}>
                         <Image style={style.avatar}
                                source={{uri:`${config.host.avatar + data.userId}-100`}}
-                               defaultSource={require('/../resources/images/avatar.png')}/>
+                               defaultSource={require('../../../resources/images/avatar.png')}/>
                         <View style={styles.containerV}>
                             <View style={styles.containerF}>
                                 <Text style={styles.text}>{data.userName}</Text>
@@ -193,7 +193,8 @@ export default class Content extends Component {
                         <Icon size={20} name='chatbubble-working' color={colors.border} style={style.icon} />
                         <Text style={style.hint}>{moment(data.createTime).calendar()}</Text>
                     </View>
-                    <ListView initialListSize={10}
+                    <ListView enableEmptySections={true}
+                              initialListSize={10}
                               pageSize={5}
                               dataSource={this.state.dataSource}
                               renderRow={this._renderRow}
@@ -287,6 +288,7 @@ const style = StyleSheet.create({
     },
     close: {
         paddingLeft: 16,
+        marginLeft: Platform.OS === 'android' ? 16 : 0,
         paddingRight: 8,
         backgroundColor: 'transparent'
     },

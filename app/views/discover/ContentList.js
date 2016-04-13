@@ -8,9 +8,9 @@ import React, {StyleSheet, Component, ListView, RefreshControl, Image,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {airloy, styles, colors, config, api, util, toast, L} from '/../app/app';
-import objective from '/../app/logic/Objective';
-import ListSource from '/../app/logic/ListSource';
+import {airloy, styles, colors, config, api, util, toast, L} from '../../app';
+import objective from '../../logic/Objective';
+import ListSource from '../../logic/ListSource';
 
 import Content from './Content';
 
@@ -123,17 +123,18 @@ export default class ContentList extends Component {
     render() {
         return (
             <View style={styles.flex}>
-                <ListView initialListSize={15}
-                             pageSize={5}
-                             dataSource={this.state.dataSource}
-                             renderRow={this._renderRow}
-                             renderSeparator={this._renderSeparator}
-                             refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
-                                                             onRefresh={() => this.reload()}
-                                                             tintColor={colors.accent}
-                                                             title="加载中..."
-                                                             colors={['#ff0000', '#00ff00', '#0000ff']}
-                                                             progressBackgroundColor="#EBEBEB" />}
+                <ListView enableEmptySections={true}
+                          initialListSize={15}
+                          pageSize={5}
+                          dataSource={this.state.dataSource}
+                          renderRow={this._renderRow}
+                          renderSeparator={this._renderSeparator}
+                          refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
+                                                          onRefresh={() => this.reload()}
+                                                          tintColor={colors.accent}
+                                                          title="加载中..."
+                                                          colors={['#ff0000', '#00ff00', '#0000ff']}
+                                                          progressBackgroundColor="#EBEBEB" />}
                 />
                 <Content data={this.state.selectedRow} visible={this.state.showModal} onFeedback={(rowData) => this.updateRow(rowData)} />
             </View>

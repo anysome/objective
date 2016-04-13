@@ -7,8 +7,8 @@ import React, {StyleSheet, Component, ListView, RefreshControl, View, Text,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, toast, L, util} from '/../app/app';
-import ListSource from '/../app/logic/ListSource';
+import {styles, colors, airloy, api, toast, L, util} from '../../app';
+import ListSource from '../../logic/ListSource';
 
 import EditItem from './EditItem';
 

@@ -8,21 +8,26 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
 import moment from 'moment';
-import app, {styles, colors, airloy, api, L, toast} from '/../app/app';
+import app, {styles, colors, airloy, api, L, toast} from '../../app';
 
-import TextArea from '/../app/widgets/TextArea';
+import TextArea from '../../widgets/TextArea';
 
 
 export default class Anything extends Component {
 
     constructor(props) {
-        super(props);
+        let {visible, ...others} = props;
+        super(others);
         this._input = null;
+        if ( typeof visible === 'undefined' ) {
+            visible = true;
+        }
+        console.log('init visible = ' + visible);
         this.state = {
             input: '',
             tip: '添加事项到今日待办, 保存点击今日',
             btn: 'today',
-            modalVisible: true,
+            modalVisible: visible,
             pin: false
         };
         this._saveToday = this._saveToday.bind(this);
@@ -34,6 +39,7 @@ export default class Anything extends Component {
     }
 
     componentWillReceiveProps() {
+        console.log('receive props while visible ' + this.state.modalVisible);
         this.setState({modalVisible:true});
     }
 
@@ -229,6 +235,7 @@ export default class Anything extends Component {
     }
 
     render() {
+        console.log('modal is to open ? ' + this.state.modalVisible);
         return (
             <View style={styles.window}>
             <Modal animated={true} transparent={false} visible={this.state.modalVisible}>

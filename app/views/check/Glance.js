@@ -7,8 +7,8 @@ import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, 
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Button from 'react-native-button';
 
-import {airloy, styles, colors, api, L, toast} from '/../app/app';
-import Objective from '/../app/logic/Objective';
+import {airloy, styles, colors, api, L, toast} from '../../app';
+import Objective from '../../logic/Objective';
 
 import Edit from './Edit';
 import Punch from './Punch';

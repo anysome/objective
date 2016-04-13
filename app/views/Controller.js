@@ -4,7 +4,7 @@
 'use strict';
 
 import React, { Component, LayoutAnimation} from 'react-native';
-import app from '/../app/app';
+import app from '../app';
 
 export default class Controller extends Component {
 

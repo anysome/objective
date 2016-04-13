@@ -5,7 +5,7 @@
 
 import React, {Component, ScrollView, View, Text} from 'react-native';
 
-import {styles, colors} from '/../app/app';
+import {styles, colors} from '../../app';
 
 export default class Message extends Component {
 

@@ -5,10 +5,10 @@
 
 import React, {Component, ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
 
-import {styles, colors, airloy, config, api, toast, L} from '/../app/app';
+import {styles, colors, airloy, config, api, toast, L} from '../../app';
 
-import TextField from '/../app/widgets/TextField';
-import TextArea from '/../app/widgets/TextArea';
+import TextField from '../../widgets/TextField';
+import TextArea from '../../widgets/TextArea';
 
 export default class Profile extends Component {
 
@@ -73,7 +73,7 @@ export default class Profile extends Component {
                     <Text>头像</Text>
                     <Image style={{width:60, height:60}}
                            source={{uri:`${config.host.avatar + this.user.id}-100`}}
-                           defaultSource={require('/../resources/images/avatar.png')} />
+                           defaultSource={require('../../../resources/images/avatar.png')} />
                 </View>
                 <View style={styles.section}>
                     <TextField

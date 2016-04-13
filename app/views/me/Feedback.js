@@ -7,9 +7,9 @@ import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, 
 import Button from 'react-native-button';
 import moment from 'moment';
 
-import {styles, colors, airloy, util, api, L, toast} from '/../app/app';
+import {styles, colors, airloy, util, api, L, toast} from '../../app';
 
-import TextArea from '/../app/widgets/TextArea';
+import TextArea from '../../widgets/TextArea';
 import FeedbackDetail from './FeedbackDetail';
 
 export default class Feedback extends Component {

@@ -10,7 +10,7 @@ import SplashPage from './app/views/inlet/Splash';
 import LoginPage from './app/views/inlet/Login';
 import MainPage from './app/views/inlet/Frame';
 
-import {airloy, config} from '/../app/app';
+import {airloy, config} from './app/app';
 
 class App extends Component {
 

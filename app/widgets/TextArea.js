@@ -7,7 +7,7 @@ import React, {
   Text
 } from 'react-native';
 
-import {colors} from '/../app/app';
+import {colors} from '../app';
 
 //var RCTUIManager = require('NativeModules').UIManager;
 

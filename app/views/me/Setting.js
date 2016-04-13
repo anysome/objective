@@ -5,7 +5,7 @@
 
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity} from 'react-native';
 
-import {styles, colors, airloy} from '/../app/app';
+import {styles, colors, airloy} from '../../app';
 
 export default class Setting extends Component {
 
