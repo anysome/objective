@@ -7,29 +7,34 @@
 
 ## iOS Snapshot
 
-<img src="https://cloud.githubusercontent.com/assets/233960/14515977/3d6db714-0231-11e6-96d2-a33aabb9c714.jpg" alt="todo" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515955/132a9968-0231-11e6-9a69-f89ecd39d44b.jpg" alt="progress" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515957/144d9ab6-0231-11e6-9dbe-7cd2e722e279.jpg" alt="calendar" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515988/59d9eb0c-0231-11e6-8d33-7f99d3d7aa07.jpg" alt="discover" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515989/59e51dec-0231-11e6-9517-ad90631a2662.jpg" alt="check" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515975/3b08a402-0231-11e6-9b21-b2c5672fecd7.jpg" alt="add" width="200">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515977/3d6db714-0231-11e6-96d2-a33aabb9c714.jpg" alt="todo" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515955/132a9968-0231-11e6-9a69-f89ecd39d44b.jpg" alt="progress" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515957/144d9ab6-0231-11e6-9dbe-7cd2e722e279.jpg" alt="calendar" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515988/59d9eb0c-0231-11e6-8d33-7f99d3d7aa07.jpg" alt="discover" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515989/59e51dec-0231-11e6-9517-ad90631a2662.jpg" alt="check" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515975/3b08a402-0231-11e6-9b21-b2c5672fecd7.jpg" alt="add" width="250">
 
 ## Android Snapshot
 **Android 版本还在适配调试中, 部分界面和功能会有错乱, 近期会更新.**
 
-<img src="https://cloud.githubusercontent.com/assets/233960/14515683/ddc43fb0-022e-11e6-99f8-f17f3136546a.png" alt="todo" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515840/05e2a526-0230-11e6-9b8c-7b7871398bb5.png" alt="progress" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515841/0e0ea470-0230-11e6-9d6d-c588b50f7bac.png" alt="calendar" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515715/136220f6-022f-11e6-96e1-495b908d7d36.png" alt="discover" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515738/4f20b5b2-022f-11e6-9f67-5cbfb206f3c8.png" alt="me" width="200">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515745/5d81af94-022f-11e6-8ba1-84c8b234843f.png" alt="add" width="200">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515683/ddc43fb0-022e-11e6-99f8-f17f3136546a.png" alt="todo" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515840/05e2a526-0230-11e6-9b8c-7b7871398bb5.png" alt="progress" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515841/0e0ea470-0230-11e6-9d6d-c588b50f7bac.png" alt="calendar" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515715/136220f6-022f-11e6-96e1-495b908d7d36.png" alt="discover" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515738/4f20b5b2-022f-11e6-9f67-5cbfb206f3c8.png" alt="me" width="250">
+<img src="https://cloud.githubusercontent.com/assets/233960/14515745/5d81af94-022f-11e6-8ba1-84c8b234843f.png" alt="add" width="250">
 
 ### Install
 
 ```
 npm install
+
 rnpm link
+
+# run on ios
 react-native run-ios
+
+# run on android
 react-native run-android
 ```
 
