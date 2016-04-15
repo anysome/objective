@@ -3,11 +3,12 @@
  */
 
 import React, {StyleSheet, Component, ListView, RefreshControl, View, Text,
-    TouchableOpacity, PixelRatio, ActionSheetIOS, Platform} from 'react-native';
+    TouchableOpacity, PixelRatio, ActionSheetIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, toast, L, util} from '../../app';
+import {styles, colors, airloy, api, toast, L} from '../../app';
+import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import EditItem from './EditItem';
@@ -44,7 +45,7 @@ export default class Project extends Component {
             });
         };
         // so many bugs on android T_T
-        Platform.OS === 'android' ?
+        util.isAndroid() ?
             this.props.navigator.replaceAtIndex(route, -1) :
                 this.props.navigator.replace(route);
     }

@@ -145,7 +145,7 @@ const style = StyleSheet.create({
     hint: {
         flex: 1,
         fontSize: 12,
-        paddingLeft: 8,
+        marginLeft: 8,
         color: colors.border,
         paddingBottom: 4
     }

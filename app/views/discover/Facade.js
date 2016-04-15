@@ -3,10 +3,10 @@
  */
 
 import React, { StyleSheet, Component, ScrollView, View, Text, Image,
-    TouchableOpacity, Platform} from 'react-native';
+    TouchableOpacity} from 'react-native';
 
 import app, {config, airloy, styles, colors, api, L, toast} from '../../app';
-
+import util from '../../libs/Util';
 import ContentList from './ContentList';
 import UserList from './UserList';
 
@@ -49,7 +49,7 @@ export default class Facade extends Component {
             };
         }
         // so many bugs on android T_T
-        Platform.OS === 'android' ?
+        util.isAndroid() ?
             this.props.navigator.replaceAtIndex(route, -1) :
                 this.props.navigator.replace(route);
     }

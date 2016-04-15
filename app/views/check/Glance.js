@@ -3,11 +3,12 @@
  */
 'use strict';
 
-import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio, Platform} from 'react-native';
+import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Button from 'react-native-button';
 
 import {airloy, styles, colors, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
 
 import Edit from './Edit';
@@ -45,7 +46,7 @@ export default class Glance extends Component {
             });
         };
         // so many bugs on android T_T
-        Platform.OS === 'android' ?
+        util.isAndroid() ?
             this.props.navigator.replaceAtIndex(route, -1) :
                 this.props.navigator.replace(route);
         this.reload();

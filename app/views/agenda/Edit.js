@@ -4,9 +4,11 @@
 'use strict';
 
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-    LayoutAnimation, ActionSheetIOS, Platform} from 'react-native';
+    LayoutAnimation, ActionSheetIOS} from 'react-native';
 import moment from 'moment';
+
 import {styles, colors, airloy, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
 
 import TextField from '../../widgets/TextField';
@@ -46,7 +48,7 @@ export default class Edit extends Component{
         if ( route.rightButtonIcon ) {
             route.onRightButtonPress = () => this._showOptions();
             // so many bugs on android T_T
-            Platform.OS === 'android' ?
+            util.isAndroid() ?
                 this.props.navigator.replaceAtIndex(route, -1) :
                 this.props.navigator.replace(route);
         }

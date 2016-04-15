@@ -3,13 +3,13 @@
  */
 'use strict';
 
-import React, {Component, StyleSheet, RefreshControl, ListView, Platform,
+import React, {Component, StyleSheet, RefreshControl, ListView,
         View, Text, LayoutAnimation, TouchableOpacity, ActionSheetIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {airloy, styles, colors, api, toast, L} from '../../app';
-
+import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
 import Edit from './Edit';
@@ -82,7 +82,7 @@ export default class Inbox extends Component {
                 }
             );
         };
-        Platform.OS === 'android' ? this.props.navigator.replacePrevious(route) : this.props.navigator.replace(route);
+        util.isAndroid() ? this.props.navigator.replacePrevious(route) : this.props.navigator.replace(route);
     }
 
     componentDidMount() {

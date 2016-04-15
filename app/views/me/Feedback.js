@@ -7,8 +7,8 @@ import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, 
 import Button from 'react-native-button';
 import moment from 'moment';
 
-import {styles, colors, airloy, util, api, L, toast} from '../../app';
-
+import {styles, colors, airloy, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import TextArea from '../../widgets/TextArea';
 import FeedbackDetail from './FeedbackDetail';
 

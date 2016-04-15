@@ -30,21 +30,6 @@ function L(message, options) {
     return I18n.translate(message, options);
 }
 
-var util = new class {
-    trace(obj) {
-        for (var prop in obj) {
-            console.log('prop: ' + prop);
-        }
-    }
-    clone(object) {
-        return JSON.parse(JSON.stringify(object));
-    }
-    removeFromArray(arr, item) {
-        let index = arr.indexOf(item);
-        index > -1 && arr.splice(index, 1);
-    }
-} ();
-
 function toast(message, position =  -70) {
     Toast.show(message, {
         duration: Toast.durations.SHORT,
@@ -75,8 +60,7 @@ export default {
     colors: colors,
     styles: styles,
     L: L,
-    toast: toast,
-    util: util
+    toast: toast
 };
 
-export { config, styles, colors, airloy, api, util, L, toast};
+export { config, styles, colors, airloy, api, L, toast};

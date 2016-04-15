@@ -3,11 +3,12 @@
  */
 'use strict';
 
-import React, { StyleSheet, Component, View, ScrollView, ListView,
+import React, { StyleSheet, Component, View, ScrollView, ListView, Platform,
     RefreshControl, TouchableOpacity, Text, ActionSheetIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import app, {airloy, styles, colors, api, L, toast} from '../../app';
+import {airloy, styles, colors, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import Controller from '../Controller';
@@ -25,7 +26,7 @@ export default class Check extends Controller {
         this.listSource = null;
         this.state = {
             isRefreshing: true,
-            panelTop: -36,
+            panelTop: util.isAndroid() ? -100 : -36,
             dataSource: new ListView.DataSource({
                 getSectionHeaderData: (dataBlob, sectionId) => dataBlob[sectionId],
                 getRowData: (dataBlob, sectionId, rowId) => dataBlob[sectionId].getRow(rowId),
@@ -40,8 +41,14 @@ export default class Check extends Controller {
             this.route.rightButtonIcon = this.getIcon('ios-plus-empty');
             this.props.navigator.replace(this.route);
             this.route.onRightButtonPress = () => {
+                let newTop = -100;
+                if ( util.isAndroid() ) {
+                    newTop = this.state.panelTop === 0 ? -100 : 0
+                } else {
+                    newTop = this.state.panelTop === 65 ? -36 : 65
+                }
                 this.setState({
-                    panelTop: this.state.panelTop === 65 ? -36 : 65
+                    panelTop: newTop
                 });
             };
         }
@@ -242,7 +249,7 @@ export default class Check extends Controller {
 const style = StyleSheet.create({
     panel: {
         position: 'absolute',
-        top: -36,
+        top: util.isAndroid() ? -100 : -36,
         left: 0,
         right: 0,
         height: 100,

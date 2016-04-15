@@ -3,11 +3,12 @@
  */
 'use strict';
 
-import React, { Component, StyleSheet, View, Text, TouchableOpacity, Platform} from 'react-native';
+import React, { Component, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {colors, styles} from '../../app';
+import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 
 
@@ -81,8 +82,8 @@ const style = StyleSheet.create({
         backgroundColor: colors.light1
     },
     icon: {
-        marginLeft: Platform.OS === 'android' ? 16 : 0,
-        paddingLeft: 16
+        marginLeft: util.isAndroid() ? 16 : 0,
+        paddingLeft: util.isAndroid() ? 0 : 16
     },
     alert: {
         marginLeft: 5

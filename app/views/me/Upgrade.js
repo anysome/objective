@@ -5,7 +5,7 @@
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import Button from 'react-native-button';
 
-import {styles, colors, airloy, util, api, L, toast} from '../../app';
+import {styles, colors, airloy, api, L, toast} from '../../app';
 import TextField from '../../widgets/TextField';
 
 export default class Setting extends Component {

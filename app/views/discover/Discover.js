@@ -9,7 +9,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import objective from '../../logic/Objective';
-import {config, airloy, styles, colors, util, api, L, toast} from '../../app';
+import {config, airloy, styles, colors, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import Controller from '../Controller';

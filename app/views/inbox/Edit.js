@@ -3,10 +3,10 @@
  */
 
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-    ActionSheetIOS, Platform} from 'react-native';
+    ActionSheetIOS} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast} from '../../app';
-
+import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
@@ -42,7 +42,7 @@ export default class Edit extends Component{
                 route.onRightButtonPress = () => this._showOptions();
             }
             // so many bugs on android T_T
-            Platform.OS === 'android' ?
+            util.isAndroid() ?
                 this.props.navigator.replaceAtIndex(route, -1) :
                     this.props.navigator.replace(route);
         }

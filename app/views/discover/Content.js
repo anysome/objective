@@ -3,11 +3,12 @@
  */
 
 import React, {StyleSheet, Component, ScrollView, View, Text, Modal, Image,
-    TouchableOpacity, LayoutAnimation, ListView, PixelRatio, Platform} from 'react-native';
+    TouchableOpacity, LayoutAnimation, ListView, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {config, styles, colors, airloy, api, L, toast} from '../../app';
+import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 
 import TextField from '../../widgets/TextField';
@@ -30,25 +31,6 @@ export default class Content extends Component {
             visibleBottom: 0
         };
     }
-
-    //componentDidMount() {
-    //    airloy.event.on('keyboardWillShow', (e) => {
-    //        this.setState({
-    //            isKeyboardOpened: true,
-    //            visibleBottom: e.endCoordinates.height
-    //        });
-    //    });
-    //    airloy.event.on('keyboardWillHide', (e) => {
-    //        this.setState({
-    //            isKeyboardOpened: false,
-    //            visibleBottom: 0
-    //        });
-    //    });
-    //}
-    //
-    //componentWillUnmount() {
-    //    airloy.event.off('keyboardWillShow', 'keyboardWillHide');
-    //}
 
     componentWillUpdate(props, state) {
         if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
@@ -259,8 +241,10 @@ const style = StyleSheet.create({
         borderBottomColor: colors.border
     },
     icon: {
-        paddingLeft: 8,
-        paddingRight: 16
+        paddingLeft: util.isAndroid() ? 0 : 8,
+        marginLeft: util.isAndroid() ? 8 : 0,
+        paddingRight: util.isAndroid() ? 0 : 16,
+        marginRight: util.isAndroid() ? 16 : 0,
     },
     hint: {
         flex: 1,
@@ -287,15 +271,16 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     close: {
-        paddingLeft: 16,
-        marginLeft: Platform.OS === 'android' ? 16 : 0,
-        paddingRight: 8,
+        paddingLeft: util.isAndroid() ? 0 : 16,
+        marginLeft: util.isAndroid() ? 16 : 0,
+        paddingRight: util.isAndroid() ? 0 : 8,
+        marginRight: util.isAndroid() ? 8 : 0,
         backgroundColor: 'transparent'
     },
     input: {
         flex: 1,
         marginTop: 5,
-        marginRight: 8
+        marginRight: 8,
     },
     row: {
         padding: 16,
