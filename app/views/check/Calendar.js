@@ -9,13 +9,14 @@ import CalendarView from '../../widgets/CalendarView';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, toast, L} from '../../app';
+import util from '../../libs/Util';
 
 export default class Calendar extends Component {
 
     constructor(props) {
         let {data, ...others} = props;
         super(others);
-        this.fixTop = 65;
+        this.fixTop = util.isAndroid() ? 0 :65;
         this.checkDaily = data;
         this.startDay = moment().add(-2, 'month').startOf('month');
         this.endDay = moment().endOf('month');

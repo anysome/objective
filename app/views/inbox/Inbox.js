@@ -311,7 +311,9 @@ const style = StyleSheet.create({
         backgroundColor: colors.light1
     },
     icon: {
-        paddingLeft: 16,
-        paddingRight: 10,
+        marginLeft: util.isAndroid() ? 16 : 0,
+        paddingLeft: util.isAndroid() ? 0 : 16,
+        marginRight: util.isAndroid() ? 10 : 0,
+        paddingRight: util.isAndroid() ? 0 : 10
     }
 });
