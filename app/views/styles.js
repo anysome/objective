@@ -4,6 +4,7 @@
 'use strict';
 
 import {StyleSheet, PixelRatio} from 'react-native';
+import util from '../libs/Util';
 
 var colors = {
     light1: '#F2EFE9',  //E2F9DA
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light2
     },
     separator: {
-        height: 1,
+        height: 1 / PixelRatio.get(),
         position: 'absolute',
         left: 16,
         right: 0,
@@ -179,8 +180,8 @@ const styles = StyleSheet.create({
     },
     inputR: {
         flex: 1,
-        height: 25,
-        marginLeft: 16,
+        height: util.isAndroid() ? 40 : 25,
+        marginLeft: util.isAndroid() ? 0 : 16,
         marginTop: null,
         textAlign: 'right'
     },

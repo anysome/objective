@@ -17,7 +17,7 @@ import TextField from '../../widgets/TextField';
 import ResetPassword from './ResetPassword';
 
 import app, {colors, styles, api, airloy, L, toast} from '../../app';
-
+import EventTypes from '../../logic/EventTypes';
 
 
 export default class Login extends Component {
@@ -36,14 +36,14 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        airloy.event.on('keyboardWillShow', (e) => {
+        airloy.event.on(EventTypes.keyboardShow, (e) => {
             let newSize = Dimensions.get('window').height - e.endCoordinates.height;
             this.setState({
                 isKeyboardOpened: true,
                 visibleHeight: newSize
             });
         });
-        airloy.event.on('keyboardWillHide', (e) => {
+        airloy.event.on(EventTypes.keyboardHide, (e) => {
             this.setState({
                 isKeyboardOpened: false,
                 visibleHeight: Dimensions.get('window').height
@@ -52,7 +52,7 @@ export default class Login extends Component {
     }
 
     componentWillUnmount() {
-        airloy.event.off('keyboardWillShow', 'keyboardWillHide');
+        airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
     }
 
     componentWillUpdate(props, state) {

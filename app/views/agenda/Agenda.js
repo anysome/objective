@@ -11,6 +11,7 @@ import {airloy, styles, colors, api, L, toast} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import LocalNotifications from '../../logic/LocalNotifications';
+import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
@@ -69,11 +70,11 @@ export default class Agenda extends Controller {
             };
             this.props.navigator.replace(this.route);
         }
-        airloy.event.on('agenda.change', ()=> {
+        airloy.event.on(EventTypes.agendaChange, ()=> {
             // call network request or mark stale until page visible
             this.visible ? this.reload() : this.markStale();
         });
-        airloy.event.on('agenda.add', (agenda)=> {
+        airloy.event.on(EventTypes.agendaAdd, (agenda)=> {
             this.listSource.add(agenda);
             this._sortList();
             // TODO treat view stale differently to data stale, currently not support data stale.

@@ -10,6 +10,7 @@ import moment from 'moment';
 import {config, styles, colors, airloy, api, L, toast} from '../../app';
 import util from '../../libs/Util';
 import objective from '../../logic/Objective';
+import EventTypes from '../../logic/EventTypes';
 
 import TextField from '../../widgets/TextField';
 
@@ -44,20 +45,20 @@ export default class Content extends Component {
             this.reload(nextProps.data);
         }
         if ( nextProps.visible ) {
-            airloy.event.on('keyboardWillShow', (e) => {
+            airloy.event.on(EventTypes.keyboardShow, (e) => {
                 this.setState({
                     isKeyboardOpened: true,
                     visibleBottom: e.endCoordinates.height
                 });
             });
-            airloy.event.on('keyboardWillHide', (e) => {
+            airloy.event.on(EventTypes.keyboardHide, (e) => {
                 this.setState({
                     isKeyboardOpened: false,
                     visibleBottom: 0
                 });
             });
         } else {
-            airloy.event.off('keyboardWillShow', 'keyboardWillHide');
+            airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
             this.setState({
                 isKeyboardOpened: false,
                 visibleBottom: 0
@@ -83,6 +84,7 @@ export default class Content extends Component {
     }
 
     async _send() {
+        if ( ! this.state.comment ) return ;
         let result = await airloy.net.httpPost(api.content.detail.comment, {
             contentId: this.state.data.id,
             comment: this.state.comment}

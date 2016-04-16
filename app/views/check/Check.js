@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {airloy, styles, colors, api, L, toast} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
+import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
@@ -52,10 +53,10 @@ export default class Check extends Controller {
                 });
             };
         }
-        airloy.event.on('target.change', () => {
+        airloy.event.on(EventTypes.targetChange, () => {
             this.visible ? this.reload() : this.markStale();
         });
-        airloy.event.on('target.punch', (done) => {
+        airloy.event.on(EventTypes.targetPunch, (done) => {
             let rowData = this.listSource.read(done.id);
             if ( rowData ) {
                 rowData.closed = true;
