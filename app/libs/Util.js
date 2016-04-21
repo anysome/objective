@@ -20,4 +20,11 @@ export default new class {
     isAndroid() {
         return Platform.OS === 'android';
     }
+
+    getTodayStart() {
+        let now = new Date();
+        let tzOffset = now.getTimezoneOffset() * 60000;
+        now.setHours(0,0,0,0);
+        return now.getTime() + tzOffset;
+    }
 } ();

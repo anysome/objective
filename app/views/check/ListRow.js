@@ -12,9 +12,7 @@ import objective from '../../logic/Objective';
 export default class ListRow extends Component {
 
     constructor(props) {
-        let {today, ...others} = props;
-        super(others);
-        this.today = today;
+        super(props);
         this.done = props.sectionId === 2;
         this.arranged = props.sectionId == 1;
     }
@@ -42,7 +40,7 @@ export default class ListRow extends Component {
         if ( checkDaily.frequency === '1' ) {
             maybe = '1 天 ' + checkDaily.gross + unitName;
         } else {
-            let ms = checkDaily.endDate - this.today;
+            let ms = checkDaily.endDate - this.props.today;
             let checkLeftDays = 1;
             if ( ms > 0 ) {
                 checkLeftDays = ms / 86400000 + 1;

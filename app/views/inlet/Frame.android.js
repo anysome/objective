@@ -5,11 +5,13 @@
 
 import React from 'react';
 import {StyleSheet, Navigator, TouchableOpacity, AppState, Image, Text, View} from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TabNavigator from 'react-native-tab-navigator';
+import NavigatorWithBar from '../../widgets/NavigatorWithBar';
 
 import {colors, airloy, styles} from '../../app';
-import NavigatorWithBar from '../../widgets/NavigatorWithBar';
+import util from '../../libs/Util';
+
 
 import Agenda from '../agenda/Agenda';
 import Check from '../check/Check';
@@ -27,9 +29,7 @@ export default class Main extends React.Component {
             currentPage: 'Me'
         };
         this.icons = new Map();
-        let now = new Date();
-        now.setHours(0, 0,0,0);
-        this.today = now.getTime();
+        this.today = util.getTodayStart();
         this._handleAppStateChange = this._handleAppStateChange.bind(this);
     }
 
@@ -62,6 +62,7 @@ export default class Main extends React.Component {
         if ( currentAppState === 'active') {
             if ( new Date().getTime() - this.today > 86400000 ) {
                 this.today = this.today + 86400000;
+                airloy.net.httpGet(api.check.list);
                 airloy.event.emit('target.change');
                 airloy.event.emit('agenda.change');
                 airloy.event.emit('me.change');

@@ -15,9 +15,7 @@ import objective from '../../logic/Objective';
 export default class ListRow extends Component {
 
     constructor(props) {
-        let {today, ...others} = props;
-        super(others);
-        this.today = today;
+        super(props);
         this.done = props.sectionId === 2;
         this.future = props.sectionId == 1;
     }
@@ -47,7 +45,7 @@ export default class ListRow extends Component {
                 title: data.title,
                 detail: data.detail,
                 reminder: data.reminder,
-                arrangeDate: this.today === data.today ? false : moment(data.today).fromNow()
+                arrangeDate: this.props.today === data.today ? false : moment(data.today).fromNow()
             };
         }
     }

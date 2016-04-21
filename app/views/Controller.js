@@ -79,12 +79,4 @@ export default class Controller extends Component {
         console.log(`-------- "${this.name}" unmounting`);
     }
 
-    //shouldComponentUpdate(nextProps, nextState) {
-    //    if ( new Date().getTime() - this.today > 86400000 ) {
-    //        // new day is arrival,
-    //        this.today += 86400000;
-    //    }
-    //    return true;
-    //}
-
 }

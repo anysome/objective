@@ -53,6 +53,7 @@ export default class Frame extends Component {
 		if ( currentAppState === 'active') {
 			if ( new Date().getTime() - this.today > 86400000 ) {
 				this.today = this.today + 86400000;
+				airloy.net.httpGet(api.check.list);
 				airloy.event.emit('target.change');
 				airloy.event.emit('agenda.change');
 				airloy.event.emit('me.change');
