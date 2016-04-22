@@ -4,7 +4,7 @@
 'use strict';
 
 import React, { Component, LayoutAnimation} from 'react-native';
-import app from '../app';
+import {airloy} from '../app';
 import EventTypes from '../logic/EventTypes';
 
 export default class Controller extends Component {
@@ -61,7 +61,7 @@ export default class Controller extends Component {
     }
 
     componentDidMount() {
-        app.airloy.event.on(EventTypes.tabChange, (tabPage)=> {
+        airloy.event.on(EventTypes.tabChange, (tabPage)=> {
             if ( this.stale && tabPage === this.name ) {
                 console.log(`stale tab "${tabPage}" reload while showing`);
                 this.reload();

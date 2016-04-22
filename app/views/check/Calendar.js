@@ -16,7 +16,6 @@ export default class Calendar extends Component {
     constructor(props) {
         let {data, ...others} = props;
         super(others);
-        this.fixTop = util.isAndroid() ? 0 :65;
         this.checkDaily = data;
         this.startDay = moment().add(-2, 'month').startOf('month');
         this.endDay = moment().endOf('month');
@@ -57,7 +56,7 @@ export default class Calendar extends Component {
 
     render() {
         return (
-            <View style={[styles.flex, {top: this.fixTop}]}>
+            <View style={style.flex}>
                 <Text style={style.title}>{this.checkDaily.title}</Text>
                 {this.state.loaded ?
                     <CalendarView
@@ -78,6 +77,10 @@ export default class Calendar extends Component {
 
 
 const style = StyleSheet.create({
+  flex: {
+    flex: 1,
+    top: util.isAndroid() ? 0 : 65
+  },
     title: {
         margin: 10,
         color: colors.dark2,

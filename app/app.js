@@ -15,6 +15,8 @@ import MyAuth from './libs/dev/DevAuth';
 
 import {colors, styles} from './views/styles';
 
+import ActivityIndicator from './widgets/ActivityIndicator';
+
 // init
 I18n.fallbacks = true;
 I18n.missingTranslationPrefix = '';
@@ -53,14 +55,12 @@ function toast(message, position =  -70) {
     });
 }
 
+function hang(up = true) {
+  if(up) {
+    ActivityIndicator.show();
+  } else {
+    ActivityIndicator.hide();
+  }
+}
 
-export default {
-    config: config,
-    airloy: airloy,
-    colors: colors,
-    styles: styles,
-    L: L,
-    toast: toast
-};
-
-export { config, styles, colors, airloy, api, L, toast};
+export { config, styles, colors, airloy, api, L, toast, hang};
