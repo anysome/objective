@@ -28,11 +28,11 @@ let indicator = null;
 
 export default class ActivityIndicator {
 
-  static show() {
+  static show(type='Circle') {
     indicator || (
       indicator = new RootSiblings(
         <View style={style.container}>
-          <Spinner isVisible={true} size={100} type={'ChasingDots'} color={colors.accent}/>
+          <Spinner isVisible={true} size={100} type={type} color={colors.accent}/>
         </View>
       )
     );

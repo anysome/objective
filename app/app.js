@@ -55,9 +55,9 @@ function toast(message, position =  -70) {
     });
 }
 
-function hang(up = true) {
-  if(up) {
-    ActivityIndicator.show();
+function hang(upOrType = true) {
+  if(upOrType) {
+    ActivityIndicator.show(typeof(upOrType) === 'string' ? upOrType : 'Wave');
   } else {
     ActivityIndicator.hide();
   }

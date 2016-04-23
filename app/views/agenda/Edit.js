@@ -66,12 +66,14 @@ export default class Edit extends Component {
       },
       async (buttonIndex) => {
         if (buttonIndex === 0) {
+          hang();
           let newDate = isFuture ? moment(this.today) : moment(this.today + 86400000);
           let result = await airloy.net.httpGet(api.agenda.schedule, {
               id: this.agenda.id,
               newDate: newDate.format('YYYY-MM-DD')
             }
           );
+          hang(false);
           if (result.success) {
             this.agenda.today = isFuture ? this.today : this.today + 86400000;
             this.props.onFeedback(this.agenda);
@@ -80,7 +82,9 @@ export default class Edit extends Component {
           }
         }
         if (buttonIndex === 1) {
+          hang();
           let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
+          hang(false);
           if (result.success) {
             airloy.event.emit('target.change');
             this.props.onDelete(this.agenda);
