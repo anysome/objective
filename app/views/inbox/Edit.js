@@ -2,15 +2,15 @@
  * Created by Layman(http://github.com/anysome) on 16/3/17.
  */
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-  ActionSheetIOS} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert, ActionSheetIOS} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
-export default class Edit extends Component {
+export default class Edit extends React.Component {
 
   constructor(props) {
     var {data, sectionId, ...others} = props;
@@ -28,14 +28,27 @@ export default class Edit extends Component {
     if (route.rightButtonIcon) {
       if (this.props.sectionId === 1) {
         // edit project
-        route.onRightButtonPress = async () => {
-          // todo two button confirm if has total > 0
-          let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
-          if (result.success) {
-            this.props.onDeleted(this.data);
-          } else {
-            toast(L(result.message));
-          }
+        route.onRightButtonPress = () => {
+          Alert.alert(
+            '确认删除 ?',
+            this.data.countTodo > 0 ? '未完成的任务可在回收站里找到.' : '彻底删除了哦!',
+            [
+              {text: '不了'},
+              {
+                text: '删除',
+                onPress: async () => {
+                  hang();
+                  let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
+                  if (result.success) {
+                    this.props.onDeleted(this.data);
+                  } else {
+                    toast(L(result.message));
+                  }
+                  hang(false);
+                }
+              }
+            ]
+          );
         };
       } else {
         // edit chore
@@ -50,11 +63,10 @@ export default class Edit extends Component {
 
   _showOptions() {
     let BUTTONS = ['转入清单...', '做为新清单', '删除', '取消'];
-    let CANCEL_INDEX = 3, DESTRUCTIVE_INDEX = 2;
     ActionSheetIOS.showActionSheetWithOptions({
         options: BUTTONS,
-        cancelButtonIndex: CANCEL_INDEX,
-        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        cancelButtonIndex: 3,
+        destructiveButtonIndex: 2,
         tintColor: colors.dark1
       },
       async (buttonIndex) => {
@@ -63,27 +75,42 @@ export default class Edit extends Component {
             this._selectProjects();
             break;
           case 1 :
+            hang();
             let result = await airloy.net.httpGet(api.project.plot, {id: this.data.id});
             if (result.success) {
               this.props.onProjectized(this.data);
             } else {
               toast(L(result.message));
             }
+            hang(false);
             break;
           case 2 :
-            hang();
-            let result2 = await airloy.net.httpGet(api.inbox.remove, {id: this.data.id});
-            hang(false);
-            if (result2.success) {
-              if (this.data.catalog === 'trash') {
-                this.props.onDeleted(this.data);
-              } else {
-                this.data.catalog = 'trash';
-                this.props.onUpdated(this.data);
-              }
-            } else {
-              toast(L(result2.message));
-            }
+            let isTrash = this.data.catalog === 'trash';
+            Alert.alert(
+              '确认删除 ?',
+              isTrash ? '彻底删除了哦, 清空回收站更快哒' : '删除后可在回收站里找到.',
+              [
+                {text: '不了'},
+                {
+                  text: '删除',
+                  onPress: async () => {
+                    hang();
+                    let result2 = await airloy.net.httpGet(api.inbox.remove, {id: this.data.id});
+                    hang(false);
+                    if (result2.success) {
+                      if (isTrash) {
+                        this.props.onDeleted(this.data);
+                      } else {
+                        this.data.catalog = 'trash';
+                        this.props.onUpdated(this.data);
+                      }
+                    } else {
+                      toast(L(result2.message));
+                    }
+                  }
+                }
+              ]
+            );
             break;
         }
       }
@@ -101,6 +128,7 @@ export default class Edit extends Component {
         tintColor: colors.dark1
       },
       async (buttonIndex) => {
+        hang();
         let result = await airloy.net.httpGet(api.project.move, {
           id: this.data.id,
           topicId: projects[buttonIndex].id
@@ -110,6 +138,7 @@ export default class Edit extends Component {
         } else {
           toast(L(result.message));
         }
+        hang(false);
       }
     );
   }

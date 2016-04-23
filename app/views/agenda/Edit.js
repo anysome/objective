@@ -3,8 +3,9 @@
  */
 'use strict';
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-  LayoutAnimation, ActionSheetIOS} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, ActionSheetIOS,
+  Alert} from 'react-native';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
@@ -16,7 +17,7 @@ import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
 
-export default class Edit extends Component {
+export default class Edit extends React.Component {
 
   constructor(props) {
     var {data, today, ...others} = props;
@@ -57,11 +58,10 @@ export default class Edit extends Component {
   _showOptions() {
     let isFuture = this.today < this.agenda.today;
     let BUTTONS = [isFuture ? '安排到今天' : '推迟到明天', '删除', '取消'];
-    let CANCEL_INDEX = 2, DESTRUCTIVE_INDEX = 1;
     ActionSheetIOS.showActionSheetWithOptions({
         options: BUTTONS,
-        cancelButtonIndex: CANCEL_INDEX,
-        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        cancelButtonIndex: 2,
+        destructiveButtonIndex: 1,
         tintColor: colors.dark1
       },
       async (buttonIndex) => {
@@ -82,15 +82,27 @@ export default class Edit extends Component {
           }
         }
         if (buttonIndex === 1) {
-          hang();
-          let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
-          hang(false);
-          if (result.success) {
-            airloy.event.emit('target.change');
-            this.props.onDelete(this.agenda);
-          } else {
-            toast(L(result.message));
-          }
+          Alert.alert(
+            '确认删除 ?',
+            '删除后可在待定列表的回收站里找到.',
+            [
+              {text: '不了'},
+              {
+                text: '删除',
+                onPress: async () => {
+                  hang();
+                  let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
+                  hang(false);
+                  if (result.success) {
+                    airloy.event.emit('target.change');
+                    this.props.onDelete(this.agenda);
+                  } else {
+                    toast(L(result.message));
+                  }
+                }
+              }
+            ]
+          );
         }
       }
     );

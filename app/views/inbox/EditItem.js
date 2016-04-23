@@ -2,8 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/3/19.
  */
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-  ActionSheetIOS} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert, ActionSheetIOS} from 'react-native';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
@@ -11,7 +11,7 @@ import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
-export default class EditItem extends Component {
+export default class EditItem extends React.Component {
 
   constructor(props) {
     var {data, sectionId, ...others} = props;
@@ -27,15 +27,27 @@ export default class EditItem extends Component {
   componentWillMount() {
     let route = this.props.navigator.navigationContext.currentRoute;
     if (route.rightButtonIcon) {
-      route.onRightButtonPress = async () => {
-        hang();
-        let result = await airloy.net.httpGet(api.project.item.remove, {id: this.data.itemId});
-        hang(false);
-        if (result.success) {
-          this.props.onDeleted(this.data);
-        } else {
-          toast(L(result.message));
-        }
+      route.onRightButtonPress = () => {
+        Alert.alert(
+          '确认删除 ?',
+          '删除后可在回收站里找到.',
+          [
+            {text: '不了'},
+            {
+              text: '删除',
+              onPress: async () => {
+                hang();
+                let result = await airloy.net.httpGet(api.project.item.remove, {id: this.data.itemId});
+                hang(false);
+                if (result.success) {
+                  this.props.onDeleted(this.data);
+                } else {
+                  toast(L(result.message));
+                }
+              }
+            }
+          ]
+        );
       };
       // so many bugs on android T_T
       util.isAndroid() ?
@@ -70,13 +82,13 @@ export default class EditItem extends Component {
       hang();
       result = await airloy.net.httpPost(api.inbox.update, chore);
     }
-    hang(false);
     if (result.success) {
       this.data.arranged && airloy.event.emit('agenda.change');
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));
     }
+    hang(false);
   }
 
   render() {
