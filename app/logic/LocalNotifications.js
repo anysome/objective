@@ -12,15 +12,15 @@ export default class LocalNotifications {
     PushNotificationIOS.cancelLocalNotifications({agenda: agenda.id});
     // schedule new if necessary
     if (agenda.reminder) {
-      // check future time
       let now = new Date();
-      let alarmTime = agenda.today + agenda.reminder;
-      if ( alarmTime < now) {
+      let tzOffset = (now).getTimezoneOffset() * 60000;
+      // fix bug for timezone offset
+      let alarmTime = agenda.today + agenda.reminder - tzOffset;
+      // check future time
+      if ( alarmTime < now ) {
         return;
       }
-      // fix bug for timezone offset
-      let tzOffset = (now).getTimezoneOffset() * 60000;
-      let fireDate = new Date(alarmTime - tzOffset);
+      let fireDate = new Date(alarmTime);
       fireDate.setSeconds(1);
       PushNotificationIOS.scheduleLocalNotification({
         fireDate: fireDate.toISOString(),
