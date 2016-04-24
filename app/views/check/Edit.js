@@ -200,6 +200,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -265,6 +266,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -334,6 +336,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -393,6 +396,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -443,6 +447,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -529,6 +534,7 @@ export default class Edit extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
@@ -670,5 +676,8 @@ const style = StyleSheet.create({
     paddingBottom: 5,
     color: colors.dark1,
     fontSize: 14
+  },
+  footer: {
+    height: 300
   }
 });

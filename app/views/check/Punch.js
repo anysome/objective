@@ -24,14 +24,17 @@ export default class Punch extends Component {
       tip: '记录一下...'
     };
     this._output = null;
+    this.sharedTargetIds = null;
+    this._init();
   }
 
-  //componentWillReceiveProps(nextProps) {
-  //    this.setState({
-  //        remark: '',
-  //        output: ''
-  //    });
-  //}
+  async _init() {
+    this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
+    this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
+    console.log('ids = ' + this.sharedTargetIds);
+    this.state.toShare = this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) > -1;
+    console.log(' to share = ' + this.state.toShare);
+  }
 
   _switch() {
     let tipText = this.state.toShare ? '记录一下...' : '我要分享...';
@@ -53,6 +56,18 @@ export default class Punch extends Component {
       });
       hang(false);
       if (result.success) {
+        if (this.state.toShare) {
+          if (this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) < 0) {
+            this.sharedTargetIds = this.sharedTargetIds + ',' + this.checkDaily.checkTargetId;
+            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
+          }
+        } else {
+          if (this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) > -1) {
+            this.sharedTargetIds = this.sharedTargetIds.replace(',' + this.checkDaily.checkTargetId, '');
+            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
+            console.log('new ids after cancel ' + this.sharedTargetIds);
+          }
+        }
         toast('太给力了!');
         airloy.event.emit('agenda.change');
         airloy.event.emit('target.change');

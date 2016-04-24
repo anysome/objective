@@ -7,7 +7,7 @@ import React, {StyleSheet, Component, View, Text, ListView, RefreshControl, Acti
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, styles, colors, api, L, toast} from '../../app';
+import {airloy, styles, colors, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import LocalNotifications from '../../logic/LocalNotifications';
@@ -197,18 +197,35 @@ export default class Agenda extends Controller {
 
   _longPressRow(rowData, sectionId) {
     if (sectionId !== 2) {
-      let BUTTONS = ['定时提醒', '取消'];
+      let isToday = sectionId === 0;
+      let BUTTONS = isToday ? ['定时提醒', '推迟到明天', '取消'] : ['定时提醒', '取消'];
       ActionSheetIOS.showActionSheetWithOptions({
           options: BUTTONS,
-          cancelButtonIndex: 1,
+          cancelButtonIndex: isToday ? 2 : 1,
           tintColor: colors.dark1
         },
-        (buttonIndex) => {
+        async (buttonIndex) => {
           if (buttonIndex === 0) {
             this.setState({
               showTimer: true,
               selectedRow: rowData
             });
+          }
+          if (buttonIndex === 1 && isToday) {
+            hang();
+            let newDate = moment(this.today + 86400000);
+            let result = await airloy.net.httpGet(api.agenda.schedule, {
+                id: rowData.id,
+                newDate: newDate.format('YYYY-MM-DD')
+              }
+            );
+            hang(false);
+            if (result.success) {
+              rowData.today = this.today + 86400000;
+              this._updateData(util.clone(rowData));
+            } else {
+              toast(L(result.message));
+            }
           }
         }
       );
@@ -216,10 +233,15 @@ export default class Agenda extends Controller {
   }
 
   updateRow(rowData) {
+    this._updateData(rowData);
+    this.backward();
+  }
+
+  _updateData(rowData) {
+    // add or remove notification
     LocalNotifications.scheduleAgenda(rowData);
     this.listSource.update(rowData);
     this._sortList();
-    this.backward();
   }
 
   deleteRow(rowData) {
@@ -241,10 +263,7 @@ export default class Agenda extends Controller {
 
   updateTimer(rowData) {
     if (rowData) {
-      // add notification
-      LocalNotifications.scheduleAgenda(rowData);
-      this.listSource.update(util.clone(rowData));
-      this._sortList();
+      this._updateData(util.clone(rowData));
     }
     this.setState({
       showTimer: false

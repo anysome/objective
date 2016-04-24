@@ -25,9 +25,23 @@ export default class Commit extends Component {
       tip: '记录一下...'
     };
     this._output = null;
+    this.sharedTargetIds = null;
+    this._init();
+  }
+
+  async _init() {
+    this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
+    this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.data.checkTargetId) {
+      console.log('ids = ' + this.sharedTargetIds);
+      this.state.toShare = this.sharedTargetIds.indexOf(nextProps.data.checkTargetId) > -1;
+    } else {
+      this.state.toShare = false;
+    }
+    console.log(' to share = ' + this.state.toShare);
     if (nextProps.data.type === '0') {
       let shareable = nextProps.data.checkTargetId != null;
       let tip = shareable && this.state.toShare ? '我要分享...' : '记录一下...';
@@ -73,6 +87,17 @@ export default class Commit extends Component {
       });
       hang(false);
       if (result.success) {
+        if (this.state.toShare) {
+          if ( this.sharedTargetIds.indexOf(agenda.checkTargetId) < 0 ) {
+            this.sharedTargetIds = this.sharedTargetIds + ',' + agenda.checkTargetId;
+            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
+          }
+        } else {
+          if ( this.sharedTargetIds.indexOf(agenda.checkTargetId) > -1 ) {
+            this.sharedTargetIds = this.sharedTargetIds.replace(',' + agenda.checkTargetId, '');
+            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
+          }
+        }
         if (agenda.checkDailyId) {
           airloy.event.emit('target.punch', {
             id: agenda.checkDailyId,
@@ -100,13 +125,15 @@ export default class Commit extends Component {
                               value={this.state.remark}
                               onChangeText={text => this.setState({remark: text})}/>
           <View style={style.bar}>
+            { this.state.editable ?
             <TextField style={[style.input, {color: this.state.inputColor}]}
                        ref={c => this._output = c}
                        placeholder='今日完成数'
                        value={this.state.output}
-                       editable={this.state.editable}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
+              : <View style={style.input}></View>
+            }
             { this.state.shareable &&
             <TouchableWithoutFeedback onPress={() => this._switch()}>
               <Icon name={this.state.toShare ? 'toggle-filled' : 'toggle'}
