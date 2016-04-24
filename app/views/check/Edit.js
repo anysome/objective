@@ -1,10 +1,10 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/11.
  */
-'use strict';
 
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
-  LayoutAnimation} from 'react-native';
+import React from 'react';
+import {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
+  LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
@@ -17,7 +17,7 @@ import DatePicker from '../../widgets/DatePicker';
 import OptionsPicker from '../../widgets/OptionsPicker';
 
 
-export default class Edit extends Component {
+export default class Edit extends React.Component {
 
   constructor(props) {
     let {type, data, ...others} = props;
@@ -90,17 +90,29 @@ export default class Edit extends Component {
     this._title = null;
   }
 
-  async _toDelete() {
-    hang();
-    let result = await airloy.net.httpGet(api.target.remove, {id: this.target.id});
-    hang(false);
-    if (result.success) {
-      airloy.event.emit('target.change');
-      airloy.event.emit('agenda.change');
-      this.props.navigator.popToTop();
-    } else {
-      toast(L(result.message));
-    }
+  _toDelete() {
+    Alert.alert(
+      '确认删除 ?',
+      '将彻底删除该目标和它所有产生的待办.',
+      [
+        {text: '不了'},
+        {
+          text: '删除',
+          onPress: async () => {
+            hang();
+            let result = await airloy.net.httpGet(api.target.remove, {id: this.target.id});
+            hang(false);
+            if (result.success) {
+              airloy.event.emit('target.change');
+              airloy.event.emit('agenda.change');
+              this.props.navigator.popToTop();
+            } else {
+              toast(L(result.message));
+            }
+          }
+        }
+      ]
+    );
   }
 
   async _save() {
@@ -130,7 +142,6 @@ export default class Edit extends Component {
     this.target.times = parseInt(this.state.times);
     hang();
     let result = await airloy.net.httpPost(url, this.target);
-    hang(false);
     if (result.success) {
       // add and update both call reload from server
       airloy.event.emit('target.change', result.info);
@@ -139,6 +150,7 @@ export default class Edit extends Component {
     } else {
       toast(L(result.message));
     }
+    hang(false);
   }
 
   _renderDay() {
