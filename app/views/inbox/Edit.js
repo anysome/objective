@@ -3,12 +3,13 @@
  */
 
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert, ActionSheetIOS} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react-native';
 import moment from 'moment';
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
+import ActionSheet from '../../widgets/ActionSheet';
 
 export default class Edit extends React.Component {
 
@@ -63,7 +64,7 @@ export default class Edit extends React.Component {
 
   _showOptions() {
     let BUTTONS = ['转入清单...', '做为新清单', '删除', '取消'];
-    ActionSheetIOS.showActionSheetWithOptions({
+    ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: 3,
         destructiveButtonIndex: 2,
@@ -123,7 +124,7 @@ export default class Edit extends React.Component {
       projects.push(project);
       BUTTONS.push(project.title);
     }
-    ActionSheetIOS.showActionSheetWithOptions({
+    ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         tintColor: colors.dark1
       },

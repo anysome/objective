@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import TabNavigator from 'react-native-tab-navigator';
 import NavigatorWithBar from '../../widgets/NavigatorWithBar';
 
-import {colors, airloy, styles} from '../../app';
+import {colors, airloy, api} from '../../app';
 import util from '../../libs/Util';
 
 

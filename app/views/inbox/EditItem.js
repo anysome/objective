@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert, ActionSheetIOS} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react-native';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';

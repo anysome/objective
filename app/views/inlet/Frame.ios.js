@@ -6,7 +6,7 @@
 import React, {StyleSheet, NavigatorIOS, TabBarIOS, Component, PushNotificationIOS, AppStateIOS, AlertIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, colors} from '../../app';
+import {airloy, colors, api} from '../../app';
 
 
 import Agenda from '../agenda/Agenda';

@@ -4,13 +4,14 @@
 
 import React from 'react';
 import {StyleSheet, ListView, RefreshControl, View, Text,
-  TouchableOpacity, PixelRatio, ActionSheetIOS} from 'react-native';
+  TouchableOpacity, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
+import ActionSheet from '../../widgets/ActionSheet';
 
 import EditItem from './EditItem';
 
@@ -81,7 +82,7 @@ export default class Project extends React.Component {
     if (arrangable) {
       let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
       let CANCEL_INDEX = 3;
-      ActionSheetIOS.showActionSheetWithOptions({
+      ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
           tintColor: colors.dark1

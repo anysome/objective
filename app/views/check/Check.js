@@ -4,7 +4,7 @@
 'use strict';
 
 import React, { StyleSheet, Component, View, ScrollView, ListView, Platform,
-    RefreshControl, TouchableOpacity, Text, ActionSheetIOS} from 'react-native';
+    RefreshControl, TouchableOpacity, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, styles, colors, api, L, toast} from '../../app';
@@ -14,6 +14,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
+import ActionSheet from '../../widgets/ActionSheet';
 import ListRow from './ListRow';
 import Glance from './Glance';
 import Edit from './Edit';
@@ -130,7 +131,7 @@ export default class Check extends Controller {
             }
             BUTTONS.push('查看', '取消');
 
-            ActionSheetIOS.showActionSheetWithOptions({
+          ActionSheet.showActionSheetWithOptions({
                     options: BUTTONS,
                     cancelButtonIndex: CANCEL_INDEX,
                     destructiveButtonIndex: DESTRUCTIVE_INDEX,

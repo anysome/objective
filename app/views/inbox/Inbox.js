@@ -4,7 +4,7 @@
 'use strict';
 
 import React, {Component, StyleSheet, RefreshControl, ListView,
-  View, Text, LayoutAnimation, TouchableOpacity, ActionSheetIOS} from 'react-native';
+  View, Text, LayoutAnimation, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -12,6 +12,7 @@ import {airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
+import ActionSheet from '../../widgets/ActionSheet';
 import Edit from './Edit';
 import Project from './Project';
 
@@ -42,7 +43,7 @@ export default class Inbox extends Component {
     route.onRightButtonPress = () => {
       let BUTTONS = ['新备忘', '新分类清单', '清空回收站', '取消'];
       let CANCEL_INDEX = 3, DESTRUCTIVE_INDEX = 2;
-      ActionSheetIOS.showActionSheetWithOptions({
+      ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
           destructiveButtonIndex: DESTRUCTIVE_INDEX,
@@ -192,7 +193,7 @@ export default class Inbox extends Component {
   _toArrange(rowData) {
     let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
     let CANCEL_INDEX = 3;
-    ActionSheetIOS.showActionSheetWithOptions({
+    ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: CANCEL_INDEX,
         tintColor: colors.dark1

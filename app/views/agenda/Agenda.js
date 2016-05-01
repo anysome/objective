@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {StyleSheet, Component, View, Text, ListView, RefreshControl, ActionSheetIOS} from 'react-native';
+import React, {StyleSheet, Component, View, Text, ListView, RefreshControl} from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -15,6 +15,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
+import ActionSheet from '../../widgets/ActionSheet';
 import ListRow from './ListRow';
 import Edit from './Edit';
 import Commit from './Commit';
@@ -199,7 +200,7 @@ export default class Agenda extends Controller {
     if (sectionId !== 2) {
       let isToday = sectionId === 0;
       let BUTTONS = isToday ? ['定时提醒', '推迟到明天', '取消'] : ['定时提醒', '取消'];
-      ActionSheetIOS.showActionSheetWithOptions({
+      ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: isToday ? 2 : 1,
           tintColor: colors.dark1

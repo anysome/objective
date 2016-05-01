@@ -4,8 +4,7 @@
 'use strict';
 
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, ActionSheetIOS,
-  Alert} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';
 
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
@@ -16,6 +15,7 @@ import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
+import ActionSheet from '../../widgets/ActionSheet';
 
 export default class Edit extends React.Component {
 
@@ -58,7 +58,7 @@ export default class Edit extends React.Component {
   _showOptions() {
     let isFuture = this.today < this.agenda.today;
     let BUTTONS = [isFuture ? '安排到今天' : '推迟到明天', '删除', '取消'];
-    ActionSheetIOS.showActionSheetWithOptions({
+    ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: 2,
         destructiveButtonIndex: 1,
