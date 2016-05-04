@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import React, {Component, View, Text, Modal, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {Component, View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
@@ -241,7 +241,7 @@ export default class Anything extends Component {
     return (
       <View style={styles.window}>
         <Modal animated={true} transparent={false} visible={this.state.modalVisible}>
-          <View style={styles.window}>
+          <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps>
             <View style={style.body}>
                         <TextArea
                           ref={(c)=> this._input = c}
@@ -256,11 +256,6 @@ export default class Anything extends Component {
                 </TouchableOpacity>
                 <Text style={style.hint}>{this.state.tip}</Text>
               </View>
-
-              <Button style={styles.buttonText} onPress={()=>this._onClose()}
-                      containerStyle={style.button}>
-                取消
-              </Button>
 
               <View style={styles.containerA}>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('today')}
@@ -290,8 +285,13 @@ export default class Anything extends Component {
                         containerStyle={[style.round,
                                         {backgroundColor: this.state.btn === 'time' ? colors.accent : colors.border}]}>计时</Button>
               </View>
+
+              <Button style={styles.buttonText} onPress={()=>this._onClose()}
+                      containerStyle={style.button}>
+                取消
+              </Button>
             </View>
-          </View>
+          </ScrollView>
         </Modal>
       </View>
     );
@@ -331,7 +331,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height:40,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 10,
     overflow:'hidden',
     borderRadius: 5,
