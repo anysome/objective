@@ -5,7 +5,7 @@
 
 import React, {Component, ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
 
-import {styles, colors, airloy, config, api, toast, L, hang} from '../../app';
+import {analytics, styles, colors, airloy, config, api, toast, L, hang} from '../../app';
 
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
@@ -27,7 +27,12 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
+    analytics.onPageStart('page_profile');
     this.reload();
+  }
+
+  componentWillUnMount() {
+    analytics.onPageEnd('page_profile');
   }
 
   async reload() {

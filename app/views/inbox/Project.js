@@ -8,7 +8,7 @@ import {StyleSheet, ListView, RefreshControl, View, Text,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, toast, L, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
@@ -53,8 +53,12 @@ export default class Project extends React.Component {
   }
 
   componentDidMount() {
-    //console.log(JSON.stringify(this.project));
+    analytics.onPageStart('page_project');
     this.reload();
+  }
+
+  componentWillUnMount() {
+    analytics.onPageEnd('page_project');
   }
 
   async reload() {

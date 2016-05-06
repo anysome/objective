@@ -8,7 +8,7 @@ import React, {Component, StyleSheet, RefreshControl, ListView,
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {airloy, styles, colors, api, toast, L, hang} from '../../app';
+import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
@@ -87,7 +87,12 @@ export default class Inbox extends Component {
   }
 
   componentDidMount() {
+    analytics.onPageStart('page_inbox');
     this.reload();
+  }
+
+  componentWillUnMount() {
+    analytics.onPageEnd('page_inbox');
   }
 
   async reload() {

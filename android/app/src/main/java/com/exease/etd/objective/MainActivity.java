@@ -1,11 +1,15 @@
 package com.exease.etd.objective;
 
 import com.facebook.react.ReactActivity;
+import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.umeng.analytics.MobclickAgent;
+
+import in.esseak.react_native_umeng.UmengPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +42,23 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new ImagePickerPackage(),
             new VectorIconsPackage(),
             new ReactNativeI18n(),
-            new RNDeviceInfo()
+            new RNDeviceInfo(),
+            new UmengPackage()
         );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

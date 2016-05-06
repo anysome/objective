@@ -6,6 +6,7 @@
 import I18n from 'react-native-i18n';
 import moment from 'moment';
 require('moment/locale/zh-cn');
+import MobclickAgent from 'rn-umeng';
 
 import config from '../config.json';
 import api from './api.json';
@@ -15,6 +16,13 @@ import {colors, styles} from './views/styles';
 
 import toast from './widgets/Toast';
 import ActivityIndicator from './widgets/ActivityIndicator';
+
+// analytics
+MobclickAgent.startWithAppkey(config.keys.umeng);
+MobclickAgent.setDebugMode(true);
+MobclickAgent.getDeviceInfo(info => {
+  console.log(JSON.stringify(info));
+});
 
 // init
 I18n.fallbacks = true;
@@ -39,4 +47,4 @@ function hang(upOrType = true) {
   }
 }
 
-export { config, styles, colors, airloy, api, L, toast, hang};
+export { MobclickAgent as analytics, config, styles, colors, airloy, api, L, toast, hang};

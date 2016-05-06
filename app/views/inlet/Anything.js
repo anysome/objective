@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
 import moment from 'moment';
-import {styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 
 import TextArea from '../../widgets/TextArea';
 
@@ -90,6 +90,7 @@ export default class Anything extends Component {
       hang();
       callback(title, detail);
       hang(false);
+      analytics.onEvent('click_add_anything');
     } else {
       this.setState({
         btn: btn,

@@ -5,7 +5,7 @@
 import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import Button from 'react-native-button';
 
-import {styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import TextField from '../../widgets/TextField';
 
 export default class Setting extends Component {
@@ -35,13 +35,14 @@ export default class Setting extends Component {
     };
     hang();
     let result = await airloy.net.httpPost(api.me.upgrade, user);
-    hang(false);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       this.onSigned();
+      analytics.onEvent('user_upgrade');
     } else {
       toast(L(result.message));
     }
+    hang(false);
   }
 
   render() {

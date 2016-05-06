@@ -16,7 +16,7 @@ import Button from 'react-native-button';
 import TextField from '../../widgets/TextField';
 import ResetPassword from './ResetPassword';
 
-import {styles, colors, airloy, api, toast, L, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app';
 
 import EventTypes from '../../logic/EventTypes';
 
@@ -76,12 +76,12 @@ export default class Login extends Component {
     let result = await airloy.net.httpPost(api.public.login, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
+      analytics.onProfileSignIn(result.info.id);
       this.onSigned();
-      hang(false);
     } else {
       toast(L(result.message), 70);
-      hang(false);
     }
+    hang(false);
   }
 
   async _justIn() {
@@ -90,12 +90,12 @@ export default class Login extends Component {
     let result = await airloy.net.httpPost(api.public.taste, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
+      analytics.onProfileSignIn(result.info.id);
       this.onSigned();
-      hang(false);
     } else {
       toast(L(result.message), 70);
-      hang(false);
     }
+    hang(false);
   }
 
   openModal() {

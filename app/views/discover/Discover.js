@@ -155,7 +155,7 @@ export default class Discover extends Controller {
   }
 
   render() {
-    console.log(' render discover page ' + airloy.device.os);
+    console.log(' render discover page ');
     return (
       <View style={styles.flex}>
         <ListView initialListSize={10}
