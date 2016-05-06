@@ -52,7 +52,10 @@
   "me": {
     "reward": "reward/agenda.json",
     "upgrade": "user/upgrade.json",
-    "open": "social/open.json"
+    "open": "social/open.json",
+    "token": {
+      "avatar": "user/avatar/upload/auth.json"
+    }
   },
   "feedback": {
     "list": "conta/feedback/mime.json",

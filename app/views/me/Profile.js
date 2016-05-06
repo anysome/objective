@@ -4,8 +4,10 @@
 'use strict';
 
 import React, {Component, ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+let ImagePickerManager = require('NativeModules').ImagePickerManager;
 
 import {analytics, styles, colors, airloy, config, api, toast, L, hang} from '../../app';
+import util from '../../libs/Util';
 
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
@@ -22,7 +24,8 @@ export default class Profile extends Component {
     this.state = {
       name: this.user.name,
       signature: '',
-      email: this.user.email
+      email: this.user.email,
+      avatar: config.host.avatar + this.user.id + '-100'
     };
   }
 
@@ -51,7 +54,66 @@ export default class Profile extends Component {
 
   _selectImage() {
     // TODO
-    console.log(' next time implement');
+    let options = {
+      title: 'Select Avatar', // specify null or empty string to remove the title
+      cancelButtonTitle: 'Cancel',
+      takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
+      chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
+      cameraType: 'back', // 'front' or 'back'
+      mediaType: 'photo', // 'photo' or 'video'
+      videoQuality: 'high', // 'low', 'medium', or 'high'
+      durationLimit: 10, // video recording max time in seconds
+      maxWidth: 100, // photos only
+      maxHeight: 100, // photos only
+      aspectX: 2, // android only - aspectX:aspectY, the cropping image's ratio of width to height
+      aspectY: 1, // android only - aspectX:aspectY, the cropping image's ratio of width to height
+      quality: 0.2, // 0 to 1, photos only
+      angle: 0, // android only, photos only
+      allowsEditing: false, // Built in functionality to resize/reposition the image after selection
+      noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
+      storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
+        skipBackup: true, // ios only - image will NOT be backed up to icloud
+        path: 'images' // ios only - will save image at /Documents/images rather than the root
+      }
+    };
+    let self = this;
+    ImagePickerManager.showImagePicker(options, async (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePickerManager Error: ', response.error);
+      } else {
+        const fileUri = util.isAndroid() ? response.uri : response.uri.replace('file://', '');
+        hang();
+        let result = await airloy.net.httpGet(api.me.token.avatar);
+        if (result.success) {
+          let formData = new FormData();
+          formData.append('file', {uri: fileUri, type: 'application/octet-stream ', name: self.user.id});
+          formData.append('key', 'avatar/' + self.user.id);
+          formData.append('token', result.info);
+          fetch(config.host.upload, {
+            method: 'POST',
+            body: formData
+          }).then(resp => {
+            if (resp.ok ) {
+              self.setState({
+                avatar: fileUri
+              });
+              // TODO reset avatar cache
+            } else {
+              toast('Upload error code: ' + resp.status);
+            }
+          }).catch(error => {
+            toast(error);
+          });
+        } else {
+          toast(L(result.message));
+        }
+        hang(false);
+      }
+    });
   }
 
   async _save() {
@@ -77,12 +139,12 @@ export default class Profile extends Component {
   render() {
     return (
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps>
-        <View style={styles.row}>
+        <TouchableOpacity style={styles.row} onPress={() => this._selectImage()}>
           <Text>头像</Text>
           <Image style={{width:60, height:60}}
-                 source={{uri:`${config.host.avatar + this.user.id}-100`}}
+                 source={{uri: this.state.avatar}}
                  defaultSource={require('../../../resources/images/avatar.png')}/>
-        </View>
+        </TouchableOpacity>
         <View style={styles.section}>
           <TextField
             flat={true}

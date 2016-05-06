@@ -149,7 +149,7 @@ export default class Frame extends Component {
 					onPress={() => this._selectTab('Check')}>
 					{this._renderNavigator(Check, "检查单")}
 				</Icon.TabBarItem>
-				<Icon.TabBarItem iconName="plus-round" title={null} iconSize={36}
+				<Icon.TabBarItem iconName="plus-round" title={null} iconSize={iconSize}
 								 selected={this.state.currentPage === 'Anything'}
 								 onPress={() => this._openAdd()}>
 					<Anything onClose={() => this.closeAdd()} />
