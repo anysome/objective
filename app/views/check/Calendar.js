@@ -9,7 +9,7 @@ import moment from 'moment';
 
 import CalendarView from '../../widgets/CalendarView';
 
-import {styles, colors, airloy, api, toast, L} from '../../app';
+import {analytics, styles, colors, airloy, api, toast, L} from '../../app';
 import util from '../../libs/Util';
 
 export default class Calendar extends Component {
@@ -30,7 +30,12 @@ export default class Calendar extends Component {
   }
 
   componentDidMount() {
+    analytics.onPageStart('page_check_calendar');
     this.reload();
+  }
+
+  componentWillUnMount() {
+    analytics.onPageEnd('page_check_calendar');
   }
 
   async reload() {

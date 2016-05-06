@@ -6,7 +6,7 @@ import React, {Component, View, Text, StyleSheet, Modal, DatePickerIOS, Touchabl
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
@@ -63,6 +63,7 @@ export default class Timer extends Component {
     } else {
       toast(L(result.message), 30);
     }
+    analytics.onEvent('click_agenda_timer');
   }
 
   render() {

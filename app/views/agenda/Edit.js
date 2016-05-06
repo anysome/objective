@@ -7,7 +7,7 @@ import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';
 
-import {styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
 
@@ -163,6 +163,7 @@ export default class Edit extends React.Component {
     } else {
       toast(L(result.message));
     }
+    analytics.onEvent('click_agenda_save');
   }
 
   render() {

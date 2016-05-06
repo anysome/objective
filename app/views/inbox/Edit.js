@@ -170,7 +170,7 @@ export default class Edit extends React.Component {
     } else {
       toast(L(result.message));
     }
-    analytics.onEvent('click_save_inbox');
+    analytics.onEvent('click_inbox_save');
   }
 
   render() {

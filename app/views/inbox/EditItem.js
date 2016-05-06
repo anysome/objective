@@ -89,7 +89,7 @@ export default class EditItem extends React.Component {
       toast(L(result.message));
     }
     hang(false);
-    analytics.onEvent('click_save_project_item');
+    analytics.onEvent('click_task_save');
   }
 
   render() {

@@ -6,7 +6,7 @@
 import React, {Component, View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
@@ -111,6 +111,7 @@ export default class Commit extends Component {
       } else {
         toast(L(result.message));
       }
+      analytics.onEvent('click_agenda_punch');
     } else {
       this._output.focus();
     }

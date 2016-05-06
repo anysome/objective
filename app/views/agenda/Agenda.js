@@ -7,7 +7,7 @@ import React, {StyleSheet, Component, View, Text, ListView, RefreshControl} from
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, styles, colors, api, L, toast, hang} from '../../app';
+import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import LocalNotifications from '../../logic/LocalNotifications';
@@ -78,9 +78,6 @@ export default class Agenda extends Controller {
     airloy.event.on(EventTypes.agendaAdd, (agenda)=> {
       this.listSource.add(agenda);
       this._sortList();
-      // TODO treat view stale differently to data stale, currently not support data stale.
-      // reload list or mark stale until page visible
-      //this.visible ? this._sortList() : this.markStale();
     });
   }
 
@@ -187,6 +184,7 @@ export default class Agenda extends Controller {
         } else {
           toast(L(result.message));
         }
+        analytics.onEvent('click_agenda_schedule');
       } else {
         this.setState({
           showCommit: true,
@@ -227,6 +225,7 @@ export default class Agenda extends Controller {
             } else {
               toast(L(result.message));
             }
+            analytics.onEvent('click_agenda_schedule');
           }
         }
       );

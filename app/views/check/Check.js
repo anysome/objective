@@ -7,7 +7,7 @@ import React, { StyleSheet, Component, View, ScrollView, ListView, Platform,
     RefreshControl, TouchableOpacity, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, styles, colors, api, L, toast} from '../../app';
+import {analytics, airloy, styles, colors, api, L, toast} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import EventTypes from '../../logic/EventTypes';
@@ -52,6 +52,7 @@ export default class Check extends Controller {
                 this.setState({
                     panelTop: newTop
                 });
+                analytics.onEvent('click_check_add');
             };
         }
         airloy.event.on(EventTypes.targetChange, () => {
@@ -165,6 +166,7 @@ export default class Check extends Controller {
                             } else {
                                 toast(L(result.message));
                             }
+                            analytics.onEvent('click_check_arrange');
                     }
                 }
             );
