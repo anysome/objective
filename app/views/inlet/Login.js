@@ -1,7 +1,6 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
-
 import React from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation} from 'react-native';
 import Button from 'react-native-button';
@@ -105,7 +104,7 @@ export default class Login extends React.Component {
           device: user.device,
           loginTime: user.loginTime
         };
-        let result = await airloy.net.httpPost(api.public.weibo, token);
+        let result = await airloy.net.httpPost(api.public.sign.weibo, token);
         if (result.success) {
           await airloy.auth.saveUser(result.info);
           analytics.onProfileSignIn(result.info.id);

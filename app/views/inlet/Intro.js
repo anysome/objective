@@ -1,18 +1,10 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
-'use strict';
+import React from 'react';
+import {View, StyleSheet, Image, Text} from 'react-native';
 
-import React, {
-	Component,
-	View,
-	StyleSheet,
-	Image,
-	Text
-}
-from 'react-native';
-
-export default class Intro extends Component {
+export default class Intro extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>

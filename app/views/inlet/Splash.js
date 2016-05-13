@@ -1,7 +1,6 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
-'use strict';
 import React from 'react';
 import {View, Text} from 'react-native';
 import Animatable from 'react-native-animatable';

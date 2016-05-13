@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/17.
  */
-'use strict';
-
-import React, {Component, StyleSheet, RefreshControl, ListView,
+import React from 'react';
+import {StyleSheet, RefreshControl, ListView,
   View, Text, LayoutAnimation, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
@@ -17,7 +16,7 @@ import Edit from './Edit';
 import Project from './Project';
 
 
-export default class Inbox extends Component {
+export default class Inbox extends React.Component {
 
   constructor(props) {
     let {today, ...others} = props;

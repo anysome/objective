@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/16.
  */
-'use strict';
-
-import React, {StyleSheet, Component, ScrollView, View, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text} from 'react-native';
 import Spinner from 'react-native-spinkit';
 import moment from 'moment';
 
@@ -12,7 +11,7 @@ import CalendarView from '../../widgets/CalendarView';
 import {analytics, styles, colors, airloy, api, toast, L} from '../../app';
 import util from '../../libs/Util';
 
-export default class Calendar extends Component {
+export default class Calendar extends React.Component {
 
   constructor(props) {
     let {data, ...others} = props;

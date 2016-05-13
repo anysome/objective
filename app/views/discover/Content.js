@@ -171,12 +171,12 @@ export default class Content extends React.Component {
             </View>
           </View>
           <View style={style.timeline}>
+            <Text style={style.count}>{data.comments}</Text>
+            <Icon size={20} name='chatbubble-working' color={colors.border} style={style.icon}/>
             <Text style={style.count}>{data.likes}</Text>
             <TouchableOpacity onPress={() => this._like(data)}>
               <Icon size={20} name='android-favorite' color={colors.border} style={style.icon}/>
             </TouchableOpacity>
-            <Text style={style.count}>{data.comments}</Text>
-            <Icon size={20} name='chatbubble-working' color={colors.border} style={style.icon}/>
             <Text style={style.hint}>{moment(data.createTime).calendar()}</Text>
           </View>
           <ListView enableEmptySections={true}

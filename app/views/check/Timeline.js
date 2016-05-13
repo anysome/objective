@@ -1,13 +1,13 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/16.
  */
-
-import React, {StyleSheet, Component, ScrollView, View, Text, ListView, PixelRatio} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, ListView, PixelRatio} from 'react-native';
 import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, toast, L} from '../../app';
 
-export default class Timeline extends Component {
+export default class Timeline extends React.Component {
 
   constructor(props) {
     let {data, ...others} = props;

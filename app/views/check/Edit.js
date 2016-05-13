@@ -1,7 +1,6 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/11.
  */
-
 import React from 'react';
 import {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
   LayoutAnimation, Alert} from 'react-native';

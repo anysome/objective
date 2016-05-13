@@ -1,8 +1,6 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/1.
  */
-'use strict';
-
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';

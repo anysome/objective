@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/11.
  */
-'use strict';
-
-import React, {Component, StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Button from 'react-native-button';
 
@@ -16,7 +15,7 @@ import Punch from './Punch';
 import Calendar from './Calendar';
 import Timeline from './Timeline';
 
-export default class Glance extends Component {
+export default class Glance extends React.Component {
 
   constructor(props) {
     let {data, today, nextIcon, ...others} = props;

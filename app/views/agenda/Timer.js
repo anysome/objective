@@ -1,17 +1,14 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/21.
  */
-
-import React, {Component, View, Text, StyleSheet, Modal, DatePickerIOS, TouchableWithoutFeedback} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, Modal, DatePickerIOS, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 
-import TextField from '../../widgets/TextField';
-import TextArea from '../../widgets/TextArea';
-
-export default class Timer extends Component {
+export default class Timer extends React.Component {
 
   constructor(props) {
     super(props);

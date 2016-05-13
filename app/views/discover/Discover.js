@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
-'use strict';
-
-import React, { StyleSheet, Component, View, Text, Image, TouchableOpacity,
+import React from 'react';
+import {StyleSheet, View, Text, Image, TouchableOpacity,
   RefreshControl, ListView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';

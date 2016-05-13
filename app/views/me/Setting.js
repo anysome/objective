@@ -1,13 +1,12 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
-'use strict';
-
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity, Linking} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Linking} from 'react-native';
 
 import {analytics, styles, colors, airloy} from '../../app';
 
-export default class Setting extends Component {
+export default class Setting extends React.Component {
 
   constructor(props) {
     super(props);

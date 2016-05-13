@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
-'use strict';
-
-import React, {StyleSheet, Component, ListView, RefreshControl, Image,
+import React from 'react';
+import {StyleSheet, ListView, RefreshControl, Image,
   View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
@@ -15,7 +14,7 @@ import ListSource from '../../logic/ListSource';
 
 import Content from './Content';
 
-export default class ContentList extends Component {
+export default class ContentList extends React.Component {
 
   constructor(props) {
     super(props);

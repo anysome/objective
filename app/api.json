@@ -4,7 +4,9 @@
     "taste": "pub/try.json",
     "auth": "pub/authorize.json",
     "resetPassword": "pub/repassword.json",
-    "weibo": "pub/weibo/sign.json"
+    "sign": {
+      "weibo": "pub/weibo/sign.json"
+    }
   },
   "agenda": {
     "list": "agenda/recent.json",

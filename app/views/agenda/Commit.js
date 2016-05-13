@@ -1,9 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/9.
  */
-'use strict';
-
-import React, {Component, View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
@@ -11,7 +10,7 @@ import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app'
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
-export default class Commit extends Component {
+export default class Commit extends React.Component {
 
   constructor(props) {
     super(props);

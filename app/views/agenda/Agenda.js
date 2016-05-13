@@ -1,11 +1,9 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
-'use strict';
-
-import React, {StyleSheet, Component, View, Text, ListView, RefreshControl} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Text, ListView, RefreshControl} from 'react-native';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';

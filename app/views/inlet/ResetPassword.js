@@ -1,16 +1,15 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/5.
  */
-'use strict';
-
-import React, {Component, StyleSheet, Modal, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, Modal, View} from 'react-native';
 import Button from 'react-native-button';
 
 import {styles, colors, airloy, api, L, toast, hang} from '../../app';
 import TextField from '../../widgets/TextField';
 
 
-export default class ResetPassword extends Component {
+export default class ResetPassword extends React.Component {
 
   constructor(props) {
     super(props);

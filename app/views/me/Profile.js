@@ -1,16 +1,15 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
-'use strict';
-
-import React, {Component, ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
 
 import {analytics, styles, airloy, config, api, toast, L, hang} from '../../app';
 
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
-export default class Profile extends Component {
+export default class Profile extends React.Component {
 
   constructor(props) {
     super(props);

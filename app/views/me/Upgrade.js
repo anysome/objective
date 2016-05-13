@@ -1,14 +1,14 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/12.
  */
-
-import React, {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import Button from 'react-native-button';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import TextField from '../../widgets/TextField';
 
-export default class Setting extends Component {
+export default class Setting extends React.Component {
 
   constructor(props) {
     var {onUpgraded, ...others} = props;
