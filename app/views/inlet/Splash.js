@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {View, Text} from 'react-native';
-import Animatable from 'react-native-animatable';
+import * as Animatable from 'react-native-animatable';
 
 export default class Splash extends React.Component {
   render() {
