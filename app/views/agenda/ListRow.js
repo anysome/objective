@@ -44,7 +44,7 @@ export default class ListRow extends React.Component {
         title: data.title,
         detail: data.detail,
         reminder: data.reminder,
-        arrangeDate: this.props.today === data.today ? false : moment(data.today).fromNow()
+        arrangeDate: this.props.today === data.today ? false : moment(data.today).from(this.props.today)
       };
     }
   }

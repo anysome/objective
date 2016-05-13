@@ -1,15 +1,14 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/29.
  */
-'use strict';
 
 import {L} from '../app';
 
 const colors = {
-    priority1: "#55EFCB",
-    priority2: "#1D77EF",
-    priority3: "#FF3B30",
-    priority0: "#D2CFD0"
+  priority1: "#55EFCB",
+  priority2: "#1D77EF",
+  priority3: "#FF3B30",
+  priority0: "#D2CFD0"
 };
 
 const unit = new Map();
@@ -37,48 +36,48 @@ frequency.set('4', L('objective.frequency.totally'));
 
 class Objective {
 
-    constructor() {
-        this.color = colors;
-        this.unit = unit;
-        this.priority = priority;
-        this.frequency = frequency;
-    }
+  constructor() {
+    this.color = colors;
+    this.unit = unit;
+    this.priority = priority;
+    this.frequency = frequency;
+  }
 
-    getPriorityColor(priorityValue) {
-        let color;
-        switch(priorityValue) {
-            case 1:
-                color = colors.priority1;
-                break;
-            case 2:
-                color = colors.priority2;
-                break;
-            case 3:
-            case 8:
-            case 9:
-                color = colors.priority3;
-                break;
-            default:
-                color = colors.priority0;
-        }
-        return color;
+  getPriorityColor(priorityValue) {
+    let color;
+    switch (priorityValue) {
+      case 1:
+        color = colors.priority1;
+        break;
+      case 2:
+        color = colors.priority2;
+        break;
+      case 3:
+      case 8:
+      case 9:
+        color = colors.priority3;
+        break;
+      default:
+        color = colors.priority0;
     }
+    return color;
+  }
 
-    getPriorityName(priorityValue) {
-        return this.priority.get(priorityValue);
-    }
+  getPriorityName(priorityValue) {
+    return this.priority.get(priorityValue);
+  }
 
-    getUnitName(unitValue) {
-        if ( this.unit.has(unitValue) ) {
-            return this.unit.get(unitValue);
-        } else {
-            return unitValue;
-        }
+  getUnitName(unitValue) {
+    if (this.unit.has(unitValue)) {
+      return this.unit.get(unitValue);
+    } else {
+      return unitValue;
     }
+  }
 
-    getFrequencyName(frequencyValue) {
-        return this.frequency.get(frequencyValue);
-    }
+  getFrequencyName(frequencyValue) {
+    return this.frequency.get(frequencyValue);
+  }
 }
 
 export default new Objective();

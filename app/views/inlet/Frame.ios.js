@@ -6,6 +6,7 @@ import {StyleSheet, NavigatorIOS, TabBarIOS, PushNotificationIOS, AppStateIOS, A
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, colors, api} from '../../app';
+import util from '../../libs/Util';
 
 import Agenda from '../agenda/Agenda';
 import Check from '../check/Check';
@@ -24,9 +25,7 @@ export default class Frame extends React.Component {
 		};
     this.iconSize = 28;
 		this.icons = new Map();
-		let now = new Date();
-		now.setHours(0, 0,0,0);
-		this.today = now.getTime();
+    this.today = util.getTodayStart();
 		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 	}
 
