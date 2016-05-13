@@ -1,8 +1,8 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/14.
  */
-
-import React, {StyleSheet, Component, ScrollView, View, Text, Modal, Image,
+import React from 'react';
+import {StyleSheet, ScrollView, View, Text, Modal, Image,
   TouchableOpacity, LayoutAnimation, ListView, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
@@ -14,8 +14,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import TextField from '../../widgets/TextField';
 
-
-export default class Content extends Component {
+export default class Content extends React.Component {
 
   constructor(props) {
     let {visible, ...others} = props;

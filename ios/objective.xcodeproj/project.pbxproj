@@ -25,6 +25,13 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C16AAE41C9FE1A900D1280D /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C16AAD91C9FE16300D1280D /* libRCTPushNotification.a */; };
 		8CA890CF1CDC43E800674720 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA890CE1CDC43E800674720 /* libz.tbd */; };
+		8CF6991A1CE57F4C00C3AF39 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CF699191CE57F4C00C3AF39 /* WeiboSDK.bundle */; };
+		8CF6991C1CE57F8A00C3AF39 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6991B1CE57F8A00C3AF39 /* libsqlite3.tbd */; };
+		8CF6991E1CE57FA500C3AF39 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6991D1CE57FA500C3AF39 /* ImageIO.framework */; };
+		8CF699201CE57FB200C3AF39 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6991F1CE57FB200C3AF39 /* SystemConfiguration.framework */; };
+		8CF699221CE57FBA00C3AF39 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF699211CE57FBA00C3AF39 /* Security.framework */; };
+		8CF699241CE57FC400C3AF39 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF699231CE57FC400C3AF39 /* CoreTelephony.framework */; };
+		8CF699261CE57FCE00C3AF39 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF699251CE57FCE00C3AF39 /* CoreText.framework */; };
 		8CF87E461C9C4F3B006E9165 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C246B2F1C9C4E0D003C4041 /* libART.a */; };
 		A05BBAC4B4B34BBA9ABC63A0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A22ADCD3ADC4F73AF42609D /* libRNImagePicker.a */; };
 		A21A208FCE5B44309B9401D3 /* libRCTUmeng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F98AE1E56F4B2D91AC087F /* libRCTUmeng.a */; };
@@ -32,6 +39,7 @@
 		B1D2C9F9D1EB42608556138E /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A2E71AF134ABDB6229F40 /* libRNVectorIcons.a */; };
 		D5CE5C3B335D4200AB7B8807 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E06F5797A0714BDD8FBD35B7 /* Ionicons.ttf */; };
 		EBF8C8ECE0614CFEA463EB9A /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4947AA6A52BF4C31AB90041D /* libRNSpinkit.a */; };
+		F53B5A6755504E858B29D3A5 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C345FBCC3CE24D49B6228F9F /* libRCTWeiboAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +183,13 @@
 			remoteGlobalIDString = 27B75AB01CABBFF8003925AB;
 			remoteInfo = RCTUmeng;
 		};
+		8CF699101CE57CAF00C3AF39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 827AE20322D44B9F9B7F852A /* RCTWeiboAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 915450F51C3D1520000CBFD2;
+			remoteInfo = RCTWeiboAPI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -204,13 +219,22 @@
 		450A2E71AF134ABDB6229F40 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		4947AA6A52BF4C31AB90041D /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		827AE20322D44B9F9B7F852A /* RCTWeiboAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeiboAPI.xcodeproj; path = "../node_modules/react-native-weibo/ios/RCTWeiboAPI.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		86F98AE1E56F4B2D91AC087F /* libRCTUmeng.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTUmeng.a; sourceTree = "<group>"; };
 		8C16AACE1C9FE16300D1280D /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		8C246B2A1C9C4E0D003C4041 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		8CA890CE1CDC43E800674720 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8CF699191CE57F4C00C3AF39 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WeiboSDK.bundle; path = "../node_modules/react-native-weibo/ios/libWeiboSDK/WeiboSDK.bundle"; sourceTree = "<group>"; };
+		8CF6991B1CE57F8A00C3AF39 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8CF6991D1CE57FA500C3AF39 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		8CF6991F1CE57FB200C3AF39 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8CF699211CE57FBA00C3AF39 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8CF699231CE57FC400C3AF39 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		8CF699251CE57FCE00C3AF39 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B12E78AB339540AAA0755D6E /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		B991F55215DF4DF28009522C /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		C345FBCC3CE24D49B6228F9F /* libRCTWeiboAPI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTWeiboAPI.a; sourceTree = "<group>"; };
 		D77DD875655C470F93E5EC86 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		E06F5797A0714BDD8FBD35B7 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		E9F529C0C9FE45EFB8847458 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
@@ -229,6 +253,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF699261CE57FCE00C3AF39 /* CoreText.framework in Frameworks */,
+				8CF699241CE57FC400C3AF39 /* CoreTelephony.framework in Frameworks */,
+				8CF699221CE57FBA00C3AF39 /* Security.framework in Frameworks */,
+				8CF699201CE57FB200C3AF39 /* SystemConfiguration.framework in Frameworks */,
+				8CF6991E1CE57FA500C3AF39 /* ImageIO.framework in Frameworks */,
+				8CF6991C1CE57F8A00C3AF39 /* libsqlite3.tbd in Frameworks */,
 				8CA890CF1CDC43E800674720 /* libz.tbd in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -248,6 +278,7 @@
 				8C16AAE41C9FE1A900D1280D /* libRCTPushNotification.a in Frameworks */,
 				A05BBAC4B4B34BBA9ABC63A0 /* libRNImagePicker.a in Frameworks */,
 				A21A208FCE5B44309B9401D3 /* libRCTUmeng.a in Frameworks */,
+				F53B5A6755504E858B29D3A5 /* libRCTWeiboAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +417,7 @@
 				03D2D8AA2B2D4E58A5933138 /* RNVectorIcons.xcodeproj */,
 				D77DD875655C470F93E5EC86 /* RNImagePicker.xcodeproj */,
 				03A1E733553742389480C42F /* RCTUmeng.xcodeproj */,
+				827AE20322D44B9F9B7F852A /* RCTWeiboAPI.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -401,6 +433,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8CF699251CE57FCE00C3AF39 /* CoreText.framework */,
+				8CF699231CE57FC400C3AF39 /* CoreTelephony.framework */,
+				8CF699211CE57FBA00C3AF39 /* Security.framework */,
+				8CF6991F1CE57FB200C3AF39 /* SystemConfiguration.framework */,
+				8CF6991D1CE57FA500C3AF39 /* ImageIO.framework */,
+				8CF6991B1CE57F8A00C3AF39 /* libsqlite3.tbd */,
+				8CF699191CE57F4C00C3AF39 /* WeiboSDK.bundle */,
 				8CA890CE1CDC43E800674720 /* libz.tbd */,
 				13B07FAE1A68108700A75B9A /* objective */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -482,6 +521,14 @@
 			isa = PBXGroup;
 			children = (
 				8CA890C41CDC43BB00674720 /* libRCTUmeng.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CF699011CE57CAE00C3AF39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CF699111CE57CAF00C3AF39 /* libRCTWeiboAPI.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -613,6 +660,10 @@
 				{
 					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+				},
+				{
+					ProductGroup = 8CF699011CE57CAE00C3AF39 /* Products */;
+					ProjectRef = 827AE20322D44B9F9B7F852A /* RCTWeiboAPI.xcodeproj */;
 				},
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
@@ -781,6 +832,13 @@
 			remoteRef = 8CA890C31CDC43BB00674720 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8CF699111CE57CAF00C3AF39 /* libRCTWeiboAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTWeiboAPI.a;
+			remoteRef = 8CF699101CE57CAF00C3AF39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -798,6 +856,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				D5CE5C3B335D4200AB7B8807 /* Ionicons.ttf in Resources */,
+				8CF6991A1CE57F4C00C3AF39 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,6 +943,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objective.app/objective";
@@ -904,6 +964,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -934,6 +995,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
+					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -962,6 +1024,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
+					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1017,6 +1080,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
+					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1063,6 +1127,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
+					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

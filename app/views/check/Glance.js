@@ -29,6 +29,7 @@ export default class Glance extends Component {
       summary: '',
       progressText: '我想想...',
       progress: 0,
+      tProgress: 0,
       showModal: false
     };
   }
@@ -98,8 +99,10 @@ export default class Glance extends Component {
     let progress = 100 * doneTotal / this.expectTotal;
 
     let dayLeft = (this.target.dateEnd - this.today) / 86400000 + 1;
+    let dayUsedProgress = 100 * (dayTotal - dayLeft) / dayTotal
     this.setState({
-      summary: this.state.summary + `, 剩余 ${dayLeft} 天`,
+      summary: `${this.state.summary}, 剩余 ${dayLeft} 天`,
+      tProgress: dayUsedProgress,
       progress: progress,
       progressText: `${doneTotal} / ${this.expectTotal}`
     });
@@ -164,6 +167,7 @@ export default class Glance extends Component {
             </AnimatedCircularProgress>
           </View>
           <View style={style.positionC}>
+            <Text style={style.hint}>{this.state.tProgress.toFixed(1)}</Text>
             <Text style={style.progress}>{this.state.progress.toFixed(1)}</Text>
             <Text style={style.hint}>{this.state.progressText}</Text>
           </View>

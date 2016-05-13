@@ -3,7 +3,8 @@
     "login": "pub/sign.json",
     "taste": "pub/try.json",
     "auth": "pub/authorize.json",
-    "resetPassword": "pub/repassword.json"
+    "resetPassword": "pub/repassword.json",
+    "weibo": "pub/weibo/sign.json"
   },
   "agenda": {
     "list": "agenda/recent.json",

@@ -1,27 +1,20 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
-'use strict';
 
-import React, {
-  Component,
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  LayoutAnimation
-} from 'react-native';
+import React from 'react';
+import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation} from 'react-native';
 import Button from 'react-native-button';
+import * as WeiboAPI from 'react-native-weibo';
 
 import TextField from '../../widgets/TextField';
 import ResetPassword from './ResetPassword';
 
 import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app';
-
 import EventTypes from '../../logic/EventTypes';
 
 
-export default class Login extends Component {
+export default class Login extends React.Component {
 
   constructor(props) {
     var {onSigned, ...others} = props;
@@ -98,6 +91,36 @@ export default class Login extends Component {
     hang(false);
   }
 
+  _weiboLogin() {
+    console.log('to login by weibo');
+    WeiboAPI.login({scope: 'all', redirectURI: 'http://asfun.cn/m/login/weibo.html'}).then(
+      async (response) => {
+        hang();
+        let user = airloy.auth.formUser(airloy.device.getIdentifier(), '');
+        let token = {
+          accessToken: response.accessToken,
+          userID: response.userID,
+          expirationDate: response.expirationDate,
+          refreshToken: response.refreshToken,
+          device: user.device,
+          loginTime: user.loginTime
+        };
+        let result = await airloy.net.httpPost(api.public.weibo, token);
+        if (result.success) {
+          await airloy.auth.saveUser(result.info);
+          analytics.onProfileSignIn(result.info.id);
+          this.onSigned();
+        } else {
+          toast(L(result.message), 70);
+        }
+        hang(false);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   openModal() {
     this.setState({openModal: true});
     console.log(' to open modal');
@@ -113,7 +136,12 @@ export default class Login extends Component {
       <View style={style.window}>
         <View style={[styles.containerC, {height: this.state.visibleHeight}]}>
           <View style={style.body}>
-            <Text style={{alignSelf:'center', color:colors.dark1, margin: 10}}>HELP TO DO, NOT TO NOTE!</Text>
+            <View style={style.containerA}>
+              <TouchableOpacity onPress={()=>this._weiboLogin()}>
+                <Image style={style.third} source={require('../../../resources/images/weibo.png')}/>
+              </TouchableOpacity>
+              <Text style={styles.hint}>第三方帐号登录</Text>
+            </View>
             <TextField
               ref={(c) => this._email = c}
               placeholder="注册邮箱 / 登录名"
@@ -164,6 +192,21 @@ const style = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.light1,
     backgroundColor: colors.light2
+  },
+  containerA: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.light3
+  },
+  third: {
+    width: 64,
+    height: 64,
+    marginBottom: 10
   },
   link: {
     flex: 1,

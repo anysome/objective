@@ -1,9 +1,9 @@
 /**
  * Created by Layman(http://github.com/anysome) on 16/3/2.
  */
-'use strict';
 
-import React, {Component, View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
 
@@ -13,7 +13,7 @@ import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app'
 import TextArea from '../../widgets/TextArea';
 
 
-export default class Anything extends Component {
+export default class Anything extends React.Component {
 
   constructor(props) {
     let {visible, ...others} = props;
