@@ -1,18 +1,12 @@
-'use strict';
-
-import React, {
-  PixelRatio,
-  View,
-  TextInput,
-  Text
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, PixelRatio, View, TextInput, Text} from 'react-native';
 
 import {colors} from '../app';
 
 //var RCTUIManager = require('NativeModules').UIManager;
 
 var TextArea = React.createClass({
-  propTypes: React.TextInput.propTypes,
+  propTypes: TextInput.propTypes,
 
   value: '',
 
@@ -104,7 +98,7 @@ var TextArea = React.createClass({
   }
 })
 
-var styles = React.StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 10
