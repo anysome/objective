@@ -9,6 +9,7 @@ import {styles, colors, airloy, config, api, toast, L} from '../../app';
 
 import Controller from '../Controller';
 import Profile from './Profile';
+import Dones from '../agenda/Dones';
 import Feedback from './Feedback';
 import ContentList from '../discover/ContentList';
 import UserList from '../discover/UserList';
@@ -45,6 +46,14 @@ export default class Me extends Controller {
       });
       airloy.auth.updateUser(this.user);
     }
+  }
+
+  _toDones() {
+    this.forward({
+      title: '我的成就',
+      component: Dones,
+      navigationBarHidden: false
+    });
   }
 
   _toFeedback() {
@@ -167,6 +176,11 @@ export default class Me extends Controller {
           </View>
         </TouchableOpacity>
         <View style={styles.section}>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toDones()}>
+            <Text>我的成就</Text>
+            <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+          </TouchableOpacity>
+          <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFeedback()}>
             <Text>我的反馈</Text>
             <Icon size={20} name="ios-arrow-right" color={colors.border}/>

@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, View, Text, ListView, RefreshControl} from 'react-native';
+import {View, ListView, RefreshControl, Alert} from 'react-native';
 import moment from 'moment';
 
 import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
@@ -119,6 +119,7 @@ export default class Agenda extends Controller {
         [section0.rowIds, section1.rowIds, section2.rowIds]
       )
     });
+    console.log(this.state.dataSource);
   }
 
   _sortRow(agenda, section0, section1, section2) {
@@ -195,35 +196,66 @@ export default class Agenda extends Controller {
   _longPressRow(rowData, sectionId) {
     if (sectionId !== 2) {
       let isToday = sectionId === 0;
-      let BUTTONS = isToday ? ['定时提醒', '推迟到明天', '取消'] : ['定时提醒', '取消'];
+      let BUTTONS = isToday ? ['删除', '定时提醒', '推迟到明天', '取消'] : ['删除', '定时提醒', '取消'];
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
-          cancelButtonIndex: isToday ? 2 : 1,
+          destructiveButtonIndex: 0,
+          cancelButtonIndex: isToday ? 3 : 2,
           tintColor: colors.dark1
         },
         async (buttonIndex) => {
-          if (buttonIndex === 0) {
-            this.setState({
-              showTimer: true,
-              selectedRow: rowData
-            });
-          }
-          if (buttonIndex === 1 && isToday) {
-            hang();
-            let newDate = moment(this.today + 86400000);
-            let result = await airloy.net.httpGet(api.agenda.schedule, {
-                id: rowData.id,
-                newDate: newDate.format('YYYY-MM-DD')
-              }
-            );
-            hang(false);
-            if (result.success) {
-              rowData.today = this.today + 86400000;
-              this._updateData(util.clone(rowData));
-            } else {
-              toast(L(result.message));
-            }
-            analytics.onEvent('click_agenda_schedule');
+          switch (buttonIndex) {
+            case 0:
+                  let message = rowData.checkDailyId ? '删除后可重新安排检查单.' : '删除后可在待定列表的回收站里找到.'
+                  Alert.alert(
+                    '确认删除 ?',
+                    message,
+                    [
+                      {text: '不了'},
+                      {
+                        text: '删除',
+                        onPress: async () => {
+                          hang();
+                          let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
+                          if (result.success) {
+                            airloy.event.emit('target.change');
+                            this.deleteRow(rowData);
+                          } else {
+                            toast(L(result.message));
+                          }
+                          hang(false);
+                        }
+                      }
+                    ]
+                  );
+                  break;
+            case 1:
+                  this.setState({
+                    showTimer: true,
+                    selectedRow: rowData
+                  });
+                  break;
+            case 2:
+                  if (isToday) {
+                    hang();
+                    let newDate = moment(this.today + 86400000);
+                    let result = await airloy.net.httpGet(api.agenda.schedule, {
+                        id: rowData.id,
+                        newDate: newDate.format('YYYY-MM-DD')
+                      }
+                    );
+                    hang(false);
+                    if (result.success) {
+                      rowData.today = this.today + 86400000;
+                      this._updateData(util.clone(rowData));
+                    } else {
+                      toast(L(result.message));
+                    }
+                    analytics.onEvent('click_agenda_schedule');
+                  }
+                  break;
+            default :
+                  console.log('cancel options');
           }
         }
       );

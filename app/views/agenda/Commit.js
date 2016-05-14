@@ -40,7 +40,6 @@ export default class Commit extends React.Component {
     } else {
       this.state.toShare = false;
     }
-    console.log(' to share = ' + this.state.toShare);
     if (nextProps.data.type === '0') {
       let shareable = nextProps.data.checkTargetId != null;
       let tip = shareable && this.state.toShare ? '我要分享...' : '记录一下...';
@@ -78,7 +77,7 @@ export default class Commit extends React.Component {
     if (this.state.output) {
       let agenda = this.props.data;
       hang();
-      let result = await airloy.net.httpPost(api.agenda.done, {
+      let result = await airloy.net.httpPost(api.agenda.punch, {
         id: agenda.id,
         output: this.state.output,
         remark: this.state.remark,

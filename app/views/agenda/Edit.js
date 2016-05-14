@@ -80,9 +80,10 @@ export default class Edit extends React.Component {
           }
         }
         if (buttonIndex === 1) {
+          let message = this.agenda.checkDailyId ? '删除后可重新安排检查单.' : '删除后可在待定列表的回收站里找到.'
           Alert.alert(
             '确认删除 ?',
-            '删除后可在待定列表的回收站里找到.',
+            message,
             [
               {text: '不了'},
               {

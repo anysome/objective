@@ -15,7 +15,6 @@ import ActionSheet from '../../widgets/ActionSheet';
 import Edit from './Edit';
 import Project from './Project';
 
-
 export default class Inbox extends React.Component {
 
   constructor(props) {
@@ -71,12 +70,14 @@ export default class Inbox extends React.Component {
               });
               break;
             case 2 :
+              hang();
               let result = await airloy.net.httpGet(api.inbox.clean);
               if (result.success) {
                 this.reload();
               } else {
                 toast(L(result.message));
               }
+              hang(false);
               break;
           }
         }

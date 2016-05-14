@@ -14,7 +14,10 @@
     "update": "agenda/todo/update.json",
     "remove": "agenda/todo/delete.json",
     "schedule": "agenda/todo/redate.json",
-    "done": "agenda/todo/fulfill.json",
+    "punch": "agenda/todo/fulfill.json",
+    "done": {
+      "recent": "agenda/done/recent.json"
+    },
     "remind": "agenda/todo/remind.json"
   },
   "inbox": {
