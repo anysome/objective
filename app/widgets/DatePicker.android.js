@@ -6,15 +6,29 @@ import {DatePickerAndroid} from 'react-native'
 
 export default class DatePicker extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      visible: nextProps.visible
+    });
+  }
+
   async _popup() {
     try {
       let {action, year, month, day} = await DatePickerAndroid.open({
-        // 要设置默认值为今天的话，使用`new Date()`即可。
-        // 下面显示的会是2020年5月25日。月份是从0开始算的。
         date: this.props.date
+        // date: new Date(this.props.date.getTime() + 86400000) // fixed bug
       });
-      if (action !== DatePickerAndroid.dismissedAction) {
-        // 这里开始可以处理用户选好的年月日三个参数：year, month (0-11), day
+      if (action === DatePickerAndroid.dismissedAction) {
+        // tick setting props.visible for android
+        this.props.onDateChange(this.props.date);
+      } else {
         this.props.onDateChange(new Date(year, month, day));
       }
     } catch (e) {
@@ -23,7 +37,7 @@ export default class DatePicker extends React.Component {
   }
 
   render() {
-    if (this.props.visible) {
+    if (this.state.visible) {
       this._popup();
     }
     return null;

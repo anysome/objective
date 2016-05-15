@@ -627,7 +627,8 @@ export default class Edit extends React.Component {
 
   _onSelectedDateStart(value) {
     this.setState({
-      dateStart: value
+      dateStart: value,
+      showPickerDateStart: util.isAndroid() ? false : true
     });
   }
 
@@ -643,7 +644,8 @@ export default class Edit extends React.Component {
 
   _onSelectedDateEnd(value) {
     this.setState({
-      dateEnd: value
+      dateEnd: value,
+      showPickerDateEnd: util.isAndroid() ? false : true
     });
   }
 

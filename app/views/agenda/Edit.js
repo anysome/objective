@@ -118,7 +118,8 @@ export default class Edit extends React.Component {
   _onSelectedDate(date) {
     this.setState({
       date: date,
-      today: moment(date).format('YYYY-MM-DD')
+      today: moment(date).format('YYYY-MM-DD'),
+      showPickerDate: util.isAndroid() ? false : true
     });
   }
 

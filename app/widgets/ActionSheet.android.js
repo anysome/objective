@@ -3,10 +3,9 @@
  */
 
 import React from 'react'
-import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, PixelRatio, ActionSheetIOS} from 'react-native'
+import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, PixelRatio} from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
 
-import util from '../libs/Util';
 import {colors} from '../views/styles'
 
 const style = StyleSheet.create({
@@ -46,7 +45,7 @@ function _closeSheet() {
   sheet && sheet.destroy() || (sheet = null);
 }
 
-export default util.isAndroid() ? class ActionSheet {
+export default class ActionSheet {
 
   static showActionSheetWithOptions(config: Object, callback: Function) {
     let options = [];
@@ -82,4 +81,4 @@ export default util.isAndroid() ? class ActionSheet {
     // TODO
   }
 
-} : ActionSheetIOS;
+};
