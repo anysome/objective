@@ -8,7 +8,7 @@
     "debug": false
   },
   "objective": {
-    "version": "2.0.6"
+    "version": "2.0.9"
   },
   "host": {
     "upload": "http://upload.qiniu.com/",

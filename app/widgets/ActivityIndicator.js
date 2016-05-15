@@ -8,10 +8,11 @@ import RootSiblings from 'react-native-root-siblings'
 import Spinner from 'react-native-spinkit';
 
 import {colors} from '../views/styles'
+import util from '../libs/Util';
 
 const style = StyleSheet.create({
   container: {
-    top: 20,
+    top: util.isAndroid() ? 0 : 20,
     right: 5,
     bottom: 5,
     left: 5,

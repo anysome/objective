@@ -65,7 +65,7 @@ export default class Timer extends React.Component {
 
   render() {
     return (
-      <Modal animated={true} transparent={true} visible={this.props.visible}>
+      <Modal animated={true} transparent={true} onRequestClose={() => {}} visible={this.props.visible}>
         <TouchableWithoutFeedback onPress={() => this.props.onFeedback()}>
           <View style={style.bg}/>
         </TouchableWithoutFeedback>

@@ -178,13 +178,13 @@ export default class Edit extends React.Component {
             returnKeyType="done"
           />
           <View style={styles.separator}/>
-                    <TextArea
-                      flat={true}
-                      defaultValue={this.state.detail}
-                      onChangeText={(text) => this.setState({detail:text})}
-                      placeholder={this.agenda.detail || '如有备注...'}
-                      returnKeyType="default"
-                    />
+          <TextArea
+            flat={true}
+            defaultValue={this.state.detail}
+            onChangeText={(text) => this.setState({detail:text})}
+            placeholder={this.agenda.detail || '如有备注...'}
+            returnKeyType="default"
+          />
         </View>
         <View style={styles.section}>
           <TouchableOpacity style={styles.sectionRow} onPress={()=> this._selectDate()}>

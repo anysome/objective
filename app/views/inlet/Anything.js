@@ -9,7 +9,7 @@ import Button from 'react-native-button';
 
 import moment from 'moment';
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
-
+import util from '../../libs/Util';
 import TextArea from '../../widgets/TextArea';
 
 
@@ -241,8 +241,8 @@ export default class Anything extends React.Component {
     console.log('modal is to open ? ' + this.state.modalVisible);
     return (
       <View style={styles.window}>
-        <Modal animated={true} transparent={false} visible={this.state.modalVisible}>
-          <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps>
+        <Modal animated={true} transparent={false} onRequestClose={() => {}} visible={this.state.modalVisible}>
+          <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
             <View style={style.body}>
                         <TextArea
                           ref={(c)=> this._input = c}

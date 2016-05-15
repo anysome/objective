@@ -150,7 +150,7 @@ export default class Content extends React.Component {
     let log = data.log ? data.log : false;
     let checkDaily = data.content ? JSON.parse(data.content) : {};
     return (
-      <Modal animated={true} transparent={false} visible={this.props.visible}>
+      <Modal animated={true} transparent={false} onRequestClose={() => {}} visible={this.props.visible}>
         <View style={styles.window}>
           <View style={style.header}>
             <Image style={style.avatar}

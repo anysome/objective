@@ -89,6 +89,10 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+            WB_APPID: "2280021458"
+        ]
+
     }
     splits {
         abi {
