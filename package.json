@@ -24,6 +24,7 @@
     "react-native-tab-navigator": "0.3.0",
     "react-native-vector-icons": "1.3.4",
     "react-native-weibo": "1.0.5",
+    "react-native-wheel-picker": "0.9.4",
     "react-timer-mixin": "0.13.3",
     "rn-umeng": "1.0.3"
   }

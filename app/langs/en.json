@@ -32,15 +32,12 @@
     },
     "punch": {
       "invalid": "你确定完成了吗?"
-    },
-    "check": {
-      "deadline": "超出有效打卡期限"
     }
   },
   "objective": {
     "priority": {
-      "none": "None",
-      "ordinary": "Ordinary",
+      "none": "无",
+      "ordinary": "一般",
       "medium": "要紧",
       "emphasis": "重点",
       "emergency": "极其重要",

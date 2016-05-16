@@ -1,6 +1,7 @@
 package com.exease.etd.objective;
 
 import com.facebook.react.ReactActivity;
+import com.zyu.ReactNativeWheelPickerPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -43,6 +44,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new ReactNativeWheelPickerPackage(),
             new WeiboPackage(),
             new ImagePickerPackage(),
             new VectorIconsPackage(),

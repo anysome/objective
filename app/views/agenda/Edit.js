@@ -133,7 +133,7 @@ export default class Edit extends React.Component {
   _onSelectedPriority(value) {
     this.setState({
       priority: value,
-      showPickerPriority: false
+      showPickerPriority: util.isAndroid()
     });
   }
 

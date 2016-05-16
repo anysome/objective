@@ -577,7 +577,7 @@ export default class Edit extends React.Component {
   _onSelectedPriority(value) {
     this.setState({
       priority: value,
-      showPickerPriority: false
+      showPickerPriority: util.isAndroid()
     });
   }
 
@@ -594,7 +594,7 @@ export default class Edit extends React.Component {
   _onSelectedUnit(value) {
     this.setState({
       unit: value,
-      showPickerUnit: false
+      showPickerUnit: util.isAndroid()
     });
   }
 
@@ -611,7 +611,7 @@ export default class Edit extends React.Component {
   _onSelectedFrequency(value) {
     this.setState({
       frequency: value,
-      showPickerFrequency: false
+      showPickerFrequency: util.isAndroid()
     });
   }
 

@@ -119,7 +119,6 @@ export default class Agenda extends Controller {
         [section0.rowIds, section1.rowIds, section2.rowIds]
       )
     });
-    console.log(this.state.dataSource);
   }
 
   _sortRow(agenda, section0, section1, section2) {
