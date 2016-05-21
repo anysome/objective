@@ -44,7 +44,6 @@ class DateTimePicker extends React.Component {
   constructor(props) {
     super(props);
     const { minuteInterval, date } = props;
-    alert(date);
     let dateIndices = this.getDateIndices(date);
     this.minutes = makeRange(0, 59, minuteInterval, true);
     this.hours = makeRange(1, 12);
@@ -67,7 +66,7 @@ class DateTimePicker extends React.Component {
   }
 
   getNewDate(hourIndex, minuteIndex, ampmIndex) {
-    
+
     hourIndex = hourIndex + 1;
     hourIndex = hourIndex === 12 ? 0 : hourIndex;
     hourIndex = ampmIndex === 0 ? hourIndex : hourIndex + 12;
@@ -151,7 +150,6 @@ DateTimePicker.propTypes = {
 const style = StyleSheet.create({
   wheel: {
     flex: 1,
-    // width: 60,
     height: 200
   },
   container: {
