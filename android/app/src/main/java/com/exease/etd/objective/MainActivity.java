@@ -12,6 +12,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.umeng.analytics.MobclickAgent;
 
 import in.esseak.react_native_umeng.UmengPackage;
+import co.fixt.wheel.WheelPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +51,8 @@ public class MainActivity extends ReactActivity {
             new VectorIconsPackage(),
             new ReactNativeI18n(),
             new RNDeviceInfo(),
-            new UmengPackage()
+            new UmengPackage(),
+            new WheelPackage()
         );
     }
 

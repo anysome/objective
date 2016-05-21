@@ -2,11 +2,12 @@
  * Created by Layman(http://github.com/anysome) on 16/3/21.
  */
 import React from 'react';
-import {View, Text, StyleSheet, Modal, DatePickerIOS, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
+import TimePicker from '../../widgets/TimePicker';
 
 export default class Timer extends React.Component {
 
@@ -78,12 +79,10 @@ export default class Timer extends React.Component {
             :
             <Text style={style.title}>暂未设置提醒</Text>
           }
-          <DatePickerIOS
-            date={this.state.date}
-            mode="time"
-            minuteInterval={5}
-            onDateChange={date => this._onSelectedDate(date)}
-          />
+          <TimePicker date={this.state.date}
+                      minuteInterval={5}
+                      visible={true}
+                      onDateChange={date => this._onSelectedDate(date)} />
           <View style={style.bar}>
             <Icon.Button name='close' color={colors.light3}
                          underlayColor={colors.light1}

@@ -26,6 +26,7 @@
     "react-native-weibo": "1.0.5",
     "react-native-wheel-picker": "0.9.4",
     "react-timer-mixin": "0.13.3",
+    "react-native-wheel": "fixt/react-native-wheel",
     "rn-umeng": "1.0.3"
   }
 }
