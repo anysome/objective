@@ -21,6 +21,7 @@ export default class Edit extends React.Component {
   constructor(props) {
     let {type, data, ...others} = props;
     super(others);
+    this.keyboardType = util.isAndroid() ? 'numeric' : 'number-pad';
     if (data) {
       this.target = data;
       data.type === '1' && (this.lasting = moment(data.dateEnd).diff(moment(data.dateStart), 'days') + 1);
@@ -183,7 +184,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({lasting:text})}
               placeholder={'' + this.lasting}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
@@ -249,7 +250,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
@@ -319,7 +320,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
@@ -371,7 +372,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
@@ -431,7 +432,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
@@ -517,7 +518,7 @@ export default class Edit extends React.Component {
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
-              keyboardType='number-pad'
+              keyboardType={this.keyboardType}
               style={styles.inputR}
             />
           </View>
