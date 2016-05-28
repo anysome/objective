@@ -82,7 +82,6 @@ class DateTimePicker extends React.Component {
       hourIndex: index
     });
     let newDate = this.getNewDate(index, this.state.minuteIndex, this.state.ampmIndex);
-    alert(newDate);
     this.props.onDateChange(newDate);
   }
 

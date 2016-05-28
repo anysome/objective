@@ -10,9 +10,9 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.umeng.analytics.MobclickAgent;
-
 import in.esseak.react_native_umeng.UmengPackage;
 import co.fixt.wheel.WheelPackage;
+import io.neson.react.notification.NotificationPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +52,8 @@ public class MainActivity extends ReactActivity {
             new ReactNativeI18n(),
             new RNDeviceInfo(),
             new UmengPackage(),
-            new WheelPackage()
+            new WheelPackage(),
+            new NotificationPackage(this)
         );
     }
 

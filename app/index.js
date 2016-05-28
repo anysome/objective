@@ -4,7 +4,6 @@
 
 import React from 'react';
 
-import SplashPage from './views/inlet/Splash';
 //import IntroPage from './views/inlet/Intro';
 import LoginPage from './views/inlet/Login';
 import MainPage from './views/inlet/Frame';
@@ -16,7 +15,6 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      loading: true,
       firstTime: false,
       logined: false
     };
@@ -37,7 +35,6 @@ export default class App extends React.Component {
       isAuth = await airloy.auth.setup();
     }
     this.setState({
-      loading: false,
       //firstTime: newInstall,
       logined: isAuth
     });
@@ -57,8 +54,8 @@ export default class App extends React.Component {
   }
 
   render() {
-    return this.state.loading ? <SplashPage /> :
-      //this.state.firstTime ? <IntroPage /> :
-      this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
+    // return //this.state.firstTime ? <IntroPage /> :
+    //   this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
+    return this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
   }
 }

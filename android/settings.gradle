@@ -17,3 +17,5 @@ include ':rn-umeng'
 project(':rn-umeng').projectDir = new File(rootProject.projectDir, '../node_modules/rn-umeng/android')
 include ':react-native-wheel-view'
 project(':react-native-wheel-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wheel')
+include ':react-native-system-notification'
+project(':react-native-system-notification').projectDir = new File(settingsDir, '../node_modules/react-native-system-notification/android')
