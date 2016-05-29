@@ -116,6 +116,7 @@ export default class Login extends React.Component {
       },
       error => {
         console.log(error);
+        toast(`暂时无法登录, 请重试或使用其它方式`);
       }
     );
   }

@@ -12,7 +12,7 @@ import util from '../libs/Util';
 
 const style = StyleSheet.create({
   container: {
-    top: util.isAndroid() ? 0 : 20,
+    top: util.isAndroid() ? 5 : 20,
     right: 5,
     bottom: 5,
     left: 5,

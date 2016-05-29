@@ -90,7 +90,7 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
-            WB_APPID: "2280021458"
+            WB_APPID: "wb + your weibo app key" // use 2 bit prefix to keep string, 'wb' will cut by code 
         ]
 
     }

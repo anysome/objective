@@ -23,7 +23,7 @@
     "react-native-system-notification": "0.1.11",
     "react-native-tab-navigator": "0.3.0",
     "react-native-vector-icons": "1.3.4",
-    "react-native-weibo": "1.0.5",
+    "react-native-weibo": "happyming9527/react-native-weibo",
     "react-native-wheel": "fixt/react-native-wheel",
     "react-native-wheel-picker": "0.9.4",
     "react-timer-mixin": "0.13.3",
