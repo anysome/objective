@@ -1,5 +1,7 @@
 package com.exease.etd.objective;
 
+import android.content.Intent;
+
 import com.facebook.react.ReactActivity;
 import com.zyu.ReactNativeWheelPickerPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
@@ -67,5 +69,13 @@ public class MainActivity extends ReactActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void invokeDefaultOnBackPressed() {
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
     }
 }

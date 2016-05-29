@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, Navigator, TouchableOpacity, AppState, Image, Text, View} from 'react-native';
+import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabNavigator from 'react-native-tab-navigator';
 import NavigatorWithBar from '../../widgets/NavigatorWithBar';
@@ -17,7 +17,6 @@ import Anything from './Anything';
 import Me from '../me/Me';
 import Discover from '../discover/Discover';
 
-const iconSize = 24;
 
 export default class Main extends React.Component {
 
@@ -26,6 +25,7 @@ export default class Main extends React.Component {
     this.state = {
       currentPage: 'Me'
     };
+    this.iconSize = 24;
     this.icons = new Map();
     this.today = util.getTodayStart();
     this._handleAppStateChange = this._handleAppStateChange.bind(this);
@@ -34,9 +34,15 @@ export default class Main extends React.Component {
   componentWillMount() {
     // draw icon images for later use case
     ['ios-box-outline', 'ios-more-outline', 'ios-plus-empty',
-      'ios-compose-outline', 'ios-trash-outline'].forEach(name => this.icons.set(name, <Icon name={name} size={24}
-                                                                                             color={colors.accent}/>));
+      'ios-compose-outline', 'ios-trash-outline'].forEach(
+          name => this.icons.set(name, <Icon name={name} size={24} color={colors.accent}/>)
+    );
     AppState.addEventListener('change', this._handleAppStateChange);
+
+    BackAndroid.addEventListener('hardwareBackPress', function() {
+      
+      return false;
+    });
   }
 
   componentWillUnmount() {
@@ -87,8 +93,8 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Agenda'}
           title="待办"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-star-outline' size={iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-star' size={iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-star-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='ios-star' size={this.iconSize} color={colors.accent} />}
           onPress={() => this.setState({currentPage: 'Agenda'})}>
           <NavigatorWithBar component={Agenda} navigationBarHidden={false} title='待办' frame={this}/>
         </TabNavigator.Item>
@@ -96,15 +102,15 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Check'}
           title="检查单"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-checkmark-outline' size={iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='android-checkmark-circle' size={iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-checkmark-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='android-checkmark-circle' size={this.iconSize} color={colors.accent} />}
           onPress={() => this.setState({currentPage: 'Check'})}>
           <NavigatorWithBar component={Check} navigationBarHidden={false} title='检查单' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Anything'}
-          renderIcon={() => <Icon name='plus-round' size={iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='plus-round' size={iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='plus-round' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='plus-round' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._openAdd()}>
           <Anything onClose={() => this.closeAdd()}/>
         </TabNavigator.Item>
@@ -112,8 +118,8 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Me'}
           title="我"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-person-outline' size={iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-contact-outline' size={iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-person-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='ios-contact-outline' size={this.iconSize} color={colors.accent} />}
           onPress={() => this.setState({currentPage: 'Me'})}>
           <NavigatorWithBar component={Me} navigationBarHidden={true} title='我' frame={this}/>
         </TabNavigator.Item>
@@ -121,8 +127,8 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Discover'}
           title="发现"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-navigate-outline' size={iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-navigate' size={iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-navigate-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='ios-navigate' size={this.iconSize} color={colors.accent} />}
           onPress={() => this.setState({currentPage: 'Discover'})}>
           <NavigatorWithBar component={Discover} navigationBarHidden={false} title='发现' frame={this}/>
         </TabNavigator.Item>
