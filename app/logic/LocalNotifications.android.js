@@ -62,7 +62,7 @@ export default class LocalNotifications {
         payload: {type:'agenda', id: agenda.id},
         sendAt: fireDate,
         repeatEvery: 'minute',
-        repeatCount: 3
+        repeatCount: 1
       });
     }
   }

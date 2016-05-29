@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "bundle-ios": "react-native bundle --entry-file index.ios.js --platform ios --dev false --bundle-output ./ios/main.jsbundle"
+    "bundle-ios": "react-native bundle --entry-file index.ios.js --platform ios --dev false --bundle-output ./ios/main.jsbundle",
+    "apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "base-64": "0.1.0",
