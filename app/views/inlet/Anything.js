@@ -244,12 +244,12 @@ export default class Anything extends React.Component {
         <Modal animated={true} transparent={false} onRequestClose={() => {}} visible={this.state.modalVisible}>
           <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
             <View style={style.body}>
-                        <TextArea
-                          ref={(c)=> this._input = c}
-                          value={this.state.input}
-                          onChangeText={text => this.setState({input:text})}
-                          placeholder="想做什么..."
-                          autoFocus={true}/>
+                <TextArea
+                  ref={(c)=> this._input = c}
+                  value={this.state.input}
+                  onChangeText={text => this.setState({input:text})}
+                  placeholder="想做什么..."
+                  autoFocus={true}/>
               <View style={style.pin}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => this._pin()}>
                   <Icon name={this.state.pin ? 'toggle-filled' : 'toggle'} size={32}
@@ -323,7 +323,7 @@ const style = StyleSheet.create({
     color: colors.border
   },
   body: {
-    paddingTop: 30,
+    paddingTop: util.isAndroid() ? 20 : 30,
     paddingLeft: 16,
     paddingRight: 16
   },

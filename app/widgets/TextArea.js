@@ -116,7 +116,7 @@ var styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     fontSize: 18,
-    marginTop: util.isAndroid() ? 0 : 10,
+    marginTop: 10,
     color: colors.accent,
     borderWidth: 1,
     borderColor: colors.light3,

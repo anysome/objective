@@ -37,13 +37,26 @@ export default class Timeline extends React.Component {
   }
 
   _renderRow(rowData, sectionId, rowId) {
-    return (
-      <View style={style.row}>
-        <Text style={style.progress}>+ {rowData.times}</Text>
-        <Text style={style.progress}>{rowData.total}</Text>
-        <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
-      </View>
-    );
+    if ( rowData.detail ) {
+      return (
+        <View style={style.rowBig}>
+          <Text style={style.progress}>+ {rowData.times}</Text>
+          <Text style={style.progress}>{rowData.total}</Text>
+          <View style={style.body}>
+            <Text style={styles.text}>{rowData.detail}</Text>
+            <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <View style={style.row}>
+          <Text style={style.progress}>+ {rowData.times}</Text>
+          <Text style={style.progress}>{rowData.total}</Text>
+          <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
+        </View>
+      );
+    }
   }
 
   render() {
@@ -73,22 +86,20 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 35,
-    paddingLeft: 16,
-    paddingRight: 16,
+
     alignItems: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: colors.light2,
     backgroundColor: colors.light1
   },
-  round: {
-    marginLeft: 20,
-    marginRight: 20,
-    width: 32,
-    borderWidth: 5,
-    borderColor: colors.accent,
-    borderRadius: 16,
+  rowBig: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingRight: 16,
     alignItems: 'center',
-    justifyContent: 'center',
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: colors.light2,
+    backgroundColor: colors.light1
   },
   progress: {
     color: colors.dark1,
@@ -99,5 +110,10 @@ const style = StyleSheet.create({
   hint: {
     color: colors.border,
     fontSize: 12
+  },
+  body: {
+    flex: 1,
+    marginTop: 3,
+    marginBottom: 5
   }
 });
