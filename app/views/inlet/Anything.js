@@ -6,11 +6,12 @@ import React from 'react';
 import {View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'react-native-button';
-
 import moment from 'moment';
+
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import TextArea from '../../widgets/TextArea';
+import EventTypes from '../../logic/EventTypes';
 
 
 export default class Anything extends React.Component {
@@ -106,7 +107,7 @@ export default class Anything extends React.Component {
     };
     let result = await airloy.net.httpPost(api.agenda.add, agenda);
     if (result.success) {
-      airloy.event.emit('agenda.add', result.info);
+      airloy.event.emit(EventTypes.agendaAdd, result.info);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
     } else {
       alert(L(result.message));
@@ -121,7 +122,7 @@ export default class Anything extends React.Component {
     };
     let result = await airloy.net.httpPost(api.agenda.add, agenda);
     if (result.success) {
-      airloy.event.emit('agenda.add', result.info);
+      airloy.event.emit(EventTypes.agendaAdd, result.info);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
     } else {
       alert(L(result.message));
@@ -158,8 +159,8 @@ export default class Anything extends React.Component {
     };
     let result = await airloy.net.httpPost(api.target.add, target);
     if (result.success) {
-      airloy.event.emit('target.change', result.info);
-      airloy.event.emit('agenda.change');
+      airloy.event.emit(EventTypes.targetChange, result.info);
+      airloy.event.emit(EventTypes.agendaChange);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
     } else {
       alert(L(result.message));
@@ -180,7 +181,7 @@ export default class Anything extends React.Component {
     };
     let result = await airloy.net.httpPost(api.target.add, target);
     if (result.success) {
-      airloy.event.emit('target.change', result.info);
+      airloy.event.emit(EventTypes.targetChange, result.info);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
     } else {
       alert(L(result.message));
@@ -201,7 +202,7 @@ export default class Anything extends React.Component {
     };
     let result = await airloy.net.httpPost(api.target.add, target);
     if (result.success) {
-      airloy.event.emit('target.change', result.info);
+      airloy.event.emit(EventTypes.targetChange, result.info);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
     } else {
       alert(L(result.message));

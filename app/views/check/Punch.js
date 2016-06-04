@@ -6,7 +6,7 @@ import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-nat
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
-
+import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
@@ -68,8 +68,8 @@ export default class Punch extends React.Component {
           }
         }
         toast('太给力了!');
-        airloy.event.emit('agenda.change');
-        airloy.event.emit('target.change');
+        airloy.event.emit(EventTypes.agendaChange);
+        airloy.event.emit(EventTypes.targetChange);
         this.checkDaily.times = this.checkDaily.times + increasement;
         this.props.onFeedback(this.checkDaily);
       } else {

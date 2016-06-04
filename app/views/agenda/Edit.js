@@ -8,7 +8,7 @@ import moment from 'moment';
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
-
+import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
@@ -93,7 +93,7 @@ export default class Edit extends React.Component {
                   let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
                   hang(false);
                   if (result.success) {
-                    airloy.event.emit('target.change');
+                    airloy.event.emit(EventTypes.targetChange);
                     this.props.onDelete(this.agenda);
                   } else {
                     toast(L(result.message));

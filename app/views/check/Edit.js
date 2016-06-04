@@ -5,10 +5,11 @@ import React from 'react';
 import {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
   LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';
+
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
-
+import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
@@ -103,8 +104,8 @@ export default class Edit extends React.Component {
             let result = await airloy.net.httpGet(api.target.remove, {id: this.target.id});
             hang(false);
             if (result.success) {
-              airloy.event.emit('target.change');
-              airloy.event.emit('agenda.change');
+              airloy.event.emit(EventTypes.targetChange);
+              airloy.event.emit(EventTypes.agendaChange);
               this.props.navigator.popToTop();
             } else {
               toast(L(result.message));
@@ -144,8 +145,8 @@ export default class Edit extends React.Component {
     let result = await airloy.net.httpPost(url, this.target);
     if (result.success) {
       // add and update both call reload from server
-      airloy.event.emit('target.change', result.info);
-      airloy.event.emit('agenda.change');
+      airloy.event.emit(EventTypes.targetChange, result.info);
+      airloy.event.emit(EventTypes.agendaChange);
       this.props.navigator.popToTop();
     } else {
       toast(L(result.message));

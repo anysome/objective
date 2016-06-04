@@ -160,7 +160,7 @@ export default class Check extends Controller {
                 }
               );
               if (result.success) {
-                airloy.event.emit('agenda.change');
+                airloy.event.emit(EventTypes.agendaChange);
                 rowData.arranged = true;
                 this.listSource.update(rowData);
                 this._sortList();

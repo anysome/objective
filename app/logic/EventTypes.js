@@ -15,4 +15,6 @@ export default {
 
   targetChange: 'target.change',
   targetPunch: 'target.punch',
+
+  meChange: 'me.change'
 }

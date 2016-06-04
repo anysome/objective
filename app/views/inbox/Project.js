@@ -12,6 +12,7 @@ import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app'
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
+import EventTypes from '../../logic/EventTypes';
 
 import EditItem from './EditItem';
 
@@ -101,7 +102,7 @@ export default class Project extends React.Component {
               }
             );
             if (result.success) {
-              airloy.event.emit('agenda.change');
+              airloy.event.emit(EventTypes.agendaChange);
               rowData.arranged = true;
               this.listSource.update(util.clone(rowData));
               this.setState({

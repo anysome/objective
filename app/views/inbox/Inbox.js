@@ -12,6 +12,8 @@ import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
 import ActionSheet from '../../widgets/ActionSheet';
+import EventTypes from '../../logic/EventTypes';
+
 import Edit from './Edit';
 import Project from './Project';
 
@@ -214,7 +216,7 @@ export default class Inbox extends React.Component {
           );
           hang(false);
           if (result.success) {
-            airloy.event.emit('agenda.change');
+            airloy.event.emit(EventTypes.targetChange);
             this.listSource.remove(rowData);
             this._sortList();
           } else {

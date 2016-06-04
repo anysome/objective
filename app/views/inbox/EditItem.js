@@ -4,12 +4,12 @@
 
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react-native';
-import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
+import EventTypes from '../../logic/EventTypes';
 
 export default class EditItem extends React.Component {
 
@@ -83,7 +83,7 @@ export default class EditItem extends React.Component {
       result = await airloy.net.httpPost(api.inbox.update, chore);
     }
     if (result.success) {
-      this.data.arranged && airloy.event.emit('agenda.change');
+      this.data.arranged && airloy.event.emit(EventTypes.agendaChange);
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));

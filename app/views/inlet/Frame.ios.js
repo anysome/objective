@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, colors, api} from '../../app';
 import util from '../../libs/Util';
+import EventTypes from '../../logic/EventTypes';
 
 import Agenda from '../agenda/Agenda';
 import Check from '../check/Check';
@@ -50,9 +51,9 @@ export default class Frame extends React.Component {
 			if ( new Date().getTime() - this.today > 86400000 ) {
 				this.today = this.today + 86400000;
 				airloy.net.httpGet(api.check.list);
-				airloy.event.emit('target.change');
-				airloy.event.emit('agenda.change');
-				airloy.event.emit('me.change');
+				airloy.event.emit(EventTypes.targetChange);
+				airloy.event.emit(EventTypes.agendaChange);
+				airloy.event.emit(EventTypes.meChange);
 			}
 			console.log(' current time = ' + this.today );
 		}
@@ -80,7 +81,7 @@ export default class Frame extends React.Component {
 		} else {
 			this.setState({currentPage: tabPage});
 			this.lastPage = null;
-			airloy.event.emit('tab.change', tabPage);
+			airloy.event.emit(EventTypes.tabChange, tabPage);
 		}
 	}
 

@@ -6,7 +6,7 @@ import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-nat
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
-
+import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
@@ -97,7 +97,7 @@ export default class Commit extends React.Component {
           }
         }
         if (agenda.checkDailyId) {
-          airloy.event.emit('target.punch', {
+          airloy.event.emit(EventTypes.targetPunch, {
             id: agenda.checkDailyId,
             times: parseInt(this.state.output)
           });
