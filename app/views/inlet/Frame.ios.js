@@ -49,7 +49,7 @@ export default class Frame extends React.Component {
 	_handleAppStateChange(currentAppState) {
 		if ( currentAppState === 'active') {
 			if ( new Date().getTime() - this.today > 86400000 ) {
-				this.today = this.today + 86400000;
+				this.today = util.getTodayStart();
 				airloy.net.httpGet(api.check.list);
 				airloy.event.emit(EventTypes.targetChange);
 				airloy.event.emit(EventTypes.agendaChange);

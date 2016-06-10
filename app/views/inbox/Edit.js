@@ -124,22 +124,27 @@ export default class Edit extends React.Component {
       projects.push(project);
       BUTTONS.push(project.title);
     }
+    BUTTONS.push('取消');
+    let CANCEL_INDEX = projects.length;
     ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
         tintColor: colors.dark1
       },
       async (buttonIndex) => {
-        hang();
-        let result = await airloy.net.httpGet(api.project.move, {
-          id: this.data.id,
-          topicId: projects[buttonIndex].id
-        });
-        if (result.success) {
-          this.props.onProjectized(this.data);
-        } else {
-          toast(L(result.message));
+        if (buttonIndex !== CANCEL_INDEX) {
+          hang();
+          let result = await airloy.net.httpGet(api.project.move, {
+            id: this.data.id,
+            topicId: projects[buttonIndex].id
+          });
+          if (result.success) {
+            this.props.onProjectized(this.data);
+          } else {
+            toast(L(result.message));
+          }
+          hang(false);
         }
-        hang(false);
       }
     );
   }

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, RefreshControl, ListView,
-  View, Text, LayoutAnimation, TouchableOpacity} from 'react-native';
+  View, Text, LayoutAnimation, TouchableOpacity, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -16,6 +16,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import Edit from './Edit';
 import Project from './Project';
+import EditItem from './EditItem';
 
 export default class Inbox extends React.Component {
 
@@ -197,6 +198,67 @@ export default class Inbox extends React.Component {
     }
   }
 
+  _longPressRow(rowData) {
+    let BUTTONS = ['删除', '取消'];
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        destructiveButtonIndex: 0,
+        cancelButtonIndex: 1,
+        tintColor: colors.dark1
+      },
+      async (buttonIndex) => {
+        if (buttonIndex === 0) {
+          let isTrash = rowData.catalog === 'trash';
+          Alert.alert(
+            '确认删除 ?',
+            isTrash ? '彻底删除了哦, 清空回收站更快哒' : '删除后可在回收站里找到.',
+            [
+              {text: '不了'},
+              {
+                text: '删除',
+                onPress: async () => {
+                  hang();
+                  let result2 = await airloy.net.httpGet(api.inbox.remove, {id: rowData.id});
+                  hang(false);
+                  if (result2.success) {
+                    if (isTrash) {
+                      this.listSource.remove(rowData);
+                      this._sortList();
+                    } else {
+                      rowData.catalog = 'trash';
+                      this.listSource.update(rowData);
+                      this._sortList();
+                    }
+                  } else {
+                    toast(L(result2.message));
+                  }
+                }
+              }
+            ]
+          );
+        }
+      }
+    );
+  }
+
+  _addTask(rowData) {
+    this.props.navigator.push({
+      title: '添加子任务',
+      component: EditItem,
+      passProps: {
+        projectId: rowData.id,
+        editable: true,
+        onUpdated: (task) => {
+          rowData.countTodo = rowData.countTodo + 1;
+          rowData.countTotal = rowData.countTotal + 1;
+          this.props.navigator.pop();
+          this.listSource.update(util.clone(rowData));
+          this._sortList();
+        }
+      }
+    });
+  }
+
   _toArrange(rowData) {
     let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
     let CANCEL_INDEX = 3;
@@ -262,7 +324,8 @@ export default class Inbox extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     if (sectionId === 1) {
       return (
-        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
+        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
+                          onLongPress={() => this._addTask(rowData)}>
           <Icon size={28} name='ios-compose-outline' style={style.icon} color={colors.border}
                 onPress={() => this._toProject(rowData)}/>
           <Text style={styles.title}>{rowData.title}</Text>
@@ -271,7 +334,8 @@ export default class Inbox extends React.Component {
       );
     } else {
       return (
-        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}>
+        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
+                          onLongPress={() => this._longPressRow(rowData)}>
           <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border}
                 onPress={() => this._toArrange(rowData)}/>
           <View style={styles.flex}>

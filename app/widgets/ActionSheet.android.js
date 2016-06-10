@@ -23,18 +23,24 @@ const style = StyleSheet.create({
     opacity: 0.4,
   },
   row: {
-    height: 45,
+    height: 50,
     backgroundColor: colors.light1,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: colors.border
   },
+  brace: {
+    height: 7,
+    backgroundColor: colors.light2
+  },
   close: {
-    height: 45,
+    height: 50,
     backgroundColor: colors.light1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: colors.border
   }
 });
 
@@ -50,16 +56,19 @@ export default class ActionSheet {
   static showActionSheetWithOptions(config: Object, callback: Function) {
     let options = [];
     config.options.forEach((option, i) => {
-      i === config.cancelButtonIndex ?
+      i === config.cancelButtonIndex ? (
+        options.push(
+          <View key={'brace-' + i} style={style.brace} />
+        ),
         options.push(
           <TouchableOpacity key={'option-' + i} style={style.close} activeOpacity={0.8} onPress={_closeSheet}>
             <Text style={{color: config.tintColor, fontWeight: 'bold'}}>{option}</Text>
           </TouchableOpacity>
-        ) :
+        ) ):
         options.push(
           <TouchableOpacity key={'option-' + i} style={style.row} activeOpacity={0.8} onPress={() => {
-            callback(i);
             _closeSheet();
+            callback(i);
           }}>
             <Text style={{color: i === config.destructiveButtonIndex ? colors.accent : config.tintColor}}>{option}</Text>
           </TouchableOpacity>

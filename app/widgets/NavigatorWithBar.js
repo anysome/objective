@@ -77,14 +77,14 @@ const style = StyleSheet.create({
   },
   navBar: {
     height: 45,
-    alignItems: 'center',
-    borderBottomColor: colors.border,
-    borderBottomWidth: 1 / PixelRatio.get()
+    alignItems: 'center'
   },
   scene: {
     flex: 1,
     marginTop: 45,
-    backgroundColor: colors.light2
+    backgroundColor: colors.light2,
+    borderTopColor: colors.border,
+    borderTopWidth: 1 / PixelRatio.get()
   },
   sceneHidden: {
     marginTop: 0
@@ -94,11 +94,16 @@ const style = StyleSheet.create({
   },
   navBarLeftButton: {
     paddingTop: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
+    height: 45,
+    width: 45
   },
   navBarRightButton: {
     paddingTop: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    height: 45,
+    width: 45,
+    alignItems: 'flex-end'
   },
   navBarTitleText: {
     flex: 1,
