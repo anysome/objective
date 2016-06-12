@@ -253,7 +253,7 @@ export default class Anything extends React.Component {
                   autoFocus={true}/>
               <View style={style.pin}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => this._pin()}>
-                  <Icon name={this.state.pin ? 'toggle-filled' : 'toggle'} size={32}
+                  <Icon name={this.state.pin ? 'ios-pin' : 'ios-pin-outline'} size={32}
                         color={ this.state.pin ? colors.accent : colors.light3}/>
                 </TouchableOpacity>
                 <Text style={style.hint}>{this.state.tip}</Text>

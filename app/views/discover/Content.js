@@ -172,10 +172,10 @@ export default class Content extends React.Component {
           </View>
           <View style={style.timeline}>
             <Text style={style.count}>{data.comments}</Text>
-            <Icon size={20} name='chatbubble-working' color={colors.border} style={style.icon}/>
+            <Icon size={20} name='md-text' color={colors.border} style={style.icon}/>
             <Text style={style.count}>{data.likes}</Text>
             <TouchableOpacity onPress={() => this._like(data)}>
-              <Icon size={20} name='android-favorite' color={colors.border} style={style.icon}/>
+              <Icon size={20} name='ios-heart' color={colors.border} style={style.icon}/>
             </TouchableOpacity>
             <Text style={style.hint}>{moment(data.createTime).calendar()}</Text>
           </View>
@@ -187,7 +187,7 @@ export default class Content extends React.Component {
                     renderFooter={this._renderFooter}
           />
           <View style={[style.bottom, {bottom: this.state.visibleBottom}]}>
-            <Icon size={32} name='android-close' color={colors.border} style={style.close}
+            <Icon size={32} name='md-close' color={colors.border} style={style.close}
                   onPress={() => this._close()}/>
             <TextField value={this.state.comment} style={style.input}
                        placeholder="也说两句..."
@@ -195,7 +195,7 @@ export default class Content extends React.Component {
                        returnKeyType="send"
                        onSubmitEditing={()=>this._send()}
             />
-            <Icon.Button name='ios-chatboxes-outline' color={colors.light1}
+            <Icon.Button name='md-chatboxes' color={colors.light1}
                          underlayColor={colors.light1}
                          backgroundColor={colors.accent}
                          onPress={()=> this._send()}>

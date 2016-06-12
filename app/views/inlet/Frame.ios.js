@@ -32,8 +32,8 @@ export default class Frame extends React.Component {
 
 	componentWillMount() {
 		// draw icon images for later use case
-		['ios-box-outline', 'ios-more-outline', 'ios-plus-empty',
-			'ios-compose-outline', 'ios-trash-outline'].forEach(name => {
+		['ios-archive-outline', 'ios-more-outline', 'ios-add',
+      'ios-create-outline', 'ios-trash-outline'].forEach(name => {
 				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
@@ -139,14 +139,14 @@ export default class Frame extends React.Component {
 				</Icon.TabBarItem>
 				<Icon.TabBarItem
 					title="检查单"
-					iconName="ios-checkmark-outline"
-					selectedIconName="android-checkmark-circle"
+					iconName="ios-checkmark-circle-outline"
+					selectedIconName="md-checkmark-circle-outline"
 					iconSize={this.iconSize}
 					selected={this.state.currentPage === 'Check'}
 					onPress={() => this._selectTab('Check')}>
 					{this._renderNavigator(Check, "检查单")}
 				</Icon.TabBarItem>
-				<Icon.TabBarItem iconName="plus-round" title={null} iconSize={this.iconSize}
+				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize}
 								 selected={this.state.currentPage === 'Anything'}
 								 onPress={() => this._openAdd()}>
 					<Anything onClose={() => this.closeAdd()} />

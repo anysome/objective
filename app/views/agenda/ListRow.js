@@ -22,7 +22,7 @@ export default class ListRow extends React.Component {
   _transform(data) {
     if (this.done) {
       return {
-        icon: {name: 'android-checkbox', color: colors.light3},
+        icon: {name: 'md-checkbox', color: colors.light3},
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -30,7 +30,7 @@ export default class ListRow extends React.Component {
       };
     } else if (this.future) {
       return {
-        icon: {name: 'arrow-up-c', color: objective.getPriorityColor(data.priority)},
+        icon: {name: 'md-arrow-round-up', color: objective.getPriorityColor(data.priority)},
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -39,7 +39,7 @@ export default class ListRow extends React.Component {
       };
     } else {
       return {
-        icon: {color: objective.getPriorityColor(data.priority), name: 'android-checkbox-outline-blank'},
+        icon: {color: objective.getPriorityColor(data.priority), name: 'md-square-outline'},
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -55,15 +55,13 @@ export default class ListRow extends React.Component {
       <TouchableOpacity style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
         <Icon size={28} style={style.icon} name={transform.icon.name} color={transform.icon.color}
               onPress={this.props.onIconClick}/>
-        { transform.priority > 8 &&
-        <Icon size={20} name='alert' color={transform.icon.color} style={style.alert}/> }
-        { transform.priority > 3 &&
-        <Icon size={20} name='alert' color={transform.icon.color} style={style.alert}/> }
+        { transform.priority > 8 ? <Text style={[style.alert, {color: transform.icon.color}]}>!!</Text> :
+          transform.priority > 3 ? <Text style={[style.alert, {color: transform.icon.color}]}>!</Text> : null }
         <Text style={[styles.title, style.body]}>
           {transform.title}
         </Text>
-        {transform.reminder && <Icon size={20} name='ios-bell-outline' color={colors.dark1}/>}
-        {transform.arrangeDate && <Text style={[styles.hint, style.alert]}>{transform.arrangeDate}</Text>}
+        {transform.reminder && <Icon size={20} name='ios-notifications-outline' color={colors.dark1}/>}
+        {transform.arrangeDate && <Text style={style.hint}>{transform.arrangeDate}</Text>}
       </TouchableOpacity>
     );
   }
@@ -84,7 +82,9 @@ const style = StyleSheet.create({
     paddingLeft: util.isAndroid() ? 0 : 16
   },
   alert: {
-    marginLeft: 5
+    marginLeft: 5,
+    fontSize: 26,
+    fontWeight: 'bold'
   },
   body: {
     marginLeft: 10,
@@ -92,5 +92,11 @@ const style = StyleSheet.create({
   },
   tail: {
     alignItems: 'flex-end'
+  },
+  hint: {
+    textAlign: 'right',
+    fontSize: 12,
+    color: colors.border,
+    marginLeft: 5
   }
 });

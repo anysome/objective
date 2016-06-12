@@ -90,13 +90,13 @@ export default class Timer extends React.Component {
                          onPress={() => this.props.onFeedback()}>
               <Text style={styles.text}>取消</Text>
             </Icon.Button>
-            <Icon.Button name='android-notifications-off' color={colors.accent}
+            <Icon.Button name='md-notifications-off' color={colors.accent}
                          underlayColor={colors.light1}
                          backgroundColor={colors.light2}
                          onPress={()=> this._cancel()}>
               <Text style={styles.link}>删除提醒</Text>
             </Icon.Button>
-            <Icon.Button name='android-notifications' color={colors.light1}
+            <Icon.Button name='md-notifications' color={colors.light1}
                          underlayColor={colors.light1}
                          backgroundColor={colors.accent}
                          onPress={()=> this._setup()}>

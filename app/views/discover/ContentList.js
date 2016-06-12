@@ -104,12 +104,12 @@ export default class ContentList extends React.Component {
           </Text>
         </View>
         <View style={styles.containerH}>
+          <Text style={style.count}>{rowData.comments}</Text>
+          <Icon size={20} name='md-text' color={colors.light1} style={style.icon}/>
           <Text style={style.count}>{rowData.likes}</Text>
           <TouchableOpacity onPress={() => this._like(rowData)}>
-            <Icon size={20} name='android-favorite' color={colors.light1} style={style.icon}/>
+            <Icon size={20} name='ios-heart' color={colors.light1} style={style.icon}/>
           </TouchableOpacity>
-          <Text style={style.count}>{rowData.comments}</Text>
-          <Icon size={20} name='chatbubble-working' color={colors.light1} style={style.icon}/>
           <Text style={style.hint}>{moment(rowData.createTime).calendar()}</Text>
         </View>
       </TouchableOpacity>

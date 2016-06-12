@@ -57,7 +57,7 @@ class NavigationBarRouteMapper {
   RightButton(route, navigator, index, navState) {
     let btnText = route.rightButtonIcon ? route.rightButtonIcon :
       route.rightButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.rightButtonTitle}</Text>
-        : <Icon name="android-more-vertical" size={24} color={colors.accent}/>;
+        : <Icon name="md-more" size={24} color={colors.accent}/>;
     return route.onRightButtonPress ? (
       <TouchableOpacity style={style.navBarRightButton}
                         onPress={()=> route.onRightButtonPress()}>

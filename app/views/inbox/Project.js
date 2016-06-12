@@ -156,7 +156,7 @@ export default class Project extends React.Component {
     let transform, arrangable = true, editable = true;
     if (rowData.status === '1') {
       transform = {
-        iconName: 'ios-checkmark-empty',
+        iconName: 'md-checkmark',
         color: colors.light3,
         titleColor: colors.border,
         detailColor: colors.border
@@ -164,7 +164,7 @@ export default class Project extends React.Component {
       arrangable = editable = false;
     } else if (rowData.arranged) {
       transform = {
-        iconName: 'android-calendar',
+        iconName: 'md-calendar',
         color: colors.light3,
         titleColor: colors.dark1,
         detailColor: colors.dark1

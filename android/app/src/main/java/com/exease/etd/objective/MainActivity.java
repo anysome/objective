@@ -3,6 +3,7 @@ package com.exease.etd.objective;
 import android.content.Intent;
 
 import com.facebook.react.ReactActivity;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -47,6 +48,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNSpinkitPackage(),
             new ReactNativeWheelPickerPackage(),
             new WeiboPackage(),
             new ImagePickerPackage(),

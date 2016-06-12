@@ -178,40 +178,40 @@ export default class Me extends Controller {
         <View style={styles.section}>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toDones()}>
             <Text>我的成就</Text>
-            <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
           <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFeedback()}>
             <Text>我的反馈</Text>
-            <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
         </View>
         { this.state.accountType === 'astmp' ?
           <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toUpgrade()}>
             <Text>安家落户</Text>
-            <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
           :
           <View style={styles.section}>
             <TouchableOpacity style={styles.sectionRow} onPress={() => this._toContent()}>
               <Text>分享</Text>
-              <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+              <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
             </TouchableOpacity>
             <View style={styles.hr}/>
             <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFollow()}>
               <Text>{L('banner.me.follows')}</Text>
-              <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+              <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
             </TouchableOpacity>
             <View style={styles.hr}/>
             <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFan()}>
               <Text>粉丝</Text>
-              <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+              <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
             </TouchableOpacity>
           </View>
         }
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('设置', Setting)}>
           <Text>设置</Text>
-          <Icon size={20} name="ios-arrow-right" color={colors.border}/>
+          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
         </TouchableOpacity>
       </ScrollView>
     );

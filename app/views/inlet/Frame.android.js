@@ -33,8 +33,8 @@ export default class Main extends React.Component {
 
   componentWillMount() {
     // draw icon images for later use case
-    ['ios-box-outline', 'ios-more-outline', 'ios-plus-empty',
-      'ios-compose-outline', 'ios-trash-outline'].forEach(
+    ['ios-archive-outline', 'ios-more-outline', 'ios-add',
+      'ios-create-outline', 'ios-trash-outline'].forEach(
           name => this.icons.set(name, <Icon name={name} size={24} color={colors.accent}/>)
     );
     AppState.addEventListener('change', this._handleAppStateChange);
@@ -111,15 +111,15 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Check'}
           title="检查单"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-checkmark-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='android-checkmark-circle' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-checkmark-circle-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='md-checkmark-circle-outline' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._selectTab('Check')}>
           <NavigatorWithBar component={Check} navigationBarHidden={false} title='检查单' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Anything'}
-          renderIcon={() => <Icon name='plus-round' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='plus-round' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='md-add' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='md-add' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._openAdd()}>
           <Anything onClose={() => this.closeAdd()}/>
         </TabNavigator.Item>

@@ -83,7 +83,7 @@ export default class UserList extends React.Component {
           <Text>{user.name}</Text>
           <Text style={style.hint}>{user.signature}</Text>
         </View>
-        <Icon size={20} name={judge ? 'arrow-swap' : 'checkmark'} color={colors.border} style={style.icon}/>
+        <Icon size={20} name={judge ? 'md-swap' : 'md-checkmark'} color={colors.border} style={style.icon}/>
       </TouchableOpacity>
     );
   }

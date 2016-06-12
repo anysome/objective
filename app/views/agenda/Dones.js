@@ -83,7 +83,7 @@ export default class Dones extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <View style={style.container}>
-        <Icon size={28} name='android-checkbox' style={style.icon} color={colors.light3} />
+        <Icon size={28} name='md-checkbox' style={style.icon} color={colors.light3} />
         <View style={style.body}>
           <Text style={styles.text}>{rowData.title}</Text>
           {rowData.detail ? <Text style={style.hint}>{rowData.detail}</Text> : null}

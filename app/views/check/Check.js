@@ -40,7 +40,7 @@ export default class Check extends Controller {
 
   componentWillMount() {
     if (this.route) {
-      this.route.rightButtonIcon = this.getIcon('ios-plus-empty');
+      this.route.rightButtonIcon = this.getIcon('ios-add');
       this.props.navigator.replace(this.route);
       this.route.onRightButtonPress = () => {
         let newTop = -100;

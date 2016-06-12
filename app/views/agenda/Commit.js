@@ -111,6 +111,7 @@ export default class Commit extends React.Component {
       }
       analytics.onEvent('click_agenda_punch');
     } else {
+      this.setState({output: '1'});
       this._output.focus();
     }
   }
@@ -135,12 +136,12 @@ export default class Commit extends React.Component {
             }
             { this.state.shareable &&
             <TouchableWithoutFeedback onPress={() => this._switch()}>
-              <Icon name={this.state.toShare ? 'toggle-filled' : 'toggle'}
-                    size={36} style={style.icon}
+              <Icon name={this.state.toShare ? 'md-switch' : 'md-switch'}
+                    size={32} style={style.icon}
                     color={ this.state.toShare ? colors.accent : colors.border}/>
             </TouchableWithoutFeedback>
             }
-            <Icon.Button name='checkmark' color={colors.light1}
+            <Icon.Button name='md-checkmark' color={colors.light1}
                          underlayColor={colors.light1}
                          backgroundColor={colors.accent}
                          onPress={()=> this._commit()}>

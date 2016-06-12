@@ -326,7 +326,7 @@ export default class Inbox extends React.Component {
       return (
         <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
                           onLongPress={() => this._addTask(rowData)}>
-          <Icon size={28} name='ios-compose-outline' style={style.icon} color={colors.border}
+          <Icon size={28} name='ios-create-outline' style={style.icon} color={colors.border}
                 onPress={() => this._toProject(rowData)}/>
           <Text style={styles.title}>{rowData.title}</Text>
           <Text style={styles.hint}>{rowData.countTodo} / {rowData.countTotal}</Text>

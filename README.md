@@ -1,6 +1,6 @@
 # Objective 行事易
 
-**可自动跟踪目标完成情况的待办清单软件** 
+**可自动跟踪目标完成情况的待办清单软件**
 
 也许还有收集箱、项目等 GTD 的功能, 正在被慢慢的简化和抛弃.
 
@@ -48,8 +48,8 @@ es6 first!
 
 ### TODO
 
-- [ ] Android 2.0 release
-- [ ] User login and profile enhance
+- [x] Android 2.0 release
+- [x] User login and profile enhance
 - [ ] Hot Update
 - [ ] Local cache and db
 - [ ] I18n
@@ -80,10 +80,12 @@ v1.x的版本使用[Titanium](https://github.com/appcelerator/titanium)、[Alloy
 
 [iOS AppStore](https://itunes.apple.com/cn/app/xing-shi-yi/id931153512?mt=8)
 
-Android Markets (v1.x waiting for upgrade)
+Android Markets
 [小米](http://app.mi.com/detail/71912)
 [豌豆荚](http://www.wandoujia.com/apps/com.exease.etd.objective)
 [应用宝](http://sj.qq.com/myapp/detail.htm?apkName=com.exease.etd.objective)
+[应用汇](http://www.appchina.com/app/com.exease.etd.objective)
+[安智](http://www.anzhi.com/soft_2619658.html)
 
 
 ### License
