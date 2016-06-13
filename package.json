@@ -11,8 +11,8 @@
     "base-64": "0.1.0",
     "md5": "2.1.0",
     "moment": "2.12.0",
-    "react": "15.1.0",
-    "react-native": "0.27.2",
+    "react": "15.0.2",
+    "react-native": "0.26.2",
     "react-native-button": "github:ide/react-native-button",
     "react-native-circular-progress": "0.0.7",
     "react-native-cli": "1.0.0",
@@ -28,6 +28,6 @@
     "react-native-wheel": "github:anysome/react-native-wheel",
     "react-native-wheel-picker": "1.0.0",
     "react-timer-mixin": "0.13.3",
-    "rn-umeng": "1.0.3"
+    "rn-umeng": "github:esseak/rn-umeng"
   }
 }

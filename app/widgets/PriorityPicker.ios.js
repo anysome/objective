@@ -10,8 +10,9 @@ export default class PriorityPicker extends React.Component {
 
   constructor(props) {
     super(props);
-    this.others = props.others;
-    this.small = props.small;
+    let {small, ...others} = props;
+    this.others = others;
+    this.small = small;
   }
 
   _renderOptions() {

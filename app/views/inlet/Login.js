@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
 import React from 'react';
-import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation, Keyboard} from 'react-native';
+import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation} from 'react-native';
 import Button from 'react-native-button';
 import * as WeiboAPI from 'react-native-weibo';
 
@@ -28,14 +28,14 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
-    Keyboard.addListener(EventTypes.keyboardShow, e => {
+    airloy.event.on(EventTypes.keyboardShow, e => {
       let newSize = Dimensions.get('window').height - e.endCoordinates.height;
       this.setState({
         isKeyboardOpened: true,
         visibleHeight: newSize
       });
     });
-    Keyboard.addListener(EventTypes.keyboardHide, e => {
+    airloy.event.on(EventTypes.keyboardHide, e => {
       this.setState({
         isKeyboardOpened: false,
         visibleHeight: Dimensions.get('window').height
@@ -44,8 +44,7 @@ export default class Login extends React.Component {
   }
 
   componentWillUnmount() {
-    // Keyboard.removeAllListener(EventTypes.keyboardHide);
-    // Keyboard.removeAllListener(EventTypes.keyboardShow);
+    airloy.event.off(EventTypes.keyboardHide, EventTypes.keyboardShow);
   }
 
   componentWillUpdate(props, state) {

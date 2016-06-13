@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, Modal, Image,
-  TouchableOpacity, LayoutAnimation, ListView, PixelRatio, Keyboard} from 'react-native';
+  TouchableOpacity, LayoutAnimation, ListView, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -19,7 +19,7 @@ export default class Content extends React.Component {
   constructor(props) {
     super(props);
     this.list = [];
-    this.isChange = false;
+    this.isChanged = false;
     this.state = {
       data: {},
       comment: '',
@@ -41,23 +41,23 @@ export default class Content extends React.Component {
     if (this.props.data !== nextProps.data) {
       this.setState({data: nextProps.data});
       this.reload(nextProps.data);
+      this.isChanged = false;
     }
     if (nextProps.visible) {
-      Keyboard.addListener(EventTypes.keyboardShow, e => {
+      airloy.event.on(EventTypes.keyboardShow, e => {
         this.setState({
           isKeyboardOpened: true,
           visibleBottom: e.endCoordinates.height
         });
       });
-      Keyboard.addListener(EventTypes.keyboardHide, e => {
+      airloy.event.on(EventTypes.keyboardHide, e => {
         this.setState({
           isKeyboardOpened: false,
           visibleBottom: 0
         });
       });
     } else {
-      // Keyboard.removeAllListener(EventTypes.keyboardHide);
-      // Keyboard.removeAllListener(EventTypes.keyboardShow);
+      airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
       this.setState({
         isKeyboardOpened: false,
         visibleBottom: 0
@@ -99,14 +99,14 @@ export default class Content extends React.Component {
         data: this.state.data,
         dataSource: this.state.dataSource.cloneWithRows(this.list)
       });
-      this.isChange = true;
+      this.isChanged = true;
     } else {
       toast(L(result.message));
     }
   }
 
   _close() {
-    if (this.isChange) {
+    if (this.isChanged) {
       this.props.onFeedback(this.state.data);
     } else {
       this.props.onFeedback();

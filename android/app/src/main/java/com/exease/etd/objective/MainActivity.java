@@ -6,7 +6,6 @@ import com.facebook.react.ReactActivity;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -51,7 +50,6 @@ public class MainActivity extends ReactActivity {
             new RNSpinkitPackage(),
             new ReactNativeWheelPickerPackage(),
             new WeiboPackage(),
-            new ImagePickerPackage(),
             new VectorIconsPackage(),
             new ReactNativeI18n(),
             new RNDeviceInfo(),

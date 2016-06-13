@@ -8,8 +8,9 @@ export default class OptionsPicker extends React.Component {
 
   constructor(props) {
     super(props);
-    this.options = props.options;
-    this.others = props.others;
+    let {options, ...others} = props;
+    this.options = options;
+    this.others = others;
   }
 
   _renderOptions() {

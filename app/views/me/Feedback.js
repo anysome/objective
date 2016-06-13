@@ -153,5 +153,5 @@ const style = StyleSheet.create({
     flex: 1,
     paddingTop: 5,
     paddingBottom: 5
-  },
+  }
 });
