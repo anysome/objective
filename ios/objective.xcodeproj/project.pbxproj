@@ -999,7 +999,10 @@
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.exease.etd.objective;
 				PRODUCT_NAME = objective;
 				PROVISIONING_PROFILE = "";
@@ -1028,7 +1031,10 @@
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.exease.etd.objective;
 				PRODUCT_NAME = objective;
 				PROVISIONING_PROFILE = "";

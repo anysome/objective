@@ -10,6 +10,8 @@ import MainPage from './views/inlet/Frame';
 
 import {airloy, config} from './app';
 
+let loginCount = 0;
+
 export default class App extends React.Component {
 
   constructor() {
@@ -54,6 +56,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    let pageId = `login-${++loginCount}`;
     // return //this.state.firstTime ? <IntroPage /> :
     //   this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
     return this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;

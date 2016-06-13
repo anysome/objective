@@ -20,8 +20,8 @@ import OptionsPicker from '../../widgets/OptionsPicker';
 export default class Edit extends React.Component {
 
   constructor(props) {
-    let {type, data, ...others} = props;
-    super(others);
+    super(props);
+    let {type, data} = props;
     this.keyboardType = util.isAndroid() ? 'numeric' : 'number-pad';
     if (data) {
       this.target = data;

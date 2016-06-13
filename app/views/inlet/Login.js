@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
 import React from 'react';
-import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation} from 'react-native';
+import {View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, LayoutAnimation, Keyboard} from 'react-native';
 import Button from 'react-native-button';
 import * as WeiboAPI from 'react-native-weibo';
 
@@ -16,9 +16,8 @@ import EventTypes from '../../logic/EventTypes';
 export default class Login extends React.Component {
 
   constructor(props) {
-    var {onSigned, ...others} = props;
-    super(others);
-    this.onSigned = onSigned;
+    super(props);
+    this.onSigned = props.onSigned;
     this._email = null;
     this._password = null;
     this.state = {
@@ -29,14 +28,14 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
-    airloy.event.on(EventTypes.keyboardShow, (e) => {
+    Keyboard.addListener(EventTypes.keyboardShow, e => {
       let newSize = Dimensions.get('window').height - e.endCoordinates.height;
       this.setState({
         isKeyboardOpened: true,
         visibleHeight: newSize
       });
     });
-    airloy.event.on(EventTypes.keyboardHide, (e) => {
+    Keyboard.addListener(EventTypes.keyboardHide, e => {
       this.setState({
         isKeyboardOpened: false,
         visibleHeight: Dimensions.get('window').height
@@ -45,7 +44,8 @@ export default class Login extends React.Component {
   }
 
   componentWillUnmount() {
-    airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
+    // Keyboard.removeAllListener(EventTypes.keyboardHide);
+    // Keyboard.removeAllListener(EventTypes.keyboardShow);
   }
 
   componentWillUpdate(props, state) {

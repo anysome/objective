@@ -9,9 +9,8 @@ import EventTypes from '../logic/EventTypes';
 export default class Controller extends React.Component {
 
   constructor(props) {
-    var {frame, tabBarItem, ...others} = props;
-    super(others);
-    this.frame = frame;
+    super(props);
+    this.frame = props.frame;
     this.loading = false;
     this.stale = false;
     this.name = 'Controller';

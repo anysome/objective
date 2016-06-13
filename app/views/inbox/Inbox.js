@@ -21,11 +21,10 @@ import EditItem from './EditItem';
 export default class Inbox extends React.Component {
 
   constructor(props) {
-    let {today, ...others} = props;
     super(props);
     this.listSource = null;
     this.projectList = null;
-    this.today = today;
+    this.today = props.today;
     this.state = {
       isRefreshing: true,
       dataSource: new ListView.DataSource({

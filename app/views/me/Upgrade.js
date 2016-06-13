@@ -11,9 +11,8 @@ import TextField from '../../widgets/TextField';
 export default class Setting extends React.Component {
 
   constructor(props) {
-    var {onUpgraded, ...others} = props;
-    super(others);
-    this.onSigned = onUpgraded;
+    super(props);
+    this.onSigned = props.onUpgraded;
     this._email = null;
     this._password = null;
   }

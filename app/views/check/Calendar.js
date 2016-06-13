@@ -14,9 +14,8 @@ import util from '../../libs/Util';
 export default class Calendar extends React.Component {
 
   constructor(props) {
-    let {data, ...others} = props;
-    super(others);
-    this.checkDaily = data;
+    super(props);
+    this.checkDaily = props.data;
     this.startDay = moment().add(-2, 'month').startOf('month');
     this.endDay = moment().endOf('month');
     this.today = moment();

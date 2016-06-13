@@ -7,10 +7,9 @@ import {Picker} from 'react-native';
 export default class OptionsPicker extends React.Component {
 
   constructor(props) {
-    let {visible, options, ...others} = props;
-    super(others);
-    this.options = options;
-    this.others = others;
+    super(props);
+    this.options = props.options;
+    this.others = props.others;
   }
 
   _renderOptions() {

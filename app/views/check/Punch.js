@@ -13,12 +13,11 @@ import TextArea from '../../widgets/TextArea';
 export default class Punch extends React.Component {
 
   constructor(props) {
-    let {data, onFeedback, ...others} = props;
-    super(others);
-    this.checkDaily = data;
+    super(props);
+    this.checkDaily = props.data;
     this.state = {
       toShare: false,
-      output: data.unit === '0' ? '1' : '',
+      output: props.data.unit === '0' ? '1' : '',
       remark: '',
       tip: '记录一下...'
     };
@@ -84,7 +83,7 @@ export default class Punch extends React.Component {
 
   render() {
     return (
-      <Modal animated={true} transparent={true} onRequestClose={() => {}} visible={this.props.visible}>
+      <Modal animationType='slide'  transparent={true} onRequestClose={() => {}} visible={this.props.visible}>
         <View style={style.container}>
           <Text style={style.title}>{this.props.data.title}</Text>
                     <TextArea placeholder={this.state.tip}

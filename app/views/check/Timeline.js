@@ -10,9 +10,8 @@ import {analytics, styles, colors, airloy, api, toast, L} from '../../app';
 export default class Timeline extends React.Component {
 
   constructor(props) {
-    let {data, ...others} = props;
-    super(others);
-    this.checkDaily = data;
+    super(props);
+    this.checkDaily = props.data;
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2

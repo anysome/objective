@@ -18,10 +18,9 @@ import Timeline from './Timeline';
 export default class Glance extends React.Component {
 
   constructor(props) {
-    let {data, today, nextIcon, ...others} = props;
-    super(others);
-    this.checkDaily = data;
-    this.today = today;
+    super(props);
+    this.checkDaily = props.data;
+    this.today = props.today;
     this.target = null;
     this.expectTotal = 0;
     this.state = {
@@ -154,7 +153,6 @@ export default class Glance extends React.Component {
   render() {
     return (
       <ScrollView style={style.container}>
-
         <View>
           <View style={styles.containerC}>
             <AnimatedCircularProgress

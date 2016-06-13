@@ -14,10 +14,9 @@ import ActionSheet from '../../widgets/ActionSheet';
 export default class Edit extends React.Component {
 
   constructor(props) {
-    var {data, sectionId, ...others} = props;
-    super(others);
+    super(props);
     this._title = null;
-    this.data = data || {title: '', detail: ''};
+    this.data = props.data || {title: '', detail: ''};
     this.state = {
       title: this.data.title,
       detail: this.data.detail

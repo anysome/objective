@@ -18,11 +18,10 @@ import ActionSheet from '../../widgets/ActionSheet';
 export default class Edit extends React.Component {
 
   constructor(props) {
-    var {data, today, ...others} = props;
-    super(others);
+    super(props);
     this._title = null;
-    this.today = today;
-    this.agenda = data || {today: today, priority: 0, status: '0'};
+    this.today = props.today;
+    this.agenda = props.data || {today: this.today, priority: 0, status: '0'};
     this.state = {
       title: this.agenda.title,
       detail: this.agenda.detail,

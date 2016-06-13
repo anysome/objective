@@ -9,10 +9,9 @@ import Objective from '../logic/Objective';
 export default class PriorityPicker extends React.Component {
 
   constructor(props) {
-    let {visible, small, ...others} = props;
-    super(others);
-    this.others = others;
-    this.small = small;
+    super(props);
+    this.others = props.others;
+    this.small = props.small;
   }
 
   _renderOptions() {

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, Modal, Image,
-  TouchableOpacity, LayoutAnimation, ListView, PixelRatio} from 'react-native';
+  TouchableOpacity, LayoutAnimation, ListView, PixelRatio, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -17,8 +17,7 @@ import TextField from '../../widgets/TextField';
 export default class Content extends React.Component {
 
   constructor(props) {
-    let {visible, ...others} = props;
-    super(others)
+    super(props);
     this.list = [];
     this.isChange = false;
     this.state = {
@@ -44,20 +43,21 @@ export default class Content extends React.Component {
       this.reload(nextProps.data);
     }
     if (nextProps.visible) {
-      airloy.event.on(EventTypes.keyboardShow, (e) => {
+      Keyboard.addListener(EventTypes.keyboardShow, e => {
         this.setState({
           isKeyboardOpened: true,
           visibleBottom: e.endCoordinates.height
         });
       });
-      airloy.event.on(EventTypes.keyboardHide, (e) => {
+      Keyboard.addListener(EventTypes.keyboardHide, e => {
         this.setState({
           isKeyboardOpened: false,
           visibleBottom: 0
         });
       });
     } else {
-      airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
+      // Keyboard.removeAllListener(EventTypes.keyboardHide);
+      // Keyboard.removeAllListener(EventTypes.keyboardShow);
       this.setState({
         isKeyboardOpened: false,
         visibleBottom: 0
@@ -150,7 +150,7 @@ export default class Content extends React.Component {
     let log = data.log ? data.log : false;
     let checkDaily = data.content ? JSON.parse(data.content) : {};
     return (
-      <Modal animated={true} transparent={false} onRequestClose={() => {}} visible={this.props.visible}>
+      <Modal animationType='slide' transparent={false} onRequestClose={() => {}} visible={this.props.visible}>
         <View style={styles.window}>
           <View style={style.header}>
             <Image style={style.avatar}

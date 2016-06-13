@@ -7,11 +7,6 @@ import {DatePickerIOS} from 'react-native'
 
 export default class DatePicker extends React.Component {
 
-  constructor(props) {
-    let {visible, ...others} = props;
-    super(others);
-  }
-
   render() {
     let picker = null;
     if (this.props.visible) {

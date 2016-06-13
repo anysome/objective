@@ -19,10 +19,9 @@ import EditItem from './EditItem';
 export default class Project extends React.Component {
 
   constructor(props) {
-    let {data, ...others} = props;
-    super(others);
+    super(props);
     this.listSource = new ListSource();
-    this.project = data;
+    this.project = props.data;
     this.countChanged = false;
     this.state = {
       isRefreshing: true,

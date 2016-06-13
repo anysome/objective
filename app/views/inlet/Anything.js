@@ -17,8 +17,8 @@ import EventTypes from '../../logic/EventTypes';
 export default class Anything extends React.Component {
 
   constructor(props) {
-    let {visible, ...others} = props;
-    super(others);
+    super(props);
+    let {visible} = props;
     this._input = null;
     if (typeof visible === 'undefined') {
       visible = true;
@@ -242,7 +242,7 @@ export default class Anything extends React.Component {
     console.log('modal is to open ? ' + this.state.modalVisible);
     return (
       <View style={styles.window}>
-        <Modal animated={true} transparent={false} onRequestClose={() => {}} visible={this.state.modalVisible}>
+        <Modal animationType='slide' transparent={false} onRequestClose={() => {}} visible={this.state.modalVisible}>
           <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
             <View style={style.body}>
                 <TextArea

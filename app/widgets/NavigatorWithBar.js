@@ -10,10 +10,6 @@ import {colors, styles} from '../app';
 
 export default class NavigatorWithBar extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Navigator

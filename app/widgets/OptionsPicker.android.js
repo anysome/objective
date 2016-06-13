@@ -10,11 +10,10 @@ import {colors} from '../views/styles';
 export default class OptionsPicker extends React.Component {
 
   constructor(props) {
-    let {visible, onValueChange, options, ...others} = props;
-    super(others);
-    this.onValueChange = onValueChange;
-    this.options = options;
-    this.others = others;
+    super(props);
+    this.onValueChange = props.onValueChange;
+    this.options = props.options;
+    this.others = props.others;
   }
 
   _renderOptions() {

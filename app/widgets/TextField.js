@@ -8,12 +8,11 @@ import {colors} from '../app'
 export default class TextField extends React.Component {
 
   constructor(props) {
-    let {onChangeText, flat, ...others} = props;
-    super(others);
+    super(props);
     this._input = null;
     this.value = '';
-    this.onChangeText = onChangeText;
-    this.flat = flat;
+    this.onChangeText = props.onChangeText;
+    this.flat = props.flat;
   }
 
   _changeText(text) {

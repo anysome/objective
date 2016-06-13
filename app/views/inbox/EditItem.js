@@ -14,10 +14,9 @@ import EventTypes from '../../logic/EventTypes';
 export default class EditItem extends React.Component {
 
   constructor(props) {
-    var {data, sectionId, ...others} = props;
-    super(others);
+    super(props);
     this._title = null;
-    this.data = data || {title: '', detail: '', arranged: false};
+    this.data = props.data || {title: '', detail: '', arranged: false};
     this.state = {
       title: this.data.title,
       detail: this.data.detail

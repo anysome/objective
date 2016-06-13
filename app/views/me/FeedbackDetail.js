@@ -13,15 +13,14 @@ import TextArea from '../../widgets/TextArea';
 export default class FeedbackDetail extends React.Component {
 
   constructor(props) {
-    let {data, nextIcon, ...others} = props;
-    super(others);
+    super(props);
     this.state = {
       input: '',
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
     };
-    this.feedback = data;
+    this.feedback = props.data;
     this.list = [];
     this._input = null;
   }
@@ -123,5 +122,5 @@ const style = StyleSheet.create({
     flex: 1,
     paddingTop: 5,
     paddingBottom: 5
-  },
+  }
 });

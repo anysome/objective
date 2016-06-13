@@ -12,9 +12,8 @@ import UserList from './UserList';
 export default class Facade extends React.Component {
 
   constructor(props) {
-    let {data, ...others} = props;
-    super(others);
-    this.user = data;
+    super(props);
+    this.user = props.data;
     this.state = {
       tab: 0
     };
