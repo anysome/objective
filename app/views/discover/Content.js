@@ -26,13 +26,13 @@ export default class Content extends React.Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => true
       }),
-      isKeyboardOpened: false,
       visibleBottom: 0
     };
+    this._word = null;
   }
 
   componentWillUpdate(props, state) {
-    if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
+    if (state.visibleBottom !== this.state.visibleBottom) {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     }
   }
@@ -46,30 +46,18 @@ export default class Content extends React.Component {
     if (nextProps.visible) {
       airloy.event.on(EventTypes.keyboardShow, e => {
         this.setState({
-          isKeyboardOpened: true,
           visibleBottom: e.endCoordinates.height
         });
       });
       airloy.event.on(EventTypes.keyboardHide, e => {
         this.setState({
-          isKeyboardOpened: false,
           visibleBottom: 0
         });
-      });
-    } else {
-      airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
-      this.setState({
-        isKeyboardOpened: false,
-        visibleBottom: 0
       });
     }
   }
 
   reload(data) {
-    //airloy.net.httpGet(api.content.detail.likes, {contentId: data.id}).then(result => {
-    //    if ( result.success )
-    //});
-
     airloy.net.httpGet(api.content.detail.comments, {contentId: data.id}).then(result => {
       if (result.success) {
         this.list = result.info;
@@ -106,10 +94,28 @@ export default class Content extends React.Component {
   }
 
   _close() {
-    if (this.isChanged) {
-      this.props.onFeedback(this.state.data);
+    if ( util.isAndroid() ) {
+      this.state.visibleBottom && this.setState({visibleBottom: 0});
+      airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
+      if (this.isChanged) {
+        this.props.onFeedback(this.state.data);
+      } else {
+        this.props.onFeedback();
+      }
     } else {
-      this.props.onFeedback();
+      if ( this.state.visibleBottom ) {
+        // TODO close modal when keyboard on may cause exception
+        // just hide keyboard,
+        console.log('call keyboard to hide');
+        this._word.blur();
+      } else {
+        airloy.event.off(EventTypes.keyboardShow, EventTypes.keyboardHide);
+        if (this.isChanged) {
+          this.props.onFeedback(this.state.data);
+        } else {
+          this.props.onFeedback();
+        }
+      }
     }
   }
 
@@ -150,7 +156,7 @@ export default class Content extends React.Component {
     let log = data.log ? data.log : false;
     let checkDaily = data.content ? JSON.parse(data.content) : {};
     return (
-      <Modal animationType='slide' transparent={false} onRequestClose={() => {}} visible={this.props.visible}>
+      <Modal animationType='slide' transparent={false} onRequestClose={() => this._close()} visible={this.props.visible}>
         <View style={styles.window}>
           <View style={style.header}>
             <Image style={style.avatar}
@@ -190,6 +196,7 @@ export default class Content extends React.Component {
             <Icon size={32} name='md-close' color={colors.border} style={style.close}
                   onPress={() => this._close()}/>
             <TextField value={this.state.comment} style={style.input}
+                       ref={(c) => this._word = c}
                        placeholder="也说两句..."
                        onChangeText={text => this.setState({comment: text})}
                        returnKeyType="send"

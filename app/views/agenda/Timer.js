@@ -66,7 +66,7 @@ export default class Timer extends React.Component {
 
   render() {
     return (
-      <Modal animationType='slide' transparent={true} onRequestClose={() => {}} visible={this.props.visible}>
+      <Modal animationType='slide' transparent={true} onRequestClose={() => this.props.onFeedback()} visible={this.props.visible}>
         <TouchableWithoutFeedback onPress={() => this.props.onFeedback()}>
           <View style={style.bg}/>
         </TouchableWithoutFeedback>
@@ -84,7 +84,7 @@ export default class Timer extends React.Component {
                       visible={true}
                       onDateChange={date => this._onSelectedDate(date)} />
           <View style={style.bar}>
-            <Icon.Button name='close' color={colors.light3}
+            <Icon.Button name='md-close' color={colors.light3}
                          underlayColor={colors.light1}
                          backgroundColor={colors.light2}
                          onPress={() => this.props.onFeedback()}>

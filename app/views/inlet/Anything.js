@@ -242,7 +242,7 @@ export default class Anything extends React.Component {
     console.log('modal is to open ? ' + this.state.modalVisible);
     return (
       <View style={styles.window}>
-        <Modal animationType='slide' transparent={false} onRequestClose={() => {}} visible={this.state.modalVisible}>
+        <Modal animationType='slide' transparent={false} onRequestClose={()=>this._onClose()} visible={this.state.modalVisible}>
           <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
             <View style={style.body}>
                 <TextArea

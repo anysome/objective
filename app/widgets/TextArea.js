@@ -56,6 +56,10 @@ var TextArea = React.createClass({
     this.refs.input.focus();
   },
 
+  blur() {
+    this.refs.input.blur();
+  },
+
   render: function() {
     let passedStyle = this.props.style || {};
     let inputStyle = {};

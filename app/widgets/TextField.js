@@ -24,6 +24,10 @@ export default class TextField extends React.Component {
     this._input.focus();
   }
 
+  blur() {
+    this._input.blur();
+  }
+
   render() {
     let style = this.flat ? styles.flat : styles.round;
     return <TextInput autoCapitalize='none'

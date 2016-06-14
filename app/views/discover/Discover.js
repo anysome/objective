@@ -154,7 +154,7 @@ export default class Discover extends Controller {
   }
 
   render() {
-    console.log(' render discover page ');
+    console.log(' render discover page , modal visible: ' + this.state.showModal);
     return (
       <View style={styles.flex}>
         <ListView initialListSize={10}

@@ -118,7 +118,7 @@ export default class Commit extends React.Component {
 
   render() {
     return (
-      <Modal animationType='slide' transparent={true} onRequestClose={() => {}} visible={this.props.visible}>
+      <Modal animationType='slide' transparent={true} onRequestClose={() => this.props.onFeedback()} visible={this.props.visible}>
         <View style={style.container}>
           <Text style={style.title}>{this.props.data.title}</Text>
                     <TextArea placeholder={this.state.tip}
