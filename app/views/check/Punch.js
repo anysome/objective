@@ -121,7 +121,7 @@ const style = StyleSheet.create({
   container: {
     height: 220,
     padding: 20,
-    backgroundColor: colors.light1
+    backgroundColor: colors.light2
   },
   title: {
     paddingTop: 4,

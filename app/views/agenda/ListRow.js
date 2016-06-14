@@ -53,8 +53,14 @@ export default class ListRow extends React.Component {
     var transform = this._transform(this.props.data);
     return (
       <TouchableOpacity style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
-        <Icon size={28} style={style.icon} name={transform.icon.name} color={transform.icon.color}
-              onPress={this.props.onIconClick}/>
+        { util.isAndroid() ?
+          <TouchableOpacity onPress={this.props.onIconClick} style={style.icon}>
+            <Icon size={28} name={transform.icon.name} color={transform.icon.color}/>
+          </TouchableOpacity>
+          :
+          <Icon size={28} style={style.icon} name={transform.icon.name} color={transform.icon.color}
+                onPress={this.props.onIconClick}/>
+        }
         { transform.priority > 8 ? <Text style={[style.alert, {color: transform.icon.color}]}>!!</Text> :
           transform.priority > 3 ? <Text style={[style.alert, {color: transform.icon.color}]}>!</Text> : null }
         <Text style={[styles.title, style.body]}>
@@ -78,8 +84,7 @@ const style = StyleSheet.create({
     backgroundColor: colors.light1
   },
   icon: {
-    marginLeft: util.isAndroid() ? 16 : 0,
-    paddingLeft: util.isAndroid() ? 0 : 16
+    paddingLeft: 16
   },
   alert: {
     marginLeft: 5,
