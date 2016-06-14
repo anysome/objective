@@ -88,7 +88,7 @@ export default class ResetPassword extends React.Component {
 
   render() {
     return (
-      <Modal animationType='slide' transparent={false} visible={this.props.visible}>
+      <Modal animationType='slide' transparent={false} onRequestClose={() => {}} visible={this.props.visible}>
         <View style={styles.modal}>
           <View style={style.container}>
             { this.state.showReset ?

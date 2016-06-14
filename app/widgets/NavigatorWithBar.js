@@ -41,7 +41,7 @@ class NavigationBarRouteMapper {
     let btnText = route.leftButtonIcon ? route.leftButtonIcon :
       route.leftButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.leftButtonTitle}</Text> :
         index === 0 ? null :
-          <Icon name="chevron-left" size={24} color={colors.accent}/>;
+          <Icon name="ios-arrow-back" size={24} color={colors.accent}/>;
     return (
       <TouchableOpacity style={style.navBarLeftButton}
                         onPress={() => {route.onLeftButtonPress ? route.onLeftButtonPress() : navigator.pop();} }>

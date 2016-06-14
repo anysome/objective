@@ -28,6 +28,7 @@ export default class OptionsPicker extends React.Component {
 
   _onValueChange(value) {
     // I need string
+    // console.log('picker item change');
     this.onValueChange('' + value);
   }
 
@@ -37,9 +38,7 @@ export default class OptionsPicker extends React.Component {
       picker = (
         <Picker {...this.others}
           style={style.picker}
-          textSize={14}
-          otherTextColor={colors.dark1}
-          currentTextColor={colors.accent}
+          itemStyle={{color: colors.dark1, fontSize: 26}}
           selectedValue={parseInt(this.props.selectedValue)}
           onValueChange={value => this._onValueChange(value)} >
           {this._renderOptions()}

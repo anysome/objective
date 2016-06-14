@@ -31,9 +31,7 @@ export default class PriorityPicker extends React.Component {
       picker = (
         <Picker {...this.others}
           style={{height: this.small ? 120 : 150}}
-          textSize={14}
-          otherTextColor={colors.dark1}
-          currentTextColor={colors.accent}
+          itemStyle={{color: colors.dark1, fontSize: 26}}
           selectedValue={this.props.selectedValue}>
           {this._renderOptions()}
         </Picker>
