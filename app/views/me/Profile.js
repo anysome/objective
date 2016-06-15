@@ -85,7 +85,7 @@ export default class Profile extends React.Component {
         <View style={styles.section}>
           <TextField
             flat={true}
-            value={this.state.name}
+            defaultValue={this.state.name}
             onChangeText={(text) => this.setState({name:text})}
             placeholder='昵称'
             returnKeyType="default"
@@ -93,15 +93,16 @@ export default class Profile extends React.Component {
           <View style={styles.separator}/>
           <TextField
             flat={true}
-            value={this.state.email}
+            defaultValue={this.state.email}
             onChangeText={(text) => this.setState({email:text})}
             placeholder='邮箱'
+            keyboardType="email-address"
             returnKeyType="default"
           />
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.signature}
+                      defaultValue={this.state.signature}
                       onChangeText={(text) => this.setState({signature:text})}
                       placeholder='个性签名'
                       returnKeyType="default"

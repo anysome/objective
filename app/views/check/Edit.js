@@ -162,7 +162,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || '想要养成的习惯...'}
             returnKeyType="done"
@@ -170,7 +170,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -181,7 +181,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>持续天数</Text>
             <TextField
               flat={true}
-              value={this.state.lasting}
+              defaultValue={this.state.lasting}
               onChangeText={(text) => this.setState({lasting:text})}
               placeholder={'' + this.lasting}
               returnKeyType="done"
@@ -214,7 +214,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || '本月计划...'}
             returnKeyType="done"
@@ -222,7 +222,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -247,7 +247,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>月份指标</Text>
             <TextField
               flat={true}
-              value={'' + this.state.times}
+              defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
@@ -280,7 +280,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || moment(this.state.dateEnd).format('YYYY') + ' 年度目标...'}
             returnKeyType="done"
@@ -288,7 +288,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -317,7 +317,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>周期指标</Text>
             <TextField
               flat={true}
-              value={'' + this.state.times}
+              defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
@@ -350,7 +350,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || '100次的行动最容易达成心愿...'}
             returnKeyType="done"
@@ -358,7 +358,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -369,7 +369,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>行动次数</Text>
             <TextField
               flat={true}
-              value={'' + this.state.times}
+              defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
@@ -410,7 +410,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || '一万小时的专注先从1000番茄开始...'}
             returnKeyType="done"
@@ -418,7 +418,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -429,7 +429,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>番茄时间</Text>
             <TextField
               flat={true}
-              value={'' + this.state.times}
+              defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"
@@ -461,7 +461,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.target.title || '适合自己的计划才是最好的计划...'}
             returnKeyType="done"
@@ -469,7 +469,7 @@ export default class Edit extends React.Component {
           <View style={styles.separator}/>
                     <TextArea
                       flat={true}
-                      value={this.state.detail}
+                      defaultValue={this.state.detail}
                       onChangeText={(text) => this.setState({detail:text})}
                       placeholder={this.target.detail || '如有其它信息可填写...'}
                       returnKeyType="default"
@@ -515,7 +515,7 @@ export default class Edit extends React.Component {
             <Text style={style.text}>周期指标</Text>
             <TextField
               flat={true}
-              value={'' + this.state.times}
+              defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
               placeholder={'' + this.target.times}
               returnKeyType="done"

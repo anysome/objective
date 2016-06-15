@@ -122,14 +122,14 @@ export default class Commit extends React.Component {
         <View style={style.container}>
           <Text style={style.title}>{this.props.data.title}</Text>
                     <TextArea placeholder={this.state.tip}
-                              value={this.state.remark}
+                              defaultValue={this.state.remark}
                               onChangeText={text => this.setState({remark: text})}/>
           <View style={style.bar}>
             { this.state.editable ?
             <TextField style={[style.input, {color: this.state.inputColor}]}
                        ref={c => this._output = c}
                        placeholder='今日完成数'
-                       value={this.state.output}
+                       defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
               : <View style={style.input}></View>

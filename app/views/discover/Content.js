@@ -195,7 +195,7 @@ export default class Content extends React.Component {
           <View style={[style.bottom, {bottom: this.state.visibleBottom}]}>
             <Icon size={32} name='md-close' color={colors.border} style={style.close}
                   onPress={() => this._close()}/>
-            <TextField value={this.state.comment} style={style.input}
+            <TextField defaultValue={this.state.comment} style={style.input}
                        ref={(c) => this._word = c}
                        placeholder="也说两句..."
                        onChangeText={text => this.setState({comment: text})}

@@ -122,7 +122,7 @@ export default class Feedback extends React.Component {
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <TextArea
           ref={(c)=> this._input = c}
-          value={this.state.input}
+          defaultValue={this.state.input}
           onChangeText={text => this.setState({input:text})}
           placeholder="行事易，因你更美好！"
           autoFocus={true}/>

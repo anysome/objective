@@ -21,7 +21,7 @@ export default class Edit extends React.Component {
     super(props);
     this._title = null;
     this.today = props.today;
-    this.agenda = props.data || {today: this.today, priority: 0, status: '0'};
+    this.agenda = props.data || {today: this.today + 86400000 * 2, priority: 0, status: '0'};
     this.state = {
       title: this.agenda.title,
       detail: this.agenda.detail,
@@ -172,7 +172,7 @@ export default class Edit extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.agenda.title || '想做什么...'}
             returnKeyType="done"

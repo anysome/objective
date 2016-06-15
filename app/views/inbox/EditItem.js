@@ -98,7 +98,7 @@ export default class EditItem extends React.Component {
           <TextField
             ref={c => this._title = c}
             flat={true}
-            value={this.state.title}
+            defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.data.title || '想做什么...'}
             returnKeyType="done"

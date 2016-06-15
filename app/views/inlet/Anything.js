@@ -247,7 +247,7 @@ export default class Anything extends React.Component {
             <View style={style.body}>
                 <TextArea
                   ref={(c)=> this._input = c}
-                  value={this.state.input}
+                  defaultValue={this.state.input}
                   onChangeText={text => this.setState({input:text})}
                   placeholder="想做什么..."
                   autoFocus={true}/>

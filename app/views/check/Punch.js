@@ -87,13 +87,13 @@ export default class Punch extends React.Component {
         <View style={style.container}>
           <Text style={style.title}>{this.props.data.title}</Text>
                     <TextArea placeholder={this.state.tip}
-                              value={this.state.remark}
+                              defaultValue={this.state.remark}
                               onChangeText={text => this.setState({remark: text})}/>
           <View style={style.bar}>
             <TextField style={style.input}
                        ref={c => this._output = c}
                        placeholder='新增完成数'
-                       value={this.state.output}
+                       defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
             <TouchableWithoutFeedback onPress={() => this._switch()}>
