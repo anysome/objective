@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, PixelRatio} from 'react-native'
+import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, PixelRatio, BackAndroid} from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
 
 import {colors} from '../views/styles'
@@ -48,7 +48,17 @@ const style = StyleSheet.create({
 let sheet = null;
 
 function _closeSheet() {
+  sheet && removeBack() && sheet.destroy() || (sheet = null);
+}
+
+function _androidBack() {
   sheet && sheet.destroy() || (sheet = null);
+  return true;
+}
+
+function removeBack() {
+  BackAndroid.removeEventListener('hardwareBackPress', _androidBack);
+  return true;
 }
 
 export default class ActionSheet {
@@ -74,7 +84,7 @@ export default class ActionSheet {
           </TouchableOpacity>
         );
     });
-    sheet || (
+    sheet || ( BackAndroid.addEventListener('hardwareBackPress', _androidBack),
       sheet = new RootSiblings(
         <View style={style.container}>
           <TouchableWithoutFeedback onPress={_closeSheet}>

@@ -67,7 +67,7 @@ export default class Agenda extends Controller {
           }
         });
       };
-      this.props.navigator.replace(this.route);
+      util.isAndroid() || this.props.navigator.replace(this.route);
     }
     airloy.event.on(EventTypes.agendaChange, ()=> {
       // call network request or mark stale until page visible

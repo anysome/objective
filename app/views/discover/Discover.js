@@ -13,6 +13,7 @@ import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import Controller from '../Controller';
+import TargetList from './TargetList';
 import Content from './Content';
 import Facade from './Facade';
 
@@ -34,6 +35,16 @@ export default class Discover extends Controller {
   }
 
   componentWillMount() {
+    if (this.route) {// Logout and then login cause currentRoute to be null. Maybe a bug.
+      this.route.rightButtonTitle = '目标';
+      this.route.onRightButtonPress = () => {
+        this.forward({
+          title: '共享的目标',
+          component: TargetList
+        });
+      };
+      util.isAndroid() || this.props.navigator.replace(this.route);
+    }
   }
 
   async reload() {

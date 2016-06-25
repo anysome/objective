@@ -73,7 +73,8 @@
   "content": {
     "list": {
       "user": "social/content/user.json",
-      "public": "social/content/public.json"
+      "public": "social/content/public.json",
+      "target": "social/content/target.json"
     },
     "detail": {
       "likes": "social/content/like/list.json",
@@ -87,6 +88,11 @@
   "discover": {
     "follows": "social/user/followers.json",
     "fans": "social/user/fans.json",
+    "target": {
+      "public": "social/target/public.json",
+      "join": "social/target/join.json",
+      "share": "social/target/request.json"
+    },
     "user": {
       "read": "social/user/get.json",
       "follow": "social/user/follow.json",

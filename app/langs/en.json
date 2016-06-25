@@ -24,6 +24,14 @@
         "exist": "帐号已存在,请换个"
       }
     },
+    "target": {
+      "join": {
+        "already": "早已经加入"
+      },
+      "share": {
+        "exist": "目标已被分享"
+      }
+    },
     "schedule": {
       "past": "只能安排到今日以后"
     },

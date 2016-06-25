@@ -41,7 +41,6 @@ export default class Check extends Controller {
   componentWillMount() {
     if (this.route) {
       this.route.rightButtonIcon = this.getIcon('ios-add');
-      this.props.navigator.replace(this.route);
       this.route.onRightButtonPress = () => {
         let newTop = -100;
         if (util.isAndroid()) {
@@ -54,6 +53,7 @@ export default class Check extends Controller {
         });
         analytics.onEvent('click_check_add');
       };
+      util.isAndroid() || this.props.navigator.replace(this.route);
     }
     airloy.event.on(EventTypes.targetChange, () => {
       this.visible ? this.reload() : this.markStale();
@@ -149,7 +149,7 @@ export default class Check extends Controller {
                 passProps: {
                   data: rowData,
                   today: this.today,
-                  nextIcon: this.getIcon('ios-trash-outline')
+                  nextIcon: this.getIcon('ios-more-outline')
                 }
               });
               break;
@@ -178,7 +178,7 @@ export default class Check extends Controller {
         passProps: {
           data: rowData,
           today: this.today,
-          nextIcon: this.getIcon('ios-trash-outline')
+          nextIcon: this.getIcon('ios-more-outline')
         }
       });
     }

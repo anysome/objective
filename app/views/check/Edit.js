@@ -15,7 +15,7 @@ import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
 import OptionsPicker from '../../widgets/OptionsPicker';
-
+import ActionSheet from '../../widgets/ActionSheet';
 
 export default class Edit extends React.Component {
 
@@ -664,7 +664,36 @@ export default class Edit extends React.Component {
   componentDidMount() {
     let route = this.props.navigator.navigationContext.currentRoute;
     if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => this._toDelete();
+      route.onRightButtonPress = () => {
+        ActionSheet.showActionSheetWithOptions({
+            options: ['分享', '删除', '取消'],
+            cancelButtonIndex: 2,
+            destructiveButtonIndex: 1,
+            tintColor: colors.dark1
+          },
+          async(buttonIndex) => {
+            switch (buttonIndex) {
+              case 2:
+                break;
+              case 1:
+                this._toDelete();
+                break;
+              default:
+                let result = await airloy.net.httpGet(api.discover.target.share, {
+                    checkTargetId: this.target.id
+                  }
+                );
+                if (result.success) {
+                  toast('目标已分享, 请稍候两天');
+                } else {
+                  toast(L(result.message));
+                }
+                analytics.onEvent('click_target_share');
+            }
+          }
+        );
+      };
+      //this._toDelete();
       // so many bugs on android T_T
       util.isAndroid() ?
         this.props.navigator.replaceAtIndex(route, -1) :
