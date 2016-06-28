@@ -135,7 +135,6 @@ export default class Check extends Controller {
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
-          destructiveButtonIndex: DESTRUCTIVE_INDEX,
           tintColor: colors.dark1
         },
         async(buttonIndex) => {

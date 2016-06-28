@@ -42,11 +42,10 @@ export default class Inbox extends React.Component {
     this.rightButtonIcon = route.rightButtonIcon;
     route.onRightButtonPress = () => {
       let BUTTONS = ['新备忘', '新分类清单', '清空回收站', '取消'];
-      let CANCEL_INDEX = 3, DESTRUCTIVE_INDEX = 2;
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
-          cancelButtonIndex: CANCEL_INDEX,
-          destructiveButtonIndex: DESTRUCTIVE_INDEX,
+          cancelButtonIndex: 3,
+          destructiveButtonIndex: 2,
           tintColor: colors.dark1
         },
         async (buttonIndex) => {
