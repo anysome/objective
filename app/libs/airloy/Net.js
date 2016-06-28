@@ -14,7 +14,7 @@ export default class Net {
   config(args) {
     let server = this._server;
     if ( args.server ) {
-      server = args.https ? 'https://' : 'http://' + args.server + '/';
+      server = (args.https ? 'https://' : 'http://') + args.server + '/';
     }
     this._server = server;
     args.auth && (this._auth = args.auth);
@@ -86,13 +86,13 @@ export default class Net {
         method: 'GET',
         headers: new Headers({
           Accept: 'application/json;charset=UTF-8'
-        }),
+        })
       });
       this._auth.authRequest(request);
       let response = await fetch(request);
       return await this._responseHandle(response);
     } catch (e) {
-      console.warn('parsing failed', JSON.stringify(e));
+      console.warn('http result parsing failed', JSON.stringify(e));
       return {
         success: false,
         message: e.message,
@@ -116,7 +116,7 @@ export default class Net {
       let response = await fetch(request);
       return await this._responseHandle(response);
     } catch (e) {
-      console.warn('parsing failed', JSON.stringify(e));
+      console.warn('http result parsing failed', JSON.stringify(e));
       return {
         success: false,
         message: e.message,
