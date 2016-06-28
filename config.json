@@ -1,14 +1,12 @@
 {
   "airloy": {
-    "server": "http://test.asfun.cn/",
+    "server": "test.asfun.cn",
+    "https": false,
     "apiVersion": "v1",
     "clientName": "Objective.rn",
     "clientKey": "etd",
     "clientSecret": "etd|dev",
     "debug": false
-  },
-  "objective": {
-    "version": "2.0.10"
   },
   "host": {
     "upload": "http://upload.qiniu.com/",

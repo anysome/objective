@@ -28,7 +28,7 @@ export default class App extends React.Component {
 
   async _init() {
     let oldVersion = await airloy.store.getItem('app_version');
-    let version = config.objective.version;
+    let version = require('../package.json').version;
     let newInstall = version !== oldVersion;
     var isAuth = false;
     if (newInstall) {

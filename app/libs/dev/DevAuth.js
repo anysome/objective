@@ -69,6 +69,7 @@ export default class DevAuth extends Auth {
   }
 
   authRequest(request) {
+    request.headers.set('Host', this._host);
     request.headers.set('Client-Key', this._client);
     request.headers.set('Auth', _auth);
     if (this._session)
