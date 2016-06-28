@@ -8,7 +8,7 @@ import React from 'react';
 import LoginPage from './views/inlet/Login';
 import MainPage from './views/inlet/Frame';
 
-import {airloy, config} from './app';
+import {airloy, config, api} from './app';
 
 let loginCount = 0;
 
@@ -49,7 +49,12 @@ export default class App extends React.Component {
     });
   }
 
-  signed() {
+  signed(recruit) {
+    console.log('is recruit user ? ' + recruit);
+    recruit && airloy.net.httpGet(api.discover.target.join, {
+        id: '96e449c1509644d689f2a9c8f3f096bc'// 共享目标日常计划的id
+      }
+    );
     this.setState({
       logined: true
     });
@@ -59,6 +64,6 @@ export default class App extends React.Component {
     let pageId = `login-${++loginCount}`;
     // return //this.state.firstTime ? <IntroPage /> :
     //   this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
-    return this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
+    return this.state.logined ? <MainPage /> : <LoginPage onSigned={(recruit)=>this.signed(recruit)}/>;
   }
 }
