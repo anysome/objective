@@ -203,11 +203,11 @@ export default class Check extends Controller {
   }
 
   render() {
-    console.log(' render check page');
     return (
       <View style={styles.flex}>
         <ListView enableEmptySections={true}
-                  initialListSize={10} pageSize={5}
+                  initialListSize={10}
+                  pageSize={5}
                   dataSource={this.state.dataSource}
                   renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
                   renderSectionHeader={this._renderSectionHeader}

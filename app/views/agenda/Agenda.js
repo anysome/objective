@@ -308,7 +308,6 @@ export default class Agenda extends Controller {
   }
 
   render() {
-    console.log(' render agenda page');
     return (
       <View style={styles.flex}>
         <ListView
