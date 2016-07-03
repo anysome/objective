@@ -112,7 +112,7 @@ export default class Main extends React.Component {
           title="检查单"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Icon name='ios-checkmark-circle-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='md-checkmark-circle-outline' size={this.iconSize} color={colors.accent} />}
+          renderSelectedIcon={() => <Icon name='md-checkmark-circle' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._selectTab('Check')}>
           <NavigatorWithBar component={Check} navigationBarHidden={false} title='检查单' frame={this}/>
         </TabNavigator.Item>
@@ -128,7 +128,7 @@ export default class Main extends React.Component {
           title="我"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Icon name='ios-person-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-contact-outline' size={this.iconSize} color={colors.accent} />}
+          renderSelectedIcon={() => <Icon name='ios-contact' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._selectTab('Me')}>
           <NavigatorWithBar component={Me} navigationBarHidden={true} title='我' frame={this}/>
         </TabNavigator.Item>

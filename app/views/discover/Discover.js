@@ -2,8 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity,
-  RefreshControl, ListView} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, Image, TouchableOpacity,
+  RefreshControl, ListView, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -45,6 +45,14 @@ export default class Discover extends Controller {
       };
       util.isAndroid() || this.props.navigator.replace(this.route);
     }
+  }
+
+  _toTarget() {
+    console.log('got to target');
+    this.forward({
+      title: '共享的目标',
+      component: TargetList
+    });
   }
 
   async reload() {
@@ -137,12 +145,12 @@ export default class Discover extends Controller {
               <Text style={styles.hint}>{rowData.uid}</Text>
             </View>
             <View style={styles.containerF}>
-              <Text style={style.hint}>{moment(rowData.createTime).calendar()}</Text>
+              <Text style={style.date}>{moment(rowData.createTime).calendar()}</Text>
               <Text style={style.count}>{rowData.comments}</Text>
-              <Icon size={20} name='md-text' color={colors.light1} style={style.icon}/>
+              <Icon size={20} name='md-text' color={colors.light2} style={style.icon}/>
               <Text style={style.count}>{rowData.likes}</Text>
               <TouchableOpacity onPress={() => this._like(rowData)}>
-                <Icon size={20} name='ios-heart' color={colors.light1} style={style.icon}/>
+                <Icon size={20} name='ios-heart' color={colors.light2} style={style.icon}/>
               </TouchableOpacity>
             </View>
           </View>
@@ -150,29 +158,41 @@ export default class Discover extends Controller {
         <View style={styles.containerV}>
           <View style={style.container}>
             <Text style={style.text}>{checkDaily.title}</Text>
-            <Text style={styles.hint}>
+            <Text style={style.times}>
               {`${checkDaily.total} + ${checkDaily.times} ${objective.getUnitName(checkDaily.unit)}`}
             </Text>
           </View>
-          {log && <Text style={styles.title}>{rowData.log}</Text>}
+          {log && <Text style={style.text}>{rowData.log}</Text>}
         </View>
       </TouchableOpacity>
     );
   }
 
-  _renderSeparator(sectionId, rowId, adjacentRowHighlighted) {
-    return <View key={rowId + '_separator'} style={style.separator}></View>
+  _renderHeader() {
+    return (
+      <View style={style.section}>
+        <TouchableOpacity style={style.area}>
+          <Text>灌鸡汤</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[style.area, style.areaBorder]}>
+          <Text>讨论组</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.area} onPress={this._toTarget}>
+          <Text>淘目标</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   render() {
-    console.log(' render discover page , modal visible: ' + this.state.showModal);
     return (
       <View style={styles.flex}>
         <ListView initialListSize={10}
                   pageSize={5}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}
-                  renderSeparator={this._renderSeparator}
+                  // renderHeader={this._renderHeader}
+                  // stickyHeaderIndices={[0]}
                   refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
                                                              onRefresh={() => this.reload()}
                                                              tintColor={colors.accent}
@@ -189,16 +209,40 @@ export default class Discover extends Controller {
 
 
 const style = StyleSheet.create({
+  section: {
+    height: 75,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: colors.light2,
+    paddingLeft: 16,
+    paddingRight: 16
+  },
+  area: {
+    flex: 1,
+    height: 55,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  areaBorder: {
+    borderLeftColor: colors.border,
+    borderLeftWidth: 1,
+    borderRightColor: colors.border,
+    borderRightWidth: 1
+  },
   row: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: colors.light2,
+    backgroundColor: colors.light1,
     paddingLeft: 16,
     paddingRight: 16,
+    marginBottom: 20,
     paddingTop: 10,
     paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: colors.light3,
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: colors.light3
   },
   header: {
     flexDirection: 'row',
@@ -208,10 +252,13 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.light1,
     padding: 8,
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
+    borderRadius: 5,
+    borderColor: colors.light2,
+    borderWidth: 1 / PixelRatio.get(),
+    backgroundColor: colors.light3
   },
   text: {
     flex: 1,
@@ -224,18 +271,22 @@ const style = StyleSheet.create({
     height: airloy.device.os.indexOf('Phone') > -1 ? 40 : 80,
   },
   separator: {
-    height: 10,
-    backgroundColor: colors.light3,
+    height: 10
   },
   icon: {
     marginLeft: 8,
   },
-  hint: {
+  date: {
     flex: 1,
     fontSize: 12,
     paddingTop: 4,
     textAlign: 'left',
     color: colors.dark1
+  },
+  times: {
+    textAlign: 'right',
+    fontSize: 12,
+    color: colors.dark2
   },
   count: {
     marginLeft: 8,

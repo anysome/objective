@@ -102,17 +102,12 @@ export default class TargetList extends React.Component {
     );
   }
 
-  _renderSeparator(sectionId, rowId, adjacentRowHighlighted) {
-    return <View key={rowId + '_separator'} style={styles.hr}></View>
-  }
-
   render() {
     return <ListView enableEmptySections={true}
                      initialListSize={10}
                      pageSize={5}
                      dataSource={this.state.dataSource}
                      renderRow={this._renderRow}
-                     renderSeparator={this._renderSeparator}
                      refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
                                                          onRefresh={() => this.reload()}
                                                          tintColor={colors.accent}

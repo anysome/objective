@@ -29,9 +29,8 @@ export default class Punch extends React.Component {
   async _init() {
     this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
     this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
-    console.log('ids = ' + this.sharedTargetIds);
     this.state.toShare = this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) > -1;
-    console.log(' to share = ' + this.state.toShare);
+    console.log('to share = ' + this.state.toShare);
   }
 
   _switch() {

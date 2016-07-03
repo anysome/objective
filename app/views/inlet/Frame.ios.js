@@ -140,7 +140,7 @@ export default class Frame extends React.Component {
 				<Icon.TabBarItem
 					title="检查单"
 					iconName="ios-checkmark-circle-outline"
-					selectedIconName="md-checkmark-circle-outline"
+					selectedIconName="md-checkmark-circle"
 					iconSize={this.iconSize}
 					selected={this.state.currentPage === 'Check'}
 					onPress={() => this._selectTab('Check')}>
@@ -154,7 +154,7 @@ export default class Frame extends React.Component {
 				<Icon.TabBarItem
 					title="我"
 					iconName="ios-person-outline"
-					selectedIconName="ios-contact-outline"
+					selectedIconName="ios-contact"
 					iconSize={this.iconSize}
 					selected={this.state.currentPage === 'Me'}
 					onPress={() => this._selectTab('Me')}>
