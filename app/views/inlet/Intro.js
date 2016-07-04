@@ -7,24 +7,22 @@ import {View, StyleSheet, Image, Text} from 'react-native';
 export default class Intro extends React.Component {
 	render() {
 		return (
-			<View style={styles.container}>
-	        	<Image source={require('../../../resources/images/avatar.png')} style={styles.backgroundImage}/>
-	      	</View>
+			<View style={style.container}>
+        <Text style={style.title}>行事易</Text>
+      </View>
 		);
 	}
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
 	container: {
-		flex: 1
-	},
-	backgroundImage: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: null,
-		height: null,
-		backgroundColor: 'transparent',
-		resizeMode: 'cover',
-	}
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+	title: {
+    fontSize: 40,
+    fontWeight: 'bold'
+  }
 });

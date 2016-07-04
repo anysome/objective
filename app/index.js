@@ -4,13 +4,11 @@
 
 import React from 'react';
 
-//import IntroPage from './views/inlet/Intro';
+import IntroPage from './views/inlet/Intro';
 import LoginPage from './views/inlet/Login';
 import MainPage from './views/inlet/Frame';
 
 import {airloy, config, api} from './app';
-
-let loginCount = 0;
 
 export default class App extends React.Component {
 
@@ -18,6 +16,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       firstTime: false,
+      loading: true,
       logined: false
     };
   }
@@ -36,16 +35,17 @@ export default class App extends React.Component {
     } else {
       isAuth = await airloy.auth.setup();
     }
-    this.setState({
-      //firstTime: newInstall,
-      logined: isAuth
-    });
     // forward to login page if necessary
     airloy.event.on(airloy.event.authRequiredEvent, ()=> {
       this.setState({logined: false});
     });
     airloy.event.on(airloy.event.logoutEvent, ()=> {
       this.setState({logined: false});
+    });
+    this.setState({
+      //firstTime: newInstall,
+      loading: false,
+      logined: isAuth
     });
   }
 
@@ -61,9 +61,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    let pageId = `login-${++loginCount}`;
     // return //this.state.firstTime ? <IntroPage /> :
-    //   this.state.logined ? <MainPage /> : <LoginPage onSigned={()=>this.signed()}/>;
-    return this.state.logined ? <MainPage /> : <LoginPage onSigned={(recruit)=>this.signed(recruit)}/>;
+
+    return this.state.loading ? <IntroPage /> :
+        this.state.logined ? <MainPage /> : <LoginPage onSigned={(recruit)=>this.signed(recruit)}/>;
   }
 }
