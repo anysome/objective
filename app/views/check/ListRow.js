@@ -76,7 +76,8 @@ export default class ListRow extends React.Component {
     var transform = this._transform(this.props.data);
     return (
       <TouchableOpacity style={[style.container, {borderLeftColor: transform.priorityColor}]}
-                        onPress={this.props.onPress}>
+                        onPress={this.props.onPress}
+                        onLongPress={this.props.onLongPress}>
         <View style={style.containerF}>
           <Text style={styles.title}>{transform.title}</Text>
           <Text style={[styles.text, {color: transform.timeLeft.color}]}>{transform.timeLeft.text}</Text>

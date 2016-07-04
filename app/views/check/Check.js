@@ -4,10 +4,10 @@
 import React from 'react';
 import {
   StyleSheet, View, ScrollView, ListView, Platform,
-  RefreshControl, TouchableOpacity, Text
+  RefreshControl, TouchableOpacity, Text, Alert
 } from 'react-native';
 
-import {analytics, airloy, styles, colors, api, L, toast} from '../../app';
+import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import EventTypes from '../../logic/EventTypes';
@@ -183,9 +183,70 @@ export default class Check extends Controller {
     }
   }
 
+  _longPressRow(rowData, sectionId) {
+    ActionSheet.showActionSheetWithOptions({
+        options: ['修改', '删除', '取消'],
+        cancelButtonIndex: 2,
+        destructiveButtonIndex: 1,
+        tintColor: colors.dark1
+      },
+      async(buttonIndex) => {
+        switch (buttonIndex) {
+          case 2:
+            break;
+          case 1:
+            this._toDelete(rowData);
+            break;
+          default:
+            hang();
+            let result = await airloy.net.httpGet(api.target.read, {id: rowData.checkTargetId});
+            hang(false);
+            if ( result.success ) {
+              this.forward({
+                title: '修改',
+                component: Edit,
+                rightButtonIcon: this.getIcon('ios-more-outline'),
+                passProps: {
+                  data: result.info
+                }
+              });
+            } else {
+              toast(L(result.message));
+            }
+        }
+      }
+    );
+  }
+
+  _toDelete(rowData) {
+    Alert.alert(
+      '确认删除 ?',
+      '将彻底删除该检查单和它所有产生的待办.',
+      [
+        {text: '不了'},
+        {
+          text: '删除',
+          onPress: async () => {
+            hang();
+            let result = await airloy.net.httpGet(api.target.remove, {id: rowData.checkTargetId});
+            if (result.success) {
+              airloy.event.emit(EventTypes.agendaChange);
+              this.listSource.remove(rowData);
+              this._sortList();
+            } else {
+              toast(L(result.message));
+            }
+            hang(false);
+          }
+        }
+      ]
+    );
+  }
+
   _renderRow(rowData, sectionId, rowId) {
     return <ListRow data={rowData} sectionId={sectionId} today={this.today}
-                    onPress={() => this._pressRow(rowData, sectionId)}/>;
+                    onPress={() => this._pressRow(rowData, sectionId)}
+                    onLongPress={() => this._longPressRow(rowData, sectionId)}/>;
   }
 
   _renderSectionHeader(sectionData, sectionId) {
