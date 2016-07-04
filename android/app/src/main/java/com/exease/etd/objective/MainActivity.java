@@ -8,7 +8,6 @@ import com.zyu.ReactNativeWheelPickerPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.umeng.analytics.MobclickAgent;
@@ -52,7 +51,6 @@ public class MainActivity extends ReactActivity {
             new WeiboPackage(),
             new VectorIconsPackage(),
             new ReactNativeI18n(),
-            new RNDeviceInfo(),
             new UmengPackage(),
             new WheelPackage(),
             new NotificationPackage(this)

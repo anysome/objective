@@ -267,14 +267,14 @@ const style = StyleSheet.create({
   },
   avatar: {
     marginRight: 16,
-    width: airloy.device.os.indexOf('Phone') > -1 ? 40 : 80,
-    height: airloy.device.os.indexOf('Phone') > -1 ? 40 : 80,
+    width: 40,
+    height: 40,
   },
   separator: {
     height: 10
   },
   icon: {
-    marginLeft: 8,
+    marginLeft: 8
   },
   date: {
     flex: 1,

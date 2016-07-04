@@ -10,7 +10,7 @@ import md5 from 'md5';
 import base64 from 'base-64';
 
 let _loginTime = 0,
-  _device = Device.getIdentifier(),
+  _device = '',
   _auth = '';
 
 
@@ -32,6 +32,7 @@ export default class DevAuth extends Auth {
     if (deviceId) {
       _device = deviceId;
     } else {
+      _device = Device.getIdentifier();
       this._store.setItem('app.device.id', _device);
     }
   }

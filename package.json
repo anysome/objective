@@ -28,6 +28,7 @@
     "react-native-wheel": "github:anysome/react-native-wheel",
     "react-native-wheel-picker": "1.0.0",
     "react-timer-mixin": "0.13.3",
-    "rn-umeng": "github:esseak/rn-umeng"
+    "rn-umeng": "github:esseak/rn-umeng",
+    "uuid": "2.0.2"
   }
 }

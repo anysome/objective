@@ -129,7 +129,6 @@ dependencies {
     compile project(':react-native-weibo')
     compile project(':react-native-vector-icons')
     compile project(':react-native-i18n')
-    compile project(':react-native-device-info')
     compile project(':rn-umeng')
     compile project(':react-native-wheel-view')
     compile project(':react-native-system-notification')

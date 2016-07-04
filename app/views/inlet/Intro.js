@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
+import {colors} from '../../app';
 
 export default class Intro extends React.Component {
 	render() {
@@ -17,6 +18,7 @@ export default class Intro extends React.Component {
 const style = StyleSheet.create({
 	container: {
 		flex: 1,
+    backgroundColor: colors.light2,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
