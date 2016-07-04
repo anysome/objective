@@ -217,8 +217,10 @@ export default class Agenda extends Controller {
                           hang();
                           let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
                           if (result.success) {
-                            airloy.event.emit(EventTypes.targetChange);
-                            this.deleteRow(rowData);
+                            rowData.checkDailyId && airloy.event.emit(EventTypes.targetChange);
+                            LocalNotifications.cancelAgenda(rowData.id);
+                            this.listSource.remove(rowData);
+                            this._sortList();
                           } else {
                             toast(L(result.message));
                           }
