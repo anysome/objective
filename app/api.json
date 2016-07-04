@@ -53,7 +53,8 @@
     "remove": "check/target/delete.json",
     "punch": "check/target/punch.json",
     "track": "check/target/track.json",
-    "punches": "check/target/punchs.json"
+    "punches": "check/target/punchs.json",
+    "history": "check/target/history.json"
   },
   "me": {
     "reward": "reward/agenda.json",

@@ -32,7 +32,7 @@ export default class Frame extends React.Component {
 
 	componentWillMount() {
 		// draw icon images for later use case
-		['ios-archive-outline', 'ios-more-outline', 'ios-add',
+		['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
       'ios-create-outline', 'ios-trash-outline'].forEach(name => {
 				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});

@@ -18,7 +18,7 @@ import ActionSheet from '../../widgets/ActionSheet';
 import ListRow from './ListRow';
 import Glance from './Glance';
 import Edit from './Edit';
-
+import HistoryTarget from './HistoryTarget';
 
 export default class Check extends Controller {
 
@@ -52,6 +52,17 @@ export default class Check extends Controller {
           panelTop: newTop
         });
         analytics.onEvent('click_check_add');
+      };
+      this.route.leftButtonIcon = this.getIcon('ios-archive-outline');
+      this.route.onLeftButtonPress = () => {
+        this.forward({
+          title: '过期目标',
+          component: HistoryTarget,
+          passProps: {
+            today: this.today,
+            nextIcon: this.getIcon('ios-more-outline')
+          }
+        });
       };
       util.isAndroid() || this.props.navigator.replace(this.route);
     }
@@ -130,7 +141,7 @@ export default class Check extends Controller {
         BUTTONS.push('安排到后天');
         CANCEL_INDEX = 4, DESTRUCTIVE_INDEX = 3;
       }
-      BUTTONS.push('查看', '取消');
+      BUTTONS.push('完成情况', '取消');
 
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
