@@ -11,7 +11,8 @@ import {analytics, config, airloy, styles, colors, api, L, toast} from '../../ap
 import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
 
-import Glance from './Glance';
+import Calendar from './Calendar';
+import Timeline from './Timeline';
 import Edit from './Edit';
 
 export default class HistoryTarget extends React.Component {
@@ -53,17 +54,16 @@ export default class HistoryTarget extends React.Component {
   }
 
   _pressRow(rowData) {
-    console.log('to glance with target no checkdaily');
     ActionSheet.showActionSheetWithOptions({
-        options: ['完成情况', '修改目标', '取消'],
-        cancelButtonIndex: 2,
+        options: ['打卡日历', '前进路线', '修改目标', '取消'],
+        cancelButtonIndex: 3,
         tintColor: colors.dark1
       },
       async(buttonIndex) => {
         switch (buttonIndex) {
-          case 2:
+          case 3:
             break;
-          case 1:
+          case 2:
             this.props.navigator.push({
               title: '修改目标',
               component: Edit,
@@ -73,15 +73,22 @@ export default class HistoryTarget extends React.Component {
               }
             });
             break;
+          case 1:
+            this.props.navigator.push({
+              title: '前进路线',
+              component: Timeline,
+              passProps: {
+                targetId: rowData.id,
+                title: rowData.title
+              }
+            });
+            break;
           default:
             this.props.navigator.push({
-              title: '完成情况',
-              component: Glance,
+              title: '打卡日历',
+              component: Calendar,
               passProps: {
-                data: rowData,
-                isTarget: true,
-                today: this.props.today,
-                nextIcon: this.props.nextIcon
+                target: rowData
               }
             });
         }

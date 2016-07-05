@@ -15,9 +15,17 @@ export default class Calendar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.checkDaily = props.data;
-    this.startDay = moment().add(-2, 'month').startOf('month');
-    this.endDay = moment().endOf('month');
+    if ( props.target ) {
+      this.startDay = moment(props.target.dateEnd).add(-6, 'month').startOf('month');
+      this.endDay = moment(props.target.dateEnd).endOf('month');
+      this.targetId = props.target.id;
+      this.title = props.target.title;
+    } else {
+      this.startDay = moment().add(-2, 'month').startOf('month');
+      this.endDay = moment().endOf('month');
+      this.targetId = props.targetId;
+      this.title = props.title;
+    }
     this.today = moment();
     this.actives = new Map();
     this.notes = new Map();
@@ -38,7 +46,7 @@ export default class Calendar extends React.Component {
 
   async reload() {
     let result = await airloy.net.httpGet(api.target.punches, {
-      id: this.checkDaily.checkTargetId,
+      id: this.targetId,
       days: this.today.diff(this.startDay, 'days') + 1
     });
     if (result.success) {
@@ -57,7 +65,7 @@ export default class Calendar extends React.Component {
   render() {
     return (
       <View style={style.flex}>
-        <Text style={style.title}>{this.checkDaily.title}</Text>
+        <Text style={style.title}>{this.title}</Text>
         {this.state.loaded ?
           <CalendarView
             active={this.actives}

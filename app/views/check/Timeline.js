@@ -11,7 +11,6 @@ export default class Timeline extends React.Component {
 
   constructor(props) {
     super(props);
-    this.checkDaily = props.data;
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
@@ -25,7 +24,7 @@ export default class Timeline extends React.Component {
   }
 
   async reload() {
-    let result = await airloy.net.httpGet(api.target.track, {id: this.checkDaily.checkTargetId});
+    let result = await airloy.net.httpGet(api.target.track, {id: this.props.targetId});
     if (result.success) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(result.info)
@@ -61,7 +60,7 @@ export default class Timeline extends React.Component {
   render() {
     return (
       <ScrollView>
-        <Text style={style.title}>{this.checkDaily.title}</Text>
+        <Text style={style.title}>{this.props.title}</Text>
         <ListView
           initialListSize={10} pageSize={5}
           dataSource={this.state.dataSource}

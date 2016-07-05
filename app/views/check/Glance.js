@@ -111,7 +111,8 @@ export default class Glance extends React.Component {
       title: '前进路线',
       component: Timeline,
       passProps: {
-        data: this.checkDaily
+        targetId: this.checkDaily.checkTargetId,
+        title: this.checkDaily.title
       }
     });
   }
@@ -121,7 +122,8 @@ export default class Glance extends React.Component {
       title: '打卡日历',
       component: Calendar,
       passProps: {
-        data: this.checkDaily
+        targetId: this.checkDaily.checkTargetId,
+        title: this.checkDaily.title
       }
     });
   }
