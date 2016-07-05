@@ -91,7 +91,10 @@ export default class Agenda extends Controller {
     });
     let result = await airloy.net.httpGet(api.agenda.list, null);
     if (result.success) {
-      this.listSource = new ListSource(result.info);
+      this.listSource = new ListSource(result.info, (agenda) => {
+        // check each item and schedule reminder if necessary
+        agenda.reminder && LocalNotifications.scheduleAgenda(agenda);
+      });
       this._sortList();
       this.setState({
         isRefreshing: false

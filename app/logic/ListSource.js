@@ -3,10 +3,11 @@
  */
 export default class ListSource {
 
-  constructor(datas:Array<any> = []) {
+  constructor(datas:Array<any> = [], eachCallback:Function) {
     this._hash = new Map();
     for (let data of datas) {
       this._hash.set(data.id, data);
+      eachCallback && eachCallback(data);
     }
   }
 
