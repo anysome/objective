@@ -20,13 +20,15 @@ export default class ListRow extends React.Component {
     let dateEnd = moment(checkDaily.endDate);
     let unitName = objective.getUnitName(checkDaily.unit);
     let maybe = '', progress = '';
-    let doneSize = 14, undoSize = 26, doneColor = colors.dark1;
+    let doneSize = 14, undoSize = 26;
+    let doneColor = colors.dark1, undoColor = colors.border;
     if (checkDaily.gross === 1) {
       if (checkDaily.closed) {
         progress = checkDaily.total + checkDaily.times;
         doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
+        undoColor = colors.dark2;
       } else {
         progress = checkDaily.total;
       }
@@ -36,6 +38,7 @@ export default class ListRow extends React.Component {
         doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
+        undoColor = colors.dark2;
       } else {
         progress = checkDaily.progress;
       }
@@ -76,6 +79,7 @@ export default class ListRow extends React.Component {
       doneSize: doneSize,
       undoSize: undoSize,
       doneColor: doneColor,
+      undoColor: undoColor,
       arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,
       summary: summary
     };
@@ -89,7 +93,7 @@ export default class ListRow extends React.Component {
                         onLongPress={this.props.onLongPress}>
         <Text style={style.title}>{transform.title}</Text>
         <Text style={style.text}>
-          完成 <Text style={{fontSize: transform.doneSize}}>{transform.progress}</Text>
+          完成 <Text style={{fontSize: transform.doneSize, color: transform.undoColor}}>{transform.progress}</Text>
           ,  预计 <Text style={{color: transform.arrangedColor,fontSize: transform.undoSize}}>{transform.maybe}</Text>
         </Text>
         <View style={style.containerF}>
