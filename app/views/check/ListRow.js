@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/3/10.
  */
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import moment from 'moment';
 
 import {colors, styles} from '../../app';
@@ -19,19 +19,23 @@ export default class ListRow extends React.Component {
   _transform(checkDaily) {
     let dateEnd = moment(checkDaily.endDate);
     let unitName = objective.getUnitName(checkDaily.unit);
-    var maybe = '', progress = '';
-    var closedColor = colors.dark1;
+    let maybe = '', progress = '';
+    let doneSize = 14, undoSize = 26, doneColor = colors.dark1;
     if (checkDaily.gross === 1) {
       if (checkDaily.closed) {
         progress = checkDaily.total + checkDaily.times;
-        closedColor = colors.border;
+        doneSize = 26;
+        undoSize = 14;
+        doneColor = colors.border;
       } else {
         progress = checkDaily.total;
       }
     } else {
       if (checkDaily.closed) {
         progress = checkDaily.progress + checkDaily.times;
-        closedColor = colors.border;
+        doneSize = 26;
+        undoSize = 14;
+        doneColor = colors.border;
       } else {
         progress = checkDaily.progress;
       }
@@ -59,16 +63,19 @@ export default class ListRow extends React.Component {
         }
       }
     }
-    let arrangedColor = checkDaily.arranged ? colors.border : colors.dark2;
     return {
       priorityColor: objective.getPriorityColor(checkDaily.priority),
       title: checkDaily.title,
       detail: checkDaily.detail,
-      timeLeft: {text: dateEnd.add(1, 'days').fromNow(), color: arrangedColor},
+      timeLeft: dateEnd.add(1, 'days').fromNow(),
       progress: progress,
-      maybe: {text: maybe, color: closedColor},
-      target: {text: checkDaily.gross + ' ' + unitName, color: arrangedColor},
-      frequencyName: objective.getFrequencyName(checkDaily.frequency)
+      maybe: maybe,
+      required: checkDaily.gross + ' ' + unitName,
+      frequencyName: objective.getFrequencyName(checkDaily.frequency),
+      doneSize: doneSize,
+      undoSize: undoSize,
+      doneColor: doneColor,
+      arrangedColor: checkDaily.arranged ? colors.border : colors.dark2
     };
   }
 
@@ -78,25 +85,16 @@ export default class ListRow extends React.Component {
       <TouchableOpacity style={[style.container, {borderLeftColor: transform.priorityColor}]}
                         onPress={this.props.onPress}
                         onLongPress={this.props.onLongPress}>
+        <Text style={style.title}>{transform.title}</Text>
+        <Text style={style.text}>
+          {transform.frequencyName} {transform.required}
+          ,  完成 <Text style={{fontSize: transform.doneSize}}>{transform.progress}</Text>
+          ,  预计 <Text style={{color: transform.arrangedColor,fontSize: transform.undoSize}}>{transform.maybe}</Text>
+        </Text>
         <View style={style.containerF}>
-          <Text style={styles.title}>{transform.title}</Text>
-          <Text style={[styles.text, {color: transform.timeLeft.color}]}>{transform.timeLeft.text}</Text>
+          <Text style={style.hint}>{transform.detail}</Text>
+          <Text style={[styles.text, {color: transform.doneColor}]}>{transform.timeLeft}</Text>
         </View>
-        <View style={styles.containerH}>
-          <View style={style.containerV}>
-            <Text style={styles.text}>{transform.progress}</Text>
-            <Text style={style.hint}>已完成</Text>
-          </View>
-          <View style={style.containerVC}>
-            <Text style={[styles.text, {color: transform.maybe.color}]}>{transform.maybe.text}</Text>
-            <Text style={style.hint}>预估</Text>
-          </View>
-          <View style={style.containerV}>
-            <Text style={[styles.text, {color: transform.target.color}]}>{transform.target.text}</Text>
-            <Text style={style.hint}>{transform.frequencyName}</Text>
-          </View>
-        </View>
-        <Text style={style.hint}>{transform.detail}</Text>
       </TouchableOpacity>
     );
   }
@@ -111,15 +109,37 @@ const style = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: colors.light1,
     borderLeftWidth: 5,
-    borderLeftColor: colors.border
+    borderLeftColor: colors.border,
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: colors.light3,
+    borderRightWidth: 1 / PixelRatio.get(),
+    borderRightColor: colors.light3,
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: colors.light3
+  },
+  title: {
+    flex: 1,
+    paddingTop: 6,
+    paddingBottom: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
+    color: colors.dark3,
+    fontSize: 20
+  },
+  text: {
+    paddingLeft: 8,
+    paddingRight: 8,
+    color: colors.border,
+    fontSize: 14
   },
   containerF: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 4,
+    paddingTop: 10,
     paddingLeft: 8,
-    paddingRight: 8
+    paddingRight: 8,
+    paddingBottom: 4
   },
   containerVC: {
     flex: 1,
@@ -138,8 +158,6 @@ const style = StyleSheet.create({
   hint: {
     flex: 1,
     fontSize: 12,
-    marginLeft: 8,
-    color: colors.border,
-    paddingBottom: 4
+    color: colors.border
   }
 });

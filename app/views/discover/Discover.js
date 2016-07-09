@@ -40,7 +40,7 @@ export default class Discover extends Controller {
     return (
       <ScrollView>
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toShare()}>
-          <Text>最新分享</Text>
+          <Text>最新打卡</Text>
           <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
         </TouchableOpacity>
 
