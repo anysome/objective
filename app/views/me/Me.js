@@ -29,8 +29,7 @@ export default class Me extends Controller {
     };
   }
 
-  componentDidMount() {
-    // if accountType != astmp and uid === 0  then open social
+  async reload() {
     if (this.user.accountType !== 'astmp' && this.user.uid === 0) {
       this._openSocial();
     }
