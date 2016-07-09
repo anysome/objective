@@ -20,11 +20,11 @@ import Glance from './Glance';
 import Edit from './Edit';
 import HistoryTarget from './HistoryTarget';
 
-export default class Check extends Controller {
+export default class Target extends Controller {
 
   constructor(props) {
     super(props);
-    this.name = 'Check';
+    this.name = 'Target';
     this.listSource = null;
     this.state = {
       isRefreshing: true,
@@ -232,7 +232,7 @@ export default class Check extends Controller {
   _toDelete(rowData) {
     Alert.alert(
       '确认删除 ?',
-      '将彻底删除该检查单和它所有产生的待办.',
+      '将彻底删除该目标和它所有产生的待办.',
       [
         {text: '不了'},
         {

@@ -208,7 +208,7 @@ export default class Agenda extends Controller {
         async (buttonIndex) => {
           switch (buttonIndex) {
             case 0:
-                  let message = rowData.checkDailyId ? '删除后可重新安排检查单.' : '删除后可在待定列表的回收站里找到.'
+                  let message = rowData.checkDailyId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
                   Alert.alert(
                     '确认删除 ?',
                     message,

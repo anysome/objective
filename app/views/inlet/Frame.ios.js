@@ -10,7 +10,7 @@ import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
 import Agenda from '../agenda/Agenda';
-import Check from '../check/Check';
+import Target from '../check/Target';
 import Anything from './Anything';
 import Me from '../me/Me';
 import Discover from '../discover/Discover';
@@ -138,13 +138,13 @@ export default class Frame extends React.Component {
 					{this._renderNavigator(Agenda, "待办")}
 				</Icon.TabBarItem>
 				<Icon.TabBarItem
-					title="检查单"
+					title="目标"
 					iconName="ios-checkmark-circle-outline"
 					selectedIconName="md-checkmark-circle"
 					iconSize={this.iconSize}
-					selected={this.state.currentPage === 'Check'}
-					onPress={() => this._selectTab('Check')}>
-					{this._renderNavigator(Check, "检查单")}
+					selected={this.state.currentPage === 'Target'}
+					onPress={() => this._selectTab('Target')}>
+					{this._renderNavigator(Target, "目标")}
 				</Icon.TabBarItem>
 				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize}
 								 selected={this.state.currentPage === 'Anything'}

@@ -75,7 +75,7 @@ export default class TargetList extends React.Component {
             );
             if (result.success) {
               airloy.event.emit(EventTypes.targetChange);
-              toast('已经添加到检查单');
+              toast('已经添加到目标列表中');
             } else {
               toast(L(result.message));
             }
