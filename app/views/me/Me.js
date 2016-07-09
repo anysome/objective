@@ -11,12 +11,11 @@ import Controller from '../Controller';
 import Profile from './Profile';
 import Dones from '../agenda/Dones';
 import Feedback from './Feedback';
-import ContentList from '../discover/ContentList';
-import UserList from '../discover/UserList';
+import ContentList from './UserContentList';
+import UserList from './RelatedUserList';
 import Message from './Message';
 import Setting from './Setting';
 import Upgrade from './Upgrade';
-
 
 export default class Me extends Controller {
   constructor(props) {

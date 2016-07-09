@@ -6,8 +6,8 @@ import {StyleSheet, ScrollView, View, Text, Image, TouchableOpacity} from 'react
 
 import app, {config, airloy, styles, colors, api, L, toast} from '../../app';
 import util from '../../libs/Util';
-import ContentList from './ContentList';
-import UserList from './UserList';
+import ContentList from '../me/UserContentList';
+import UserList from '../me/RelatedUserList';
 
 export default class Facade extends React.Component {
 

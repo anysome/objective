@@ -12,7 +12,7 @@ import {airloy, styles, colors, config, api, toast, L} from '../../app';
 
 import Facade from '../discover/Facade';
 
-export default class UserList extends React.Component {
+export default class RelatedUserList extends React.Component {
 
   constructor(props) {
     super(props);

@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, NavigatorIOS, TabBarIOS, PushNotificationIOS, AppStateIOS, AlertIOS} from 'react-native';
+import {StyleSheet, NavigatorIOS, TabBarIOS, PushNotificationIOS, AppState, AlertIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, colors, api} from '../../app';
@@ -37,12 +37,12 @@ export default class Frame extends React.Component {
 				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
-		AppStateIOS.addEventListener('change', this._handleAppStateChange);
+    AppState.addEventListener('change', this._handleAppStateChange);
 	}
 
 	componentWillUnmount() {
 		PushNotificationIOS.removeEventListener('notification', this._onNotification);
-		AppStateIOS.removeEventListener('change', this._handleAppStateChange);
+    AppState.removeEventListener('change', this._handleAppStateChange);
 		console.log(`-------- Frame unmounting`);
 	}
 

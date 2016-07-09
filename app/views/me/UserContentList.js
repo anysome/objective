@@ -12,9 +12,9 @@ import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 import ListSource from '../../logic/ListSource';
 
-import Content from './Content';
+import Content from '../discover/Content';
 
-export default class ContentList extends React.Component {
+export default class UserContentList extends React.Component {
 
   constructor(props) {
     super(props);
