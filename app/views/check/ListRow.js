@@ -63,19 +63,21 @@ export default class ListRow extends React.Component {
         }
       }
     }
+    let frequencyName = objective.getFrequencyName(checkDaily.frequency);
+    let summary = checkDaily.detail ?
+      `${frequencyName} ${checkDaily.gross} ${unitName}  |  ${checkDaily.detail}` :
+      `${frequencyName} ${checkDaily.gross} ${unitName}`
     return {
       priorityColor: objective.getPriorityColor(checkDaily.priority),
       title: checkDaily.title,
-      detail: checkDaily.detail,
       timeLeft: dateEnd.add(1, 'days').fromNow(),
       progress: progress,
       maybe: maybe,
-      required: checkDaily.gross + ' ' + unitName,
-      frequencyName: objective.getFrequencyName(checkDaily.frequency),
       doneSize: doneSize,
       undoSize: undoSize,
       doneColor: doneColor,
-      arrangedColor: checkDaily.arranged ? colors.border : colors.dark2
+      arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,
+      summary: summary
     };
   }
 
@@ -87,12 +89,11 @@ export default class ListRow extends React.Component {
                         onLongPress={this.props.onLongPress}>
         <Text style={style.title}>{transform.title}</Text>
         <Text style={style.text}>
-          {transform.frequencyName} {transform.required}
-          ,  完成 <Text style={{fontSize: transform.doneSize}}>{transform.progress}</Text>
+          完成 <Text style={{fontSize: transform.doneSize}}>{transform.progress}</Text>
           ,  预计 <Text style={{color: transform.arrangedColor,fontSize: transform.undoSize}}>{transform.maybe}</Text>
         </Text>
         <View style={style.containerF}>
-          <Text style={style.hint}>{transform.detail}</Text>
+          <Text style={style.hint}>{transform.summary}</Text>
           <Text style={[styles.text, {color: transform.doneColor}]}>{transform.timeLeft}</Text>
         </View>
       </TouchableOpacity>
