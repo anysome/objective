@@ -231,7 +231,7 @@ const style = StyleSheet.create({
     paddingRight: 16,
     paddingBottom: 4,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.light3,
     backgroundColor: colors.light2
   },
   container: {

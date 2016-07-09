@@ -108,6 +108,8 @@ const style = StyleSheet.create({
     marginBottom: 20,
     paddingRight: 16,
     paddingLeft: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
     backgroundColor: colors.light1,
     borderLeftWidth: 6,
     borderLeftColor: colors.border,
@@ -118,7 +120,6 @@ const style = StyleSheet.create({
   },
   title: {
     flex: 1,
-    paddingTop: 8,
     color: colors.dark3,
     fontSize: 20
   },
@@ -131,12 +132,12 @@ const style = StyleSheet.create({
   containerF: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingBottom: 8
+    justifyContent: 'space-between'
   },
   hint: {
     flex: 1,
     fontSize: 12,
+    paddingRight: 8,
     color: colors.border
   }
 });

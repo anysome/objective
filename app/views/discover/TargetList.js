@@ -34,7 +34,7 @@ export default class TargetList extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.discover.target.public, {id: this.props.userId});
+    let result = await airloy.net.httpGet(api.discover.target.public);
     if (result.success) {
       this.setState({
         isRefreshing: false,

@@ -99,6 +99,9 @@
       "follow": "social/user/follow.json",
       "unfollow": "social/user/unfollow.json",
       "info": "social/user/info.json"
+    },
+    "article": {
+      "public": "sns/article/public.json"
     }
   }
 }
