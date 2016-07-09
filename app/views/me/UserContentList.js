@@ -96,28 +96,24 @@ export default class UserContentList extends React.Component {
     let checkDaily = rowData.content ? JSON.parse(rowData.content) : {};
     return (
       <TouchableOpacity style={style.row} onPress={() => this._pressRow(rowData)}>
-        {log && <Text style={styles.title}>{rowData.log}</Text>}
+        {log && <Text style={styles.text}>{rowData.log}</Text>}
         <View style={style.container}>
           <Text style={style.text}>{checkDaily.title}</Text>
-          <Text style={styles.hint}>
+          <Text style={style.times}>
             {`${checkDaily.total} + ${checkDaily.times} ${objective.getUnitName(checkDaily.unit)}`}
           </Text>
         </View>
         <View style={styles.containerH}>
           <Text style={style.count}>{rowData.comments}</Text>
-          <Icon size={20} name='md-text' color={colors.light1} style={style.icon}/>
+          <Icon size={20} name='md-text' color={colors.light2} style={style.icon}/>
           <Text style={style.count}>{rowData.likes}</Text>
           <TouchableOpacity onPress={() => this._like(rowData)}>
-            <Icon size={20} name='ios-heart' color={colors.light1} style={style.icon}/>
+            <Icon size={20} name='ios-heart' color={colors.light2} style={style.icon}/>
           </TouchableOpacity>
           <Text style={style.hint}>{moment(rowData.createTime).calendar()}</Text>
         </View>
       </TouchableOpacity>
     );
-  }
-
-  _renderSeparator(sectionId, rowId, adjacentRowHighlighted) {
-    return <View key={rowId + '_separator'} style={style.separator}></View>
   }
 
   render() {
@@ -128,7 +124,6 @@ export default class UserContentList extends React.Component {
                   pageSize={5}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}
-                  renderSeparator={this._renderSeparator}
                   refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
                                                           onRefresh={() => this.reload()}
                                                           tintColor={colors.accent}
@@ -147,35 +142,42 @@ const style = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: colors.light2,
+    backgroundColor: colors.light1,
     paddingLeft: 16,
     paddingRight: 16,
     paddingTop: 10,
     paddingBottom: 10,
+    marginBottom: 20,
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: colors.light3,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.border
+    borderBottomColor: colors.light3
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.light1,
+    backgroundColor: colors.light3,
     padding: 8,
     marginTop: 5,
-    marginBottom: 5
-  },
-  separator: {
-    height: 10,
-    backgroundColor: colors.light3,
+    marginBottom: 5,
+    borderRadius: 5,
+    borderColor: colors.light2,
+    borderWidth: 1 / PixelRatio.get()
   },
   text: {
     flex: 1,
     color: colors.dark1,
     fontSize: 14
   },
+  times: {
+    textAlign: 'right',
+    fontSize: 12,
+    color: colors.dark2
+  },
   icon: {
     marginLeft: 8,
-    marginRight: 16,
+    marginRight: 16
   },
   hint: {
     flex: 1,
