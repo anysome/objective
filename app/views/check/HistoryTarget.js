@@ -152,23 +152,26 @@ const style = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    marginLeft: 10,
-    marginRight: 13,
-    marginTop: 10,
-    paddingLeft: 8,
-    paddingRight: 8,
+    marginTop: 20,
+    paddingTop: 4,
+    paddingLeft: 10,
+    paddingRight: 16,
     backgroundColor: colors.light1,
-    borderLeftWidth: 5,
-    borderLeftColor: colors.border
+    borderLeftWidth: 6,
+    borderLeftColor: colors.border,
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: colors.light3,
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: colors.light3
   },
   containerF: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 5,
+    paddingBottom: 8,
     paddingTop: 5,
     marginTop: 5,
-    borderTopColor: colors.light3,
+    borderTopColor: colors.border,
     borderTopWidth: 1 / PixelRatio.get()
   }
 });

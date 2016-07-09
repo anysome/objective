@@ -51,7 +51,7 @@ export default class TargetList extends React.Component {
   _pressRow(rowData) {
     console.log('options show');
     ActionSheet.showActionSheetWithOptions({
-        options: ['我也加入', '打卡情况', '取消'],
+        options: ['我也加入', '打卡记录', '取消'],
         cancelButtonIndex: 2,
         tintColor: colors.dark1
       },
@@ -61,7 +61,7 @@ export default class TargetList extends React.Component {
             break;
           case 1:
             this.props.navigator.push({
-              title: '打卡分享',
+              title: '打卡记录',
               component: TargetContentList,
               passProps: {
                 data: rowData

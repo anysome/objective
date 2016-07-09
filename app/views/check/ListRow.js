@@ -104,31 +104,26 @@ const style = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    marginLeft: 10,
-    marginRight: 13,
-    marginBottom: 10,
+    marginBottom: 20,
+    paddingRight: 16,
+    paddingLeft: 10,
     backgroundColor: colors.light1,
-    borderLeftWidth: 5,
+    borderLeftWidth: 6,
     borderLeftColor: colors.border,
     borderTopWidth: 1 / PixelRatio.get(),
     borderTopColor: colors.light3,
-    borderRightWidth: 1 / PixelRatio.get(),
-    borderRightColor: colors.light3,
     borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: colors.light3
   },
   title: {
     flex: 1,
-    paddingTop: 6,
-    paddingBottom: 10,
-    paddingLeft: 8,
-    paddingRight: 8,
+    paddingTop: 8,
     color: colors.dark3,
     fontSize: 20
   },
   text: {
-    paddingLeft: 8,
-    paddingRight: 8,
+    paddingTop: 3,
+    paddingBottom: 4,
     color: colors.border,
     fontSize: 14
   },
@@ -136,24 +131,7 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 10,
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingBottom: 4
-  },
-  containerVC: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    borderLeftWidth: 1,
-    borderLeftColor: colors.light3,
-    borderRightWidth: 1,
-    borderRightColor: colors.light3
-  },
-  containerV: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center'
+    paddingBottom: 8
   },
   hint: {
     flex: 1,

@@ -20,7 +20,7 @@ export default class Discover extends Controller {
 
   _toTarget() {
     this.forward({
-      title: '共享的目标',
+      title: '淘目标',
       component: TargetList
     });
   }
