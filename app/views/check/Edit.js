@@ -666,7 +666,7 @@ export default class Edit extends React.Component {
     if (route.rightButtonIcon) {
       route.onRightButtonPress = () => {
         ActionSheet.showActionSheetWithOptions({
-            options: ['分享', '删除', '取消'],
+            options: ['共享', '删除', '取消'],
             cancelButtonIndex: 2,
             destructiveButtonIndex: 1,
             tintColor: colors.dark1
@@ -684,7 +684,7 @@ export default class Edit extends React.Component {
                   }
                 );
                 if (result.success) {
-                  toast('目标已分享, 请稍候两天');
+                  toast('目标已共享, 请稍候两天');
                 } else {
                   toast(L(result.message));
                 }

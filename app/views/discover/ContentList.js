@@ -163,7 +163,7 @@ const style = StyleSheet.create({
     backgroundColor: colors.light1,
     paddingLeft: 16,
     paddingRight: 16,
-    marginBottom: 20,
+    marginTop: 20,
     paddingTop: 10,
     paddingBottom: 10,
     borderTopWidth: 1 / PixelRatio.get(),
