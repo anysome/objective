@@ -57,7 +57,10 @@
     "history": "check/target/history.json"
   },
   "me": {
-    "reward": "reward/agenda.json",
+    "reward": {
+      "total": "reward/agenda.json",
+      "recent": "reward/agenda/recent.json"
+    },
     "upgrade": "user/upgrade.json",
     "open": "social/open.json",
     "token": {
@@ -80,7 +83,6 @@
     "detail": {
       "likes": "social/content/like/list.json",
       "like": "social/content/like.json",
-      "unlike": "social/content/unlike.json",
       "comments": "social/content/comment/list.json",
       "comment": "social/content/comment/add.json",
       "uncomment": "social/content/comment/delete.json"

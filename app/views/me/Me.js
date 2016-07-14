@@ -10,6 +10,7 @@ import {styles, colors, airloy, config, api, toast, L} from '../../app';
 import Controller from '../Controller';
 import Profile from './Profile';
 import Dones from '../agenda/Dones';
+import Happiness from './Happiness';
 import Feedback from './Feedback';
 import ContentList from './UserContentList';
 import UserList from './RelatedUserList';
@@ -48,8 +49,16 @@ export default class Me extends Controller {
 
   _toDones() {
     this.forward({
-      title: '我的成就',
+      title: '成就事项',
       component: Dones,
+      navigationBarHidden: false
+    });
+  }
+
+  _toHappiness() {
+    this.forward({
+      title: '幸福指数',
+      component: Happiness,
       navigationBarHidden: false
     });
   }
@@ -175,7 +184,12 @@ export default class Me extends Controller {
         </TouchableOpacity>
         <View style={styles.section}>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toDones()}>
-            <Text>我的成就</Text>
+            <Text>成就事项</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+          </TouchableOpacity>
+          <View style={styles.hr}/>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toHappiness()}>
+            <Text>幸福指数</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
           <View style={styles.hr}/>
