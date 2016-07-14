@@ -89,12 +89,12 @@ export default class FeedbackDetail extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
-                <TextArea
-                  ref={(c)=> this._input = c}
-                  defaultValue={this.state.input}
-                  onChangeText={text => this.setState({input:text})}
-                  placeholder="再次感谢..."
-                  autoFocus={true}/>
+        <TextArea
+          ref={(c)=> this._input = c}
+          defaultValue={this.state.input}
+          onChangeText={text => this.setState({input:text})}
+          placeholder="再次感谢..."
+          autoFocus={true}/>
         <Button
           style={styles.buttonText}
           containerStyle={styles.button}

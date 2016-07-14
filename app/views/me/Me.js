@@ -47,14 +47,6 @@ export default class Me extends Controller {
     }
   }
 
-  _toDones() {
-    this.forward({
-      title: '成就事项',
-      component: Dones,
-      navigationBarHidden: false
-    });
-  }
-
   _toHappiness() {
     this.forward({
       title: '幸福指数',
@@ -153,7 +145,7 @@ export default class Me extends Controller {
     this.props.navigator.pop();
   }
 
-  _forward(title:String, component:Component) {
+  _forward(title:String, component) {
     this.forward({
       title: title,
       component: component,
@@ -183,21 +175,22 @@ export default class Me extends Controller {
           </View>
         </TouchableOpacity>
         <View style={styles.section}>
-          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toDones()}>
-            <Text>成就事项</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
-          </TouchableOpacity>
-          <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toHappiness()}>
             <Text>幸福指数</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
           <View style={styles.hr}/>
-          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFeedback()}>
-            <Text>我的反馈</Text>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._forward('成就事项', Dones)}>
+            <Text>成就事项</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity style={styles.row} onPress={() => this._toFeedback()}>
+          <Text>我的反馈</Text>
+          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+        </TouchableOpacity>
+
         { this.state.accountType === 'astmp' ?
           <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toUpgrade()}>
             <Text>安家落户</Text>

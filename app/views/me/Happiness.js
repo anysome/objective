@@ -12,7 +12,12 @@ export default class Happiness extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reward: {},
+      reward: {
+        score: '我想想...',
+        fruit9: '*',
+        fruit8: '*',
+        fruit: '*'
+      },
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
@@ -44,19 +49,19 @@ export default class Happiness extends React.Component {
 
   _renderRow(rowData, sectionId, rowId) {
     return (
-      <View style={style.container}>
-        <Text style={style.score}>{'+' + rowData.score}</Text>
-        <View style={styles.containerH}>
+      <View style={style.row}>
+        <Text style={style.score}>+ {rowData.score}</Text>
+        <View style={style.containerR}>
           <Text style={styles.text}>{rowData.fruit9}</Text>
           <Image style={style.fruitSmall}
                  source={require('../../../resources/images/Apple64.png')}/>
         </View>
-        <View style={styles.containerH}>
+        <View style={style.containerR}>
           <Text style={styles.text}>{rowData.fruit8}</Text>
           <Image style={style.fruitSmall}
                  source={require('../../../resources/images/Strawberry64.png')}/>
         </View>
-        <View style={styles.containerH}>
+        <View style={style.containerR}>
           <Text style={styles.text}>{rowData.fruit1}</Text>
           <Image style={style.fruitSmall}
                  source={require('../../../resources/images/Pear64.png')}/>
@@ -74,8 +79,9 @@ export default class Happiness extends React.Component {
     return (
       <ScrollView>
         <View style={styles.section}>
-          <View style={styles.sectionRow}>
+          <View style={style.indexRow}>
             <Text style={style.bigText}>{this.state.reward.score}</Text>
+            <Text style={styles.hint}>总共完成 {this.state.reward.fruit} 个待办</Text>
           </View>
           <View style={styles.sectionRow}>
             <View style={style.containerH}>
@@ -109,7 +115,24 @@ export default class Happiness extends React.Component {
 
 
 const style = StyleSheet.create({
-  container: {
+  indexRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 10
+  },
+  bigText: {
+    color: colors.accent,
+    fontWeight: 'bold',
+    fontSize: 56
+  },
+  containerH: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  row: {
     flexDirection: 'row',
     flex: 1,
     paddingLeft: 16,
@@ -118,19 +141,18 @@ const style = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.light1
   },
-  bigText: {
-    color: colors.accent,
-    fontSize: 48
-  },
-  containerH: {
+  containerR: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginRight: 32
   },
   fruit: {
     width: 24,
     height: 24,
-    marginLeft: 8
+    marginLeft: 8,
+    opacity: 0.5
   },
   hint: {
     flex: 1,
@@ -140,11 +162,13 @@ const style = StyleSheet.create({
   fruitSmall: {
     width: 16,
     height: 16,
-    marginLeft: 4
+    marginLeft: 4,
+    opacity: 0.5
   },
   score: {
-    width: 80,
+    width: 50,
     color: colors.accent,
+    fontWeight: 'bold',
     fontSize: 14
   }
 });

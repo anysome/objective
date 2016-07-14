@@ -23,6 +23,10 @@ export default class Timeline extends React.Component {
     this.reload();
   }
 
+  componentWillUnMount() {
+    analytics.onPageEnd('page_check_timeline');
+  }
+
   async reload() {
     let result = await airloy.net.httpGet(api.target.track, {id: this.props.targetId});
     if (result.success) {
@@ -51,7 +55,7 @@ export default class Timeline extends React.Component {
         <View style={style.row}>
           <Text style={style.progress}>+ {rowData.times}</Text>
           <Text style={style.progress}>{rowData.total}</Text>
-          <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
+          <Text style={styles.hint}>{moment(rowData.checkTime).calendar()}</Text>
         </View>
       );
     }
@@ -83,8 +87,7 @@ const style = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    height: 35,
-
+    height: 40,
     alignItems: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: colors.light2,
@@ -101,17 +104,18 @@ const style = StyleSheet.create({
   },
   progress: {
     color: colors.dark1,
-    width: 60,
+    width: 70,
     fontSize: 14,
     textAlign: 'center'
   },
   hint: {
     color: colors.border,
-    fontSize: 12
+    fontSize: 12,
+    marginTop: 3,
   },
   body: {
     flex: 1,
-    marginTop: 3,
+    marginTop: 5,
     marginBottom: 5
   }
 });
