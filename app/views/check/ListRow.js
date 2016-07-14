@@ -21,14 +21,13 @@ export default class ListRow extends React.Component {
     let unitName = objective.getUnitName(checkDaily.unit);
     let maybe = '', progress = '';
     let doneSize = 14, undoSize = 26;
-    let doneColor = colors.dark1, undoColor = colors.border;
+    let doneColor = colors.dark1;
     if (checkDaily.gross === 1) {
       if (checkDaily.closed) {
         progress = checkDaily.total + checkDaily.times;
         doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
-        undoColor = colors.dark2;
       } else {
         progress = checkDaily.total;
       }
@@ -38,7 +37,6 @@ export default class ListRow extends React.Component {
         doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
-        undoColor = colors.dark2;
       } else {
         progress = checkDaily.progress;
       }
@@ -67,21 +65,18 @@ export default class ListRow extends React.Component {
       }
     }
     let frequencyName = objective.getFrequencyName(checkDaily.frequency);
-    let summary = checkDaily.detail ?
-      `${frequencyName} ${checkDaily.gross} ${unitName}  |  ${checkDaily.detail}` :
-      `${frequencyName} ${checkDaily.gross} ${unitName}`
     return {
       priorityColor: objective.getPriorityColor(checkDaily.priority),
       title: checkDaily.title,
+      detail: checkDaily.detail,
       timeLeft: dateEnd.add(1, 'days').fromNow(),
       progress: progress,
       maybe: maybe,
       doneSize: doneSize,
       undoSize: undoSize,
       doneColor: doneColor,
-      undoColor: undoColor,
       arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,
-      summary: summary
+      summary: `${frequencyName} ${checkDaily.gross} ${unitName}`
     };
   }
 
@@ -91,13 +86,12 @@ export default class ListRow extends React.Component {
       <TouchableOpacity style={[style.container, {borderLeftColor: transform.priorityColor}]}
                         onPress={this.props.onPress}
                         onLongPress={this.props.onLongPress}>
-        <Text style={style.title}>{transform.title}</Text>
+        <Text style={style.title}>「+{transform.progress}」{transform.title}</Text>
         <Text style={style.text}>
-          完成 <Text style={{fontSize: transform.doneSize, color: transform.undoColor}}>{transform.progress}</Text>
-          ,  预计 <Text style={{color: transform.arrangedColor,fontSize: transform.undoSize}}>{transform.maybe}</Text>
+          {transform.summary},  预计 <Text style={{color: transform.arrangedColor,fontSize: transform.undoSize}}>{transform.maybe}</Text>
         </Text>
         <View style={style.containerF}>
-          <Text style={style.hint}>{transform.summary}</Text>
+          <Text style={style.hint}>{transform.detail}</Text>
           <Text style={[styles.text, {color: transform.doneColor}]}>{transform.timeLeft}</Text>
         </View>
       </TouchableOpacity>
@@ -125,7 +119,8 @@ const style = StyleSheet.create({
   title: {
     flex: 1,
     color: colors.dark3,
-    fontSize: 20
+    fontSize: 20,
+    marginLeft: -10
   },
   text: {
     paddingTop: 3,
