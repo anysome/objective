@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -21,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8A8500A4975340C49159DFCF /* libRCTUmeng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE4AD3308884E2BBE5927F7 /* libRCTUmeng.a */; };
 		8C16AAE41C9FE1A900D1280D /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C16AAD91C9FE16300D1280D /* libRCTPushNotification.a */; };
 		8CA890CF1CDC43E800674720 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA890CE1CDC43E800674720 /* libz.tbd */; };
 		8CF6991A1CE57F4C00C3AF39 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CF699191CE57F4C00C3AF39 /* WeiboSDK.bundle */; };
@@ -36,7 +38,6 @@
 		D5CE5C3B335D4200AB7B8807 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E06F5797A0714BDD8FBD35B7 /* Ionicons.ttf */; };
 		EBF8C8ECE0614CFEA463EB9A /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4947AA6A52BF4C31AB90041D /* libRNSpinkit.a */; };
 		F53B5A6755504E858B29D3A5 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C345FBCC3CE24D49B6228F9F /* libRCTWeiboAPI.a */; };
-		8A8500A4975340C49159DFCF /* libRCTUmeng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE4AD3308884E2BBE5927F7 /* libRCTUmeng.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,13 @@
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = ART;
 		};
+		8CA4D4B81D391DCD00F2C4F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20E9689FDE4F43A5B8A0415A /* RCTUmeng.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27B75AB01CABBFF8003925AB;
+			remoteInfo = RCTUmeng;
+		};
 		8CF699101CE57CAF00C3AF39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 827AE20322D44B9F9B7F852A /* RCTWeiboAPI.xcodeproj */;
@@ -189,6 +197,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = objective/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = objective/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1BE4AD3308884E2BBE5927F7 /* libRCTUmeng.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTUmeng.a; sourceTree = "<group>"; };
+		20E9689FDE4F43A5B8A0415A /* RCTUmeng.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTUmeng.xcodeproj; path = "../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng.xcodeproj"; sourceTree = "<group>"; };
 		2982A552DBE4488694C4C25D /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
 		450A2E71AF134ABDB6229F40 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		4947AA6A52BF4C31AB90041D /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
@@ -209,8 +219,6 @@
 		C345FBCC3CE24D49B6228F9F /* libRCTWeiboAPI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTWeiboAPI.a; sourceTree = "<group>"; };
 		E06F5797A0714BDD8FBD35B7 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		F5A4CA48EE0B4375AC3D002E /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
-		20E9689FDE4F43A5B8A0415A /* RCTUmeng.xcodeproj */ = {isa = PBXFileReference; name = "RCTUmeng.xcodeproj"; path = "../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		1BE4AD3308884E2BBE5927F7 /* libRCTUmeng.a */ = {isa = PBXFileReference; name = "libRCTUmeng.a"; path = "libRCTUmeng.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +477,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8CA4D4AC1D391DCD00F2C4F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CA4D4B91D391DCD00F2C4F0 /* libRCTUmeng.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8CF699011CE57CAE00C3AF39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +608,10 @@
 				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
 					ProjectRef = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+				},
+				{
+					ProductGroup = 8CA4D4AC1D391DCD00F2C4F0 /* Products */;
+					ProjectRef = 20E9689FDE4F43A5B8A0415A /* RCTUmeng.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302E01ABCB9EE00DB3ED1 /* Products */;
@@ -743,6 +763,13 @@
 			remoteRef = 8C246B2E1C9C4E0D003C4041 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8CA4D4B91D391DCD00F2C4F0 /* libRCTUmeng.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTUmeng.a;
+			remoteRef = 8CA4D4B81D391DCD00F2C4F0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8CF699111CE57CAF00C3AF39 /* libRCTWeiboAPI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -846,9 +873,7 @@
 				INFOPLIST_FILE = objectiveTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objective.app/objective";
 			};
@@ -866,9 +891,7 @@
 				INFOPLIST_FILE = objectiveTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objective.app/objective";
 			};

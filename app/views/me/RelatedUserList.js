@@ -77,7 +77,7 @@ export default class RelatedUserList extends React.Component {
     let judge = this.props.isFans ? user.followed : user.faned;
     return (
       <TouchableOpacity style={style.row} onPress={() => this._pressRow(user)}>
-        <Image style={style.avatar} source={{uri: `${config.host.avatar + user.id}-60`}}
+        <Image style={style.avatar} source={{uri: user.avatar || `${config.host.image}/avatar/${user.id}-60`}}
                defaultSource={require('../../../resources/images/avatar.png')}/>
         <View style={styles.containerV}>
           <Text>{user.name}</Text>

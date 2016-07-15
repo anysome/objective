@@ -135,7 +135,8 @@ export default class Content extends React.Component {
     return (
       <View style={style.row}>
         <Image style={style.user}
-               source={{uri:`${config.host.avatar + rowData.userId}-60`}}/>
+               source={{uri:`${config.host.image}${rowData.userAvatar}-60`}}
+               defaultSource={require('../../../resources/images/avatar.png')}/>
         <View style={styles.containerV}>
           <View style={styles.containerF}>
             <Text style={styles.text}>{rowData.userName}</Text>
@@ -160,7 +161,7 @@ export default class Content extends React.Component {
         <View style={styles.window}>
           <View style={style.header}>
             <Image style={style.avatar}
-                   source={{uri:`${config.host.avatar + data.userId}-100`}}
+                   source={{uri:`${config.host.image}${data.userAvatar}-100`}}
                    defaultSource={require('../../../resources/images/avatar.png')}/>
             <View style={styles.containerV}>
               <View style={styles.containerF}>

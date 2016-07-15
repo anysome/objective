@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
       name: this.user.name,
       signature: '',
       email: this.user.email,
-      avatar: config.host.avatar + this.user.id + '-100'
+      avatar: this.user.avatar || `${config.host.image}/avatar/${this.user.id}-100`
     };
   }
 

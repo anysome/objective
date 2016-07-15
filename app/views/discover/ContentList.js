@@ -98,7 +98,7 @@ export default class ContentList extends React.Component {
         <View style={style.header}>
           <TouchableOpacity onPress={() => this._toUser(rowData.userId)}>
             <Image style={style.avatar}
-                   source={{uri:`${config.host.avatar + rowData.userId}-100`}}
+                   source={{uri:`${config.host.image}${rowData.userAvatar}-100`}}
                    defaultSource={require('../../../resources/images/avatar.png')}/>
           </TouchableOpacity>
           <View style={styles.containerV}>

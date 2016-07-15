@@ -119,6 +119,8 @@ export default class Happiness extends React.Component {
 }
 
 
+const colorHappy = '#ffc400';
+
 const style = StyleSheet.create({
   indexRow: {
     flex: 1,
@@ -129,7 +131,7 @@ const style = StyleSheet.create({
   },
   bigText: {
     flex: 1,
-    color: colors.accent,
+    color: colorHappy,
     fontWeight: 'bold',
     fontSize: 56
   },
@@ -174,7 +176,7 @@ const style = StyleSheet.create({
   },
   score: {
     width: 50,
-    color: colors.accent,
+    color: colorHappy,
     fontWeight: 'bold',
     fontSize: 14
   }

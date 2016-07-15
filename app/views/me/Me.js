@@ -167,7 +167,7 @@ export default class Me extends Controller {
       <ScrollView>
         <TouchableOpacity style={[styles.row, {marginTop: 0}]} onPress={() => this._toProfile()}>
           <Image style={{width:100, height:100, marginTop: 20, marginRight: 16}}
-                 source={{uri:`${config.host.avatar + this.user.id}-100`}}
+                 source={{uri: this.user.avatar || `${config.host.image}/avatar/${this.user.id}-100`}}
                  defaultSource={require('../../../resources/images/avatar.png')}/>
           <View style={styles.containerV}>
             <Text style={styles.sectionRow}>{this.state.name}</Text>

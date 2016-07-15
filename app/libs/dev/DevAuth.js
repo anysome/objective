@@ -61,7 +61,8 @@ export default class DevAuth extends Auth {
       email: sUser.email,
       uid: sUser.uid,
       accountType: sUser.accountType,
-      recruit: sUser.recruit
+      recruit: sUser.recruit,
+      avatar: sUser.avatar
     };
     this._store.setItem('user.info', JSON.stringify(this.user));
     this._store.setItem('user.logined', '1');

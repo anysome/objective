@@ -33,7 +33,8 @@ export default class Auth {
       name: sUser.name,
       email: sUser.email,
       accountType: sUser.accountType,
-      recruit: sUser.recruit
+      recruit: sUser.recruit,
+      avatar: sUser.avatar
     };
     return this.user;
   }

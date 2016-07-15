@@ -10,7 +10,7 @@
   },
   "host": {
     "upload": "http://upload.qiniu.com/",
-    "avatar": "http://image.asfun.cn/avatar/"
+    "image": "http://image.asfun.cn"
   },
   "keys": {
     "umeng": "your own key"

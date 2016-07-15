@@ -2,8 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
 import React from 'react';
-import {StyleSheet, ListView, RefreshControl, Image,
-  View, Text, TouchableOpacity, PixelRatio} from 'react-native';
+import {StyleSheet, ListView, RefreshControl, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
