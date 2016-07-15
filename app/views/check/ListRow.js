@@ -20,12 +20,10 @@ export default class ListRow extends React.Component {
     let dateEnd = moment(checkDaily.endDate);
     let unitName = objective.getUnitName(checkDaily.unit);
     let maybe = '', progress = '';
-    let doneSize = 14, undoSize = 26;
-    let doneColor = colors.dark1;
+    let undoSize = 26, doneColor = colors.dark1;
     if (checkDaily.gross === 1) {
       if (checkDaily.closed) {
         progress = checkDaily.total + checkDaily.times;
-        doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
       } else {
@@ -34,7 +32,6 @@ export default class ListRow extends React.Component {
     } else {
       if (checkDaily.closed) {
         progress = checkDaily.progress + checkDaily.times;
-        doneSize = 26;
         undoSize = 14;
         doneColor = colors.border;
       } else {
@@ -72,7 +69,6 @@ export default class ListRow extends React.Component {
       timeLeft: dateEnd.add(1, 'days').fromNow(),
       progress: progress,
       maybe: maybe,
-      doneSize: doneSize,
       undoSize: undoSize,
       doneColor: doneColor,
       arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,

@@ -52,19 +52,24 @@ export default class Happiness extends React.Component {
       <View style={style.row}>
         <Text style={style.score}>+ {rowData.score}</Text>
         <View style={style.containerR}>
-          <Text style={styles.text}>{rowData.fruit9}</Text>
+          {rowData.fruit9 > 0 &&
           <Image style={style.fruitSmall}
                  source={require('../../../resources/images/Apple64.png')}/>
+          }
         </View>
         <View style={style.containerR}>
-          <Text style={styles.text}>{rowData.fruit8}</Text>
-          <Image style={style.fruitSmall}
-                 source={require('../../../resources/images/Strawberry64.png')}/>
+          {rowData.fruit8 > 0 && [
+            <Text key={rowData.id + '-txt'} style={styles.text}>{rowData.fruit8}</Text>,
+            <Image key={rowData.id + '-img'} style={style.fruitSmall}
+                   source={require('../../../resources/images/Strawberry64.png')}/>
+          ]}
         </View>
         <View style={style.containerR}>
-          <Text style={styles.text}>{rowData.fruit1}</Text>
-          <Image style={style.fruitSmall}
-                 source={require('../../../resources/images/Pear64.png')}/>
+          {rowData.fruit1 > 0 && [
+            <Text key={rowData.id + '-txt'} style={styles.text}>{rowData.fruit1}</Text>,
+            <Image key={rowData.id + '-img'} style={style.fruitSmall}
+                   source={require('../../../resources/images/Pear64.png')}/>
+          ]}
         </View>
         <Text style={styles.hint}>{moment(rowData.today).format('YYYY-MM-DD')}</Text>
       </View>
@@ -81,7 +86,7 @@ export default class Happiness extends React.Component {
         <View style={styles.section}>
           <View style={style.indexRow}>
             <Text style={style.bigText}>{this.state.reward.score}</Text>
-            <Text style={styles.hint}>总共完成 {this.state.reward.fruit} 个待办</Text>
+            <Text style={style.hint}>完成待办: {this.state.reward.fruit}</Text>
           </View>
           <View style={styles.sectionRow}>
             <View style={style.containerH}>
@@ -118,11 +123,12 @@ const style = StyleSheet.create({
   indexRow: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
     paddingTop: 10
   },
   bigText: {
+    flex: 1,
     color: colors.accent,
     fontWeight: 'bold',
     fontSize: 56
@@ -155,9 +161,10 @@ const style = StyleSheet.create({
     opacity: 0.5
   },
   hint: {
-    flex: 1,
     fontSize: 12,
-    color: colors.border
+    textAlign: 'right',
+    color: colors.border,
+    marginBottom: 12
   },
   fruitSmall: {
     width: 16,
