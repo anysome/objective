@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
 import React from 'react';
-import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
 
 import {analytics, styles, airloy, config, api, toast, L, hang} from '../../app';
 
@@ -111,7 +111,15 @@ export default class Profile extends React.Component {
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
+        <View style={style.footer}></View>
       </ScrollView>
     );
   }
 }
+
+
+const style = StyleSheet.create({
+  footer: {
+    height: 300
+  }
+});

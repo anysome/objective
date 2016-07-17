@@ -16,6 +16,7 @@ export default class Happiness extends React.Component {
         score: '我想想...',
         fruit9: '*',
         fruit8: '*',
+        fruit1: '*',
         fruit: '*'
       },
       dataSource: new ListView.DataSource({
