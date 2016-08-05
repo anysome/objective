@@ -113,6 +113,7 @@ export default class Agenda extends Controller {
     let section1 = new ListSectionView.DataSource({id: 1, name: '计划内'});
     let section2 = new ListSectionView.DataSource({id: 2, name: '今日完成'});
     for (let rowData of this.listSource) {
+      console.log('----------------- agenda = ' + JSON.stringify(rowData));
       this._sortRow(rowData, section0, section1, section2);
     }
     this.setState({

@@ -11,7 +11,7 @@ import MobclickAgent from 'rn-umeng';
 import config from '../config.json';
 import api from './api.json';
 import airloy, {init} from './libs/airloy';
-import MyAuth from './libs/dev/DevAuth';
+import MyAuth from './libs/airloy/impl/Rc4Auth';
 import {colors, styles} from './views/styles';
 
 import toast from './widgets/Toast';

@@ -17,36 +17,30 @@ export default class ListRow extends React.Component {
   }
 
   _transform(checkDaily) {
-    let dateEnd = moment(checkDaily.endDate);
+    let dateEnd = moment(checkDaily.dateEnd);
     let unitName = objective.getUnitName(checkDaily.unit);
-    let maybe = '', progress = '';
+    let maybe = '';
     let undoSize = 26, doneColor = colors.dark1;
-    if (checkDaily.gross === 1) {
-      if (checkDaily.closed) {
-        progress = checkDaily.total + checkDaily.times;
+    if (checkDaily.requiredAmount === 1) {
+      if (checkDaily.doneAmount) {
         undoSize = 14;
         doneColor = colors.border;
-      } else {
-        progress = checkDaily.total;
       }
     } else {
-      if (checkDaily.closed) {
-        progress = checkDaily.progress + checkDaily.times;
+      if (checkDaily.doneAmount) {
         undoSize = 14;
         doneColor = colors.border;
-      } else {
-        progress = checkDaily.progress;
       }
     }
     if (checkDaily.frequency === '1') {
-      maybe = '1 天 ' + checkDaily.gross + unitName;
+      maybe = '1 天 ' + checkDaily.requiredAmount + unitName;
     } else {
-      let ms = checkDaily.endDate - this.props.today;
+      let ms = checkDaily.dateEnd - this.props.today;
       let checkLeftDays = 1;
       if (ms > 0) {
         checkLeftDays = ms / 86400000 + 1;
       }
-      let lefts = checkDaily.gross - checkDaily.progress;
+      let lefts = checkDaily.requiredAmount - checkDaily.roundTotal;
       if (lefts < 1) {
         maybe = '偷着乐吧';
       } else if (checkLeftDays === 1) {
@@ -67,12 +61,12 @@ export default class ListRow extends React.Component {
       title: checkDaily.title,
       detail: checkDaily.detail,
       timeLeft: dateEnd.add(1, 'days').fromNow(),
-      progress: progress,
+      progress: checkDaily.doneTotal,
       maybe: maybe,
       undoSize: undoSize,
       doneColor: doneColor,
       arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,
-      summary: `${frequencyName} ${checkDaily.gross} ${unitName}`
+      summary: `${frequencyName} ${checkDaily.requiredAmount} ${unitName}`
     };
   }
 

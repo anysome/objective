@@ -26,25 +26,12 @@ export default class Me extends Controller {
     this.state = {
       accountType: this.user.accountType,
       name: this.user.name,
-      uid: this.user.uid
+      id: this.user.id
     };
   }
 
   async reload() {
-    if (this.user.accountType !== 'astmp' && this.user.uid === 0) {
-      this._openSocial();
-    }
-  }
 
-  async _openSocial() {
-    let result = await airloy.net.httpGet(api.me.open);
-    if (result.success) {
-      this.user.uid = result.info;
-      this.setState({
-        uid: result.info
-      });
-      airloy.auth.updateUser(this.user);
-    }
   }
 
   _toHappiness() {
@@ -139,7 +126,7 @@ export default class Me extends Controller {
     this.state = {
       accountType: this.user.accountType,
       name: this.user.name,
-      uid: this.user.uid
+      id: this.user.id
     };
     this._openSocial();
     this.props.navigator.pop();
@@ -171,7 +158,7 @@ export default class Me extends Controller {
                  defaultSource={require('../../../resources/images/avatar.png')}/>
           <View style={styles.containerV}>
             <Text style={styles.sectionRow}>{this.state.name}</Text>
-            <Text style={styles.sectionRow}>{this.state.uid}</Text>
+            <Text style={styles.sectionRow}>{this.state.id}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.section}>

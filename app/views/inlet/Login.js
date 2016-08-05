@@ -67,7 +67,7 @@ export default class Login extends React.Component {
     let result = await airloy.net.httpPost(api.public.login, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
-      analytics.onProfileSignIn(result.info.id);
+      analytics.onProfileSignIn('' + result.info.id);
       this.onSigned(result.info.recruit);
     } else {
       toast(L(result.message), 70);
@@ -81,7 +81,7 @@ export default class Login extends React.Component {
     let result = await airloy.net.httpPost(api.public.taste, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
-      analytics.onProfileSignIn(result.info.id);
+      analytics.onProfileSignIn('' + result.info.id);
       this.onSigned(result.info.recruit);
     } else {
       toast(L(result.message), 70);
@@ -106,7 +106,7 @@ export default class Login extends React.Component {
         let result = await airloy.net.httpPost(api.public.sign.weibo, token);
         if (result.success) {
           await airloy.auth.saveUser(result.info);
-          analytics.onProfileSignIn(result.info.id);
+          analytics.onProfileSignIn('' + result.info.id);
           this.onSigned(result.info.recruit);
         } else {
           toast(L(result.message), 70);

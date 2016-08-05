@@ -1,11 +1,11 @@
 {
   "airloy": {
-    "server": "test.asfun.cn",
+    "server": "192.168.100.6:9090",
     "https": false,
     "apiVersion": "v1",
     "clientName": "Objective.rn",
-    "clientKey": "etd",
-    "clientSecret": "etd|dev",
+    "clientKey": "Delight",
+    "clientSecret": "test",
     "debug": false
   },
   "host": {

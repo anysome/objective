@@ -45,8 +45,8 @@ export default class Auth {
 
   authRequest(request) {
     request.headers.set('Host', this._host);
-    request.headers.set('Client-Key', this._client);
-    request.headers.set('Session', this._session);
+    request.headers.set('X-Airloy-App', this._client);
+    request.headers.set('X-Airloy-Token', this._session);
   }
 
   update(session, address, passport) {

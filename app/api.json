@@ -9,52 +9,51 @@
     }
   },
   "agenda": {
-    "list": "agenda/recent.json",
-    "add": "agenda/todo/add.json",
-    "update": "agenda/todo/update.json",
-    "remove": "agenda/todo/delete.json",
-    "schedule": "agenda/todo/redate.json",
-    "punch": "agenda/todo/fulfill.json",
+    "list": "agenda/list/focus.json",
+    "add": "agenda/add.json",
+    "update": "agenda/update.json",
+    "remove": "agenda/delete.json",
+    "schedule": "agenda/arrange.json",
+    "finish": "agenda/finish.json",
     "done": {
-      "recent": "agenda/done/recent.json"
+      "recent": "agenda/list/done.json"
     },
-    "remind": "agenda/todo/remind.json"
+    "remind": "agenda/update.json"
   },
   "inbox": {
-    "list": "chaos/chore/total.json",
-    "add": "chaos/chore/add.json",
-    "update": "chaos/chore/update.json",
-    "remove": "chaos/chore/drop.json",
-    "arrange": "chaos/chore/arrange.json",
-    "clean": "chaos/chore/trash/clean.json"
+    "list": "chore/list/focus.json",
+    "add": "chore/add.json",
+    "update": "chore/update.json",
+    "remove": "chore/delete.json",
+    "arrange": "chore/arrange.json",
+    "clean": "chore/delete/trash.json"
   },
   "project": {
-    "list": "project/topic.json",
-    "add": "project/topic/add.json",
-    "update": "project/topic/update.json",
-    "remove": "project/topic/delete.json",
-    "move": "chaos/chore/move/topic.json",
-    "plot": "chaos/chore/plot.json",
+    "list": "project/list/focus.json",
+    "add": "project/add.json",
+    "update": "project/update.json",
+    "remove": "project/delete.json",
+    "move": "chore/to/task.json",
+    "plot": "chore/to/project.json",
     "item": {
-      "list": "project/topic/item.json",
-      "add": "project/item/add.json",
-      "remove": "project/item/delete.json"
+      "list": "task/list/project.json",
+      "add": "task/add.json",
+      "remove": "task/delete.json",
+      "arrange": "task/arrange.json"
     }
   },
   "check": {
-    "list": "check/today.json",
-    "arrange": "check/roll/arrange.json"
+    "list": "target/list/focus.json",
+    "arrange": "target/arrange.json"
   },
   "target": {
-    "read": "check/target/get.json",
-    "stat": "check/target/stat.json",
-    "update": "check/target/update.json",
-    "add": "check/target/add.json",
-    "remove": "check/target/delete.json",
-    "punch": "check/target/punch.json",
-    "track": "check/target/track.json",
-    "punches": "check/target/punchs.json",
-    "history": "check/target/history.json"
+    "read": "target/fetch.json",
+    "update": "target/update.json",
+    "add": "target/add.json",
+    "remove": "target/delete.json",
+    "punch": "target/finish.json",
+    "track": "target/list/agenda.json",
+    "history": "target/list/history.json"
   },
   "me": {
     "reward": {

@@ -117,14 +117,14 @@ export default class Target extends Controller {
   }
 
   _sortRow(checkDaily, section0, section1, section2) {
-    if (checkDaily.closed) {
-      section2.push(checkDaily);
-    } else {
-      if (checkDaily.arranged) {
-        section1.push(checkDaily);
+    if (checkDaily.arranged) {
+      if (checkDaily.doneAmount) {
+        section2.push(checkDaily);
       } else {
-        section0.push(checkDaily);
+        section1.push(checkDaily);
       }
+    } else {
+      section0.push(checkDaily);
     }
   }
 

@@ -34,14 +34,14 @@ export default class Commit extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data.checkTargetId) {
+    if (nextProps.data.targetId) {
       console.log('ids = ' + this.sharedTargetIds);
-      this.state.toShare = this.sharedTargetIds.indexOf(nextProps.data.checkTargetId) > -1;
+      this.state.toShare = this.sharedTargetIds.indexOf(nextProps.data.targetId) > -1;
     } else {
       this.state.toShare = false;
     }
-    if (nextProps.data.type === '0') {
-      let shareable = nextProps.data.checkTargetId != null;
+    if (nextProps.data.doneType === '0') {
+      let shareable = nextProps.data.targetId != null;
       let tip = shareable && this.state.toShare ? '我要分享...' : '记录一下...';
       this.setState({
         editable: false,
@@ -77,28 +77,26 @@ export default class Commit extends React.Component {
     if (this.state.output) {
       let agenda = this.props.data;
       hang();
-      let result = await airloy.net.httpPost(api.agenda.punch, {
+      let result = await airloy.net.httpPost(api.agenda.finish, {
         id: agenda.id,
-        output: this.state.output,
-        remark: this.state.remark,
-        share: this.state.toShare
+        amount: this.state.output
       });
       hang(false);
       if (result.success) {
         if (this.state.toShare) {
-          if ( this.sharedTargetIds.indexOf(agenda.checkTargetId) < 0 ) {
-            this.sharedTargetIds = this.sharedTargetIds + ',' + agenda.checkTargetId;
+          if ( this.sharedTargetIds.indexOf(agenda.targetId) < 0 ) {
+            this.sharedTargetIds = this.sharedTargetIds + ',' + agenda.targetId;
             airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
           }
         } else {
-          if ( this.sharedTargetIds.indexOf(agenda.checkTargetId) > -1 ) {
-            this.sharedTargetIds = this.sharedTargetIds.replace(',' + agenda.checkTargetId, '');
+          if ( this.sharedTargetIds.indexOf(agenda.targetId) > -1 ) {
+            this.sharedTargetIds = this.sharedTargetIds.replace(',' + agenda.targetId, '');
             airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
           }
         }
-        if (agenda.checkDailyId) {
+        if (agenda.targetId) {
           airloy.event.emit(EventTypes.targetPunch, {
-            id: agenda.checkDailyId,
+            id: agenda.targetId,
             times: parseInt(this.state.output)
           });
         }

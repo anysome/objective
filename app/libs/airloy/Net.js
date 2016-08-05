@@ -48,7 +48,7 @@ export default class Net {
   async _responseHandle(response) {
     switch (response.status) {
       case 201:
-        this._auth.update(response.headers.get('Session'), response.headers.get('Address'));
+        this._auth.update(response.headers.get('X-Airloy-Token'), response.headers.get('X-Airloy-Ip'));
       case 200:
         return await response.json();
       case 400:
