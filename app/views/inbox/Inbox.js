@@ -72,9 +72,9 @@ export default class Inbox extends React.Component {
               break;
             case 2 :
               hang();
-              let result = await airloy.net.httpGet(api.inbox.clean);
+              let result = await airloy.net.httpGet(api.chore.clean);
               if (result.success) {
-                this.reload();
+                result.info && this.reload();
               } else {
                 toast(L(result.message));
               }
@@ -100,10 +100,10 @@ export default class Inbox extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.inbox.list);
+    let result = await airloy.net.httpGet(api.chore.list);
     if (result.success) {
       this.listSource = new ListSource(result.info);
-      let result2 = await airloy.net.httpGet(api.project.list);
+      let result2 = await airloy.net.httpGet(api.project.list.focus);
       if (result2.success) {
         this.listSource.concat(result2.info);
       } else {
@@ -140,9 +140,9 @@ export default class Inbox extends React.Component {
 
   _sortRow(rowData, section0, section1, section2) {
     var section;
-    if (typeof rowData.countTotal === "undefined") {
+    if (rowData.catalog) {
       if (rowData.arranged) return;
-      if (rowData.catalog === 'trash') {
+      if (rowData.catalog === 'recycled') {
         section = section2;
       } else {
         section = section0;
@@ -206,7 +206,7 @@ export default class Inbox extends React.Component {
       },
       async (buttonIndex) => {
         if (buttonIndex === 0) {
-          let isTrash = rowData.catalog === 'trash';
+          let isTrash = rowData.catalog === 'recycled';
           Alert.alert(
             '确认删除 ?',
             isTrash ? '彻底删除了哦, 清空回收站更快哒' : '删除后可在回收站里找到.',
@@ -216,14 +216,14 @@ export default class Inbox extends React.Component {
                 text: '删除',
                 onPress: async () => {
                   hang();
-                  let result2 = await airloy.net.httpGet(api.inbox.remove, {id: rowData.id});
+                  let result2 = await airloy.net.httpGet(api.chore.remove, {id: rowData.id});
                   hang(false);
                   if (result2.success) {
                     if (isTrash) {
                       this.listSource.remove(rowData);
                       this._sortList();
                     } else {
-                      rowData.catalog = 'trash';
+                      rowData.catalog = 'recycled';
                       this.listSource.update(rowData);
                       this._sortList();
                     }
@@ -247,8 +247,8 @@ export default class Inbox extends React.Component {
         projectId: rowData.id,
         editable: true,
         onUpdated: (task) => {
-          rowData.countTodo = rowData.countTodo + 1;
-          rowData.countTotal = rowData.countTotal + 1;
+          rowData.subTodo = rowData.subTodo + 1;
+          rowData.subTotal = rowData.subTotal + 1;
           this.props.navigator.pop();
           this.listSource.update(util.clone(rowData));
           this._sortList();
@@ -268,15 +268,15 @@ export default class Inbox extends React.Component {
       async (buttonIndex) => {
         if (buttonIndex !== CANCEL_INDEX) {
           hang();
-          let newDate = moment(this.today + 86400000 * buttonIndex);
-          let result = await airloy.net.httpGet(api.inbox.arrange, {
+          let newDate = new Date(this.today + 86400000 * buttonIndex);
+          let result = await airloy.net.httpGet(api.chore.arrange, {
               id: rowData.id,
-              adate: newDate.format('YYYY-MM-DD')
+              date: newDate
             }
           );
           hang(false);
           if (result.success) {
-            airloy.event.emit(EventTypes.targetChange);
+            airloy.event.emit(EventTypes.agendaAdd, result.info);
             this.listSource.remove(rowData);
             this._sortList();
           } else {
@@ -297,10 +297,10 @@ export default class Inbox extends React.Component {
   deleteRow(rowData) {
     this.listSource.remove(rowData);
     this.props.navigator.pop();
-    if (rowData.countTotal) {
-      this.reload();
-    } else {
+    if (rowData.catalog) {
       this._sortList();
+    } else {
+      this.reload();
     }
   }
 
@@ -327,7 +327,7 @@ export default class Inbox extends React.Component {
           <Icon size={28} name='ios-create-outline' style={style.icon} color={colors.border}
                 onPress={() => this._toProject(rowData)}/>
           <Text style={styles.title}>{rowData.title}</Text>
-          <Text style={styles.hint}>{rowData.countTodo} / {rowData.countTotal}</Text>
+          <Text style={styles.hint}>{rowData.subTodo} / {rowData.subTotal}</Text>
         </TouchableOpacity>
       );
     } else {

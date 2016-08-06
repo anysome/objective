@@ -45,8 +45,8 @@ export default class Calendar extends React.Component {
   }
 
   async reload() {
-    let result = await airloy.net.httpGet(api.target.punches, {
-      id: this.targetId,
+    let result = await airloy.net.httpGet(api.agenda.list.target, {
+      targetId: this.targetId,
       days: this.today.diff(this.startDay, 'days') + 1
     });
     if (result.success) {

@@ -9,50 +9,54 @@
     }
   },
   "agenda": {
-    "list": "agenda/list/focus.json",
     "add": "agenda/add.json",
     "update": "agenda/update.json",
     "remove": "agenda/delete.json",
     "finish": "agenda/finish.json",
     "remind": "agenda/remind.json",
-    "done": {
-      "recent": "agenda/list/done.json"
+    "list": {
+      "focus": "agenda/list/focus.json",
+      "done": "agenda/list/done.json",
+      "target": "agenda/list/target.json"
     }
   },
-  "inbox": {
-    "list": "chore/list/focus.json",
+  "chore": {
     "add": "chore/add.json",
     "update": "chore/update.json",
     "remove": "chore/delete.json",
     "arrange": "chore/arrange.json",
-    "clean": "chore/delete/trash.json"
+    "clean": "chore/delete/recycled.json",
+    "to": {
+      "project": "chore/to/project.json",
+      "task": "chore/to/task.json",
+      "target": "chore/to/target.json"
+    },
+    "list": "chore/list/focus.json"
   },
   "project": {
-    "list": "project/list/focus.json",
     "add": "project/add.json",
     "update": "project/update.json",
     "remove": "project/delete.json",
-    "move": "chore/to/task.json",
-    "plot": "chore/to/project.json",
-    "item": {
-      "list": "task/list/project.json",
-      "add": "task/add.json",
-      "remove": "task/delete.json",
-      "arrange": "task/arrange.json"
+    "list": {
+      "focus": "project/list/focus.json",
+      "history": "project/list/history.json"
     }
   },
-  "check": {
-    "list": "target/list/focus.json",
-    "arrange": "target/arrange.json"
+  "task": {
+    "add": "task/add.json",
+    "remove": "task/delete.json",
+    "arrange": "task/arrange.json",
+    "list": "task/list/project.json"
   },
   "target": {
-    "read": "target/fetch.json",
     "update": "target/update.json",
     "add": "target/add.json",
     "remove": "target/delete.json",
-    "punch": "target/finish.json",
-    "track": "target/list/agenda.json",
-    "history": "target/list/history.json"
+    "arrange": "target/arrange.json",
+    "list": {
+      "focus": "target/list/focus.json",
+      "history": "target/list/history.json"
+    }
   },
   "me": {
     "reward": {

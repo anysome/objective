@@ -16,7 +16,7 @@ export default class Edit extends React.Component {
   constructor(props) {
     super(props);
     this._title = null;
-    this.data = props.data || {title: '', detail: ''};
+    this.data = props.data || {title: ''};
     this.state = {
       title: this.data.title,
       detail: this.data.detail
@@ -76,7 +76,7 @@ export default class Edit extends React.Component {
             break;
           case 1 :
             hang();
-            let result = await airloy.net.httpGet(api.project.plot, {id: this.data.id});
+            let result = await airloy.net.httpGet(api.chore.to.project, {id: this.data.id});
             if (result.success) {
               this.props.onProjectized(this.data);
             } else {
@@ -85,7 +85,7 @@ export default class Edit extends React.Component {
             hang(false);
             break;
           case 2 :
-            let isTrash = this.data.catalog === 'trash';
+            let isTrash = this.data.catalog === 'recycled';
             Alert.alert(
               '确认删除 ?',
               isTrash ? '彻底删除了哦, 清空回收站更快哒' : '删除后可在回收站里找到.',
@@ -95,7 +95,7 @@ export default class Edit extends React.Component {
                   text: '删除',
                   onPress: async () => {
                     hang();
-                    let result2 = await airloy.net.httpGet(api.inbox.remove, {id: this.data.id});
+                    let result2 = await airloy.net.httpGet(api.chore.remove, {id: this.data.id});
                     hang(false);
                     if (result2.success) {
                       if (isTrash) {
@@ -133,9 +133,9 @@ export default class Edit extends React.Component {
       async (buttonIndex) => {
         if (buttonIndex !== CANCEL_INDEX) {
           hang();
-          let result = await airloy.net.httpGet(api.project.move, {
+          let result = await airloy.net.httpGet(api.chore.to.task, {
             id: this.data.id,
-            topicId: projects[buttonIndex].id
+            projectId: projects[buttonIndex].id
           });
           if (result.success) {
             this.props.onProjectized(this.data);
@@ -155,7 +155,7 @@ export default class Edit extends React.Component {
       if (this._title.value.length > 0) {
         this.data.title = this.state.title;
       }
-      let url = this.props.sectionId === 1 ? api.project.update : api.inbox.update;
+      let url = this.props.sectionId === 1 ? api.project.update : api.chore.update;
       hang();
       result = await airloy.net.httpPost(url, this.data);
     } else {
@@ -164,7 +164,7 @@ export default class Edit extends React.Component {
         return;
       }
       this.data.title = this.state.title;
-      let url = this.props.sectionId === 1 ? api.project.add : api.inbox.add;
+      let url = this.props.sectionId === 1 ? api.project.add : api.chore.add;
       hang();
       result = await airloy.net.httpPost(url, this.data);
     }

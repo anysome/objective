@@ -37,7 +37,7 @@ export default class HistoryTarget extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.target.history);
+    let result = await airloy.net.httpGet(api.target.list.history);
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this.setState({

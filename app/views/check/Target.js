@@ -84,7 +84,7 @@ export default class Target extends Controller {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.check.list, null);
+    let result = await airloy.net.httpGet(api.target.list.focus);
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this._sortList();
@@ -164,9 +164,9 @@ export default class Target extends Controller {
               });
               break;
             default:
-              let result = await airloy.net.httpGet(api.check.arrange, {
+              let result = await airloy.net.httpPost(api.target.arrange, {
                   id: rowData.id,
-                  defer: buttonIndex
+                  date: new Date(this.today + buttonIndex * 86400000)
                 }
               );
               if (result.success) {
@@ -209,16 +209,13 @@ export default class Target extends Controller {
             this._toDelete(rowData);
             break;
           default:
-            hang();
-            let result = await airloy.net.httpGet(api.target.read, {id: rowData.checkTargetId});
-            hang(false);
             if ( result.success ) {
               this.forward({
                 title: '修改',
                 component: Edit,
                 rightButtonIcon: this.getIcon('ios-more-outline'),
                 passProps: {
-                  data: result.info
+                  data: rowData
                 }
               });
             } else {

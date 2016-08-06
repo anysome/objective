@@ -42,7 +42,7 @@ export default class Dones extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.agenda.done.recent);
+    let result = await airloy.net.httpGet(api.agenda.list.done);
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this._sortList();

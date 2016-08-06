@@ -57,7 +57,6 @@ export default class Timer extends React.Component {
     hang(false);
     if (result.success) {
       this.data.reminder = result.info;
-      console.log('result time = ' + result.info);
       this.props.onFeedback(this.data);
     } else {
       toast(L(result.message), 30);

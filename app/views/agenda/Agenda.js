@@ -89,7 +89,7 @@ export default class Agenda extends Controller {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.agenda.list, null);
+    let result = await airloy.net.httpGet(api.agenda.list.focus);
     if (result.success) {
       this.listSource = new ListSource(result.info, (agenda) => {
         // check each item and schedule reminder if necessary
@@ -242,10 +242,10 @@ export default class Agenda extends Controller {
             case 2:
                   if (isToday) {
                     hang();
-                    let newDate = moment(this.today + 86400000);
-                    let result = await airloy.net.httpGet(api.agenda.schedule, {
+                    let newDate = new Date(this.today + 86400000);
+                    let result = await airloy.net.httpPost(api.agenda.update, {
                         id: rowData.id,
-                        newDate: newDate.format('YYYY-MM-DD')
+                        today: newDate
                       }
                     );
                     hang(false);

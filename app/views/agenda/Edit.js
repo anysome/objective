@@ -64,10 +64,10 @@ export default class Edit extends React.Component {
       async (buttonIndex) => {
         if (buttonIndex === 0) {
           hang();
-          let newDate = isFuture ? moment(this.today) : moment(this.today + 86400000);
-          let result = await airloy.net.httpGet(api.agenda.schedule, {
+          let newDate = isFuture ? new Date(this.today) : new Date(this.today + 86400000);
+          let result = await airloy.net.httpPost(api.agenda.update, {
               id: this.agenda.id,
-              newDate: newDate.format('YYYY-MM-DD')
+              today: newDate
             }
           );
           hang(false);
@@ -79,7 +79,7 @@ export default class Edit extends React.Component {
           }
         }
         if (buttonIndex === 1) {
-          let message = this.agenda.checkDailyId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
+          let message = this.agenda.targetId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
           Alert.alert(
             '确认删除 ?',
             message,
@@ -92,7 +92,7 @@ export default class Edit extends React.Component {
                   let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
                   hang(false);
                   if (result.success) {
-                    airloy.event.emit(EventTypes.targetChange);
+                    this.agenda.targetId && airloy.event.emit(EventTypes.targetChange);
                     this.props.onDelete(this.agenda);
                   } else {
                     toast(L(result.message));

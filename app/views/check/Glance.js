@@ -68,7 +68,7 @@ export default class Glance extends React.Component {
     this.setState({
       summary: str
     });
-    let result = await airloy.net.httpGet(api.target.read, {id: this.checkDaily.checkTargetId});
+    let result = await airloy.net.httpGet(api.target.fetch, {id: this.checkDaily.checkTargetId});
     if (result.success) {
       this.target = result.info;
       this._updateView();

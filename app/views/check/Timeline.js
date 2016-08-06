@@ -28,7 +28,7 @@ export default class Timeline extends React.Component {
   }
 
   async reload() {
-    let result = await airloy.net.httpGet(api.target.track, {id: this.props.targetId});
+    let result = await airloy.net.httpGet(api.agenda.list.target, {targetId: this.props.targetId});
     if (result.success) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(result.info)
