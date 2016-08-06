@@ -13,12 +13,11 @@
     "add": "agenda/add.json",
     "update": "agenda/update.json",
     "remove": "agenda/delete.json",
-    "schedule": "agenda/arrange.json",
     "finish": "agenda/finish.json",
+    "remind": "agenda/remind.json",
     "done": {
       "recent": "agenda/list/done.json"
-    },
-    "remind": "agenda/update.json"
+    }
   },
   "inbox": {
     "list": "chore/list/focus.json",

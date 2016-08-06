@@ -51,12 +51,13 @@ export default class Timer extends React.Component {
   async _setup(toCancel = false) {
     // upload change
     let param = toCancel ?
-      {id: this.data.id} : {id: this.data.id, reminder: moment(this.state.date).format('YYYY-MM-DD HH:mm:ss')};
+      {id: this.data.id} : {id: this.data.id, reminder: this.state.date};
     hang();
     let result = await airloy.net.httpGet(api.agenda.remind, param);
     hang(false);
     if (result.success) {
       this.data.reminder = result.info;
+      console.log('result time = ' + result.info);
       this.props.onFeedback(this.data);
     } else {
       toast(L(result.message), 30);
@@ -74,7 +75,7 @@ export default class Timer extends React.Component {
           {this.props.data.reminder ?
             <Text style={style.title}>
               <Text style={styles.hint}>已设置提醒时间: </Text>
-              {moment(this.props.data.today).format(' M月D日 ') + moment(this.props.data.reminder).format('h:mm A') }
+              {moment(this.props.data.today).format(' M月D日 ') + moment(this.props.data.reminder, 'hh:mm:ss').format('h:mm A') }
             </Text>
             :
             <Text style={style.title}>暂未设置提醒</Text>

@@ -113,7 +113,6 @@ export default class Agenda extends Controller {
     let section1 = new ListSectionView.DataSource({id: 1, name: '计划内'});
     let section2 = new ListSectionView.DataSource({id: 2, name: '今日完成'});
     for (let rowData of this.listSource) {
-      console.log('----------------- agenda = ' + JSON.stringify(rowData));
       this._sortRow(rowData, section0, section1, section2);
     }
     this.setState({
@@ -176,9 +175,9 @@ export default class Agenda extends Controller {
       this._pressRow(rowData);
     } else {
       if (sectionId === 1) {
-        let result = await airloy.net.httpGet(api.agenda.schedule, {
+        let result = await airloy.net.httpPost(api.agenda.update, {
           id: rowData.id,
-          newDate: moment(this.today).format('YYYY-MM-DD')
+          today: moment(this.today).format('YYYY-MM-DD')
         });
         if (result.success) {
           rowData.today = this.today;

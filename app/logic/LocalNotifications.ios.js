@@ -3,6 +3,7 @@
  */
 
 import {PushNotificationIOS} from 'react-native';
+import moment from 'moment';
 
 export default class LocalNotifications {
 
@@ -15,7 +16,7 @@ export default class LocalNotifications {
       let now = new Date();
       let tzOffset = (now).getTimezoneOffset() * 60000;
       // fix bug for timezone offset
-      let alarmTime = agenda.today + agenda.reminder - tzOffset;
+      let alarmTime = moment(moment(agenda.today).format('YYYY-MM-DD ') + agenda.reminder).toDate().getTime() - tzOffset;
       // check future time
       if ( alarmTime < now ) {
         return;
