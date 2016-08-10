@@ -36,7 +36,7 @@ export default class EditItem extends React.Component {
               text: '删除',
               onPress: async () => {
                 hang();
-                let result = await airloy.net.httpGet(api.project.item.remove, {id: this.data.itemId});
+                let result = await airloy.net.httpGet(api.task.remove, {id: this.data.id});
                 hang(false);
                 if (result.success) {
                   this.props.onDeleted(this.data);
@@ -62,24 +62,23 @@ export default class EditItem extends React.Component {
         this._title.focus();
         return;
       }
-      let item = {
-        topicId: this.props.projectId,
+      let task = {
+        projectId: this.props.projectId,
         title: this.state.title,
         detail: this.state.detail
       };
       hang();
-      result = await airloy.net.httpPost(api.project.item.add, item);
+      result = await airloy.net.httpPost(api.task.add, task);
     } else {
-      let chore = {
-        id: this.data.choreId,
-        title: this.data.title,
+      let task = {
+        id: this.data.id,
         detail: this.state.detail
       };
       if (this._title.value.length > 0) {
-        chore.title = this.state.title;
+        task.title = this.state.title;
       }
       hang();
-      result = await airloy.net.httpPost(api.inbox.update, chore);
+      result = await airloy.net.httpPost(api.task.update, task);
     }
     if (result.success) {
       this.data.arranged && airloy.event.emit(EventTypes.agendaChange);

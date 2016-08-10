@@ -36,6 +36,7 @@
   "project": {
     "add": "project/add.json",
     "update": "project/update.json",
+    "read": "project/fetch.json",
     "remove": "project/delete.json",
     "list": {
       "focus": "project/list/focus.json",
@@ -44,6 +45,7 @@
   },
   "task": {
     "add": "task/add.json",
+    "update": "task/update.json",
     "remove": "task/delete.json",
     "arrange": "task/arrange.json",
     "list": "task/list/project.json"

@@ -175,6 +175,7 @@ export default class Inbox extends React.Component {
         rightButtonIcon: this.props.plusIcon,
         passProps: {
           data: rowData,
+          today: this.today,
           nextIcon: this.props.trashIcon,
           onUpdated: (rowData) => this.updateRow(rowData)
         }
@@ -308,7 +309,7 @@ export default class Inbox extends React.Component {
     hang();
     this.listSource.remove(rowData);
     // reload project list to get newest info
-    let result2 = await airloy.net.httpGet(api.project.list);
+    let result2 = await airloy.net.httpGet(api.project.list.focus);
     if (result2.success) {
       this.listSource.concat(result2.info);
       this._sortList();
@@ -338,7 +339,7 @@ export default class Inbox extends React.Component {
                 onPress={() => this._toArrange(rowData)}/>
           <View style={styles.flex}>
             <Text style={styles.title}>{rowData.title}</Text>
-            <Text style={styles.text}>{rowData.detail}</Text>
+            {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
           </View>
         </TouchableOpacity>
       );

@@ -22,6 +22,7 @@ export default class Project extends React.Component {
     super(props);
     this.listSource = new ListSource();
     this.project = props.data;
+    this.today = props.today;
     this.countChanged = false;
     this.state = {
       isRefreshing: true,
@@ -65,7 +66,7 @@ export default class Project extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.project.item.list, {id: this.project.id});
+    let result = await airloy.net.httpGet(api.task.list, {projectId: this.project.id});
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this.setState({
@@ -94,10 +95,10 @@ export default class Project extends React.Component {
         async (buttonIndex) => {
           if (buttonIndex !== CANCEL_INDEX) {
             hang();
-            let newDate = moment().add(buttonIndex, 'days');
-            let result = await airloy.net.httpGet(api.inbox.arrange, {
-                id: rowData.choreId,
-                adate: newDate.format('YYYY-MM-DD')
+            let newDate = new Date(this.today + 86400000 * buttonIndex);
+            let result = await airloy.net.httpGet(api.task.arrange, {
+                id: rowData.id,
+                date: newDate
               }
             );
             if (result.success) {
@@ -131,8 +132,8 @@ export default class Project extends React.Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
     });
-    this.project.countTotal--;
-    rowData.status === '0' && this.project.countTodo--;
+    this.project.subTotal--;
+    rowData.status === '0' && this.project.subTodo--;
     this.countChanged = true;
     this.props.navigator.pop();
   }

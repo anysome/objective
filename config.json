@@ -1,6 +1,6 @@
 {
   "airloy": {
-    "server": "192.168.100.6:9090",
+    "server": "api.asfun.cn",
     "https": false,
     "apiVersion": "v1",
     "clientName": "Objective.rn",
