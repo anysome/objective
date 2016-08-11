@@ -184,7 +184,7 @@ export default class Project extends React.Component {
               onPress={() => this._toArrange(rowData, arrangable)}/>
         <View style={styles.flex}>
           <Text style={[styles.title, {color: transform.titleColor}]}>{rowData.title}</Text>
-          <Text style={[styles.text, {color: transform.detailColor}]}>{rowData.detail}</Text>
+          {rowData.detail ? <Text style={[styles.text, {color: transform.detailColor}]}>{rowData.detail}</Text> : null}
         </View>
       </TouchableOpacity>
     );

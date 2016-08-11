@@ -16,31 +16,31 @@ export default class ListRow extends React.Component {
     this.arranged = props.sectionId == 1;
   }
 
-  _transform(checkDaily) {
-    let dateEnd = moment(checkDaily.dateEnd);
-    let unitName = objective.getUnitName(checkDaily.unit);
+  _transform(target) {
+    let dateEnd = moment(target.dateEnd);
+    let unitName = objective.getUnitName(target.unit);
     let maybe = '';
     let undoSize = 26, doneColor = colors.dark1;
-    if (checkDaily.requiredAmount === 1) {
-      if (checkDaily.doneAmount) {
+    if (target.requiredAmount === 1) {
+      if (target.doneAmount) {
         undoSize = 14;
         doneColor = colors.border;
       }
     } else {
-      if (checkDaily.doneAmount) {
+      if (target.doneAmount) {
         undoSize = 14;
         doneColor = colors.border;
       }
     }
-    if (checkDaily.frequency === '1') {
-      maybe = '1 天 ' + checkDaily.requiredAmount + unitName;
+    if (target.frequency === '1') {
+      maybe = '1 天 ' + target.requiredAmount + unitName;
     } else {
-      let ms = checkDaily.dateEnd - this.props.today;
+      let ms = target.dateEnd - this.props.today;
       let checkLeftDays = 1;
       if (ms > 0) {
         checkLeftDays = ms / 86400000 + 1;
       }
-      let lefts = checkDaily.requiredAmount - checkDaily.roundTotal;
+      let lefts = target.requiredAmount - target.roundTotal;
       if (lefts < 1) {
         maybe = '偷着乐吧';
       } else if (checkLeftDays === 1) {
@@ -55,18 +55,18 @@ export default class ListRow extends React.Component {
         }
       }
     }
-    let frequencyName = objective.getFrequencyName(checkDaily.frequency);
+    let frequencyName = objective.getFrequencyName(target.frequency);
     return {
-      priorityColor: objective.getPriorityColor(checkDaily.priority),
-      title: checkDaily.title,
-      detail: checkDaily.detail,
+      priorityColor: objective.getPriorityColor(target.priority),
+      title: target.title,
+      detail: target.detail,
       timeLeft: dateEnd.add(1, 'days').fromNow(),
-      progress: checkDaily.doneTotal,
+      progress: target.doneTotal,
       maybe: maybe,
       undoSize: undoSize,
       doneColor: doneColor,
-      arrangedColor: checkDaily.arranged ? colors.border : colors.dark2,
-      summary: `${frequencyName} ${checkDaily.requiredAmount} ${unitName}`
+      arrangedColor: target.arranged ? colors.border : colors.dark2,
+      summary: `${frequencyName} ${target.requiredAmount} ${unitName}`
     };
   }
 

@@ -19,9 +19,8 @@ export default class Glance extends React.Component {
 
   constructor(props) {
     super(props);
-    this.checkDaily = props.data;
     this.today = props.today;
-    this.target = null;
+    this.target = props.data;
     this.expectTotal = 0;
     this.state = {
       summary: '',
@@ -58,48 +57,35 @@ export default class Glance extends React.Component {
   }
 
   async reload() {
-    let str;
-    if (this.checkDaily.frequency === '1' &&
-      this.checkDaily.unit === '0') {
-      str = '每天打卡';
+    let sum;
+    if (this.target.frequency === '1' &&
+      this.target.unit === '0') {
+      sum = '每天打卡';
     } else {
-      str = `${Objective.getFrequencyName(this.checkDaily.frequency)} ${this.checkDaily.gross} ${Objective.getUnitName(this.checkDaily.unit)}`;
+      sum = `${Objective.getFrequencyName(this.target.frequency)} ${this.target.requiredAmount} ${Objective.getUnitName(this.target.unit)}`;
     }
-    this.setState({
-      summary: str
-    });
-    let result = await airloy.net.httpGet(api.target.fetch, {id: this.checkDaily.checkTargetId});
-    if (result.success) {
-      this.target = result.info;
-      this._updateView();
-    } else {
-      toast(L(result.message));
-    }
-  }
-
-  _updateView() {
     let dayTotal = (this.target.dateEnd - this.target.dateStart) / 86400000 + 1;
 
-    switch (this.checkDaily.frequency) {
+    switch (this.target.frequency) {
       case '1' :
-        this.expectTotal = this.target.times * dayTotal;
+        this.expectTotal = this.target.requiredAmount * dayTotal;
         break;
       case '2' :
-        this.expectTotal = parseInt(this.target.times * dayTotal / 7);
+        this.expectTotal = parseInt(this.target.requiredAmount * dayTotal / 7);
         break;
       case '3' :
-        this.expectTotal = parseInt(this.target.times * dayTotal / 30.4);
+        this.expectTotal = parseInt(this.target.requiredAmount * dayTotal / 30.4);
         break;
       default:
-        this.expectTotal = this.target.times;
+        this.expectTotal = this.target.requiredAmount;
     }
-    let doneTotal = this.checkDaily.total + this.checkDaily.times;
+    let doneTotal = this.target.doneTotal;
     let progress = 100 * doneTotal / this.expectTotal;
 
     let dayLeft = (this.target.dateEnd - this.today) / 86400000 + 1;
     let dayUsedProgress = 100 * (dayTotal - dayLeft) / dayTotal
     this.setState({
-      summary: `${this.state.summary}, 剩余 ${dayLeft} 天`,
+      summary: `${sum}, 剩余 ${dayLeft} 天`,
       tProgress: dayUsedProgress,
       progress: progress,
       progressText: `${doneTotal} / ${this.expectTotal}`
@@ -111,8 +97,8 @@ export default class Glance extends React.Component {
       title: '前进路线',
       component: Timeline,
       passProps: {
-        targetId: this.checkDaily.checkTargetId,
-        title: this.checkDaily.title
+        targetId: this.target.id,
+        title: this.target.title
       }
     });
   }
@@ -122,8 +108,8 @@ export default class Glance extends React.Component {
       title: '打卡日历',
       component: Calendar,
       passProps: {
-        targetId: this.checkDaily.checkTargetId,
-        title: this.checkDaily.title
+        targetId: this.target.id,
+        title: this.target.title
       }
     });
   }
@@ -134,10 +120,10 @@ export default class Glance extends React.Component {
     });
   }
 
-  _doPunch(checkDaily) {
-    if (checkDaily) {
-      this.checkDaily = checkDaily;
-      let doneTotal = this.checkDaily.total + this.checkDaily.times;
+  _doPunch(target) {
+    if (target) {
+      this.target = target;
+      let doneTotal = this.target.total;
       let progress = 100 * doneTotal / this.expectTotal;
       this.setState({
         showModal: false,
@@ -182,11 +168,11 @@ export default class Glance extends React.Component {
           </Button>
         </View>
         <View style={style.row}>
-          <Text style={styles.title}>{this.checkDaily.title}</Text>
+          <Text style={styles.title}>{this.target.title}</Text>
           <Text style={style.summary}>{this.state.summary}</Text>
         </View>
-        <Text style={styles.text}>{this.checkDaily.detail}</Text>
-        {this.checkDaily.closed &&
+        <Text style={styles.text}>{this.target.detail}</Text>
+        {this.target.arranged && this.target.doneAmount > 0 &&
         <View style={styles.row}>
           <Text style={style.hint}>
             今天已完全目标, 可我还想要!
@@ -198,8 +184,8 @@ export default class Glance extends React.Component {
           </TouchableOpacity>
         </View>
         }
-        <Punch data={this.checkDaily} visible={this.state.showModal}
-               onFeedback={(checkDaily) => this._doPunch(checkDaily)}/>
+        <Punch data={this.target} visible={this.state.showModal}
+               onFeedback={(target) => this._doPunch(target)}/>
       </ScrollView>
     );
   }

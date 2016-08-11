@@ -76,10 +76,11 @@ export default class Commit extends React.Component {
   async _commit() {
     if (this.state.output) {
       let agenda = this.props.data;
+      let amount = parseInt(this.state.output);
       hang();
       let result = await airloy.net.httpPost(api.agenda.finish, {
         id: agenda.id,
-        amount: this.state.output
+        amount: amount
       });
       hang(false);
       if (result.success) {
@@ -97,7 +98,8 @@ export default class Commit extends React.Component {
         if (agenda.targetId) {
           airloy.event.emit(EventTypes.targetPunch, {
             id: agenda.targetId,
-            times: parseInt(this.state.output)
+            amonut: amount,
+            roundDateEnd: agenda.roundDateEnd
           });
         }
         agenda.status = '1';

@@ -177,7 +177,7 @@ export default class Agenda extends Controller {
       if (sectionId === 1) {
         let result = await airloy.net.httpPost(api.agenda.update, {
           id: rowData.id,
-          today: moment(this.today).format('YYYY-MM-DD')
+          today: new Date(this.today)
         });
         if (result.success) {
           rowData.today = this.today;
@@ -208,7 +208,7 @@ export default class Agenda extends Controller {
         async (buttonIndex) => {
           switch (buttonIndex) {
             case 0:
-                  let message = rowData.checkDailyId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
+                  let message = rowData.targetId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
                   Alert.alert(
                     '确认删除 ?',
                     message,
@@ -220,7 +220,7 @@ export default class Agenda extends Controller {
                           hang();
                           let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
                           if (result.success) {
-                            rowData.checkDailyId && airloy.event.emit(EventTypes.targetChange);
+                            rowData.targetId && airloy.event.emit(EventTypes.targetChange);
                             LocalNotifications.cancelAgenda(rowData.id);
                             this.listSource.remove(rowData);
                             this._sortList();
@@ -250,8 +250,7 @@ export default class Agenda extends Controller {
                     );
                     hang(false);
                     if (result.success) {
-                      rowData.today = this.today + 86400000;
-                      this._updateData(util.clone(rowData));
+                      this._updateData(result.info);
                     } else {
                       toast(L(result.message));
                     }

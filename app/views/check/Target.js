@@ -72,8 +72,11 @@ export default class Target extends Controller {
     airloy.event.on(EventTypes.targetPunch, (done) => {
       let rowData = this.listSource.read(done.id);
       if (rowData) {
-        rowData.closed = true;
-        rowData.times = done.times;
+        rowData.doneAmount = done.amonut;
+        rowData.doneTotal = rowData.doneTotal + done.amonut;
+        if (rowData.roundDateEnd == done.roundDateEnd) {
+          rowData.roundTotal = rowData.roundTotal + done.amonut;
+        }
         this.listSource.update(rowData);
         this._sortList();
       }
@@ -116,15 +119,15 @@ export default class Target extends Controller {
     });
   }
 
-  _sortRow(checkDaily, section0, section1, section2) {
-    if (checkDaily.arranged) {
-      if (checkDaily.doneAmount) {
-        section2.push(checkDaily);
+  _sortRow(target, section0, section1, section2) {
+    if (target.arranged) {
+      if (target.doneAmount) {
+        section2.push(target);
       } else {
-        section1.push(checkDaily);
+        section1.push(target);
       }
     } else {
-      section0.push(checkDaily);
+      section0.push(target);
     }
   }
 
