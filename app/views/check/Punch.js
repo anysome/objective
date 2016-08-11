@@ -14,7 +14,7 @@ export default class Punch extends React.Component {
 
   constructor(props) {
     super(props);
-    this.checkDaily = props.data;
+    this.target = props.data;
     this.state = {
       toShare: false,
       output: props.data.unit === '0' ? '1' : '',
@@ -29,7 +29,7 @@ export default class Punch extends React.Component {
   async _init() {
     this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
     this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
-    this.state.toShare = this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) > -1;
+    this.state.toShare = this.sharedTargetIds.indexOf(this.target.id) > -1;
     console.log('to share = ' + this.state.toShare);
   }
 
@@ -45,22 +45,22 @@ export default class Punch extends React.Component {
     if (this.state.output) {
       let increasement = parseInt(this.state.output);
       hang();
-      let result = await airloy.net.httpPost(api.target.punch, {
-        id: this.checkDaily.checkTargetId,
-        times: increasement,
-        remark: this.state.remark,
-        share: this.state.toShare
+      let result = await airloy.net.httpGet(api.target.punch, {
+        id: this.target.id,
+        amount: increasement
+        //remark: this.state.remark,
+        //share: this.state.toShare
       });
       hang(false);
       if (result.success) {
         if (this.state.toShare) {
-          if (this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) < 0) {
-            this.sharedTargetIds = this.sharedTargetIds + ',' + this.checkDaily.checkTargetId;
+          if (this.sharedTargetIds.indexOf(this.target.id) < 0) {
+            this.sharedTargetIds = this.sharedTargetIds + ',' + this.target.id;
             airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
           }
         } else {
-          if (this.sharedTargetIds.indexOf(this.checkDaily.checkTargetId) > -1) {
-            this.sharedTargetIds = this.sharedTargetIds.replace(',' + this.checkDaily.checkTargetId, '');
+          if (this.sharedTargetIds.indexOf(this.target.id) > -1) {
+            this.sharedTargetIds = this.sharedTargetIds.replace(',' + this.target.id, '');
             airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
             console.log('new ids after cancel ' + this.sharedTargetIds);
           }
@@ -68,8 +68,10 @@ export default class Punch extends React.Component {
         toast('太给力了!');
         airloy.event.emit(EventTypes.agendaChange);
         airloy.event.emit(EventTypes.targetChange);
-        this.checkDaily.times = this.checkDaily.times + increasement;
-        this.props.onFeedback(this.checkDaily);
+        this.target.doneAmount = this.target.doneAmount + increasement;
+        this.target.doneTotal = this.target.doneTotal +increasement;
+        this.target.roundTotal = this.target.roundTotal + increasement;
+        this.props.onFeedback(this.target);
       } else {
         toast(L(result.message));
       }

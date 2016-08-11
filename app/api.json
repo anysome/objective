@@ -55,6 +55,7 @@
     "add": "target/add.json",
     "remove": "target/delete.json",
     "arrange": "target/arrange.json",
+    "punch": "target/punch.json",
     "list": {
       "focus": "target/list/focus.json",
       "history": "target/list/history.json"

@@ -42,20 +42,20 @@ export default class Timeline extends React.Component {
     if ( rowData.detail ) {
       return (
         <View style={style.rowBig}>
-          <Text style={style.progress}>+ {rowData.times}</Text>
-          <Text style={style.progress}>{rowData.total}</Text>
+          <Text style={style.progress}>+ {rowData.doneAmount}</Text>
+          <Text style={style.progress}>{rowData.doneTotal}</Text>
           <View style={style.body}>
             <Text style={styles.text}>{rowData.detail}</Text>
-            <Text style={style.hint}>{moment(rowData.checkTime).calendar()}</Text>
+            <Text style={style.hint}>{moment(rowData.doneTime).calendar()}</Text>
           </View>
         </View>
       );
     } else {
       return (
         <View style={style.row}>
-          <Text style={style.progress}>+ {rowData.times}</Text>
-          <Text style={style.progress}>{rowData.total}</Text>
-          <Text style={styles.hint}>{moment(rowData.checkTime).calendar()}</Text>
+          <Text style={style.progress}>+ {rowData.doneAmount}</Text>
+          <Text style={style.progress}>{rowData.doneTotal}</Text>
+          <Text style={styles.hint}>{moment(rowData.doneTime).calendar()}</Text>
         </View>
       );
     }
