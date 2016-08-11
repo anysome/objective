@@ -101,7 +101,7 @@ export default class HistoryTarget extends React.Component {
       priorityColor: objective.getPriorityColor(target.priority),
       title: target.title,
       detail: target.detail,
-      times: target.times,
+      times: target.requiredAmount,
       unitName: objective.getUnitName(target.unit),
       frequencyName: objective.getFrequencyName(target.frequency),
       dateStart: target.dateStart,

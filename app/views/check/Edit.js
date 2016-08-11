@@ -36,35 +36,35 @@ export default class Edit extends React.Component {
       switch (type) {
         case '1':
           this.lasting = 90;
-          this.target.times = 1;
+          this.target.requiredAmount = 1;
           this.target.frequency = '1';
           this.target.dateEnd = moment().add(89, 'days').toDate();
           break;
         case '2':
-          this.target.times = 20;
+          this.target.requiredAmount = 20;
           this.target.dateEnd = moment().endOf('month').toDate();
           this.target.frequency = '3';
           break;
         case '3':
-          this.target.times = 3;
+          this.target.requiredAmount = 3;
           this.target.frequency = '2';
           this.target.dateEnd = moment().endOf('year').toDate();
           break;
         case '4':
           this.target.priority = 2;
-          this.target.times = 100;
+          this.target.requiredAmount = 100;
           this.target.dateEnd = moment().add(299, 'days').toDate();
           this.target.frequency = '4';
           break;
         case '5':
           this.target.priority = 3;
-          this.target.times = 1000;
+          this.target.requiredAmount = 1000;
           this.target.dateEnd = moment().add(999, 'days').toDate();
           this.target.unit = '1';
           this.target.frequency = '4';
           break;
         default :
-          this.target.times = 10;
+          this.target.requiredAmount = 10;
           this.target.dateEnd = moment().add(59, 'days').toDate();
           this.target.frequency = '3';
           this.target.unit = '3';
@@ -80,7 +80,7 @@ export default class Edit extends React.Component {
       dateEnd: new Date(this.target.dateEnd),
       frequency: this.target.frequency,
       unit: this.target.unit,
-      times: '' + this.target.times,
+      times: '' + this.target.requiredAmount,
       lasting: '' + this.lasting,
       showPickerPriority: false,
       showPickerFrequency: false,
@@ -105,7 +105,7 @@ export default class Edit extends React.Component {
             hang(false);
             if (result.success) {
               airloy.event.emit(EventTypes.targetChange);
-              airloy.event.emit(EventTypes.agendaChange);
+              this.target.arranged && airloy.event.emit(EventTypes.agendaChange);
               this.props.navigator.popToTop();
             } else {
               toast(L(result.message));
@@ -140,12 +140,11 @@ export default class Edit extends React.Component {
     this.target.priority = this.state.priority;
     this.target.frequency = this.state.frequency;
     this.target.unit = this.state.unit;
-    this.target.times = parseInt(this.state.times);
+    this.target.requiredAmount = parseInt(this.state.times);
     hang();
     let result = await airloy.net.httpPost(url, this.target);
     if (result.success) {
-      // add and update both call reload from server
-      airloy.event.emit(EventTypes.targetChange, result.info);
+      airloy.event.emit(EventTypes.targetChange);
       airloy.event.emit(EventTypes.agendaChange);
       this.props.navigator.popToTop();
     } else {
@@ -249,7 +248,7 @@ export default class Edit extends React.Component {
               flat={true}
               defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
-              placeholder={'' + this.target.times}
+              placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
               style={styles.inputR}
@@ -319,7 +318,7 @@ export default class Edit extends React.Component {
               flat={true}
               defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
-              placeholder={'' + this.target.times}
+              placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
               style={styles.inputR}
@@ -371,7 +370,7 @@ export default class Edit extends React.Component {
               flat={true}
               defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
-              placeholder={'' + this.target.times}
+              placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
               style={styles.inputR}
@@ -431,7 +430,7 @@ export default class Edit extends React.Component {
               flat={true}
               defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
-              placeholder={'' + this.target.times}
+              placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
               style={styles.inputR}
@@ -517,7 +516,7 @@ export default class Edit extends React.Component {
               flat={true}
               defaultValue={'' + this.state.times}
               onChangeText={(text) => this.setState({times:text})}
-              placeholder={'' + this.target.times}
+              placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
               style={styles.inputR}
@@ -693,7 +692,6 @@ export default class Edit extends React.Component {
           }
         );
       };
-      //this._toDelete();
       // so many bugs on android T_T
       util.isAndroid() ?
         this.props.navigator.replaceAtIndex(route, -1) :

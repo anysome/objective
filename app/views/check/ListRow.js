@@ -35,7 +35,7 @@ export default class ListRow extends React.Component {
     if (target.frequency === '1') {
       maybe = '1 天 ' + target.requiredAmount + unitName;
     } else {
-      let ms = target.dateEnd - this.props.today;
+      let ms = target.roundDateEnd - this.props.today;
       let checkLeftDays = 1;
       if (ms > 0) {
         checkLeftDays = ms / 86400000 + 1;
