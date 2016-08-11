@@ -133,9 +133,13 @@ export default class Target extends Controller {
 
   _pressRow(rowData, sectionId) {
     if (sectionId === 0) {
-      let BUTTONS = ['安排到今天'];
-      let CANCEL_INDEX = 2, DESTRUCTIVE_INDEX = 1;
-      let ms = rowData.endDate - this.today;
+      let BUTTONS = [];
+      let CANCEL_INDEX = 1, DESTRUCTIVE_INDEX = 0;
+      let ms = rowData.roundDateEnd - this.today;
+      if (ms > -1) {
+        BUTTONS.push('安排到今天');
+        CANCEL_INDEX = 2, DESTRUCTIVE_INDEX = 1;
+      }
       if (ms > 0) {
         BUTTONS.push('安排到明天');
         CANCEL_INDEX = 3, DESTRUCTIVE_INDEX = 2;
@@ -167,13 +171,13 @@ export default class Target extends Controller {
               });
               break;
             default:
-              let result = await airloy.net.httpPost(api.target.arrange, {
+              let result = await airloy.net.httpGet(api.target.arrange, {
                   id: rowData.id,
                   date: new Date(this.today + buttonIndex * 86400000)
                 }
               );
               if (result.success) {
-                airloy.event.emit(EventTypes.agendaChange);
+                airloy.event.emit(EventTypes.agendaAdd, result.info);
                 rowData.arranged = true;
                 this.listSource.update(rowData);
                 this._sortList();
@@ -239,7 +243,7 @@ export default class Target extends Controller {
           text: '删除',
           onPress: async () => {
             hang();
-            let result = await airloy.net.httpGet(api.target.remove, {id: rowData.checkTargetId});
+            let result = await airloy.net.httpGet(api.target.remove, {id: rowData.id});
             if (result.success) {
               airloy.event.emit(EventTypes.agendaChange);
               this.listSource.remove(rowData);
@@ -271,6 +275,15 @@ export default class Target extends Controller {
       passProps: {
         type: type
       }
+    });
+    let newTop = -100;
+    if (util.isAndroid()) {
+      newTop = this.state.panelTop === 0 ? -100 : 0
+    } else {
+      newTop = this.state.panelTop === 65 ? -36 : 65
+    }
+    this.setState({
+      panelTop: newTop
     });
   }
 

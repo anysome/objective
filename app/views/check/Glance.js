@@ -80,6 +80,7 @@ export default class Glance extends React.Component {
         this.expectTotal = this.target.requiredAmount;
     }
     let doneTotal = this.target.doneTotal;
+    this.expectTotal == 0 && (this.expectTotal = 1);
     let progress = 100 * doneTotal / this.expectTotal;
 
     let dayLeft = (this.target.dateEnd - this.today) / 86400000 + 1;
@@ -123,7 +124,7 @@ export default class Glance extends React.Component {
   _doPunch(target) {
     if (target) {
       this.target = target;
-      let doneTotal = this.target.total;
+      let doneTotal = this.target.doneTotal;
       let progress = 100 * doneTotal / this.expectTotal;
       this.setState({
         showModal: false,

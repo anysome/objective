@@ -23,8 +23,9 @@ export default class Timer extends React.Component {
     if (this.data !== nextProps.data) {
       this.data = nextProps.data;
       if (this.data.reminder) {
+        console.log(this.data.reminder);
         this.setState({
-          date: new Date(nextProps.data.reminder)
+          date: moment(this.data.reminder, 'hh:mm:ss').toDate()
         });
       } else {
         this.setState({

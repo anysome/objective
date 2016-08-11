@@ -102,7 +102,7 @@ export default class Project extends React.Component {
               }
             );
             if (result.success) {
-              airloy.event.emit(EventTypes.agendaChange);
+              airloy.event.emit(EventTypes.agendaAdd, result.info);
               rowData.arranged = true;
               this.listSource.update(util.clone(rowData));
               this.setState({
