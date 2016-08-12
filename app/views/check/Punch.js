@@ -47,8 +47,8 @@ export default class Punch extends React.Component {
       hang();
       let result = await airloy.net.httpGet(api.target.punch, {
         id: this.target.id,
-        amount: increasement
-        //remark: this.state.remark,
+        amount: increasement,
+        remark: this.state.remark
         //share: this.state.toShare
       });
       hang(false);

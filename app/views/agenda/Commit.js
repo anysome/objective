@@ -80,7 +80,8 @@ export default class Commit extends React.Component {
       hang();
       let result = await airloy.net.httpPost(api.agenda.finish, {
         id: agenda.id,
-        amount: amount
+        amount: amount,
+        remark: this.state.remark
       });
       hang(false);
       if (result.success) {

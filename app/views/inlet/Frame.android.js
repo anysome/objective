@@ -38,16 +38,38 @@ export default class Main extends React.Component {
           name => this.icons.set(name, <Icon name={name} size={24} color={colors.accent}/>)
     );
     AppState.addEventListener('change', this._handleAppStateChange);
+    this._autoSchedule();
 
     BackAndroid.addEventListener('hardwareBackPress', function() {
-
       return false;
     });
+  }
+
+  async _autoSchedule() {
+    let lastScheduleDate = await airloy.store.getItem('target.auto.schedule.date');
+    if (this.today != lastScheduleDate) {
+      await airloy.net.httpGet(api.target.schedule);
+      airloy.store.setItem('target.auto.schedule.date', '' + this.today);
+      console.debug('-------------------- did schedule');
+    }
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
     console.log(`-------- ${this.name} unmounting`);
+  }
+
+  _handleAppStateChange(currentAppState) {
+    if (currentAppState === 'active') {
+      if (new Date().getTime() - this.today > 86400000) {
+        this.today = util.getTodayStart();
+        this._autoSchedule();
+        airloy.event.emit(EventTypes.targetChange);
+        airloy.event.emit(EventTypes.agendaChange);
+        airloy.event.emit(EventTypes.meChange);
+      }
+      console.log(' current time = ' + this.today);
+    }
   }
 
   getToday() {
@@ -70,19 +92,6 @@ export default class Main extends React.Component {
 
   getIcon(iconName) {
     return this.icons.get(iconName);
-  }
-
-  _handleAppStateChange(currentAppState) {
-    if (currentAppState === 'active') {
-      if (new Date().getTime() - this.today > 86400000) {
-        this.today = util.getTodayStart();
-        airloy.net.httpGet(api.check.list);
-        airloy.event.emit(EventTypes.targetChange);
-        airloy.event.emit(EventTypes.agendaChange);
-        airloy.event.emit(EventTypes.meChange);
-      }
-      console.log(' current time = ' + this.today);
-    }
   }
 
   _openAdd() {

@@ -31,14 +31,24 @@ export default class Frame extends React.Component {
 	}
 
 	componentWillMount() {
-		// draw icon images for later use case
+		// draw icon images for later use
 		['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
       'ios-create-outline', 'ios-trash-outline'].forEach(name => {
 				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
     AppState.addEventListener('change', this._handleAppStateChange);
+    this._autoSchedule();
 	}
+
+  async _autoSchedule() {
+    let lastScheduleDate = await airloy.store.getItem('target.auto.schedule.date');
+    if (this.today != lastScheduleDate) {
+      await airloy.net.httpGet(api.target.schedule);
+      airloy.store.setItem('target.auto.schedule.date', '' + this.today);
+      console.debug('-------------------- did schedule');
+    }
+  }
 
 	componentWillUnmount() {
 		PushNotificationIOS.removeEventListener('notification', this._onNotification);
@@ -50,7 +60,7 @@ export default class Frame extends React.Component {
 		if ( currentAppState === 'active') {
 			if ( new Date().getTime() - this.today > 86400000 ) {
 				this.today = util.getTodayStart();
-				airloy.net.httpGet(api.check.list);
+        this._autoSchedule();
 				airloy.event.emit(EventTypes.targetChange);
 				airloy.event.emit(EventTypes.agendaChange);
 				airloy.event.emit(EventTypes.meChange);
