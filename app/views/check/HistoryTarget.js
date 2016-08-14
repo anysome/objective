@@ -130,7 +130,9 @@ export default class HistoryTarget extends React.Component {
   render() {
     return (
       <View style={styles.flex}>
-        <ListView initialListSize={10}
+        <ListView
+                  enableEmptySections={true}
+                  initialListSize={10}
                   pageSize={5}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}

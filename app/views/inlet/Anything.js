@@ -23,7 +23,6 @@ export default class Anything extends React.Component {
     if (typeof visible === 'undefined') {
       visible = true;
     }
-    console.log('init visible = ' + visible);
     this.state = {
       input: '',
       tip: '添加事项到今日待办, 保存点击今日',
@@ -103,7 +102,8 @@ export default class Anything extends React.Component {
   async _saveToday(title, detail) {
     let agenda = {
       title: title,
-      detail: detail
+      detail: detail,
+      today: new Date()
     };
     let result = await airloy.net.httpPost(api.agenda.add, agenda);
     if (result.success) {
@@ -134,7 +134,7 @@ export default class Anything extends React.Component {
       title: title,
       detail: detail
     };
-    let result = await airloy.net.httpPost(api.inbox.add, chore);
+    let result = await airloy.net.httpPost(api.chore.add, chore);
     if (result.success) {
       airloy.event.emit('chore.add', result.info);
       this._cleanCloseOrContinuous(`"${title}" 已添加.`);
@@ -153,7 +153,7 @@ export default class Anything extends React.Component {
       dateEnd: endDay.toDate(),
       priority: 1,
       frequency: '1',
-      times: 1,
+      requiredAmount: 1,
       unit: '0',
       type: '1'
     };
@@ -175,7 +175,7 @@ export default class Anything extends React.Component {
       dateEnd: moment().add(300, 'days').toDate(),
       priority: 2,
       frequency: '4',
-      times: 100,
+      requiredAmount: 100,
       unit: '0',
       type: '4'
     };
@@ -196,7 +196,7 @@ export default class Anything extends React.Component {
       dateEnd: moment().add(1000, 'days').toDate(),
       priority: 3,
       frequency: '4',
-      times: 1000,
+      requiredAmount: 1000,
       unit: '1',
       type: '5'
     };
