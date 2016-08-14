@@ -51,8 +51,18 @@ export default class Calendar extends React.Component {
     });
     if (result.success) {
       for (let punch of result.info) {
-        this.actives.set(punch.today, 'fill');
-        punch.doneAmount > 1 && this.notes.set(punch.today, punch.doneAmount);
+        switch (punch.doneAmount) {
+          case 0:
+            this.actives.set(punch.today, 'border');
+            break;
+          case 1:
+            this.actives.set(punch.today, 'fill');
+            break;
+          default:
+            this.actives.set(punch.today, 'fill');
+            this.notes.set(punch.today, punch.doneAmount);
+            break;
+        }
       }
       this.setState({
         loaded: true

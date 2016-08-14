@@ -42,20 +42,20 @@ export default class Timeline extends React.Component {
     if ( rowData.detail ) {
       return (
         <View style={style.rowBig}>
-          <Text style={style.progress}>+ {rowData.doneAmount}</Text>
+          <Text style={style.progress}>{rowData.doneAmount ? '+ ' + rowData.doneAmount : '-'}</Text>
           <Text style={style.progress}>{rowData.doneTotal}</Text>
           <View style={style.body}>
             <Text style={styles.text}>{rowData.detail}</Text>
-            <Text style={style.hint}>{moment(rowData.doneTime).calendar()}</Text>
+            <Text style={style.hint}>{moment(rowData.doneTime||rowData.today).calendar()}</Text>
           </View>
         </View>
       );
     } else {
       return (
         <View style={style.row}>
-          <Text style={style.progress}>+ {rowData.doneAmount}</Text>
+          <Text style={style.progress}>{rowData.doneAmount ? '+ ' + rowData.doneAmount : '-'}</Text>
           <Text style={style.progress}>{rowData.doneTotal}</Text>
-          <Text style={styles.hint}>{moment(rowData.doneTime).calendar()}</Text>
+          <Text style={styles.hint}>{moment(rowData.doneTime||rowData.today).calendar()}</Text>
         </View>
       );
     }
@@ -111,7 +111,7 @@ const style = StyleSheet.create({
   hint: {
     color: colors.border,
     fontSize: 12,
-    marginTop: 3,
+    marginTop: 3
   },
   body: {
     flex: 1,

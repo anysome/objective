@@ -41,7 +41,7 @@ export default class Commit extends React.Component {
       this.state.toShare = false;
     }
     if (nextProps.data.doneType === '0') {
-      let shareable = nextProps.data.targetId != null;
+      let shareable = false;//nextProps.data.targetId != null;
       let tip = shareable && this.state.toShare ? '我要分享...' : '记录一下...';
       this.setState({
         editable: false,
@@ -55,7 +55,7 @@ export default class Commit extends React.Component {
       let tip = this.state.toShare ? '我要分享...' : '记录一下...';
       this.setState({
         editable: true,
-        shareable: true,
+        shareable: false,//true,
         inputColor: colors.accent,
         remark: '',
         output: '',

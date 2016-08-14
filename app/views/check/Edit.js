@@ -102,6 +102,7 @@ export default class Edit extends React.Component {
           onPress: async () => {
             hang();
             let result = await airloy.net.httpGet(api.target.remove, {id: this.target.id});
+            console.debug("to delete target id = " + this.target.id);
             hang(false);
             if (result.success) {
               airloy.event.emit(EventTypes.targetChange);
@@ -665,16 +666,17 @@ export default class Edit extends React.Component {
     if (route.rightButtonIcon) {
       route.onRightButtonPress = () => {
         ActionSheet.showActionSheetWithOptions({
-            options: ['共享', '删除', '取消'],
-            cancelButtonIndex: 2,
-            destructiveButtonIndex: 1,
+            // options: ['共享', '删除', '取消'],
+            options: ['删除', '取消'],
+            cancelButtonIndex: 1,
+            destructiveButtonIndex: 0,
             tintColor: colors.dark1
           },
           async(buttonIndex) => {
             switch (buttonIndex) {
-              case 2:
-                break;
               case 1:
+                break;
+              case 0:
                 this._toDelete();
                 break;
               default:

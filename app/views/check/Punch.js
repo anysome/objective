@@ -97,11 +97,11 @@ export default class Punch extends React.Component {
                        defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
-            <TouchableWithoutFeedback onPress={() => this._switch()}>
+            { false && <TouchableWithoutFeedback onPress={() => this._switch()}>
               <Icon name={this.state.toShare ? 'md-switch' : 'md-switch'}
                     size={36} style={style.icon}
                     color={ this.state.toShare ? colors.accent : colors.border}/>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> }
             <Icon.Button name='md-checkmark' color={colors.light1}
                          underlayColor={colors.light1}
                          backgroundColor={colors.accent}
