@@ -10,6 +10,7 @@ import Net from './Net';
 
 const store = new Store();
 const event = new Event();
+const device = new Device();
 let auth = null;
 let net = new Net({
   auth: auth,
@@ -17,7 +18,7 @@ let net = new Net({
 });
 
 let Airloy = {
-  device: Device,
+  device: device,
   auth: auth,
   store: store,
   event: event,
@@ -32,7 +33,8 @@ export function init(MyAuth, config) {
     client: config.clientKey,
     secret: config.clientSecret,
     event: event,
-    store: store
+    store: store,
+    device: device
   });
   Airloy.auth = auth;
   Airloy.net.config({

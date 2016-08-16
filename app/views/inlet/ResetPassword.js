@@ -34,9 +34,8 @@ export default class ResetPassword extends React.Component {
       return;
     }
     hang();
-    let result = await airloy.net.httpPost(api.public.auth, {
-      account: this._account.value,
-      email: this._email.value
+    let result = await airloy.net.httpGet(api.public.auth, {
+      account: this._email.value
     });
     hang(false);
     if (result.success) {
@@ -72,9 +71,9 @@ export default class ResetPassword extends React.Component {
       return;
     }
     hang();
-    let result = await airloy.net.httpPost(api.public.resetPassword, {
+    let result = await airloy.net.httpPost(api.public.password, {
       account: this._account.value,
-      code: this._code.value,
+      authCode: this._code.value,
       password: this._pwd1.value
     });
     hang(false);

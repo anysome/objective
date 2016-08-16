@@ -2,14 +2,12 @@
  * Created by Layman(http://github.com/anysome) on 16/2/20.
  */
 
-import Device from '../Device';
 import Auth from '../Auth';
 import rc4 from './rc4';
 import md5 from 'md5';
 import base64 from 'base-64';
 
 let _loginTime = 0,
-  _device = '',
   _auth = '';
 
 
@@ -19,17 +17,7 @@ export default class Rc4Auth extends Auth {
     super(args);
     this._secret = args.secret || 'airloy.rc4';
     this._store = args.store;
-    this._init();
-  }
-
-  async _init() {
-    let deviceId = await this._store.getItem('airloy.device.id');
-    if (deviceId) {
-      _device = deviceId;
-    } else {
-      _device = Device.getIdentifier();
-      this._store.setItem('airloy.device.id', _device);
-    }
+    this._device = args.device;
   }
 
   formUser(account, password) {
@@ -37,7 +25,7 @@ export default class Rc4Auth extends Auth {
     return {
       account: account,
       password: password,
-      device: _device,
+      device: this._device.getIdentifier(),
       loginTime: _loginTime
     };
   }
@@ -114,7 +102,7 @@ export default class Rc4Auth extends Auth {
   }
 
   _makeAuth() {
-    let str = this._address + '`' + _device;
+    let str = this._address + '`' + this._device.getIdentifier();
     let key = md5(_loginTime + this._secret);
     str = rc4(str, key);
     let b64 = this._passport + ':' + str;

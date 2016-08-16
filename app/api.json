@@ -1,10 +1,10 @@
 {
   "public": {
-    "login": "pub/sign.json",
-    "taste": "pub/try.json",
+    "sign": "pub/sign.json",
+    "try": "pub/try.json",
     "auth": "pub/authorize.json",
-    "resetPassword": "pub/repassword.json",
-    "sign": {
+    "password": "pub/password.json",
+    "login": {
       "weibo": "pub/weibo/sign.json"
     }
   },

@@ -128,7 +128,6 @@ export default class Me extends Controller {
       name: this.user.name,
       id: this.user.id
     };
-    this._openSocial();
     this.props.navigator.pop();
   }
 

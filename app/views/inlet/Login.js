@@ -64,7 +64,7 @@ export default class Login extends React.Component {
     }
     hang();
     let user = airloy.auth.formUser(this._email.value, this._password.value);
-    let result = await airloy.net.httpPost(api.public.login, user);
+    let result = await airloy.net.httpPost(api.public.sign, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       analytics.onProfileSignIn('' + result.info.id);
@@ -78,7 +78,7 @@ export default class Login extends React.Component {
   async _justIn() {
     hang();
     let user = airloy.auth.formUser(airloy.device.getIdentifier(), '');
-    let result = await airloy.net.httpPost(api.public.taste, user);
+    let result = await airloy.net.httpPost(api.public.try, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       analytics.onProfileSignIn('' + result.info.id);
@@ -90,20 +90,19 @@ export default class Login extends React.Component {
   }
 
   _weiboLogin() {
-    console.log('to login by weibo');
     WeiboAPI.login({scope: 'all', redirectURI: 'http://asfun.cn/m/login/weibo.html'}).then(
       async (response) => {
         hang();
         let user = airloy.auth.formUser(airloy.device.getIdentifier(), '');
         let token = {
           accessToken: response.accessToken,
-          userID: response.userID,
+          uid: response.userID,
           expirationDate: response.expirationDate,
           refreshToken: response.refreshToken,
           device: user.device,
           loginTime: user.loginTime
         };
-        let result = await airloy.net.httpPost(api.public.sign.weibo, token);
+        let result = await airloy.net.httpPost(api.public.login.weibo, token);
         if (result.success) {
           await airloy.auth.saveUser(result.info);
           analytics.onProfileSignIn('' + result.info.id);

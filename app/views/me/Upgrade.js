@@ -26,12 +26,8 @@ export default class Setting extends React.Component {
       this._password.focus();
       return;
     }
-    let user = {
-      account: this._email.value,
-      password: this._password.value,
-      email: this._email.value,
-      name: this._email.value
-    };
+    let user = airloy.auth.formUser(this._email.value, this._password.value);
+    console.debug('new account ----------------- ' + JSON.stringify(user));
     hang();
     let result = await airloy.net.httpPost(api.me.upgrade, user);
     if (result.success) {
