@@ -30,7 +30,7 @@ export default class Happiness extends React.Component {
   }
 
   async reload() {
-    let result = await airloy.net.httpGet(api.me.reward.total, null);
+    let result = await airloy.net.httpGet(api.reward.total);
     if (result.success) {
       this.setState({
         reward: result.info
@@ -38,7 +38,7 @@ export default class Happiness extends React.Component {
     } else {
       toast(L(result.message));
     }
-    let result2 = await airloy.net.httpGet(api.me.reward.recent, null);
+    let result2 = await airloy.net.httpGet(api.reward.list);
     if (result2.success) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(result2.info)

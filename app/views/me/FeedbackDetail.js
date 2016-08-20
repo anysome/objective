@@ -103,6 +103,7 @@ export default class FeedbackDetail extends React.Component {
           回复
         </Button>
         <ListView style={style.list} initialListSize={10}
+                  enableEmptySections={true}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}
                   renderSeparator={this._renderSeparator}

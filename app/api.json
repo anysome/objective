@@ -62,11 +62,11 @@
       "history": "target/list/history.json"
     }
   },
+  "reward": {
+    "total": "reward/total.json",
+    "list": "reward/list.json"
+  },
   "me": {
-    "reward": {
-      "total": "reward/agenda.json",
-      "recent": "reward/agenda/recent.json"
-    },
     "upgrade": "user/upgrade.json",
     "open": "social/open.json",
     "token": {
@@ -74,11 +74,11 @@
     }
   },
   "feedback": {
-    "list": "conta/feedback/mime.json",
-    "add": "conta/feedback/add.json",
-    "fellow": "conta/feedback/fellow.json",
-    "remove": "conta/feedback/delete.json",
-    "answer": "conta/feedback/answer.json"
+    "list": "oper/feedback/mime.json",
+    "add": "oper/feedback/add.json",
+    "fellow": "oper/feedback/fellow.json",
+    "remove": "oper/feedback/delete.json",
+    "answer": "oper/feedback/answer.json"
   },
   "content": {
     "list": {

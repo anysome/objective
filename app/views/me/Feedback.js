@@ -134,6 +134,7 @@ export default class Feedback extends React.Component {
           反馈
         </Button>
         <ListView style={style.list} initialListSize={10}
+                  enableEmptySections={true}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}
                   renderSeparator={this._renderSeparator}
