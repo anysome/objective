@@ -14,7 +14,7 @@ import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
 import EventTypes from '../../logic/EventTypes';
 
-import EditItem from './EditItem';
+import EditTask from './EditTask';
 
 export default class Project extends React.Component {
 
@@ -39,7 +39,7 @@ export default class Project extends React.Component {
     route.onRightButtonPress = () => {
       this.props.navigator.push({
         title: '添加子任务',
-        component: EditItem,
+        component: EditTask,
         passProps: {
           projectId: this.project.id,
           editable: true,
@@ -51,6 +51,9 @@ export default class Project extends React.Component {
     util.isAndroid() ?
       this.props.navigator.replaceAtIndex(route, -1) :
       this.props.navigator.replace(route);
+    airloy.event.on(EventTypes.taskChange, ()=> {
+      this.reload();
+    });
   }
 
   componentDidMount() {
@@ -59,6 +62,7 @@ export default class Project extends React.Component {
   }
 
   componentWillUnMount() {
+    airloy.event.off(EventTypes.taskChange);
     analytics.onPageEnd('page_project');
   }
 
@@ -70,9 +74,7 @@ export default class Project extends React.Component {
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
-      });
-      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas),
         isRefreshing: false
       });
     } else {
@@ -141,7 +143,7 @@ export default class Project extends React.Component {
   _pressRow(rowData, editable) {
     this.props.navigator.push({
       title: editable ? '修改子任务' : '查看子任务',
-      component: EditItem,
+      component: EditTask,
       rightButtonIcon: this.props.nextIcon,
       passProps: {
         data: rowData,

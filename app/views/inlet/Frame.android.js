@@ -12,9 +12,9 @@ import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
 import Agenda from '../agenda/Agenda';
-import Target from '../check/Target';
+import Target from '../target/Target';
 import Anything from './Anything';
-import Me from '../me/Me';
+import Chore from '../chore/Chore';
 import Discover from '../discover/Discover';
 
 
@@ -34,7 +34,7 @@ export default class Main extends React.Component {
   componentWillMount() {
     // draw icon images for later use case
     ['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
-      'ios-create-outline', 'ios-trash-outline'].forEach(
+      'ios-create-outline', 'ios-trash-outline', 'ios-list', 'ios-time-outline'].forEach(
           name => this.icons.set(name, <Icon name={name} size={24} color={colors.accent}/>)
     );
     AppState.addEventListener('change', this._handleAppStateChange);
@@ -117,13 +117,13 @@ export default class Main extends React.Component {
           <NavigatorWithBar component={Agenda} navigationBarHidden={false} title='待办' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={this.state.currentPage === 'Target'}
-          title="目标"
+          selected={this.state.currentPage === 'Chore'}
+          title="备忘"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-checkmark-circle-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='md-checkmark-circle' size={this.iconSize} color={colors.accent} />}
-          onPress={() => this._selectTab('Target')}>
-          <NavigatorWithBar component={Target} navigationBarHidden={false} title='目标' frame={this}/>
+          renderIcon={() => <Icon name='ios-basket-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='ios-basket' size={this.iconSize} color={colors.accent} />}
+          onPress={() => this._selectTab('Chore')}>
+          <NavigatorWithBar component={Chore} navigationBarHidden={false} title='备忘' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Anything'}
@@ -133,13 +133,13 @@ export default class Main extends React.Component {
           <Anything onClose={() => this.closeAdd()}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={this.state.currentPage === 'Me'}
-          title="我"
+          selected={this.state.currentPage === 'Target'}
+          title="目标"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-person-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-contact' size={this.iconSize} color={colors.accent} />}
-          onPress={() => this._selectTab('Me')}>
-          <NavigatorWithBar component={Me} navigationBarHidden={true} title='我' frame={this}/>
+          renderIcon={() => <Icon name='ios-checkmark-circle-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='md-checkmark-circle' size={this.iconSize} color={colors.accent} />}
+          onPress={() => this._selectTab('Target')}>
+          <NavigatorWithBar component={Target} navigationBarHidden={false} title='目标' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Discover'}

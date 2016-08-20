@@ -11,7 +11,7 @@ import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import EventTypes from '../../logic/EventTypes';
 
-export default class EditItem extends React.Component {
+export default class EditTask extends React.Component {
 
   constructor(props) {
     super(props);

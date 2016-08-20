@@ -77,9 +77,7 @@ export default class Edit extends React.Component {
           case 1 :
             hang();
             let result = await airloy.net.httpGet(api.chore.to.project, {id: this.data.id});
-            if (result.success) {
-              this.props.onProjectized(this.data);
-            } else {
+            if (!result.success) {
               toast(L(result.message));
             }
             hang(false);
@@ -137,9 +135,7 @@ export default class Edit extends React.Component {
             id: this.data.id,
             projectId: projects[buttonIndex].id
           });
-          if (result.success) {
-            this.props.onProjectized(this.data);
-          } else {
+          if (!result.success) {
             toast(L(result.message));
           }
           hang(false);

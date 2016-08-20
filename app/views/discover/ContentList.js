@@ -13,7 +13,6 @@ import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import Content from './Content';
-import Facade from './Facade';
 
 export default class ContentList extends React.Component {
 
@@ -61,21 +60,6 @@ export default class ContentList extends React.Component {
     }
   }
 
-  async _toUser(userId) {
-    let result = await airloy.net.httpGet(api.discover.user.read, {id: userId});
-    if (result.success) {
-      this.props.navigator.push({
-        title: '个人主页',
-        component: Facade,
-        passProps: {
-          data: result.info
-        }
-      });
-    } else {
-      toast(L(result.message));
-    }
-  }
-
   updateRow(rowData) {
     if (rowData) {
       this.listSource.update(util.clone(rowData));
@@ -96,11 +80,9 @@ export default class ContentList extends React.Component {
     return (
       <TouchableOpacity style={style.row} onPress={() => this._pressRow(rowData)}>
         <View style={style.header}>
-          <TouchableOpacity onPress={() => this._toUser(rowData.userId)}>
-            <Image style={style.avatar}
-                   source={{uri:`${config.host.image}${rowData.userAvatar}-100`}}
-                   defaultSource={require('../../../resources/images/avatar.png')}/>
-          </TouchableOpacity>
+          <Image style={style.avatar}
+                 source={{uri:`${config.host.image}${rowData.userAvatar}-100`}}
+                 defaultSource={require('../../../resources/images/avatar.png')}/>
           <View style={styles.containerV}>
             <View style={styles.containerF}>
               <Text style={styles.text}>{rowData.userName}</Text>

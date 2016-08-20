@@ -10,9 +10,9 @@ import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
 import Agenda from '../agenda/Agenda';
-import Target from '../check/Target';
+import Target from '../target/Target';
 import Anything from './Anything';
-import Me from '../me/Me';
+import Chore from '../chore/Chore';
 import Discover from '../discover/Discover';
 
 
@@ -22,7 +22,7 @@ export default class Frame extends React.Component {
 		super();
 		this.lastPage = null;
 		this.state = {
-			currentPage: 'Me'
+			currentPage: 'Discover'
 		};
     this.iconSize = 28;
 		this.icons = new Map();
@@ -33,7 +33,7 @@ export default class Frame extends React.Component {
 	componentWillMount() {
 		// draw icon images for later use
 		['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
-      'ios-create-outline', 'ios-trash-outline'].forEach(name => {
+      'ios-create-outline', 'ios-trash-outline', 'ios-list', 'ios-time-outline'].forEach(name => {
 				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
 		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
@@ -128,9 +128,9 @@ export default class Frame extends React.Component {
 				component: component,
 				title: title,
 				passProps:{
-					frame: this,
-			  	}
-        	}}
+					frame: this
+				}
+      }}
 		/>;
 	}
 
@@ -147,29 +147,29 @@ export default class Frame extends React.Component {
 					onPress={() => this._selectTab('Agenda')}>
 					{this._renderNavigator(Agenda, "待办")}
 				</Icon.TabBarItem>
-				<Icon.TabBarItem
-					title="目标"
-					iconName="ios-checkmark-circle-outline"
-					selectedIconName="md-checkmark-circle"
-					iconSize={this.iconSize}
-					selected={this.state.currentPage === 'Target'}
-					onPress={() => this._selectTab('Target')}>
-					{this._renderNavigator(Target, "目标")}
-				</Icon.TabBarItem>
+        <Icon.TabBarItem
+          title="备忘"
+          iconName="ios-basket-outline"
+          selectedIconName="ios-basket"
+          iconSize={this.iconSize}
+          selected={this.state.currentPage === 'Chore'}
+          onPress={() => this._selectTab('Chore')}>
+          {this._renderNavigator(Chore, "备忘")}
+        </Icon.TabBarItem>
 				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize}
 								 selected={this.state.currentPage === 'Anything'}
 								 onPress={() => this._openAdd()}>
 					<Anything onClose={() => this.closeAdd()} />
 				</Icon.TabBarItem>
-				<Icon.TabBarItem
-					title="我"
-					iconName="ios-person-outline"
-					selectedIconName="ios-contact"
-					iconSize={this.iconSize}
-					selected={this.state.currentPage === 'Me'}
-					onPress={() => this._selectTab('Me')}>
-					{this._renderNavigator(Me, "我", true)}
-				</Icon.TabBarItem>
+        <Icon.TabBarItem
+          title="目标"
+          iconName="ios-checkmark-circle-outline"
+          selectedIconName="md-checkmark-circle"
+          iconSize={this.iconSize}
+          selected={this.state.currentPage === 'Target'}
+          onPress={() => this._selectTab('Target')}>
+          {this._renderNavigator(Target, "目标")}
+        </Icon.TabBarItem>
 				<Icon.TabBarItem
 					title="发现"
 					iconName="ios-navigate-outline"

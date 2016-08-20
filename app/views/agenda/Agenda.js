@@ -17,8 +17,8 @@ import ActionSheet from '../../widgets/ActionSheet';
 import ListRow from './ListRow';
 import Edit from './Edit';
 import Commit from './Commit';
-import Inbox from './../inbox/Inbox';
 import Timer from './Timer';
+import Dones from './Dones';
 
 
 export default class Agenda extends Controller {
@@ -43,17 +43,11 @@ export default class Agenda extends Controller {
 
   componentWillMount() {
     if (this.route) {// Logout and then login cause currentRoute to be null. Maybe a bug.
-      this.route.leftButtonIcon = this.getIcon('ios-filing-outline');
+      this.route.leftButtonIcon = this.getIcon('ios-time-outline');
       this.route.onLeftButtonPress = () => {
         this.forward({
-          title: '待定',
-          component: Inbox,
-          rightButtonIcon: this.getIcon('ios-more-outline'),
-          passProps: {
-            today: this.today,
-            trashIcon: this.getIcon('ios-trash-outline'),
-            plusIcon: this.getIcon('ios-add')
-          }
+          title: '近期完成',
+          component: Dones
         });
       };
       this.route.rightButtonIcon = this.getIcon('ios-create-outline');
@@ -221,6 +215,9 @@ export default class Agenda extends Controller {
                           let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
                           if (result.success) {
                             rowData.targetId && airloy.event.emit(EventTypes.targetChange);
+                            rowData.catalog && airloy.event.emit(EventTypes.choreChange);
+                            rowData.projectId && airloy.event.emit(EventTypes.taskChange);
+
                             LocalNotifications.cancelAgenda(rowData.id);
                             this.listSource.remove(rowData);
                             this._sortList();

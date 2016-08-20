@@ -103,6 +103,8 @@ export default class Commit extends React.Component {
             roundDateEnd: agenda.roundDateEnd
           });
         }
+        agenda.projectId && airloy.event.emit(EventTypes.taskChange);
+
         agenda.status = '1';
         agenda.doneTime = new Date();
         agenda.detail = this.state.remark;

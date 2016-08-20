@@ -16,5 +16,10 @@ export default {
   targetChange: 'target.change',
   targetPunch: 'target.punch',
 
+  choreChange: 'chore.change',
+  choreAdd: 'chore.add',
+
+  taskChange: 'task.change',
+
   meChange: 'me.change'
 }

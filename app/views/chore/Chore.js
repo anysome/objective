@@ -1,30 +1,29 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/3/17.
+ * Created by Layman <anysome@gmail.com> (http://github.com/anysome) on 16/8/20.
  */
 import React from 'react';
 import {StyleSheet, RefreshControl, ListView,
   View, Text, LayoutAnimation, TouchableOpacity, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import moment from 'moment';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
-import ListSectionView from '../../widgets/ListSectionView';
-import ActionSheet from '../../widgets/ActionSheet';
 import EventTypes from '../../logic/EventTypes';
 
-import Edit from './Edit';
-import Project from './Project';
-import EditItem from './EditItem';
+import Controller from '../Controller';
+import ListSectionView from '../../widgets/ListSectionView';
+import ActionSheet from '../../widgets/ActionSheet';
 
-export default class Inbox extends React.Component {
+import Edit from './Edit';
+import Listing from './Listing';
+
+export default class Chore extends Controller {
 
   constructor(props) {
     super(props);
+    this.name = 'Chore';
     this.listSource = null;
-    this.projectList = null;
-    this.today = props.today;
     this.state = {
       isRefreshing: true,
       dataSource: new ListView.DataSource({
@@ -34,81 +33,77 @@ export default class Inbox extends React.Component {
         sectionHeaderHasChanged: (s1, s2) => s1 !== s2
       })
     };
-    this.rightButtonIcon = null;
   }
 
   componentWillMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    this.rightButtonIcon = route.rightButtonIcon;
-    route.onRightButtonPress = () => {
-      let BUTTONS = ['新备忘', '新分类清单', '清空回收站', '取消'];
-      ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          cancelButtonIndex: 3,
-          destructiveButtonIndex: 2,
-          tintColor: colors.dark1
-        },
-        async (buttonIndex) => {
-          switch (buttonIndex) {
-            case 0 :
-              this.props.navigator.push({
-                title: '新增备忘',
-                component: Edit,
-                passProps: {
-                  sectionId: 0,
-                  onUpdated: (rowData) => this.updateRow(rowData)
+    if (this.route) {// Logout and then login cause currentRoute to be null. Maybe a bug.
+      this.route.rightButtonIcon = this.getIcon('ios-more-outline');
+      this.route.onRightButtonPress = () => {
+        let BUTTONS = ['新备忘', '清空回收站', '取消'];
+        ActionSheet.showActionSheetWithOptions({
+            options: BUTTONS,
+            cancelButtonIndex: 2,
+            destructiveButtonIndex: 1,
+            tintColor: colors.dark1
+          },
+          async (buttonIndex) => {
+            switch (buttonIndex) {
+              case 0 :
+                this.props.navigator.push({
+                  title: '新增备忘',
+                  component: Edit,
+                  passProps: {
+                    sectionId: 0,
+                    onUpdated: (rowData) => this.updateRow(rowData)
+                  }
+                });
+                break;
+              case 1 :
+                hang();
+                let result = await airloy.net.httpGet(api.chore.clean);
+                if (result.success) {
+                  result.info && this.reload();
+                } else {
+                  toast(L(result.message));
                 }
-              });
-              break;
-            case 1 :
-              this.props.navigator.push({
-                title: '新增分类清单',
-                component: Edit,
-                passProps: {
-                  sectionId: 1,
-                  onUpdated: (rowData) => this.updateRow(rowData)
-                }
-              });
-              break;
-            case 2 :
-              hang();
-              let result = await airloy.net.httpGet(api.chore.clean);
-              if (result.success) {
-                result.info && this.reload();
-              } else {
-                toast(L(result.message));
-              }
-              hang(false);
-              break;
+                hang(false);
+                break;
+            }
           }
-        }
-      );
-    };
-    util.isAndroid() ? this.props.navigator.replacePrevious(route) : this.props.navigator.replace(route);
+        );
+      };
+      this.route.leftButtonIcon = this.getIcon('ios-list');
+      this.route.onLeftButtonPress = () => {
+        this.forward({
+          title: '分类清单',
+          component: Listing,
+          rightButtonIcon: this.getIcon('ios-add'),
+          passProps: {
+            today: this.today,
+            trashIcon: this.getIcon('ios-trash-outline'),
+            plusIcon: this.getIcon('ios-add')
+          }
+        });
+      };
+      util.isAndroid() || this.props.navigator.replace(this.route);
+    }
+    airloy.event.on(EventTypes.choreChange, ()=> {
+      // call network request or mark stale until page visible
+      this.visible ? this.reload() : this.markStale();
+    });
+    airloy.event.on(EventTypes.choreAdd, (chore)=> {
+      this.listSource.add(chore);
+      this._sortList();
+    });
   }
 
-  componentDidMount() {
-    analytics.onPageStart('page_inbox');
-    this.reload();
-  }
-
-  componentWillUnMount() {
-    analytics.onPageEnd('page_inbox');
-  }
-
-  async reload() {
+  async _reload() {
     this.setState({
       isRefreshing: true
     });
     let result = await airloy.net.httpGet(api.chore.list);
     if (result.success) {
       this.listSource = new ListSource(result.info);
-      let result2 = await airloy.net.httpGet(api.project.list.focus);
-      if (result2.success) {
-        this.listSource.concat(result2.info);
-      } else {
-        console.log('get project list error: ' + result2.message);
-      }
       this._sortList();
       this.setState({
         isRefreshing: false
@@ -123,78 +118,44 @@ export default class Inbox extends React.Component {
 
   _sortList() {
     let section0 = new ListSectionView.DataSource({id: 0, name: '收集箱'});
-    let section1 = new ListSectionView.DataSource({id: 1, name: '分类清单'});
-    let section2 = new ListSectionView.DataSource({id: 2, name: '回收站'});
+    let section1 = new ListSectionView.DataSource({id: 1, name: '回收站'});
     for (let rowData of this.listSource) {
-      this._sortRow(rowData, section0, section1, section2);
+      this._sortRow(rowData, section0, section1);
     }
     this.projectList = section1;
     this.setState({
       dataSource: this.state.dataSource.cloneWithRowsAndSections(
-        [section0, section1, section2],
-        [0, 1, 2],
-        [section0.rowIds, section1.rowIds, section2.rowIds]
+        [section0, section1],
+        [0, 1],
+        [section0.rowIds, section1.rowIds]
       )
     });
   }
 
-  _sortRow(rowData, section0, section1, section2) {
+  _sortRow(rowData, section0, section1) {
     var section;
-    if (rowData.catalog) {
-      if (rowData.arranged) return;
-      if (rowData.catalog === 'recycled') {
-        section = section2;
-      } else {
-        section = section0;
-      }
-    } else {
+    if (rowData.arranged) return;
+    if (rowData.catalog === 'recycled') {
       section = section1;
+    } else {
+      section = section0;
     }
     section.push(rowData);
   }
 
-  _toProject(rowData) {
+  _pressRow(rowData, sectionId) {
     this.props.navigator.push({
-      title: '修改清单',
+      title: '修改备忘',
       component: Edit,
-      rightButtonIcon: this.props.trashIcon,
+      rightButtonIcon: this.rightButtonIcon,
       passProps: {
         data: rowData,
-        sectionId: 1,
+        projects: this.projectList,
+        sectionId: sectionId,
         onUpdated: (rowData) => this.updateRow(rowData),
         onDeleted: (rowData) => this.deleteRow(rowData)
       }
     });
-  }
-
-  _pressRow(rowData, sectionId) {
-    if (sectionId === 1) {
-      this.props.navigator.push({
-        title: '分类清单',
-        component: Project,
-        rightButtonIcon: this.props.plusIcon,
-        passProps: {
-          data: rowData,
-          today: this.today,
-          nextIcon: this.props.trashIcon,
-          onUpdated: (rowData) => this.updateRow(rowData)
-        }
-      });
-    } else {
-      this.props.navigator.push({
-        title: '修改备忘',
-        component: Edit,
-        rightButtonIcon: this.rightButtonIcon,
-        passProps: {
-          data: rowData,
-          projects: this.projectList,
-          sectionId: sectionId,
-          onUpdated: (rowData) => this.updateRow(rowData),
-          onDeleted: (rowData) => this.deleteRow(rowData),
-          onProjectized: (rowData) => this.updateProjects(rowData)
-        }
-      });
-    }
   }
 
   _longPressRow(rowData) {
@@ -240,24 +201,6 @@ export default class Inbox extends React.Component {
     );
   }
 
-  _addTask(rowData) {
-    this.props.navigator.push({
-      title: '添加子任务',
-      component: EditItem,
-      passProps: {
-        projectId: rowData.id,
-        editable: true,
-        onUpdated: (task) => {
-          rowData.subTodo = rowData.subTodo + 1;
-          rowData.subTotal = rowData.subTotal + 1;
-          this.props.navigator.pop();
-          this.listSource.update(util.clone(rowData));
-          this._sortList();
-        }
-      }
-    });
-  }
-
   _toArrange(rowData) {
     let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
     let CANCEL_INDEX = 3;
@@ -298,52 +241,21 @@ export default class Inbox extends React.Component {
   deleteRow(rowData) {
     this.listSource.remove(rowData);
     this.props.navigator.pop();
-    if (rowData.catalog) {
-      this._sortList();
-    } else {
-      this.reload();
-    }
-  }
-
-  async updateProjects(rowData) {
-    hang();
-    this.listSource.remove(rowData);
-    // reload project list to get newest info
-    let result2 = await airloy.net.httpGet(api.project.list.focus);
-    if (result2.success) {
-      this.listSource.concat(result2.info);
-      this._sortList();
-    } else {
-      console.log('get project list error: ' + result2.message);
-    }
-    this.props.navigator.pop();
-    hang(false);
+    this._sortList();
   }
 
   _renderRow(rowData, sectionId, rowId) {
-    if (sectionId === 1) {
-      return (
-        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
-                          onLongPress={() => this._addTask(rowData)}>
-          <Icon size={28} name='ios-create-outline' style={style.icon} color={colors.border}
-                onPress={() => this._toProject(rowData)}/>
+    return (
+      <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
+                        onLongPress={() => this._longPressRow(rowData)}>
+        <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border}
+              onPress={() => this._toArrange(rowData)}/>
+        <View style={styles.flex}>
           <Text style={styles.title}>{rowData.title}</Text>
-          <Text style={styles.hint}>{rowData.subTodo} / {rowData.subTotal}</Text>
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
-                          onLongPress={() => this._longPressRow(rowData)}>
-          <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border}
-                onPress={() => this._toArrange(rowData)}/>
-          <View style={styles.flex}>
-            <Text style={styles.title}>{rowData.title}</Text>
-            {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
-          </View>
-        </TouchableOpacity>
-      );
-    }
+          {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
+        </View>
+      </TouchableOpacity>
+    );
   }
 
   _renderSectionHeader(sectionData, sectionId) {
@@ -377,6 +289,7 @@ export default class Inbox extends React.Component {
     );
   }
 }
+
 
 
 const style = StyleSheet.create({
