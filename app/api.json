@@ -62,54 +62,23 @@
       "history": "target/list/history.json"
     }
   },
+  "discover": {
+    "user": {
+      "upgrade": "user/upgrade.json"
+    },
+    "article": {
+      "list": "op/article/list.json"
+    }
+  },
   "reward": {
     "total": "reward/total.json",
     "list": "reward/list.json"
   },
-  "me": {
-    "upgrade": "user/upgrade.json",
-    "open": "social/open.json",
-    "token": {
-      "avatar": "user/avatar/upload/auth.json"
-    }
-  },
   "feedback": {
-    "list": "oper/feedback/mime.json",
-    "add": "oper/feedback/add.json",
-    "fellow": "oper/feedback/fellow.json",
-    "remove": "oper/feedback/delete.json",
-    "answer": "oper/feedback/answer.json"
-  },
-  "content": {
-    "list": {
-      "user": "social/content/user.json",
-      "public": "social/content/public.json",
-      "target": "social/content/target.json"
-    },
-    "detail": {
-      "likes": "social/content/like/list.json",
-      "like": "social/content/like.json",
-      "comments": "social/content/comment/list.json",
-      "comment": "social/content/comment/add.json",
-      "uncomment": "social/content/comment/delete.json"
-    }
-  },
-  "discover": {
-    "follows": "social/user/followers.json",
-    "fans": "social/user/fans.json",
-    "target": {
-      "public": "social/target/public.json",
-      "join": "social/target/join.json",
-      "share": "social/target/request.json"
-    },
-    "user": {
-      "read": "social/user/get.json",
-      "follow": "social/user/follow.json",
-      "unfollow": "social/user/unfollow.json",
-      "info": "social/user/info.json"
-    },
-    "article": {
-      "public": "sns/article/public.json"
-    }
+    "list": "op/feedback/mime.json",
+    "add": "op/feedback/add.json",
+    "fellow": "op/feedback/fellow.json",
+    "remove": "op/feedback/delete.json",
+    "answer": "op/feedback/answer.json"
   }
 }

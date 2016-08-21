@@ -16,29 +16,11 @@ export default class Punch extends React.Component {
     super(props);
     this.target = props.data;
     this.state = {
-      toShare: false,
       output: props.data.unit === '0' ? '1' : '',
       remark: '',
       tip: '记录一下...'
     };
     this._output = null;
-    this.sharedTargetIds = null;
-    this._init();
-  }
-
-  async _init() {
-    this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
-    this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
-    this.state.toShare = this.sharedTargetIds.indexOf(this.target.id) > -1;
-    console.log('to share = ' + this.state.toShare);
-  }
-
-  _switch() {
-    let tipText = this.state.toShare ? '记录一下...' : '我要分享...';
-    this.setState({
-      toShare: !this.state.toShare,
-      tip: tipText
-    });
   }
 
   async _commit() {
@@ -49,22 +31,9 @@ export default class Punch extends React.Component {
         id: this.target.id,
         amount: increasement,
         remark: this.state.remark
-        //share: this.state.toShare
       });
       hang(false);
       if (result.success) {
-        if (this.state.toShare) {
-          if (this.sharedTargetIds.indexOf(this.target.id) < 0) {
-            this.sharedTargetIds = this.sharedTargetIds + ',' + this.target.id;
-            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
-          }
-        } else {
-          if (this.sharedTargetIds.indexOf(this.target.id) > -1) {
-            this.sharedTargetIds = this.sharedTargetIds.replace(',' + this.target.id, '');
-            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
-            console.log('new ids after cancel ' + this.sharedTargetIds);
-          }
-        }
         toast('太给力了!');
         airloy.event.emit(EventTypes.agendaChange);
         airloy.event.emit(EventTypes.targetChange);
@@ -97,11 +66,6 @@ export default class Punch extends React.Component {
                        defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
-            { false && <TouchableWithoutFeedback onPress={() => this._switch()}>
-              <Icon name={this.state.toShare ? 'md-switch' : 'md-switch'}
-                    size={36} style={style.icon}
-                    color={ this.state.toShare ? colors.accent : colors.border}/>
-            </TouchableWithoutFeedback> }
             <Icon.Button name='md-checkmark' color={colors.light1}
                          underlayColor={colors.light1}
                          backgroundColor={colors.accent}

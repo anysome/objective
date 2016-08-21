@@ -37,7 +37,7 @@ export default class Feedback extends React.Component {
   }
 
   async reload() {
-    let result = await airloy.net.httpGet(api.feedback.list, null);
+    let result = await airloy.net.httpGet(api.feedback.list);
     if (result.success) {
       this.list = result.info;
       this.setState({

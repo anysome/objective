@@ -8,13 +8,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {analytics, config, airloy, styles, colors, api, L, toast} from '../../app';
 
 import Controller from '../Controller';
-import SharedContentList from './SharedContentList';
-import TargetList from './TargetList';
 import ArticleList from './ArticleList';
-import Happiness from '../me/Happiness';
-import Feedback from '../me/Feedback';
-import Upgrade from '../me/Upgrade';
-import Setting from '../me/Setting';
+import Happiness from './Happiness';
+import Feedback from './Feedback';
+import Upgrade from './Upgrade';
+import Setting from './Setting';
 
 export default class Discover extends Controller {
 
@@ -25,14 +23,6 @@ export default class Discover extends Controller {
     this.state = {
       accountType: this.user.accountType
     };
-  }
-
-  _toShare() {
-    this.forward({
-      title: '最新打卡',
-      component: SharedContentList
-    });
-    analytics.onEvent('click_shared_content_list');
   }
 
   _toArticle() {
@@ -81,14 +71,6 @@ export default class Discover extends Controller {
     this.props.navigator.pop();
   }
 
-  _toTarget() {
-    this.forward({
-      title: '淘目标',
-      component: TargetList
-    });
-    analytics.onEvent('click_target_store');
-  }
-
   _forward(title:String, component) {
     this.forward({
       title: title,
@@ -105,41 +87,30 @@ export default class Discover extends Controller {
     return (
       <ScrollView>
 
+        <View style={styles.section}>
         { this.state.accountType === 'astmp' ?
-          <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toUpgrade()}>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toUpgrade()}>
             <Text>安家落户</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
-          :
-          <View style={styles.section}>
-            <TouchableOpacity style={styles.sectionRow} onPress={() => this._toHappiness()}>
-              <Text>幸福指数</Text>
-              <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
-            </TouchableOpacity>
-            <View style={styles.hr}/>
-            <TouchableOpacity style={styles.sectionRow} onPress={() => this._toFeedback()}>
-              <Text>意见反馈</Text>
-              <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
-            </TouchableOpacity>
-          </View>
-        }
-
-        <View style={styles.section}>
-          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toShare()}>
-            <Text>最新打卡</Text>
+          : [
+          <TouchableOpacity style={styles.sectionRow} key={'1'} onPress={() => this._toHappiness()}>
+            <Text>幸福指数</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+          </TouchableOpacity> ,
+          <View style={styles.hr} key={'2'}/> ,
+          <TouchableOpacity style={styles.sectionRow} key={'3'} onPress={() => this._toFeedback()}>
+            <Text>意见反馈</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
+          ]
+        }
           <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toArticle()}>
             <Text>鸡汤文章</Text>
             <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
           </TouchableOpacity>
         </View>
-
-        <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._toTarget()}>
-          <Text>淘目标</Text>
-          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
-        </TouchableOpacity>
 
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('设置', Setting)}>
           <Text>设置</Text>

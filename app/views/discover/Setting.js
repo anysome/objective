@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Linking} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, styles, colors, airloy} from '../../app';
 
@@ -11,6 +12,9 @@ export default class Setting extends React.Component {
   constructor(props) {
     super(props);
     this.sourceLink = 'https://github.com/anysome/objective';
+    this.state = {
+      linkText: '欢迎改进APP源码'
+    };
   }
 
   _logout() {
@@ -24,6 +28,9 @@ export default class Setting extends React.Component {
         Linking.openURL(this.sourceLink);
       } else {
         console.log('Don\'t know how to open URI: ' + this.sourceLink);
+        this.setState({
+          linkText: this.sourceLink
+        });
       }
     });
   }
@@ -34,14 +41,11 @@ export default class Setting extends React.Component {
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={this._logout}>
           <Text style={style.link}>退出</Text>
         </TouchableOpacity>
-        <View style={styles.row}>
-          <View>
-            <Text>APP 代码全部开源, 欢迎上去提需求反馈或做些改进.</Text>
-            <TouchableOpacity activeOpacity={0.5} onPress={() => this._linkClick()}>
-              <Text style={styles.link}>{this.sourceLink}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+
+        <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._linkClick()}>
+          <Text style={styles.link}>{this.state.linkText}</Text>
+          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+        </TouchableOpacity>
       </ScrollView>
     );
   }

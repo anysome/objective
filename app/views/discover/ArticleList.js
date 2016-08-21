@@ -32,7 +32,7 @@ export default class ArticleList extends React.Component {
     this.setState({
       isRefreshing: true
     });
-    let result = await airloy.net.httpGet(api.discover.article.public);
+    let result = await airloy.net.httpGet(api.discover.article.list);
     if (result.success) {
       this.setState({
         isRefreshing: false,

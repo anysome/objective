@@ -15,8 +15,6 @@ export default class Commit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      toShare: false,
-      shareable: false,
       editable: true,
       inputColor: colors.accent,
       output: '1',
@@ -24,53 +22,24 @@ export default class Commit extends React.Component {
       tip: '记录一下...'
     };
     this._output = null;
-    this.sharedTargetIds = null;
-    this._init();
   }
-
-  async _init() {
-    this.sharedTargetIds = await airloy.store.getItem('target.commit.share.ids');
-    this.sharedTargetIds || (this.sharedTargetIds = 'shared:');
-  }
-
+  
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data.targetId) {
-      console.log('ids = ' + this.sharedTargetIds);
-      this.state.toShare = this.sharedTargetIds.indexOf(nextProps.data.targetId) > -1;
-    } else {
-      this.state.toShare = false;
-    }
     if (nextProps.data.doneType === '0') {
-      let shareable = false;//nextProps.data.targetId != null;
-      let tip = shareable && this.state.toShare ? '我要分享...' : '记录一下...';
       this.setState({
         editable: false,
-        shareable: shareable,
         inputColor: colors.border,
         remark: '',
-        output: '1',
-        tip: tip
+        output: '1'
       });
     } else {
-      let tip = this.state.toShare ? '我要分享...' : '记录一下...';
       this.setState({
         editable: true,
-        shareable: false,//true,
         inputColor: colors.accent,
         remark: '',
-        output: '',
-        tip: tip
+        output: ''
       });
     }
-
-  }
-
-  _switch() {
-    let tipText = this.state.toShare ? '记录一下...' : '我要分享...';
-    this.setState({
-      toShare: !this.state.toShare,
-      tip: tipText
-    });
   }
 
   async _commit() {
@@ -85,17 +54,6 @@ export default class Commit extends React.Component {
       });
       hang(false);
       if (result.success) {
-        if (this.state.toShare) {
-          if ( this.sharedTargetIds.indexOf(agenda.targetId) < 0 ) {
-            this.sharedTargetIds = this.sharedTargetIds + ',' + agenda.targetId;
-            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
-          }
-        } else {
-          if ( this.sharedTargetIds.indexOf(agenda.targetId) > -1 ) {
-            this.sharedTargetIds = this.sharedTargetIds.replace(',' + agenda.targetId, '');
-            airloy.store.setItem('target.commit.share.ids', this.sharedTargetIds);
-          }
-        }
         if (agenda.targetId) {
           airloy.event.emit(EventTypes.targetPunch, {
             id: agenda.targetId,
@@ -136,13 +94,6 @@ export default class Commit extends React.Component {
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
               : <View style={style.input}></View>
-            }
-            { this.state.shareable &&
-            <TouchableWithoutFeedback onPress={() => this._switch()}>
-              <Icon name={this.state.toShare ? 'md-switch' : 'md-switch'}
-                    size={32} style={style.icon}
-                    color={ this.state.toShare ? colors.accent : colors.border}/>
-            </TouchableWithoutFeedback>
             }
             <Icon.Button name='md-checkmark' color={colors.light1}
                          underlayColor={colors.light1}
