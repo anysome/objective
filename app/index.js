@@ -6,9 +6,10 @@ import React from 'react';
 
 import IntroPage from './views/inlet/Intro';
 import LoginPage from './views/inlet/Login';
+import TransferDataPage from './views/inlet/TransferDataPage';
 import MainPage from './views/inlet/Frame';
 
-import {airloy, config, api} from './app';
+import {airloy, config} from './app';
 
 export default class App extends React.Component {
 
@@ -17,7 +18,8 @@ export default class App extends React.Component {
     this.state = {
       firstTime: false,
       loading: true,
-      logined: false
+      logined: false,
+      transferStage: 0
     };
   }
 
@@ -29,11 +31,13 @@ export default class App extends React.Component {
     let oldVersion = await airloy.store.getItem('app_version');
     let version = require('../package.json').version;
     let newInstall = version !== oldVersion;
-    var isAuth = false;
+    let isAuth = false, transferStage = 0;
     if (newInstall) {
       airloy.store.setItem('app_version', version);
     } else {
       isAuth = await airloy.auth.setup();
+      let user = airloy.auth.getUser();
+      transferStage = user.transfer;
     }
     // forward to login page if necessary
     airloy.event.on(airloy.event.authRequiredEvent, ()=> {
@@ -45,25 +49,22 @@ export default class App extends React.Component {
     this.setState({
       //firstTime: newInstall,
       loading: false,
-      logined: isAuth
+      logined: isAuth,
+      transferStage: transferStage
     });
   }
 
-  signed(recruit) {
-    console.log('is recruit user ? ' + recruit);
-    recruit && airloy.net.httpGet(api.discover.target.join, {
-        id: '96e449c1509644d689f2a9c8f3f096bc'// 共享目标日常计划的id
-      }
-    );
+  signed(transfer) {
     this.setState({
-      logined: true
+      logined: true,
+      transferStage: transfer
     });
   }
 
   render() {
-    // return //this.state.firstTime ? <IntroPage /> :
-
     return this.state.loading ? <IntroPage /> :
-        this.state.logined ? <MainPage /> : <LoginPage onSigned={(recruit)=>this.signed(recruit)}/>;
+        this.state.logined ?
+          this.state.transferStage > 5 ? <MainPage /> : <TransferDataPage stage={this.state.transferStage} onSigned={(transfer)=>this.signed(transfer)}/>
+          : <LoginPage onSigned={(transfer)=>this.signed(transfer)}/>;
   }
 }

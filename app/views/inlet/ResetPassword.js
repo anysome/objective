@@ -24,7 +24,6 @@ export default class ResetPassword extends React.Component {
   }
 
   async _auth() {
-    console.log(' to get auth');
     if (this._email.value.length < 5) {
       this._email.focus();
       return;

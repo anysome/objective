@@ -1,12 +1,19 @@
 {
   "public": {
-    "sign": "pub/sign.json",
+    "sign": "pub/old/login.json",
     "try": "pub/try.json",
-    "auth": "pub/authorize.json",
-    "password": "pub/password.json",
+    "auth": "pub/old/authorize.json",
+    "password": "pub/old/password.json",
     "login": {
-      "weibo": "pub/weibo/sign.json"
+      "weibo": "pub/old/weibo.json"
     }
+  },
+  "transfer": {
+    "target": "old/transfer/target.json",
+    "project": "old/transfer/project.json",
+    "chore": "old/transfer/chore.json",
+    "agenda": "old/transfer/agenda.json",
+    "reward": "old/transfer/reward.json"
   },
   "agenda": {
     "add": "agenda/add.json",

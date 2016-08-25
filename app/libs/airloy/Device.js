@@ -17,7 +17,7 @@ export default class Device {
       this._device_id = deviceId;
     } else {
       this._device_id = Platform.OS + '^react-native^' + uuid.v1();
-      this._store.setItem('airloy.device.id', this._device_id);
+      AsyncStorage.setItem('airloy.device.id', this._device_id);
     }
   }
 

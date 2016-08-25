@@ -31,22 +31,12 @@ export default class Rc4Auth extends Auth {
   }
 
   saveUser(sUser) {
-    this._session = sUser.session;
     this._passport = sUser.passport;
-    this._address = sUser.address;
     _auth = this._makeAuth();
     this._savePassport();
     this._store.setItem('airloy.user.login.time', '' + _loginTime);
     console.log('----------- passport ------------ ' + this._passport);
-    this.user = {
-      id: sUser.id,
-      name: sUser.name,
-      email: sUser.email,
-      uid: sUser.uid,
-      accountType: sUser.accountType,
-      recruit: sUser.recruit,
-      avatar: sUser.avatar
-    };
+    this.user = sUser;
     this._store.setItem('airloy.user.info', JSON.stringify(this.user));
     this._store.setItem('airloy.user.login.flag', '1');
     this._logined = true;
