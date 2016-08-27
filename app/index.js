@@ -9,7 +9,7 @@ import LoginPage from './views/inlet/Login';
 import TransferDataPage from './views/inlet/TransferDataPage';
 import MainPage from './views/inlet/Frame';
 
-import {airloy, config} from './app';
+import {airloy, config, api} from './app';
 
 export default class App extends React.Component {
 
@@ -55,6 +55,9 @@ export default class App extends React.Component {
   }
 
   signed(transfer) {
+    if (transfer > 5) {
+      airloy.net.httpGet(api.target.schedule);
+    }
     this.setState({
       logined: true,
       transferStage: transfer

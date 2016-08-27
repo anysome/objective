@@ -107,6 +107,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light2,
+    padding: 16,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
