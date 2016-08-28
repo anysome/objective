@@ -34,7 +34,7 @@ export default class Listing extends React.Component {
     this.rightButtonIcon = route.rightButtonIcon;
     route.onRightButtonPress = () => {
       this.props.navigator.push({
-        title: '新增分类清单',
+        title: '新增',
         component: Edit,
         passProps: {
           sectionId: 1,

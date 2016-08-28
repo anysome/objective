@@ -50,7 +50,7 @@ export default class Chore extends Controller {
             switch (buttonIndex) {
               case 0 :
                 this.props.navigator.push({
-                  title: '新增备忘',
+                  title: '新增',
                   component: Edit,
                   passProps: {
                     sectionId: 0,
