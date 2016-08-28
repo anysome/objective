@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react-native';
-import moment from 'moment';
+
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
@@ -17,6 +17,7 @@ export default class Edit extends React.Component {
     super(props);
     this._title = null;
     this.data = props.data || {title: ''};
+    this.projects = [];
     this.state = {
       title: this.data.title,
       detail: this.data.detail
@@ -26,7 +27,7 @@ export default class Edit extends React.Component {
   componentWillMount() {
     let route = this.props.navigator.navigationContext.currentRoute;
     if (route.rightButtonIcon) {
-      if (this.props.sectionId === 1) {
+      if (this.props.isProject) {
         // edit project
         route.onRightButtonPress = () => {
           Alert.alert(
@@ -115,14 +116,22 @@ export default class Edit extends React.Component {
     );
   }
 
-  _selectProjects() {
-    let BUTTONS = [], projects = [];
-    for (let project of this.props.projects) {
-      projects.push(project);
+  async _selectProjects() {
+    let BUTTONS = [];
+    if ( this.projects.length === 0) {
+      let result = await airloy.net.httpGet(api.project.list.focus);
+      if (result.success) {
+        this.projects = result.info;
+      } else {
+        toast(L(result.message));
+        return;
+      }
+    }
+    for (let project of this.projects) {
       BUTTONS.push(project.title);
     }
     BUTTONS.push('取消');
-    let CANCEL_INDEX = projects.length;
+    let CANCEL_INDEX = this.projects.length;
     ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: CANCEL_INDEX,
@@ -133,12 +142,14 @@ export default class Edit extends React.Component {
           hang();
           let result = await airloy.net.httpGet(api.chore.to.task, {
             id: this.data.id,
-            projectId: projects[buttonIndex].id
+            projectId: this.projects[buttonIndex].id
           });
-          if (!result.success) {
+          hang(false);
+          if (result.success) {
+            this.props.onDeleted(this.data);
+          } else {
             toast(L(result.message));
           }
-          hang(false);
         }
       }
     );
@@ -151,7 +162,7 @@ export default class Edit extends React.Component {
       if (this._title.value.length > 0) {
         this.data.title = this.state.title;
       }
-      let url = this.props.sectionId === 1 ? api.project.update : api.chore.update;
+      let url = this.props.isProject ? api.project.update : api.chore.update;
       hang();
       result = await airloy.net.httpPost(url, this.data);
     } else {
@@ -160,7 +171,7 @@ export default class Edit extends React.Component {
         return;
       }
       this.data.title = this.state.title;
-      let url = this.props.sectionId === 1 ? api.project.add : api.chore.add;
+      let url = this.props.isProject ? api.project.add : api.chore.add;
       hang();
       result = await airloy.net.httpPost(url, this.data);
     }
@@ -201,12 +212,3 @@ export default class Edit extends React.Component {
     );
   }
 }
-
-const style = StyleSheet.create({
-  text: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    color: colors.dark1,
-    fontSize: 14
-  }
-});

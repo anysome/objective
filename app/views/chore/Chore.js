@@ -122,7 +122,6 @@ export default class Chore extends Controller {
     for (let rowData of this.listSource) {
       this._sortRow(rowData, section0, section1);
     }
-    this.projectList = section1;
     this.setState({
       dataSource: this.state.dataSource.cloneWithRowsAndSections(
         [section0, section1],
@@ -145,13 +144,12 @@ export default class Chore extends Controller {
 
   _pressRow(rowData, sectionId) {
     this.props.navigator.push({
-      title: '修改备忘',
+      title: '修改',
       component: Edit,
-      rightButtonIcon: this.rightButtonIcon,
+      rightButtonIcon: this.getIcon('ios-more-outline'),
       passProps: {
         data: rowData,
-        projects: this.projectList,
-        sectionId: sectionId,
+        isProject: false,
         onUpdated: (rowData) => this.updateRow(rowData),
         onDeleted: (rowData) => this.deleteRow(rowData)
       }

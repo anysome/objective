@@ -31,7 +31,6 @@ export default class Listing extends React.Component {
 
   componentWillMount() {
     let route = this.props.navigator.navigationContext.currentRoute;
-    this.rightButtonIcon = route.rightButtonIcon;
     route.onRightButtonPress = () => {
       this.props.navigator.push({
         title: '新增',
@@ -75,12 +74,12 @@ export default class Listing extends React.Component {
 
   _toProject(rowData) {
     this.props.navigator.push({
-      title: '修改清单',
+      title: '修改',
       component: Edit,
       rightButtonIcon: this.props.trashIcon,
       passProps: {
         data: rowData,
-        sectionId: 1,
+        isProject: true,
         onUpdated: (rowData) => this.updateRow(rowData),
         onDeleted: (rowData) => this.deleteRow(rowData)
       }
