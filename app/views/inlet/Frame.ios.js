@@ -149,8 +149,8 @@ export default class Frame extends React.Component {
 				</Icon.TabBarItem>
         <Icon.TabBarItem
           title="备忘"
-          iconName="ios-basket-outline"
-          selectedIconName="ios-basket"
+          iconName="ios-filing-outline"
+          selectedIconName="ios-filing"
           iconSize={this.iconSize}
           selected={this.state.currentPage === 'Chore'}
           onPress={() => this._selectTab('Chore')}>

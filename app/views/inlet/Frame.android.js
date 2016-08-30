@@ -120,8 +120,8 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Chore'}
           title="备忘"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-basket-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-basket' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Icon name='ios-filing-outline' size={this.iconSize} color={colors.border} />}
+          renderSelectedIcon={() => <Icon name='ios-filing' size={this.iconSize} color={colors.accent} />}
           onPress={() => this._selectTab('Chore')}>
           <NavigatorWithBar component={Chore} navigationBarHidden={false} title='备忘' frame={this}/>
         </TabNavigator.Item>
