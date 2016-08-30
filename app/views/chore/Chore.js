@@ -50,10 +50,9 @@ export default class Chore extends Controller {
             switch (buttonIndex) {
               case 0 :
                 this.props.navigator.push({
-                  title: '新增',
+                  title: '添加',
                   component: Edit,
                   passProps: {
-                    sectionId: 0,
                     onUpdated: (rowData) => this.updateRow(rowData)
                   }
                 });
@@ -149,7 +148,6 @@ export default class Chore extends Controller {
       rightButtonIcon: this.getIcon('ios-more-outline'),
       passProps: {
         data: rowData,
-        isProject: false,
         onUpdated: (rowData) => this.updateRow(rowData),
         onDeleted: (rowData) => this.deleteRow(rowData)
       }

@@ -197,10 +197,11 @@ export default class Project extends React.Component {
   }
 
   _renderSectionHeader(sectionData, sectionId) {
-    return <View style={style.header}>
-      <Text style={styles.title}>{sectionData.title}</Text>
-      <Text style={styles.text}>{sectionData.detail}</Text>
-    </View>;
+    return sectionData.detail ? (
+      <View style={style.header}>
+        <Text style={styles.text}>{sectionData.detail}</Text>
+      </View>)
+      : null;
   }
 
   render() {

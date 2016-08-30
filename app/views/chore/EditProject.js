@@ -1,5 +1,5 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/3/19.
+ * Created by Layman(http://github.com/anysome) on 16/8/30.
  */
 
 import React from 'react';
@@ -7,16 +7,17 @@ import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
-import TextField from '../../widgets/TextField';
-import TextArea from '../../widgets/TextArea';
 import EventTypes from '../../logic/EventTypes';
 
-export default class EditTask extends React.Component {
+import TextField from '../../widgets/TextField';
+import TextArea from '../../widgets/TextArea';
+
+export default class EditProject extends React.Component {
 
   constructor(props) {
     super(props);
     this._title = null;
-    this.data = props.data || {title: '', detail: '', arranged: false};
+    this.data = props.data || {title: ''};
     this.state = {
       title: this.data.title,
       detail: this.data.detail
@@ -29,20 +30,21 @@ export default class EditTask extends React.Component {
       route.onRightButtonPress = () => {
         Alert.alert(
           '确认删除 ?',
-          '删除后可在回收站里找到.',
+          this.data.subTodo > 0 ? '未完成的任务可在回收站里找到.' : '彻底删除了哦!',
           [
             {text: '不了'},
             {
               text: '删除',
               onPress: async () => {
                 hang();
-                let result = await airloy.net.httpGet(api.task.remove, {id: this.data.id});
-                hang(false);
+                let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
                 if (result.success) {
+                  this.data.subTodo && airloy.event.emit(EventTypes.choreChange);
                   this.props.onDeleted(this.data);
                 } else {
                   toast(L(result.message));
                 }
+                hang(false);
               }
             }
           ]
@@ -57,37 +59,29 @@ export default class EditTask extends React.Component {
 
   async _save() {
     let result;
-    if (this.props.projectId) {
+    this.data.detail = this.state.detail;
+    if (this.data.id) {
+      if (this._title.value.length > 0) {
+        this.data.title = this.state.title;
+      }
+      hang();
+      result = await airloy.net.httpPost(api.project.update, this.data);
+    } else {
       if (this._title.value.length < 1) {
         this._title.focus();
         return;
       }
-      let task = {
-        projectId: this.props.projectId,
-        title: this.state.title,
-        detail: this.state.detail
-      };
+      this.data.title = this.state.title;
       hang();
-      result = await airloy.net.httpPost(api.task.add, task);
-    } else {
-      let task = {
-        id: this.data.id,
-        detail: this.state.detail
-      };
-      if (this._title.value.length > 0) {
-        task.title = this.state.title;
-      }
-      hang();
-      result = await airloy.net.httpPost(api.task.update, task);
+      result = await airloy.net.httpPost(api.project.add, this.data);
     }
+    hang(false);
     if (result.success) {
-      this.data.arranged && airloy.event.emit(EventTypes.agendaChange);
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));
     }
-    hang(false);
-    analytics.onEvent('click_task_save');
+    analytics.onEvent('click_project_save');
   }
 
   render() {
@@ -99,7 +93,7 @@ export default class EditTask extends React.Component {
             flat={true}
             defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
-            placeholder={this.data.title || '清单子项...'}
+            placeholder={this.data.title || '清单名...'}
             returnKeyType="done"
           />
           <View style={styles.separator}/>
@@ -111,21 +105,10 @@ export default class EditTask extends React.Component {
                       returnKeyType="default"
                     />
         </View>
-        { this.props.editable &&
         <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
           <Text style={styles.link}>保存</Text>
         </TouchableOpacity>
-        }
       </ScrollView>
     );
   }
 }
-
-const style = StyleSheet.create({
-  text: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    color: colors.dark1,
-    fontSize: 14
-  }
-});

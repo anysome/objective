@@ -10,7 +10,7 @@ import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app'
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
-import Edit from './Edit';
+import EditProject from './EditProject';
 import Project from './Project';
 import EditTask from './EditTask';
 
@@ -33,10 +33,9 @@ export default class Listing extends React.Component {
     let route = this.props.navigator.navigationContext.currentRoute;
     route.onRightButtonPress = () => {
       this.props.navigator.push({
-        title: '新增',
-        component: Edit,
+        title: '添加',
+        component: EditProject,
         passProps: {
-          sectionId: 1,
           onUpdated: (rowData) => this.updateRow(rowData)
         }
       });
@@ -75,11 +74,10 @@ export default class Listing extends React.Component {
   _toProject(rowData) {
     this.props.navigator.push({
       title: '修改',
-      component: Edit,
+      component: EditProject,
       rightButtonIcon: this.props.trashIcon,
       passProps: {
         data: rowData,
-        isProject: true,
         onUpdated: (rowData) => this.updateRow(rowData),
         onDeleted: (rowData) => this.deleteRow(rowData)
       }
@@ -88,7 +86,7 @@ export default class Listing extends React.Component {
 
   _pressRow(rowData, sectionId) {
     this.props.navigator.push({
-      title: '分类清单',
+      title: rowData.title,
       component: Project,
       rightButtonIcon: this.props.plusIcon,
       passProps: {
@@ -102,7 +100,7 @@ export default class Listing extends React.Component {
 
   _addTask(rowData) {
     this.props.navigator.push({
-      title: '新增子任务',
+      title: '添加子任务',
       component: EditTask,
       passProps: {
         projectId: rowData.id,

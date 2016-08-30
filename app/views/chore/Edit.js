@@ -7,6 +7,7 @@ import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
+
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import ActionSheet from '../../widgets/ActionSheet';
@@ -27,34 +28,7 @@ export default class Edit extends React.Component {
   componentWillMount() {
     let route = this.props.navigator.navigationContext.currentRoute;
     if (route.rightButtonIcon) {
-      if (this.props.isProject) {
-        // edit project
-        route.onRightButtonPress = () => {
-          Alert.alert(
-            '确认删除 ?',
-            this.data.countTodo > 0 ? '未完成的任务可在回收站里找到.' : '彻底删除了哦!',
-            [
-              {text: '不了'},
-              {
-                text: '删除',
-                onPress: async () => {
-                  hang();
-                  let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
-                  if (result.success) {
-                    this.props.onDeleted(this.data);
-                  } else {
-                    toast(L(result.message));
-                  }
-                  hang(false);
-                }
-              }
-            ]
-          );
-        };
-      } else {
-        // edit chore
-        route.onRightButtonPress = () => this._showOptions();
-      }
+      route.onRightButtonPress = () => this._showOptions();
       // so many bugs on android T_T
       util.isAndroid() ?
         this.props.navigator.replaceAtIndex(route, -1) :
@@ -78,10 +52,12 @@ export default class Edit extends React.Component {
           case 1 :
             hang();
             let result = await airloy.net.httpGet(api.chore.to.project, {id: this.data.id});
-            if (!result.success) {
+            hang(false);
+            if (result.success) {
+              this.props.onDeleted(this.data);
+            } else {
               toast(L(result.message));
             }
-            hang(false);
             break;
           case 2 :
             let isTrash = this.data.catalog === 'recycled';
@@ -162,18 +138,16 @@ export default class Edit extends React.Component {
       if (this._title.value.length > 0) {
         this.data.title = this.state.title;
       }
-      let url = this.props.isProject ? api.project.update : api.chore.update;
       hang();
-      result = await airloy.net.httpPost(url, this.data);
+      result = await airloy.net.httpPost(api.chore.update, this.data);
     } else {
       if (this._title.value.length < 1) {
         this._title.focus();
         return;
       }
       this.data.title = this.state.title;
-      let url = this.props.isProject ? api.project.add : api.chore.add;
       hang();
-      result = await airloy.net.httpPost(url, this.data);
+      result = await airloy.net.httpPost(api.chore.add, this.data);
     }
     hang(false);
     if (result.success) {
@@ -193,7 +167,7 @@ export default class Edit extends React.Component {
             flat={true}
             defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
-            placeholder={this.data.title || '想做什么...'}
+            placeholder={this.data.title || '先记下来...'}
             returnKeyType="done"
           />
           <View style={styles.separator}/>
