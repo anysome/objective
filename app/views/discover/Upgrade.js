@@ -29,7 +29,7 @@ export default class Setting extends React.Component {
     let user = airloy.auth.formUser(this._email.value, this._password.value);
     console.debug('new account ----------------- ' + JSON.stringify(user));
     hang();
-    let result = await airloy.net.httpPost(api.me.upgrade, user);
+    let result = await airloy.net.httpPost(api.discover.user.upgrade, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       this.onSigned();
