@@ -1,0 +1,18 @@
+{
+  "airloy": {
+    "server": "api.asfun.cn",
+    "https": false,
+    "apiVersion": "v1",
+    "clientName": "Objective.rn",
+    "clientKey": "Delight",
+    "clientSecret": "test",
+    "debug": false
+  },
+  "host": {
+    "upload": "http://upload.qiniu.com/",
+    "image": "http://image.asfun.cn"
+  },
+  "keys": {
+    "umeng": "your own key"
+  }
+}
