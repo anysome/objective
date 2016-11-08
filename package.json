@@ -7,9 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "airloy-react-native": "git+https://github.com/airloy/airloy-react-native.git",
+    "moment": "^2.15.2",
     "react": "15.3.2",
-    "react-native": "0.36.1",
-    "airloy-react-native": "git+https://github.com/airloy/airloy-react-native.git"
+    "react-native": "^0.37.0",
+    "react-native-i18n": "^0.1.1"
   },
   "jest": {
     "preset": "jest-react-native"
