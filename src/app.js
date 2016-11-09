@@ -4,25 +4,28 @@
 import I18n from 'react-native-i18n';
 import moment from 'moment';
 require('moment/locale/zh-cn');
-import MobclickAgent from 'rn-umeng';
+// import MobclickAgent from 'rn-umeng';
 
 import config from './config.json';
 import api from './api.json';
-import airloy, {init} from './libs/airloy';
-import MyAuth from './libs/airloy/impl/Rc4Auth';
+import airloy, {configure, use} from 'airloy/src';
+import airloyReactNative from 'airloy-react-native';
 import {colors, styles} from './views/styles';
 
-import toast from './widgets/Toast';
-import ActivityIndicator from './widgets/ActivityIndicator';
+configure(config.airloy);
+use(airloyReactNative);
 
-console.log('locale = ' + ReactNativeI18n.locale);
+// import toast from './widgets/Toast';
+// import ActivityIndicator from './widgets/ActivityIndicator';
 
-// analytics
-MobclickAgent.startWithAppkey(config.keys.umeng);
-MobclickAgent.setDebugMode(true);
-MobclickAgent.getDeviceInfo(info => {
-  console.log(JSON.stringify(info));
-});
+console.log('locale = ' + I18n.locale);
+
+// // analytics
+// MobclickAgent.startWithAppkey(config.keys.umeng);
+// MobclickAgent.setDebugMode(true);
+// MobclickAgent.getDeviceInfo(info => {
+//   console.log(JSON.stringify(info));
+// });
 
 // init
 I18n.fallbacks = true;
@@ -33,7 +36,6 @@ I18n.translations = require('./langs');
 
 moment.locale('zh-cn');
 
-init(MyAuth, config.airloy);
 
 function L(message, options) {
   return I18n.translate(message, options);
@@ -46,5 +48,10 @@ function hang(upOrType = true) {
     ActivityIndicator.hide();
   }
 }
+function toast(message) {
+  console.log('todo: toast ' + message);
+}
 
+
+let MobclickAgent = {};
 export { MobclickAgent as analytics, config, styles, colors, airloy, api, L, toast, hang};
