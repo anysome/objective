@@ -3,7 +3,6 @@
  */
 import I18n from 'react-native-i18n';
 import moment from 'moment';
-require('moment/locale/zh-cn');
 // import MobclickAgent from 'rn-umeng';
 
 import config from './config.json';
@@ -18,8 +17,6 @@ use(airloyReactNative);
 // import toast from './widgets/Toast';
 // import ActivityIndicator from './widgets/ActivityIndicator';
 
-console.log('locale = ' + I18n.locale);
-
 // // analytics
 // MobclickAgent.startWithAppkey(config.keys.umeng);
 // MobclickAgent.setDebugMode(true);
@@ -27,13 +24,15 @@ console.log('locale = ' + I18n.locale);
 //   console.log(JSON.stringify(info));
 // });
 
-// init
+console.log('locale = ' + I18n.locale);
 I18n.fallbacks = true;
 I18n.missingTranslationPrefix = '';
 I18n.missingBehaviour = 'guess';
-I18n.defaultLocale = 'en';//'zh-CN';
+// I18n.defaultLocale = I18n.locale;
 I18n.translations = require('./langs');
-
+// require('moment/locale/' + I18n.locale);
+// moment.locale(I18n.locale);
+require('moment/locale/zh-cn');
 moment.locale('zh-cn');
 
 
@@ -43,9 +42,11 @@ function L(message, options) {
 
 function hang(upOrType = true) {
   if(upOrType) {
-    ActivityIndicator.show(typeof(upOrType) === 'string' ? upOrType : 'Wave');
+    // ActivityIndicator.show(typeof(upOrType) === 'string' ? upOrType : 'Wave');
+    console.log(`show indicator ${upOrType}`);
   } else {
-    ActivityIndicator.hide();
+    // ActivityIndicator.hide();
+    console.log('hide indicator');
   }
 }
 function toast(message) {

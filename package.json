@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-ios": "react-native bundle --entry-file index.ios.js --platform ios --dev false --bundle-output ./ios/main.jsbundle",
     "test": "jest"
   },
   "dependencies": {
@@ -11,7 +12,9 @@
     "moment": "^2.15.2",
     "react": "15.3.2",
     "react-native": "^0.37.0",
-    "react-native-i18n": "^0.1.1"
+    "react-native-button": "^1.7.1",
+    "react-native-i18n": "^0.1.1",
+    "react-native-weibo": "^2.0.1"
   },
   "jest": {
     "preset": "jest-react-native"

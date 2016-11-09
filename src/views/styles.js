@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   button: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: 40,

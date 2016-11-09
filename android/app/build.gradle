@@ -95,6 +95,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+            WB_APPID: "微博的APPID"
+        ]
     }
     splits {
         abi {
@@ -126,6 +129,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-weibo')
     compile project(':react-native-i18n')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"

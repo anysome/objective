@@ -14,6 +14,7 @@ export default class App extends React.Component {
 
   constructor() {
     super();
+    console.log('construct! index.js');
     this.state = {
       firstTime: false,
       loading: true,
@@ -51,6 +52,7 @@ export default class App extends React.Component {
       logined: isAuth,
       transferStage: transferStage
     });
+    console.log('init! index.js, logined = ' + isAuth);
   }
 
   signed(transfer) {
