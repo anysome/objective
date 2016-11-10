@@ -28,10 +28,6 @@ export default class ResetPassword extends React.Component {
       this._email.focus();
       return;
     }
-    if (this._account.value.length < 5) {
-      this._account.focus();
-      return;
-    }
     hang();
     let result = await airloy.net.httpGet(api.public.auth, {
       account: this._email.value
@@ -138,15 +134,8 @@ export default class ResetPassword extends React.Component {
             :
             <View style={style.body}>
               <TextField
-                ref={(c) => this._account = c}
-                placeholder='登录名, 可能是邮箱'
-                keyboardType='email-address'
-                returnKeyType='next'
-                onSubmitEditing={()=>this._email.focus()}
-              />
-              <TextField
                 ref={(c) => this._email = c}
-                placeholder="注册时使用的邮箱"
+                placeholder="帐号邮箱"
                 keyboardType="email-address"
                 returnKeyType="send"
                 onSubmitEditing={()=>this._auth()}

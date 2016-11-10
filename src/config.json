@@ -1,9 +1,9 @@
 {
   "airloy": {
     "server": "api.asfun.cn",
-    "useHttps": false,
+    "useHttps": true,
     "apiVersion": "v1",
-    "appKey": "objective",
+    "appKey": "Delight",
     "appSecret": "test"
   },
   "host": {
