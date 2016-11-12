@@ -2,7 +2,7 @@
 
 **可自动跟踪目标完成情况的待办清单软件**
 
-也许还有收集箱、项目等 GTD 的功能, 正在被慢慢的简化和抛弃.
+使用目标、备忘、清单管理事项，再安排到每日的待办中，达到统筹全局，聚焦细节的目的。
 
 
 ## iOS Snapshot
@@ -15,7 +15,6 @@
 <img src="https://cloud.githubusercontent.com/assets/233960/14515975/3b08a402-0231-11e6-9b21-b2c5672fecd7.jpg" alt="add" width="250">
 
 ## Android Snapshot
-**Android 版本还在适配调试中, 部分界面和功能会有错乱, 近期会更新.**
 
 <img src="https://cloud.githubusercontent.com/assets/233960/14515683/ddc43fb0-022e-11e6-99f8-f17f3136546a.png" alt="todo" width="250">
 <img src="https://cloud.githubusercontent.com/assets/233960/14515840/05e2a526-0230-11e6-9b8c-7b7871398bb5.png" alt="progress" width="250">
@@ -52,7 +51,7 @@ es6 first!
 - [x] User login and profile enhance
 - [ ] Hot Update
 - [ ] Local cache and db
-- [ ] I18n
+- [x] I18n
 
 
 ### Welcome
