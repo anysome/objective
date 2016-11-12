@@ -22,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		770FF1021DD7447100D0727D /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770FF0E91DD7445A00D0727D /* libART.a */; };
 		772501A01DD365BE00AAF491 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7725019F1DD365BE00AAF491 /* libsqlite3.tbd */; };
 		772501A21DD365CE00AAF491 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501A11DD365CE00AAF491 /* libz.tbd */; };
 		772501A41DD365DC00AAF491 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501A31DD365DC00AAF491 /* ImageIO.framework */; };
@@ -101,6 +102,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		770FF0E81DD7445A00D0727D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 770FF0E41DD7445A00D0727D /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
 		};
 		77E419411DD36086007B9556 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -238,6 +246,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		65B1E2FB16C14AB181FCD5D5 /* RCTWeiboAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeiboAPI.xcodeproj; path = "../node_modules/react-native-weibo/ios/RCTWeiboAPI.xcodeproj"; sourceTree = "<group>"; };
 		66688E50B7654C8684C9B779 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
+		770FF0E41DD7445A00D0727D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		7725019F1DD365BE00AAF491 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		772501A11DD365CE00AAF491 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		772501A31DD365DC00AAF491 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -285,6 +294,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				77F5AEAA1DD6BBF200CD0710 /* libRCTPushNotification.a in Frameworks */,
+				770FF1021DD7447100D0727D /* libART.a in Frameworks */,
 				77F5AE9E1DD6B83B00CD0710 /* libRNI18n.a in Frameworks */,
 				77F5AE9D1DD6B82600CD0710 /* libRCTWeiboAPI.a in Frameworks */,
 				77F5AE9C1DD6B81500CD0710 /* libRNSpinkit.a in Frameworks */,
@@ -404,6 +414,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		770FF0E51DD7445A00D0727D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				770FF0E91DD7445A00D0727D /* libART.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7725019E1DD365BE00AAF491 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +490,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				770FF0E41DD7445A00D0727D /* ART.xcodeproj */,
 				77F5AEA01DD6BA0600CD0710 /* RCTPushNotification.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -598,6 +617,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 770FF0E51DD7445A00D0727D /* Products */;
+					ProjectRef = 770FF0E41DD7445A00D0727D /* ART.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -721,6 +744,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		770FF0E91DD7445A00D0727D /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 770FF0E81DD7445A00D0727D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		77E419421DD36086007B9556 /* libRCTImage-tvOS.a */ = {
