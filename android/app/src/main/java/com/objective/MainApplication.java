@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import co.fixt.wheel.WheelPackage;
+import com.zyu.ReactNativeWheelPickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
@@ -30,6 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new RNSpinkitPackage(),
            new MainReactPackage(),
+            new WheelPackage(),
+            new ReactNativeWheelPickerPackage(),
             new VectorIconsPackage(),
             new RNSpinkitPackage(),
             new WeiboPackage(),

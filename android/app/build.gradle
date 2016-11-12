@@ -129,6 +129,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-wheel')
+    compile project(':react-native-wheel-picker')
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-weibo')
