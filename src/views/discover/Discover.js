@@ -1,15 +1,15 @@
 /**
- * Created by Layman <anysome@gmail.com> (http://github.com/anysome) on 2016/11/9.
+ * Created by  Layman(https://github.com/anysome) on 2016/11/12.
  */
 import React from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
 import {colors} from '../../app';
 
-export default class Frame extends React.Component {
+export default class Discover extends React.Component {
   render() {
     return (
       <View style={style.container}>
-        <Text style={style.title}>Frame</Text>
+        <Text style={style.title}>discover</Text>
       </View>
     );
   }
