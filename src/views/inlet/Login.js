@@ -67,7 +67,7 @@ export default class Login extends React.Component {
     let result = await airloy.net.httpPost(api.public.sign, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
-      // analytics.onProfileSignIn('' + result.info.id);
+      analytics.onProfileSignIn('' + result.info.id);
       this.onSigned(result.info.transfer);
     } else {
       toast(L(result.message), 70);
@@ -81,7 +81,7 @@ export default class Login extends React.Component {
     let result = await airloy.net.httpPost(api.public.try, user);
     if (result.success) {
       await airloy.auth.saveUser(result.info);
-      // analytics.onProfileSignIn('' + result.info.id);
+      analytics.onProfileSignIn('' + result.info.id);
       this.onSigned(result.info.transfer);
     } else {
       toast(L(result.message), 70);
@@ -91,12 +91,10 @@ export default class Login extends React.Component {
 
   openModal() {
     this.setState({openModal: true});
-    console.log(' to open modal');
   }
 
   closeModal() {
     this.setState({openModal: false});
-    console.log(' to close modal');
   }
 
   render() {

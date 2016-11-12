@@ -14,8 +14,8 @@ import {colors, styles} from './views/styles';
 configure(config.airloy);
 use(airloyReactNative);
 
-// import toast from './widgets/Toast';
-// import ActivityIndicator from './widgets/ActivityIndicator';
+import toast from './widgets/Toast';
+import ActivityIndicator from './widgets/ActivityIndicator';
 
 // // analytics
 // MobclickAgent.startWithAppkey(config.keys.umeng);
@@ -42,21 +42,19 @@ function L(message, options) {
 
 function hang(upOrType = true) {
   if(upOrType) {
-    // ActivityIndicator.show(typeof(upOrType) === 'string' ? upOrType : 'Wave');
-    console.log(`show indicator ${upOrType}`);
+    ActivityIndicator.show(typeof(upOrType) === 'string' ? upOrType : 'Wave');
   } else {
-    // ActivityIndicator.hide();
-    console.log('hide indicator');
+    ActivityIndicator.hide();
   }
-}
-function toast(message) {
-  console.log('todo: toast ' + message);
 }
 
 
 let MobclickAgent = {
   onEvent: function () {
     console.log('analytics on event');
+  },
+  onProfileSignIn: function () {
+    console.log('analytics on profileSignIn');
   },
   onProfileSignOff: function () {
     console.log('analytics on profileSignOff');
