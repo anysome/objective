@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {View, ListView, RefreshControl, Alert} from 'react-native';
+import {View, ListView, RefreshControl} from 'react-native';
 import moment from 'moment';
 
 import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
@@ -202,60 +202,50 @@ export default class Agenda extends Controller {
         async (buttonIndex) => {
           switch (buttonIndex) {
             case 0:
-                  let message = rowData.targetId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
-                  Alert.alert(
-                    '确认删除 ?',
-                    message,
-                    [
-                      {text: '不了'},
-                      {
-                        text: '删除',
-                        onPress: async () => {
-                          hang();
-                          let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
-                          if (result.success) {
-                            rowData.targetId && airloy.event.emit(EventTypes.targetChange);
-                            rowData.catalog && airloy.event.emit(EventTypes.choreChange);
-                            rowData.projectId && airloy.event.emit(EventTypes.taskChange);
-
-                            LocalNotifications.cancelAgenda(rowData.id);
-                            this.listSource.remove(rowData);
-                            this._sortList();
-                          } else {
-                            toast(L(result.message));
-                          }
-                          hang(false);
-                        }
-                      }
-                    ]
-                  );
-                  break;
+              hang();
+              let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
+              hang(false);
+              if (result.success) {
+                if (rowData.targetId) {
+                  airloy.event.emit(EventTypes.targetChange);
+                } else if (rowData.projectId) {
+                  airloy.event.emit(EventTypes.taskChange);
+                } else {
+                  airloy.event.emit(EventTypes.choreChange);
+                }
+                rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
+                this.listSource.remove(rowData);
+                this._sortList();
+              } else {
+                toast(L(result.message));
+              }
+              break;
             case 1:
-                  this.setState({
-                    showTimer: true,
-                    selectedRow: rowData
-                  });
-                  break;
+              this.setState({
+                showTimer: true,
+                selectedRow: rowData
+              });
+              break;
             case 2:
-                  if (isToday) {
-                    hang();
-                    let newDate = new Date(this.today + 86400000);
-                    let result = await airloy.net.httpPost(api.agenda.update, {
-                        id: rowData.id,
-                        today: newDate
-                      }
-                    );
-                    hang(false);
-                    if (result.success) {
-                      this._updateData(result.info);
-                    } else {
-                      toast(L(result.message));
-                    }
-                    analytics.onEvent('click_agenda_schedule');
+              if (isToday) {
+                hang();
+                let newDate = new Date(this.today + 86400000);
+                let result = await airloy.net.httpPost(api.agenda.update, {
+                    id: rowData.id,
+                    today: newDate
                   }
-                  break;
+                );
+                hang(false);
+                if (result.success) {
+                  this._updateData(result.info);
+                } else {
+                  toast(L(result.message));
+                }
+                analytics.onEvent('click_agenda_schedule');
+              }
+              break;
             default :
-                  console.log('cancel options');
+              console.log('cancel options');
           }
         }
       );

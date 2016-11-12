@@ -29,7 +29,7 @@ export default class Dones extends React.Component {
     this._renderRow = this._renderRow.bind(this);
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     analytics.onPageEnd('page_dones');
   }
 

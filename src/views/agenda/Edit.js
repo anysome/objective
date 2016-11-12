@@ -2,13 +2,14 @@
  * Created by Layman(http://github.com/anysome) on 16/3/1.
  */
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation, Alert} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation} from 'react-native';
 import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
 import EventTypes from '../../logic/EventTypes';
+import LocalNotifications from '../../logic/LocalNotifications';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
@@ -79,28 +80,22 @@ export default class Edit extends React.Component {
           }
         }
         if (buttonIndex === 1) {
-          let message = this.agenda.targetId ? '删除后可重新安排目标.' : '删除后可在待定列表的回收站里找到.'
-          Alert.alert(
-            '确认删除 ?',
-            message,
-            [
-              {text: '不了'},
-              {
-                text: '删除',
-                onPress: async () => {
-                  hang();
-                  let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
-                  hang(false);
-                  if (result.success) {
-                    this.agenda.targetId && airloy.event.emit(EventTypes.targetChange);
-                    this.props.onDelete(this.agenda);
-                  } else {
-                    toast(L(result.message));
-                  }
-                }
-              }
-            ]
-          );
+          hang();
+          let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
+          hang(false);
+          if (result.success) {
+            if (this.agenda.targetId) {
+              airloy.event.emit(EventTypes.targetChange);
+            } else if (this.agenda.projectId) {
+              airloy.event.emit(EventTypes.taskChange);
+            } else {
+              airloy.event.emit(EventTypes.choreChange);
+            }
+            this.props.onDelete(this.agenda);
+            this.agenda.reminder && LocalNotifications.cancelAgenda(this.agenda.id);
+          } else {
+            toast(L(result.message));
+          }
         }
       }
     );

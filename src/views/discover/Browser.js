@@ -13,7 +13,7 @@ export default class Browser extends React.Component {
     analytics.onPageStart('page_browser');
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     analytics.onPageEnd('page_browser');
   }
 
