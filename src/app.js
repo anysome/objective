@@ -54,5 +54,18 @@ function toast(message) {
 }
 
 
-let MobclickAgent = {};
+let MobclickAgent = {
+  onEvent: function () {
+    console.log('analytics on event');
+  },
+  onProfileSignOff: function () {
+    console.log('analytics on profileSignOff');
+  },
+  onPageStart: function () {
+    console.log('analytics on pageStart');
+  },
+  onPageEnd: function () {
+    console.log('analytics on pageStart');
+  }
+};
 export { MobclickAgent as analytics, config, styles, colors, airloy, api, L, toast, hang};
