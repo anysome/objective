@@ -14,9 +14,9 @@ export default class LocalNotifications {
     // schedule new if necessary
     if (agenda.reminder) {
       let now = new Date();
-      let tzOffset = (now).getTimezoneOffset() * 60000;
+      // let tzOffset = (now).getTimezoneOffset() * 60000;
       // fix bug for timezone offset
-      let alarmTime = moment(moment(agenda.today).format('YYYY-MM-DD ') + agenda.reminder).toDate().getTime() - tzOffset;
+      let alarmTime = moment(moment(agenda.today).format('YYYY-MM-DD ') + agenda.reminder).toDate().getTime();// - tzOffset;
       // check future time
       if ( alarmTime < now ) {
         return;
