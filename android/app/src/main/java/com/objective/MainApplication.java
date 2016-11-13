@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import in.esseak.react_native_umeng.UmengPackage;
 import co.fixt.wheel.WheelPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -31,13 +32,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new RNSpinkitPackage(),
-           new MainReactPackage(),
-            new WheelPackage(),
-            new ReactNativeWheelPickerPackage(),
-            new VectorIconsPackage(),
-            new RNSpinkitPackage(),
-            new WeiboPackage(),
-            new ReactNativeI18n()
+          new MainReactPackage(),
+          new UmengPackage(),
+          new WheelPackage(),
+          new ReactNativeWheelPickerPackage(),
+          new VectorIconsPackage(),
+          new RNSpinkitPackage(),
+          new WeiboPackage(),
+          new ReactNativeI18n()
       );
     }
   };

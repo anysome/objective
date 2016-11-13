@@ -3,7 +3,7 @@
  */
 import I18n from 'react-native-i18n';
 import moment from 'moment';
-// import MobclickAgent from 'rn-umeng';
+import MobclickAgent from 'rn-umeng';
 
 import config from './config.json';
 import api from './api.json';
@@ -17,12 +17,12 @@ use(airloyReactNative);
 import toast from './widgets/Toast';
 import ActivityIndicator from './widgets/ActivityIndicator';
 
-// // analytics
-// MobclickAgent.startWithAppkey(config.keys.umeng);
-// MobclickAgent.setDebugMode(true);
-// MobclickAgent.getDeviceInfo(info => {
-//   console.log(JSON.stringify(info));
-// });
+// analytics
+MobclickAgent.startWithAppkey(config.keys.umeng);
+MobclickAgent.setDebugMode(true);
+MobclickAgent.getDeviceInfo(info => {
+  console.log(JSON.stringify(info));
+});
 
 console.log('locale = ' + I18n.locale);
 I18n.fallbacks = true;
@@ -48,22 +48,4 @@ function hang(upOrType = true) {
   }
 }
 
-
-let MobclickAgent = {
-  onEvent: function () {
-    console.log('analytics on event');
-  },
-  onProfileSignIn: function () {
-    console.log('analytics on profileSignIn');
-  },
-  onProfileSignOff: function () {
-    console.log('analytics on profileSignOff');
-  },
-  onPageStart: function () {
-    console.log('analytics on pageStart');
-  },
-  onPageEnd: function () {
-    console.log('analytics on pageStart');
-  }
-};
 export { MobclickAgent as analytics, config, styles, colors, airloy, api, L, toast, hang};

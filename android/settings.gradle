@@ -1,6 +1,8 @@
 rootProject.name = 'objective'
 
 include ':app'
+include ':rn-umeng'
+project(':rn-umeng').projectDir = new File(rootProject.projectDir, '../node_modules/rn-umeng/android')
 include ':react-native-wheel'
 project(':react-native-wheel').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wheel/android')
 include ':react-native-wheel-picker'

@@ -39,7 +39,6 @@ export default class Anything extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log('receive props while visible ' + this.state.modalVisible);
     this.setState({modalVisible: true});
   }
 
@@ -239,7 +238,6 @@ export default class Anything extends React.Component {
   }
 
   render() {
-    console.log('modal is to open ? ' + this.state.modalVisible);
     return (
       <View style={styles.window}>
         <Modal animationType='slide' transparent={false} onRequestClose={()=>this._onClose()} visible={this.state.modalVisible}>

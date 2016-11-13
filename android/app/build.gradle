@@ -129,6 +129,7 @@ android {
 }
 
 dependencies {
+    compile project(':rn-umeng')
     compile project(':react-native-wheel')
     compile project(':react-native-wheel-picker')
     compile project(':react-native-vector-icons')

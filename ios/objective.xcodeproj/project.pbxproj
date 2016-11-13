@@ -30,6 +30,7 @@
 		772501A81DD365F600AAF491 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501A71DD365F600AAF491 /* Security.framework */; };
 		772501AA1DD3660200AAF491 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501A91DD3660200AAF491 /* CoreTelephony.framework */; };
 		772501AC1DD3660E00AAF491 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501AB1DD3660E00AAF491 /* CoreText.framework */; };
+		77CEC8EF1DD7EA3700F8B19E /* libRCTUmeng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CEC8E41DD7E88B00F8B19E /* libRCTUmeng.a */; };
 		77F5AE9B1DD6B80200CD0710 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5AE9A1DD6B62400CD0710 /* libRNVectorIcons.a */; };
 		77F5AE9C1DD6B81500CD0710 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5AE971DD6B62400CD0710 /* libRNSpinkit.a */; };
 		77F5AE9D1DD6B82600CD0710 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E4195A1DD36086007B9556 /* libRCTWeiboAPI.a */; };
@@ -109,6 +110,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = ART;
+		};
+		77CEC8E31DD7E88B00F8B19E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A4E76D29C04377803B7365 /* RCTUmeng.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27B75AB01CABBFF8003925AB;
+			remoteInfo = RCTUmeng;
 		};
 		77E419411DD36086007B9556 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -244,6 +252,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = objective/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = objective/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		26A4E76D29C04377803B7365 /* RCTUmeng.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTUmeng.xcodeproj; path = "../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng.xcodeproj"; sourceTree = "<group>"; };
 		65B1E2FB16C14AB181FCD5D5 /* RCTWeiboAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeiboAPI.xcodeproj; path = "../node_modules/react-native-weibo/ios/RCTWeiboAPI.xcodeproj"; sourceTree = "<group>"; };
 		66688E50B7654C8684C9B779 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		770FF0E41DD7445A00D0727D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
@@ -299,6 +308,7 @@
 				77F5AE9D1DD6B82600CD0710 /* libRCTWeiboAPI.a in Frameworks */,
 				77F5AE9C1DD6B81500CD0710 /* libRNSpinkit.a in Frameworks */,
 				77F5AE9B1DD6B80200CD0710 /* libRNVectorIcons.a in Frameworks */,
+				77CEC8EF1DD7EA3700F8B19E /* libRCTUmeng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +446,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		77CEC8D11DD7E88B00F8B19E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				77CEC8E41DD7E88B00F8B19E /* libRCTUmeng.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		77E419391DD36086007B9556 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +524,7 @@
 				65B1E2FB16C14AB181FCD5D5 /* RCTWeiboAPI.xcodeproj */,
 				66688E50B7654C8684C9B779 /* RNSpinkit.xcodeproj */,
 				9ED9061E83CB43C08C5C75D2 /* RNVectorIcons.xcodeproj */,
+				26A4E76D29C04377803B7365 /* RCTUmeng.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -587,7 +606,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 810;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -651,6 +670,10 @@
 				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
 					ProjectRef = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+				},
+				{
+					ProductGroup = 77CEC8D11DD7E88B00F8B19E /* Products */;
+					ProjectRef = 26A4E76D29C04377803B7365 /* RCTUmeng.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302E01ABCB9EE00DB3ED1 /* Products */;
@@ -751,6 +774,13 @@
 			fileType = archive.ar;
 			path = libART.a;
 			remoteRef = 770FF0E81DD7445A00D0727D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		77CEC8E41DD7E88B00F8B19E /* libRCTUmeng.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTUmeng.a;
+			remoteRef = 77CEC8E31DD7E88B00F8B19E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		77E419421DD36086007B9556 /* libRCTImage-tvOS.a */ = {
@@ -962,6 +992,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -979,6 +1010,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1007,6 +1039,7 @@
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1038,6 +1071,7 @@
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				INFOPLIST_FILE = objective/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1099,6 +1133,7 @@
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1146,6 +1181,7 @@
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
