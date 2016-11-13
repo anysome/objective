@@ -171,7 +171,9 @@ const style = StyleSheet.create({
   },
   body: {
     flex: 1,
-    padding: 16,
+    paddingTop: 30,
+    paddingRight: 16,
+    paddingLeft: 16,
     borderTopWidth: 1,
     borderTopColor: 'white',
     borderBottomWidth: 1,
