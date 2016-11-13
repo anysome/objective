@@ -5,6 +5,7 @@ import React from 'react';
 import {View, StyleSheet, Image, Text, Dimensions, TouchableOpacity, Keyboard, LayoutAnimation} from 'react-native';
 import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app';
 import Button from 'react-native-button';
+import * as WeiboAPI from 'react-native-weibo';
 import TextField from '../../widgets/TextField';
 import ResetPassword from './ResetPassword';
 
@@ -50,7 +51,33 @@ export default class Login extends React.Component {
   }
 
   async _weiboLogin() {
-    console.log('weibo login');
+    WeiboAPI.login({scope: 'all', redirectURI: 'http://asfun.cn/m/login/weibo.html'}).then(
+      async (response) => {
+        hang();
+        let user = airloy.auth.formUser(airloy.device.getIdentifier(), '');
+        let token = {
+          accessToken: response.accessToken,
+          uid: response.userID,
+          expirationDate: response.expirationDate,
+          refreshToken: response.refreshToken,
+          device: user.device,
+          loginTime: user.loginTime
+        };
+        let result = await airloy.net.httpPost(api.public.login.weibo, token);
+        if (result.success) {
+          await airloy.auth.saveUser(result.info);
+          analytics.onProfileSignIn('' + result.info.id);
+          this.onSigned(result.info.transfer);
+        } else {
+          toast(L(result.message), 70);
+        }
+        hang(false);
+      },
+      error => {
+        console.log(error);
+        toast(`暂时无法登录, 请重试或使用其它方式`);
+      }
+    );
   }
 
   async _login() {
