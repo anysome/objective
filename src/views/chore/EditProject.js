@@ -4,11 +4,11 @@
 
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react-native';
+import Button from 'react-native-button';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
-
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
@@ -105,9 +105,13 @@ export default class EditProject extends React.Component {
                       returnKeyType="default"
                     />
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button
+          style={styles.buttonText}
+          containerStyle={styles.buttonAction}
+          activeOpacity={0.5}
+          onPress={()=>this._save()}>
+          保存
+        </Button>
       </ScrollView>
     );
   }

@@ -5,7 +5,7 @@ import React from 'react';
 import {StyleSheet, Component, ScrollView, View, Text, TouchableOpacity,
   LayoutAnimation, Alert} from 'react-native';
 import moment from 'moment';
-
+import Button from 'react-native-button';
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
@@ -199,9 +199,10 @@ export default class Edit extends React.Component {
                           selectedValue={this.state.priority}
                           onValueChange={value => this._onSelectedPriority(value)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );
@@ -265,9 +266,10 @@ export default class Edit extends React.Component {
                          selectedValue={this.state.unit}
                          onValueChange={value => this._onSelectedUnit(value)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );
@@ -335,9 +337,10 @@ export default class Edit extends React.Component {
                          selectedValue={this.state.unit}
                          onValueChange={value => this._onSelectedUnit(value)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );
@@ -395,9 +398,10 @@ export default class Edit extends React.Component {
                           selectedValue={this.state.priority}
                           onValueChange={value => this._onSelectedPriority(value)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );
@@ -446,9 +450,10 @@ export default class Edit extends React.Component {
                       date={this.state.dateEnd}
                       onDateChange={date => this._onSelectedDateEnd(date)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );
@@ -533,9 +538,10 @@ export default class Edit extends React.Component {
                          selectedValue={this.state.unit}
                          onValueChange={value => this._onSelectedUnit(value)}/>
         </View>
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>
+        <Button style={styles.buttonText} containerStyle={styles.buttonAction}
+                activeOpacity={0.5} onPress={()=>this._save()}>
+          保存
+        </Button>
         <View style={style.footer}></View>
       </ScrollView>
     );

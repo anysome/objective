@@ -115,7 +115,7 @@ const style = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 30,
     paddingBottom: 16,
-    backgroundColor: colors.bright2
+    backgroundColor: colors.bright1
   },
   title: {
     paddingTop: 4,

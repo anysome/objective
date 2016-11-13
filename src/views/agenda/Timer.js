@@ -113,7 +113,7 @@ export default class Timer extends React.Component {
 const style = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: 'white'
+    backgroundColor: colors.bright1
   },
   text: {
     color: 'white',

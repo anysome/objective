@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import {
-  StyleSheet, View, ScrollView, ListView, Platform,
-  RefreshControl, TouchableOpacity, Text, Alert
+  StyleSheet, View, ScrollView, ListView,
+  RefreshControl, TouchableOpacity, Text, Alert, PixelRatio
 } from 'react-native';
 
 import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
@@ -318,7 +318,7 @@ export default class Target extends Controller {
               <Text style={style.cell}>年度目标</Text>
             </TouchableOpacity>
           </View>
-          <View style={[style.line, {borderTopWidth:1, borderTopColor:colors.bright2}]}>
+          <View style={[style.line, {borderTopWidth: 1 / PixelRatio.get(), borderTopColor:colors.bright2}]}>
             <TouchableOpacity onPress={()=> this._toAdd('4')}>
               <Text style={style.cell}>百次行动</Text>
             </TouchableOpacity>

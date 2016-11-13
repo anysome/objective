@@ -7,13 +7,13 @@ import {StyleSheet, PixelRatio} from 'react-native';
 import util from '../libs/Util';
 
 var colors = {
-  bright1: '#FAFAFA',
-  bright2: '#EFEFF4',
-  border: '#CECED2',
+  bright1: '#EFEFF4',
+  bright2: '#DCDCE4',
+  border: '#CCCCCC',
   accent: '#FDC02F',
   action: '#4CD964',
-  dark1: '#202020',
-  dark2: '#808080',
+  dark1: '#000000',
+  dark2: '#666666',
 
   changeTheme: function (theme) {
     console.log('todo theme');
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
-    backgroundColor: colors.bright2
+    backgroundColor: colors.bright1
   },
   container: {
     paddingLeft: 16,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   hr: {
-    height: 1,
+    height: 1 / PixelRatio.get(),
     backgroundColor: colors.bright1
   },
   separator: {
@@ -123,6 +123,17 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     color: colors.dark1,
     fontSize: 20
+  },
+  buttonAction: {
+    marginTop: 20,
+    marginLeft: 16,
+    marginRight: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    overflow: 'hidden',
+    borderRadius: 5,
+    backgroundColor: colors.action
   },
   button: {
     // flex: 1,

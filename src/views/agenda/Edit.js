@@ -4,7 +4,7 @@
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, LayoutAnimation} from 'react-native';
 import moment from 'moment';
-
+import Button from 'react-native-button';
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
@@ -199,9 +199,13 @@ export default class Edit extends React.Component {
                           onValueChange={value => this._onSelectedPriority(value)}/>
         </View>
         {this.agenda.status === '0' &&
-        <TouchableOpacity style={styles.row} onPress={()=> this._save()}>
-          <Text style={styles.link}>保存</Text>
-        </TouchableOpacity>}
+          <Button
+            style={styles.buttonText}
+            containerStyle={styles.buttonAction}
+            activeOpacity={0.5}
+            onPress={()=>this._save()}>
+            保存
+          </Button>}
       </ScrollView>
     );
   }

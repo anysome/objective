@@ -219,15 +219,15 @@ const style = StyleSheet.create({
     fontSize: 14
   },
   row: {
-    marginTop: 10,
-    marginBottom: 5,
+    marginTop: 16,
+    marginBottom: 16,
     paddingTop: 4,
     paddingBottom: 4,
     flexDirection: 'column',
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.bright2,
+    borderTopColor: colors.border,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.bright2
+    borderBottomColor: colors.border
   },
   link: {
     fontSize: 12,
