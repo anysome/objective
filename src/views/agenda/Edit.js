@@ -60,7 +60,7 @@ export default class Edit extends React.Component {
         options: BUTTONS,
         cancelButtonIndex: 2,
         destructiveButtonIndex: 1,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async (buttonIndex) => {
         if (buttonIndex === 0) {
@@ -211,7 +211,7 @@ const style = StyleSheet.create({
   text: {
     paddingTop: 5,
     paddingBottom: 5,
-    color: colors.dark1,
+    color: colors.dark2,
     fontSize: 14
   }
 });

@@ -73,9 +73,9 @@ export default class FeedbackDetail extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <View style={style.row}>
-        <Text style={styles.title}>{rowData.content}</Text>
+        <Text style={styles.navText}>{rowData.content}</Text>
         <View style={styles.containerF}>
-          <Text style={styles.text}>{rowData.userName}</Text>
+          <Text style={styles.hint}>{rowData.userName}</Text>
           <Text style={styles.hint}>{moment(rowData.createTime).fromNow()}</Text>
         </View>
       </View>

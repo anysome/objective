@@ -83,82 +83,80 @@ export default class ResetPassword extends React.Component {
   render() {
     return (
       <Modal animationType='slide' transparent={false} onRequestClose={this.props.onBack} visible={this.props.visible}>
-        <View style={styles.modal}>
-          { this.state.showReset ?
-            <View style={style.body}>
-              <TextField
-                ref={(c) => this._account = c}
-                placeholder='登录名, 可能是邮箱'
-                keyboardType='email-address'
-                returnKeyType='next'
-                onSubmitEditing={()=>this._code.focus()}
-              />
-              <TextField
-                ref={(c) => this._code = c}
-                placeholder='授权码'
-                keyboardType='email-address'
-                returnKeyType='next'
-                onSubmitEditing={()=>this._pwd1.focus()}
-              />
-              <TextField
-                ref={(c) => this._pwd1 = c}
-                placeholder="新密码"
-                secureTextEntry={true}
-                returnKeyType="next"
-                onSubmitEditing={()=>this._pwd2.focus()}
-              />
-              <TextField
-                ref={(c) => this._pwd2 = c}
-                placeholder="确认密码"
-                secureTextEntry={true}
-                returnKeyType="done"
-                onSubmitEditing={()=>this._reset()}
-              />
-              <Button
-                style={styles.buttonText}
-                containerStyle={[styles.button, {marginTop: 20}]}
-                activeOpacity={0.5}
-                onPress={()=>this._reset()}>
-                修改密码
+        { this.state.showReset ?
+          <View style={style.body}>
+            <TextField
+              ref={(c) => this._account = c}
+              placeholder='登录名, 可能是邮箱'
+              keyboardType='email-address'
+              returnKeyType='next'
+              onSubmitEditing={()=>this._code.focus()}
+            />
+            <TextField
+              ref={(c) => this._code = c}
+              placeholder='授权码'
+              keyboardType='email-address'
+              returnKeyType='next'
+              onSubmitEditing={()=>this._pwd1.focus()}
+            />
+            <TextField
+              ref={(c) => this._pwd1 = c}
+              placeholder="新密码"
+              secureTextEntry={true}
+              returnKeyType="next"
+              onSubmitEditing={()=>this._pwd2.focus()}
+            />
+            <TextField
+              ref={(c) => this._pwd2 = c}
+              placeholder="确认密码"
+              secureTextEntry={true}
+              returnKeyType="done"
+              onSubmitEditing={()=>this._reset()}
+            />
+            <Button
+              style={styles.buttonText}
+              containerStyle={[styles.button, {marginTop: 20}]}
+              activeOpacity={0.5}
+              onPress={()=>this._reset()}>
+              修改密码
+            </Button>
+            <View
+              style={[styles.containerH, {justifyContent:'space-between', paddingTop:10, paddingBottom:10}]}>
+              <Button style={style.link} onPress={this.props.onBack}>
+                返回登录
               </Button>
-              <View
-                style={[styles.containerH, {justifyContent:'space-between', paddingTop:10, paddingBottom:10}]}>
-                <Button style={style.link} onPress={this.props.onBack}>
-                  返回登录
-                </Button>
-                <Button style={style.link} onPress={()=>this._toAuth()}>
-                  获取授权码
-                </Button>
-              </View>
-            </View>
-            :
-            <View style={style.body}>
-              <TextField
-                ref={(c) => this._email = c}
-                placeholder="帐号邮箱"
-                keyboardType="email-address"
-                returnKeyType="send"
-                onSubmitEditing={()=>this._auth()}
-              />
-              <Button
-                style={styles.buttonText}
-                containerStyle={[styles.button, {marginTop: 20}]}
-                activeOpacity={0.5}
-                onPress={()=>this._auth()}>
+              <Button style={style.link} onPress={()=>this._toAuth()}>
                 获取授权码
               </Button>
-              <View
-                style={[styles.containerH, {justifyContent:'space-between', paddingTop:10, paddingBottom:10}]}>
-                <Button style={style.link} onPress={this.props.onBack}>
-                  返回登录
-                </Button>
-                <Button style={style.link} onPress={()=>this._toReset()}>
-                  修改密码
-                </Button>
-              </View>
             </View>
-          }
-        </View>
+          </View>
+          :
+          <View style={style.body}>
+            <TextField
+              ref={(c) => this._email = c}
+              placeholder="帐号邮箱"
+              keyboardType="email-address"
+              returnKeyType="send"
+              onSubmitEditing={()=>this._auth()}
+            />
+            <Button
+              style={styles.buttonText}
+              containerStyle={[styles.button, {marginTop: 20}]}
+              activeOpacity={0.5}
+              onPress={()=>this._auth()}>
+              获取授权码
+            </Button>
+            <View
+              style={[styles.containerH, {justifyContent:'space-between', paddingTop:10, paddingBottom:10}]}>
+              <Button style={style.link} onPress={this.props.onBack}>
+                返回登录
+              </Button>
+              <Button style={style.link} onPress={()=>this._toReset()}>
+                修改密码
+              </Button>
+            </View>
+          </View>
+        }
       </Modal>
     );
   }
@@ -175,14 +173,14 @@ const style = StyleSheet.create({
     flex: 1,
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: colors.light1,
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: colors.light1,
-    backgroundColor: colors.light2
+    borderBottomColor: 'white',
+    backgroundColor: colors.bright2
   },
   link: {
     flex: 1,
     fontSize: 12,
-    color: colors.dark1
+    color: colors.accent
   }
 });

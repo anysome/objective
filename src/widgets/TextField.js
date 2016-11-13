@@ -33,7 +33,6 @@ export default class TextField extends React.Component {
     return <TextInput autoCapitalize='none'
                       autoCorrect={false}
                       clearButtonMode="while-editing"
-                      placeholderTextColor={colors.light3}
                       ref={(c) => this._input = c}
       {...this.props}
                       onChangeText={(text)=>this._changeText(text)}
@@ -45,18 +44,20 @@ const styles = StyleSheet.create({
   flat: {
     height: 40,
     marginTop: 5,
-    color: colors.accent,
-    backgroundColor: colors.light1
+    color: colors.dark1,
+    backgroundColor: 'white',
+    fontSize: 20
   },
   round: {
     height: 40,
     marginTop: 10,
-    color: colors.accent,
+    color: colors.dark1,
     borderWidth: 1,
-    borderColor: colors.light3,
+    borderColor: colors.bright2,
     borderRadius: 5,
-    backgroundColor: colors.light1,
+    backgroundColor: 'white',
     paddingLeft: 8,
-    paddingRight: 8
+    paddingRight: 8,
+    fontSize: 20
   }
 });

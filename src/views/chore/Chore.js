@@ -44,7 +44,7 @@ export default class Chore extends Controller {
             options: BUTTONS,
             cancelButtonIndex: 2,
             destructiveButtonIndex: 1,
-            tintColor: colors.dark1
+            tintColor: colors.dark2
           },
           async (buttonIndex) => {
             switch (buttonIndex) {
@@ -160,7 +160,7 @@ export default class Chore extends Controller {
         options: BUTTONS,
         destructiveButtonIndex: 0,
         cancelButtonIndex: 1,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async (buttonIndex) => {
         if (buttonIndex === 0) {
@@ -191,7 +191,7 @@ export default class Chore extends Controller {
     ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: CANCEL_INDEX,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async (buttonIndex) => {
         if (buttonIndex !== CANCEL_INDEX) {
@@ -281,10 +281,10 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     paddingRight: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   icon: {
     marginLeft: util.isAndroid() ? 16 : 0,

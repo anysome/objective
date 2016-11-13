@@ -106,7 +106,7 @@ export default class TransferDataPage extends React.Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light2,
+    backgroundColor: colors.bright2,
     padding: 16,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -114,6 +114,7 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 40,
+    color: colors.dark1,
     fontWeight: 'bold'
   }
 });

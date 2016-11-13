@@ -104,10 +104,10 @@ export default class Feedback extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <TouchableOpacity style={style.row} onPress={() => this._toReply(rowData)}>
-        <Text style={styles.title}>{rowData.content}</Text>
+        <Text style={styles.navText}>{rowData.content}</Text>
         <View style={styles.containerF}>
           <Text style={styles.hint}>{rowData.answers + ' 回复'}</Text>
-          <Text style={styles.text}>{moment(rowData.createTime).fromNow()}</Text>
+          <Text style={styles.hint}>{moment(rowData.createTime).fromNow()}</Text>
         </View>
       </TouchableOpacity>
     );

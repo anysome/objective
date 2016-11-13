@@ -180,10 +180,10 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     paddingRight: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   icon: {
     marginLeft: util.isAndroid() ? 16 : 0,

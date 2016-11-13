@@ -42,7 +42,7 @@ export default class Edit extends React.Component {
         options: BUTTONS,
         cancelButtonIndex: 3,
         destructiveButtonIndex: 2,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async (buttonIndex) => {
         switch (buttonIndex) {
@@ -99,7 +99,7 @@ export default class Edit extends React.Component {
     ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         cancelButtonIndex: CANCEL_INDEX,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async (buttonIndex) => {
         if (buttonIndex !== CANCEL_INDEX) {

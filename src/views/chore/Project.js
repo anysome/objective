@@ -91,7 +91,7 @@ export default class Project extends React.Component {
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
-          tintColor: colors.dark1
+          tintColor: colors.dark2
         },
         async (buttonIndex) => {
           if (buttonIndex !== CANCEL_INDEX) {
@@ -158,7 +158,7 @@ export default class Project extends React.Component {
     if (rowData.status === '1') {
       transform = {
         iconName: 'md-checkmark',
-        color: colors.light3,
+        color: colors.bright2,
         titleColor: colors.border,
         detailColor: colors.border
       };
@@ -166,17 +166,17 @@ export default class Project extends React.Component {
     } else if (rowData.arranged) {
       transform = {
         iconName: 'md-calendar',
-        color: colors.light3,
-        titleColor: colors.dark1,
-        detailColor: colors.dark1
+        color: colors.bright2,
+        titleColor: colors.dark2,
+        detailColor: colors.dark2
       };
       arrangable = false;
     } else {
       transform = {
         iconName: 'ios-calendar-outline',
         color: colors.border,
-        titleColor: colors.dark3,
-        detailColor: colors.dark1
+        titleColor: colors.dark1,
+        detailColor: colors.dark2
       };
     }
     return (
@@ -229,13 +229,13 @@ export default class Project extends React.Component {
 
 const style = StyleSheet.create({
   header: {
-    paddingTop: 10,
-    paddingLeft: 16,
+    paddingTop: 16,
+    paddingLeft: 24,
     paddingRight: 16,
-    paddingBottom: 4,
+    paddingBottom: 8,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3,
-    backgroundColor: colors.light2
+    borderBottomColor: colors.bright2,
+    backgroundColor: colors.bright1
   },
   container: {
     flexDirection: 'row',
@@ -244,7 +244,7 @@ const style = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   icon: {
     marginLeft: util.isAndroid() ? 16 : 0,

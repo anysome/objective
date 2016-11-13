@@ -90,31 +90,31 @@ export default class Discover extends Controller {
         <View style={styles.section}>
         { this.state.accountType === 'astmp' ?
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toUpgrade()}>
-            <Text>安家落户</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+            <Text style={styles.navText}>安家落户</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
           </TouchableOpacity>
           : [
           <TouchableOpacity style={styles.sectionRow} key={'1'} onPress={() => this._toHappiness()}>
-            <Text>幸福指数</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+            <Text style={styles.navText}>幸福指数</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
           </TouchableOpacity> ,
           <View style={styles.hr} key={'2'}/> ,
           <TouchableOpacity style={styles.sectionRow} key={'3'} onPress={() => this._toFeedback()}>
-            <Text>意见反馈</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+            <Text style={styles.navText}>意见反馈</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
           </TouchableOpacity>
           ]
         }
           <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toArticle()}>
-            <Text>鸡汤文章</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+            <Text style={styles.navText}>鸡汤文章</Text>
+            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('设置', Setting)}>
-          <Text>设置</Text>
-          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+          <Text style={styles.navText}>设置</Text>
+          <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
         </TouchableOpacity>
 
       </ScrollView>

@@ -149,7 +149,7 @@ export default class Glance extends React.Component {
               width={15}
               fill={this.state.progress}
               tintColor={colors.accent}
-              backgroundColor={colors.light1}>
+              backgroundColor={'white'}>
             </AnimatedCircularProgress>
           </View>
           <View style={style.positionC}>
@@ -225,9 +225,9 @@ const style = StyleSheet.create({
     paddingBottom: 4,
     flexDirection: 'column',
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.border,
+    borderTopColor: colors.bright2,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.border
+    borderBottomColor: colors.bright2
   },
   link: {
     fontSize: 12,
@@ -237,7 +237,7 @@ const style = StyleSheet.create({
   summary: {
     paddingTop: 5,
     flex: 1,
-    color: colors.dark1,
+    color: colors.dark2,
     fontSize: 16,
     textAlign: 'right'
   }

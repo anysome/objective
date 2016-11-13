@@ -133,7 +133,7 @@ export default class Login extends React.Component {
               <TouchableOpacity onPress={()=>this._weiboLogin()}>
                 <Image style={style.third} source={require('../../../resources/images/weibo.png')}/>
               </TouchableOpacity>
-              <Text style={styles.hint}>第三方帐号登录</Text>
+              <Text style={styles.text}>微博帐号登录</Text>
             </View>
             <TextField
               ref={(c) => this._email = c}
@@ -175,17 +175,17 @@ export default class Login extends React.Component {
 const style = StyleSheet.create({
   window: {
     flex: 1,
-    backgroundColor: colors.light3
+    backgroundColor: 'gray'
   },
   body: {
     flex: 1,
     height: 350,
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: colors.light1,
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: colors.light1,
-    backgroundColor: colors.light2
+    borderBottomColor: 'white',
+    backgroundColor: colors.bright2
   },
   containerA: {
     flexDirection: 'column',
@@ -195,7 +195,7 @@ const style = StyleSheet.create({
     paddingRight: 16,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: colors.light3
+    borderBottomColor: colors.bright2
   },
   third: {
     width: 64,
@@ -205,6 +205,6 @@ const style = StyleSheet.create({
   link: {
     flex: 1,
     fontSize: 12,
-    color: colors.dark1
+    color: colors.accent
   }
 });

@@ -153,7 +153,7 @@ export default class Target extends Controller {
       ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
-          tintColor: colors.dark1
+          tintColor: colors.dark2
         },
         async(buttonIndex) => {
           switch (buttonIndex) {
@@ -206,7 +206,7 @@ export default class Target extends Controller {
         options: ['修改', '删除', '取消'],
         cancelButtonIndex: 2,
         destructiveButtonIndex: 1,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async(buttonIndex) => {
         switch (buttonIndex) {
@@ -318,7 +318,7 @@ export default class Target extends Controller {
               <Text style={style.cell}>年度目标</Text>
             </TouchableOpacity>
           </View>
-          <View style={[style.line, {borderTopWidth:1, borderTopColor:colors.light2}]}>
+          <View style={[style.line, {borderTopWidth:1, borderTopColor:colors.bright2}]}>
             <TouchableOpacity onPress={()=> this._toAdd('4')}>
               <Text style={style.cell}>百次行动</Text>
             </TouchableOpacity>
@@ -344,9 +344,9 @@ const style = StyleSheet.create({
     height: 100,
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: colors.light1,
+    backgroundColor: colors.bright1,
     borderBottomWidth: 1,
-    borderBottomColor: colors.light3
+    borderBottomColor: colors.border
   },
   line: {
     flex: 1,

@@ -63,7 +63,7 @@ export default class ArticleList extends React.Component {
           <Text style={styles.title}>{rowData.title}</Text>
           <Text style={style.hint}>{rowData.subTitle}</Text>
         </View>
-        <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+        <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
       </TouchableOpacity>
     );
   }

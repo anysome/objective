@@ -148,7 +148,7 @@ const style = StyleSheet.create({
     paddingRight: 16,
     height: 40,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   containerR: {
     flex: 1,

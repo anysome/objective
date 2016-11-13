@@ -39,12 +39,12 @@ export default class Setting extends React.Component {
     return (
       <ScrollView>
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={this._logout}>
-          <Text style={styles.link}>退出</Text>
+          <Text style={style.link}>退出</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._linkClick()}>
-          <Text style={style.link}>{this.state.linkText}</Text>
-          <Icon size={20} name="ios-arrow-forward" color={colors.border}/>
+          <Text style={styles.navText}>{this.state.linkText}</Text>
+          <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -55,7 +55,7 @@ const style = StyleSheet.create({
   link: {
     flex: 1,
     fontSize: 16,
-    color: colors.dark1,
+    color: colors.accent,
     textAlign: 'center'
   }
 });

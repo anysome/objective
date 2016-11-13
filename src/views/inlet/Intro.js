@@ -18,13 +18,14 @@ export default class Intro extends React.Component {
 const style = StyleSheet.create({
 	container: {
 		flex: 1,
-    backgroundColor: colors.light2,
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
 	title: {
     fontSize: 40,
+    color: colors.dark1,
     fontWeight: 'bold'
   }
 });

@@ -197,7 +197,7 @@ export default class Agenda extends Controller {
           options: BUTTONS,
           destructiveButtonIndex: 0,
           cancelButtonIndex: isToday ? 3 : 2,
-          tintColor: colors.dark1
+          tintColor: colors.dark2
         },
         async (buttonIndex) => {
           switch (buttonIndex) {

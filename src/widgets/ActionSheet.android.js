@@ -24,7 +24,7 @@ const style = StyleSheet.create({
   },
   row: {
     height: 50,
-    backgroundColor: colors.light1,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
@@ -32,11 +32,11 @@ const style = StyleSheet.create({
   },
   brace: {
     height: 7,
-    backgroundColor: colors.light2
+    backgroundColor: colors.bright1
   },
   close: {
     height: 50,
-    backgroundColor: colors.light1,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth: 1 / PixelRatio.get(),

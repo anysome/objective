@@ -83,10 +83,10 @@ export default class Dones extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <View style={style.container}>
-        <Icon size={28} name='md-checkbox' style={style.icon} color={colors.light3} />
+        <Icon size={28} name='md-checkbox' style={style.icon} color={colors.bright2} />
         <View style={style.body}>
-          <Text style={styles.text}>{rowData.title}</Text>
-          {rowData.detail ? <Text style={style.hint}>{rowData.detail}</Text> : null}
+          <Text style={styles.title}>{rowData.title}</Text>
+          {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
         </View>
         <Text style={styles.hint}>{moment(rowData.doneTime).format('H:mm')}</Text>
       </View>
@@ -133,10 +133,10 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     paddingRight: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   icon: {
     marginLeft: util.isAndroid() ? 16 : 0,

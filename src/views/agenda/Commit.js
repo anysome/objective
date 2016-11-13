@@ -16,26 +16,23 @@ export default class Commit extends React.Component {
     super(props);
     this.state = {
       editable: true,
-      inputColor: colors.accent,
       output: '1',
       remark: '',
       tip: '记录一下...'
     };
     this._output = null;
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.data.doneType === '0') {
       this.setState({
         editable: false,
-        inputColor: colors.border,
         remark: '',
         output: '1'
       });
     } else {
       this.setState({
         editable: true,
-        inputColor: colors.accent,
         remark: '',
         output: ''
       });
@@ -87,7 +84,7 @@ export default class Commit extends React.Component {
                               onChangeText={text => this.setState({remark: text})}/>
           <View style={style.bar}>
             { this.state.editable ?
-            <TextField style={[style.input, {color: this.state.inputColor}]}
+            <TextField style={style.input}
                        ref={c => this._output = c}
                        placeholder='今日完成数'
                        defaultValue={this.state.output}
@@ -95,9 +92,9 @@ export default class Commit extends React.Component {
                        onChangeText={text => this.setState({output: text})}/>
               : <View style={style.input}></View>
             }
-            <Icon.Button name='md-checkmark' color={colors.light1}
-                         underlayColor={colors.light1}
-                         backgroundColor={colors.accent}
+            <Icon.Button name='md-checkmark' color={'white'}
+                         underlayColor={'white'}
+                         backgroundColor={colors.action}
                          onPress={()=> this._commit()}>
               <Text style={styles.buttonText}>完成</Text>
             </Icon.Button>
@@ -114,19 +111,23 @@ export default class Commit extends React.Component {
 const style = StyleSheet.create({
   container: {
     height: 220,
-    padding: 20,
-    backgroundColor: colors.light2
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 30,
+    paddingBottom: 16,
+    backgroundColor: colors.bright2
   },
   title: {
     paddingTop: 4,
     paddingBottom: 4,
-    color: colors.dark3,
+    color: colors.dark1,
     fontSize: 18
   },
   input: {
     flex: 1,
     marginRight: 16,
-    marginTop: 5
+    marginTop: 5,
+    borderWidth: 0
   },
   icon: {
     marginRight: 16

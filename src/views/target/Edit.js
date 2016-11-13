@@ -670,7 +670,7 @@ export default class Edit extends React.Component {
             options: ['删除', '取消'],
             cancelButtonIndex: 1,
             destructiveButtonIndex: 0,
-            tintColor: colors.dark1
+            tintColor: colors.dark2
           },
           async(buttonIndex) => {
             switch (buttonIndex) {
@@ -707,7 +707,7 @@ const style = StyleSheet.create({
   text: {
     paddingTop: 5,
     paddingBottom: 5,
-    color: colors.dark1,
+    color: colors.dark2,
     fontSize: 14
   },
   footer: {

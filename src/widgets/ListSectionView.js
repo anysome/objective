@@ -82,7 +82,7 @@ export default class ListSectionView extends React.Component {
     // let icon = this.state.collapsed ? 'arrow-right-b' : 'arrow-down-b';
     return (
       //<TouchableOpacity onPress={()=>this._opPress()}>
-      //<Icon name={icon} size={16} color={colors.light3} />
+      //<Icon name={icon} size={16} color={colors.bright2} />
       <View style={[style.row, this.props.style]}>
         <Text style={style.title}>{this.props.data.name}</Text>
         <Text style={style.icon}>{this.props.data._rowIds.length}</Text>
@@ -99,12 +99,12 @@ const style = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 16,
     height: 35,
-    backgroundColor: colors.light2
+    backgroundColor: colors.bright1
   },
   title: {
     flex: 1,
     marginRight: 8,
-    color: colors.dark1,
+    color: colors.dark2,
     textAlign: 'right'
   },
   icon: {

@@ -57,7 +57,7 @@ export default class HistoryTarget extends React.Component {
     ActionSheet.showActionSheetWithOptions({
         options: ['打卡日历', '前进路线', '修改目标', '取消'],
         cancelButtonIndex: 3,
-        tintColor: colors.dark1
+        tintColor: colors.dark2
       },
       async(buttonIndex) => {
         switch (buttonIndex) {
@@ -158,13 +158,13 @@ const style = StyleSheet.create({
     paddingTop: 4,
     paddingLeft: 10,
     paddingRight: 16,
-    backgroundColor: colors.light1,
+    backgroundColor: 'white',
     borderLeftWidth: 6,
     borderLeftColor: colors.border,
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.light3,
+    borderTopColor: colors.bright2,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3
+    borderBottomColor: colors.bright2
   },
   containerF: {
     flex: 1,

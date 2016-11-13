@@ -239,9 +239,9 @@ export default class Anything extends React.Component {
 
   render() {
     return (
-      <View style={styles.window}>
+      <View style={styles.flex}>
         <Modal animationType='slide' transparent={false} onRequestClose={()=>this._onClose()} visible={this.state.modalVisible}>
-          <ScrollView style={styles.window} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
+          <ScrollView style={styles.modal} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
             <View style={style.body}>
                 <TextArea
                   ref={(c)=> this._input = c}
@@ -252,7 +252,7 @@ export default class Anything extends React.Component {
               <View style={style.pin}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => this._pin()}>
                   <Icon name={this.state.pin ? 'ios-pin' : 'ios-pin-outline'} size={32}
-                        color={ this.state.pin ? colors.accent : colors.light3}/>
+                        color={ this.state.pin ? colors.accent : colors.bright2}/>
                 </TouchableOpacity>
                 <Text style={style.hint}>{this.state.tip}</Text>
               </View>
@@ -261,29 +261,29 @@ export default class Anything extends React.Component {
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('today')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'today' ? colors.accent : colors.border}]}>今日</Button>
+                          {backgroundColor: this.state.btn === 'today' ? colors.action : colors.accent}]}>今日</Button>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('tomorrow')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'tomorrow' ? colors.accent : colors.border}]}>明日</Button>
+                          {backgroundColor: this.state.btn === 'tomorrow' ? colors.action : colors.accent}]}>明日</Button>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('inbox')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'inbox' ? colors.accent : colors.border}]}>备忘</Button>
+                          {backgroundColor: this.state.btn === 'inbox' ? colors.action : colors.accent}]}>备忘</Button>
               </View>
               <View style={styles.containerA}>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('habit')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'habit' ? colors.accent : colors.border}]}>习惯</Button>
+                          {backgroundColor: this.state.btn === 'habit' ? colors.action : colors.accent}]}>习惯</Button>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('action')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'action' ? colors.accent : colors.border}]}>行动</Button>
+                          {backgroundColor: this.state.btn === 'action' ? colors.action : colors.accent}]}>行动</Button>
                 <Button style={styles.buttonText} onPress={()=>this._btnPress('time')}
                         activeOpacity={0.7}
                         containerStyle={[style.round,
-                          {backgroundColor: this.state.btn === 'time' ? colors.accent : colors.border}]}>计时</Button>
+                          {backgroundColor: this.state.btn === 'time' ? colors.action : colors.accent}]}>计时</Button>
               </View>
 
               <Button style={styles.buttonText} onPress={()=>this._onClose()}
@@ -307,7 +307,7 @@ const style = StyleSheet.create({
     marginTop: 10,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: colors.border
+    backgroundColor: colors.accent
   },
   pin: {
     flexDirection: 'row',
@@ -319,7 +319,7 @@ const style = StyleSheet.create({
     flex: 1,
     textAlign: 'right',
     fontSize: 12,
-    color: colors.border
+    color: colors.dark2
   },
   body: {
     paddingTop: util.isAndroid() ? 20 : 30,
@@ -335,6 +335,6 @@ const style = StyleSheet.create({
     marginBottom: 10,
     overflow:'hidden',
     borderRadius: 5,
-    backgroundColor: colors.light3
+    backgroundColor: colors.border
   }
 });

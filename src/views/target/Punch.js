@@ -66,9 +66,9 @@ export default class Punch extends React.Component {
                        defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
-            <Icon.Button name='md-checkmark' color={colors.light1}
-                         underlayColor={colors.light1}
-                         backgroundColor={colors.accent}
+            <Icon.Button name='md-checkmark' color={'white'}
+                         underlayColor={'white'}
+                         backgroundColor={colors.action}
                          onPress={()=> this._commit()}>
               <Text style={styles.buttonText}>打卡</Text>
             </Icon.Button>
@@ -85,20 +85,22 @@ export default class Punch extends React.Component {
 const style = StyleSheet.create({
   container: {
     height: 220,
-    padding: 20,
-    backgroundColor: colors.light2
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 30,
+    paddingBottom: 16,
+    backgroundColor: colors.bright2
   },
   title: {
     paddingTop: 4,
     paddingBottom: 4,
-    color: colors.dark3,
+    color: colors.dark1,
     fontSize: 18
   },
   input: {
     flex: 1,
     marginRight: 16,
-    marginTop: 5,
-    color: colors.accent
+    marginTop: 5
   },
   icon: {
     marginRight: 16

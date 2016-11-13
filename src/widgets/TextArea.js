@@ -82,7 +82,6 @@ var TextArea = React.createClass({
             autoCapitalize='none'
             autoCorrect={false}
             clearButtonMode="unless-editing"
-            placeholderTextColor={colors.light3}
             multiline={true}
           {...this.props}
             onChange={this.onChange}
@@ -121,11 +120,11 @@ var styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     marginTop: 10,
-    color: colors.accent,
+    color: colors.dark1,
     borderWidth: 1,
-    borderColor: colors.light3,
+    borderColor: colors.bright2,
     borderRadius: 5,
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   hiddenFlat: {
     marginTop: util.isAndroid() ? 5 : 0,
@@ -140,8 +139,8 @@ var styles = StyleSheet.create({
   flat: {
     flex: 1,
     marginTop: util.isAndroid() ? 1 : 5,
-    color: colors.accent,
-    backgroundColor: colors.light1,
+    color: colors.dark1,
+    backgroundColor: 'white',
     fontSize: 14
   }
 });

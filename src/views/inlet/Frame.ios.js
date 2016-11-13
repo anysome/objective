@@ -2,10 +2,10 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, NavigatorIOS, TabBarIOS, PushNotificationIOS, AppState, AlertIOS} from 'react-native';
+import {NavigatorIOS, TabBarIOS, PushNotificationIOS, AppState, AlertIOS} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {airloy, colors, api} from '../../app';
+import {airloy, styles, colors, api} from '../../app';
 import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
@@ -116,14 +116,14 @@ export default class Frame extends React.Component {
 
 	_renderNavigator(component, title, hideBar = false){
 		return <NavigatorIOS
-			style={{flex:1}}
+			style={styles.flex}
 			navigationBarHidden={hideBar}
-			titleTextColor={colors.dark1}
+			titleTextColor={colors.dark2}
 			tintColor={colors.accent}
 			translucent={true}
 			includeOpaqueBars={false}
-			navTintColor={colors.light1}
-			itemWrapperStyle={style.navigation}
+			navTintColor={'white'}
+			itemWrapperStyle={styles.navigation}
 			initialRoute={{
 				component: component,
 				title: title,
@@ -156,7 +156,7 @@ export default class Frame extends React.Component {
           onPress={() => this._selectTab('Chore')}>
           {this._renderNavigator(Chore, "备忘")}
         </Icon.TabBarItem>
-				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize}
+				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize} iconColor={colors.action}
 								 selected={this.state.currentPage === 'Anything'}
 								 onPress={() => this._openAdd()}>
 					<Anything onClose={() => this.closeAdd()} />
@@ -183,9 +183,3 @@ export default class Frame extends React.Component {
 		);
 	}
 }
-
-const style = StyleSheet.create({
-	navigation: {
-		backgroundColor: colors.light2
-	}
-});

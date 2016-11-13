@@ -17,7 +17,7 @@ class CalendarHeader extends React.Component {
       <View style={ [styles.header] }>
         {week.map((day, i) =>
           <View key={i} style={ [styles.headerCell] }>
-            <Text style={ [styles.headerText, {color: colors.dark1 }] }>
+            <Text style={ [styles.headerText, {color: colors.dark2 }] }>
               {day}
             </Text>
           </View>
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     textAlign: 'center',
-    color: colors.dark3
+    color: colors.dark1
   },
   disabledText: {
     color: colors.border,
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: 15,
-    backgroundColor: colors.light2
+    backgroundColor: colors.bright1
   },
   headerCell: {
     flex: 1,
@@ -258,8 +258,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3,
-    backgroundColor: colors.light2
+    borderBottomColor: colors.bright2,
+    backgroundColor: colors.bright1
   },
   monthHeaderText: {
     fontSize: 16,
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   activeMonthBodyCellDateText: {
-    color: colors.light1,
+    color: 'white',
   },
   spaceV: {
     height: 150

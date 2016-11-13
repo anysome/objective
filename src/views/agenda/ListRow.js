@@ -22,7 +22,7 @@ export default class ListRow extends React.Component {
   _transform(data) {
     if (this.done) {
       return {
-        icon: {name: 'md-checkbox', color: colors.light3},
+        icon: {name: 'md-checkbox', color: colors.bright2},
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -66,7 +66,7 @@ export default class ListRow extends React.Component {
             transform.priority > 3 ? <Text style={[style.alert, {color: transform.icon.color}]}>! </Text> : null }
           {transform.title}
         </Text>
-        {transform.reminder && <Icon size={20} name='ios-notifications-outline' color={colors.dark1}/>}
+        {transform.reminder && <Icon size={20} name='ios-notifications-outline' color={colors.dark2}/>}
         {transform.arrangeDate && <Text style={style.hint}>{transform.arrangeDate}</Text>}
       </TouchableOpacity>
     );
@@ -78,10 +78,10 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     paddingRight: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     alignItems: 'center',
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
   },
   icon: {
     paddingLeft: 16

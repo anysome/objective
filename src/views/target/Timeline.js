@@ -94,8 +94,8 @@ const style = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light2,
-    backgroundColor: colors.light1
+    borderBottomColor: colors.bright1,
+    backgroundColor: 'white'
   },
   rowBig: {
     flex: 1,
@@ -103,11 +103,11 @@ const style = StyleSheet.create({
     paddingRight: 16,
     alignItems: 'center',
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light2,
-    backgroundColor: colors.light1
+    borderBottomColor: colors.bright1,
+    backgroundColor: 'white'
   },
   progress: {
-    color: colors.dark1,
+    color: colors.dark2,
     width: 70,
     fontSize: 14,
     textAlign: 'center'

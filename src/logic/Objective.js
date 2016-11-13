@@ -5,10 +5,10 @@
 import {L} from '../app';
 
 const colors = {
-  priority1: "#55EFCB",
-  priority2: "#1D77EF",
+  priority1: "#8CC152",
+  priority2: "#007AFF",
   priority3: "#FF3B30",
-  priority0: "#D2CFD0"
+  priority0: "#BFBFBF"
 };
 
 const unit = new Map();

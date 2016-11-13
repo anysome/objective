@@ -16,7 +16,7 @@ const style = StyleSheet.create({
     right: 5,
     bottom: 5,
     left: 5,
-    backgroundColor: colors.dark1,
+    backgroundColor: colors.dark2,
     borderRadius: 10,
     opacity: 0.5,
     flexDirection: 'row',

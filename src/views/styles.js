@@ -1,5 +1,5 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/2/28.
+ * Created by Layman(http://github.com/anysome) on 16/11/13.
  */
 'use strict';
 
@@ -7,49 +7,30 @@ import {StyleSheet, PixelRatio} from 'react-native';
 import util from '../libs/Util';
 
 var colors = {
-  light1: '#F2EFE9',  //E2F9DA
-  light2: '#E0DED7',  //D0E8C8
-  light3: '#D2CFD0', //C2D9C1
-  border: '#B0ADAE', //ACB4A1
-  accent: '#FF6666', // D94C64
-  dark1: '#5B4B67', // 5A6A6A
-  dark2: '#281834', //273737
-  dark3: '#060012', //051515
+  bright1: '#FAFAFA',
+  bright2: '#EFEFF4',
+  border: '#CECED2',
+  accent: '#FDC02F',
+  action: '#4CD964',
+  dark1: '#202020',
+  dark2: '#808080',
 
   changeTheme: function (theme) {
-    if (theme === 'cyan') {
-      this.light1 = '#F6EEDC';
-      this.light2 = '#E4DDCA';
-      this.light3 = '#D6CEC3';
-      this.border = '#B4ACA1';
-      this.accent = '#3ed69e';
-      this.dark1 = '#6A5A56';
-      this.dark2 = '#372723';
-      this.dark3 = '#150501';
-    } else {
-      this.light1 = '#F2EFE9';  //E2F9DA
-      this.light2 = '#E0DED7';  //D0E8C8
-      this.light3 = '#D2CFD0'; //C2D9C1
-      this.border = '#B0ADAE'; //ACB4A1
-      this.accent = '#FF6666'; // D94C64
-      this.dark1 = '#5B4B67'; // 5A6A6A
-      this.dark2 = '#281834'; //273737
-      this.dark3 = '#060012'; //051515
-    }
+    console.log('todo theme');
   }
 };
 
 const styles = StyleSheet.create({
   navigation: {
-    backgroundColor: colors.light2
+    backgroundColor: colors.bright1
   },
   window: {
     flex: 1,
-    backgroundColor: colors.light2
+    backgroundColor: 'white'
   },
   modal: {
     flex: 1,
-    backgroundColor: colors.light3
+    backgroundColor: colors.bright2
   },
   container: {
     paddingLeft: 16,
@@ -83,23 +64,23 @@ const styles = StyleSheet.create({
   },
   hr: {
     height: 1,
-    backgroundColor: colors.light2
+    backgroundColor: colors.bright1
   },
   separator: {
     height: 1 / PixelRatio.get(),
     position: 'absolute',
     left: 16,
     right: 0,
-    backgroundColor: colors.light3
+    backgroundColor: colors.bright2
   },
   section: {
     flex: 1,
     flexDirection: 'column',
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3,
+    borderBottomColor: colors.bright2,
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.light3,
-    backgroundColor: colors.light1,
+    borderTopColor: colors.bright2,
+    backgroundColor: 'white',
     marginTop: 20,
     paddingLeft: 16,
     paddingRight: 16,
@@ -118,10 +99,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3,
+    borderBottomColor: colors.bright2,
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.light3,
-    backgroundColor: colors.light1,
+    borderTopColor: colors.bright2,
+    backgroundColor: 'white',
     marginTop: 20,
     paddingLeft: 16,
     paddingRight: 16,
@@ -129,15 +110,19 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   text: {
+    color: colors.dark2,
+    fontSize: 16
+  },
+  navText: {
     color: colors.dark1,
-    fontSize: 14
+    fontSize: 16
   },
   title: {
     flex: 1,
     paddingTop: 4,
     paddingBottom: 4,
-    color: colors.dark3,
-    fontSize: 18
+    color: colors.dark1,
+    fontSize: 20
   },
   button: {
     // flex: 1,
@@ -147,10 +132,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     overflow: 'hidden',
     borderRadius: 5,
-    backgroundColor: colors.accent
+    backgroundColor: colors.action
   },
   buttonText: {
-    color: colors.light1,
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold'
   },
@@ -165,9 +150,9 @@ const styles = StyleSheet.create({
   },
   link: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
-    color: colors.accent
+    color: colors.action
   },
   picker: {
     fontSize: 16,

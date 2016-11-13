@@ -90,9 +90,9 @@ const style = StyleSheet.create({
     flex: 1,
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: colors.light1,
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: colors.light1,
-    backgroundColor: colors.light2
+    borderBottomColor: 'white',
+    backgroundColor: colors.bright1
   }
 });

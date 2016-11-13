@@ -38,7 +38,7 @@ export default class OptionsPicker extends React.Component {
       picker = (
         <Picker {...this.others}
           style={style.picker}
-          itemStyle={{color: colors.dark1, fontSize: 26}}
+          itemStyle={{color: colors.dark2, fontSize: 26}}
           selectedValue={parseInt(this.props.selectedValue)}
           onValueChange={value => this._onValueChange(value)} >
           {this._renderOptions()}

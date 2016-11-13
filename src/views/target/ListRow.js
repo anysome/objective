@@ -20,7 +20,7 @@ export default class ListRow extends React.Component {
     let dateEnd = moment(target.dateEnd);
     let unitName = objective.getUnitName(target.unit);
     let maybe = '';
-    let undoSize = 26, doneColor = colors.dark1;
+    let undoSize = 26, doneColor = colors.dark2;
     if (target.requiredAmount === 1) {
       if (target.doneAmount) {
         undoSize = 14;
@@ -98,17 +98,17 @@ const style = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 8,
     paddingBottom: 8,
-    backgroundColor: colors.light1,
+    backgroundColor: 'white',
     borderLeftWidth: 6,
     borderLeftColor: colors.border,
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: colors.light3,
+    borderTopColor: colors.bright2,
     borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: colors.light3
+    borderBottomColor: colors.bright2
   },
   title: {
     flex: 1,
-    color: colors.dark3,
+    color: colors.dark1,
     fontSize: 20,
     marginLeft: -10
   },

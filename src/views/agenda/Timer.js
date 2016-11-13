@@ -85,23 +85,23 @@ export default class Timer extends React.Component {
                       visible={true}
                       onDateChange={date => this._onSelectedDate(date)} />
           <View style={style.bar}>
-            <Icon.Button name='md-close' color={colors.light3}
-                         underlayColor={colors.light1}
-                         backgroundColor={colors.light2}
+            <Icon.Button name='md-close' color='white'
+                         underlayColor='white'
+                         backgroundColor={colors.border}
                          onPress={() => this.props.onFeedback()}>
-              <Text style={styles.text}>取消</Text>
+              <Text style={style.text}>取消</Text>
             </Icon.Button>
-            <Icon.Button name='md-notifications-off' color={colors.accent}
-                         underlayColor={colors.light1}
-                         backgroundColor={colors.light2}
-                         onPress={()=> this._cancel()}>
-              <Text style={style.link}>删除提醒</Text>
-            </Icon.Button>
-            <Icon.Button name='md-notifications' color={colors.light1}
-                         underlayColor={colors.light1}
+            <Icon.Button name='md-notifications-off' color='white'
+                         underlayColor='white'
                          backgroundColor={colors.accent}
+                         onPress={()=> this._cancel()}>
+              <Text style={style.text}>删除提醒</Text>
+            </Icon.Button>
+            <Icon.Button name='md-notifications' color='white'
+                         underlayColor='white'
+                         backgroundColor={colors.action}
                          onPress={()=> this._setup()}>
-              <Text style={styles.buttonText}>设定</Text>
+              <Text style={style.text}>设定</Text>
             </Icon.Button>
           </View>
         </View>
@@ -113,11 +113,15 @@ export default class Timer extends React.Component {
 const style = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: colors.light1
+    backgroundColor: 'white'
+  },
+  text: {
+    color: 'white',
+    fontSize: 16
   },
   title: {
     textAlign: 'center',
-    color: colors.dark3,
+    color: colors.dark1,
     fontSize: 18
   },
   bar: {
@@ -133,6 +137,6 @@ const style = StyleSheet.create({
   },
   link: {
     fontSize: 16,
-    color: colors.accent
+    color: colors.action
   }
 });
