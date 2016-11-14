@@ -4,10 +4,10 @@
 import React from 'react';
 import {
   StyleSheet, View, ScrollView, ListView,
-  RefreshControl, TouchableOpacity, Text, Alert, PixelRatio
+  RefreshControl, TouchableOpacity, Text, Alert
 } from 'react-native';
 
-import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
+import {analytics, airloy, styles, colors, px1, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import EventTypes from '../../logic/EventTypes';
@@ -318,7 +318,7 @@ export default class Target extends Controller {
               <Text style={style.cell}>年度目标</Text>
             </TouchableOpacity>
           </View>
-          <View style={[style.line, {borderTopWidth: 1 / PixelRatio.get(), borderTopColor:colors.bright2}]}>
+          <View style={[style.line, {borderTopWidth: px1, borderTopColor:colors.bright2}]}>
             <TouchableOpacity onPress={()=> this._toAdd('4')}>
               <Text style={style.cell}>百次行动</Text>
             </TouchableOpacity>

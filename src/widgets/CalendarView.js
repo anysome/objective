@@ -4,10 +4,10 @@
  * Modification for styles
  */
 import React from 'react'
-import {StyleSheet, Text, View, PixelRatio, Dimensions, TouchableOpacity, ListView} from 'react-native'
+import {StyleSheet, Text, View, Dimensions, TouchableOpacity, ListView} from 'react-native'
 import moment from 'moment'
 
-import {colors} from '../app'
+import {colors, px1} from '../views/styles'
 
 class CalendarHeader extends React.Component {
   render() {
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2,
     backgroundColor: colors.bright1
   },
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   },
   activeMonthBodyCellDateBorder: {
     width: 32,
-    borderWidth: 2 / PixelRatio.get(),
+    borderWidth: 2 * px1,
     borderColor: colors.accent,
     borderRadius: 16,
   },

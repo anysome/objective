@@ -3,11 +3,11 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, Image, TouchableOpacity,
-  RefreshControl, ListView, PixelRatio} from 'react-native';
+  RefreshControl, ListView} from 'react-native';
 import moment from 'moment';
 
 import objective from '../../logic/Objective';
-import {analytics, config, airloy, styles, colors, api, L, toast} from '../../app';
+import {airloy, styles, px1, colors, api, L, toast} from '../../app';
 import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
 
@@ -161,9 +161,9 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderLeftWidth: 6,
     borderLeftColor: colors.border,
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.bright2,
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2
   },
   containerF: {
@@ -174,6 +174,6 @@ const style = StyleSheet.create({
     paddingTop: 5,
     marginTop: 5,
     borderTopColor: colors.border,
-    borderTopWidth: 1 / PixelRatio.get()
+    borderTopWidth: px1
   }
 });

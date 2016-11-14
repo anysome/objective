@@ -3,10 +3,10 @@
  */
 
 import React from 'react'
-import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, PixelRatio, BackAndroid} from 'react-native'
+import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, BackAndroid} from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
 
-import {colors} from '../views/styles'
+import {colors, px1} from '../views/styles'
 
 const style = StyleSheet.create({
   container: {
@@ -27,7 +27,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.border
   },
   brace: {
@@ -39,7 +39,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.border
   }
 });

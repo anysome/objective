@@ -6,7 +6,9 @@
 import {StyleSheet, PixelRatio} from 'react-native';
 import util from '../libs/Util';
 
-var colors = {
+const px1 = 1 / PixelRatio.get();
+
+const colors = {
   bright1: '#EFEFF4',
   bright2: '#DCDCE4',
   border: '#CCCCCC',
@@ -63,11 +65,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   hr: {
-    height: 1 / PixelRatio.get(),
+    height: px1,
     backgroundColor: colors.bright1
   },
   separator: {
-    height: 1 / PixelRatio.get(),
+    height: px1,
     position: 'absolute',
     left: 16,
     right: 0,
@@ -76,9 +78,9 @@ const styles = StyleSheet.create({
   section: {
     flex: 1,
     flexDirection: 'column',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2,
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.bright2,
     backgroundColor: 'white',
     marginTop: 20,
@@ -98,9 +100,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2,
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.bright2,
     backgroundColor: 'white',
     marginTop: 20,
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 4,
     overflow: 'hidden',
     borderRadius: 5,
-    borderWidth: 1 / PixelRatio.get(),
+    borderWidth: px1,
     borderColor: colors.accent
   },
   link: {
@@ -195,4 +197,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export {colors, styles};
+export {colors, styles, px1};

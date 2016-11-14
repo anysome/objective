@@ -3,11 +3,10 @@
  */
 
 import React from 'react';
-import {StyleSheet, ListView, RefreshControl, View, Text,
-  TouchableOpacity, PixelRatio} from 'react-native';
+import {StyleSheet, ListView, RefreshControl, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {analytics, styles, colors, airloy, api, toast, L, hang} from '../../app';
+import {analytics, styles, colors, px1, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ActionSheet from '../../widgets/ActionSheet';
@@ -233,7 +232,7 @@ const style = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 16,
     paddingBottom: 8,
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2,
     backgroundColor: colors.bright1
   },

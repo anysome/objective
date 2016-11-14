@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {TextInput, StyleSheet} from 'react-native'
-import {colors} from '../app'
+import {colors} from '../views/styles'
 
 export default class TextField extends React.Component {
 

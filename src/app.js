@@ -9,7 +9,7 @@ import config from './config.json';
 import api from './api.json';
 import airloy, {configure, use} from 'airloy/src';
 import airloyReactNative from 'airloy-react-native';
-import {colors, styles} from './views/styles';
+import {colors, styles, px1} from './views/styles';
 
 configure(config.airloy);
 use(airloyReactNative);
@@ -48,4 +48,4 @@ function hang(upOrType = true) {
   }
 }
 
-export { MobclickAgent as analytics, config, styles, colors, airloy, api, L, toast, hang};
+export { MobclickAgent as analytics, config, styles, colors, px1, airloy, api, L, toast, hang};

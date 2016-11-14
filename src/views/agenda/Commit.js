@@ -5,7 +5,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
+import {analytics, styles, colors, px1, airloy, api, L, toast, hang} from '../../app';
 import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
@@ -127,7 +127,8 @@ const style = StyleSheet.create({
     flex: 1,
     marginRight: 16,
     marginTop: 5,
-    borderWidth: 0
+    borderWidth: px1,
+    borderColor: colors.bright2
   },
   icon: {
     marginRight: 16

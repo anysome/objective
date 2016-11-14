@@ -2,10 +2,10 @@
  * Created by Layman(http://github.com/anysome) on 16/3/10.
  */
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 
-import {colors, styles} from '../../app';
+import {colors, styles, px1} from '../../app';
 import objective from '../../logic/Objective';
 
 export default class ListRow extends React.Component {
@@ -101,9 +101,9 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderLeftWidth: 6,
     borderLeftColor: colors.border,
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.bright2,
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright2
   },
   title: {

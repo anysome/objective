@@ -2,10 +2,10 @@
  * Created by Layman(http://github.com/anysome) on 16/3/16.
  */
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, ListView, PixelRatio} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, ListView} from 'react-native';
 import moment from 'moment';
 
-import {analytics, styles, colors, airloy, api, toast, L} from '../../app';
+import {analytics, styles, colors, px1, airloy, api, toast, L} from '../../app';
 
 export default class Timeline extends React.Component {
 
@@ -93,7 +93,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     alignItems: 'center',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright1,
     backgroundColor: 'white'
   },
@@ -102,7 +102,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     paddingRight: 16,
     alignItems: 'center',
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.bright1,
     backgroundColor: 'white'
   },

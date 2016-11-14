@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, PixelRatio, View, TextInput, Text} from 'react-native';
 
-import {colors} from '../app';
+import {colors, px1} from '../views/styles';
 import util from '../libs/Util';
 
 var TextArea = React.createClass({
@@ -121,7 +121,7 @@ var styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
     color: colors.dark1,
-    borderWidth: 1,
+    borderWidth: px1,
     borderColor: colors.bright2,
     borderRadius: 5,
     backgroundColor: 'white'
@@ -134,7 +134,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     color: 'transparent',
-    fontSize: 14
+    fontSize: 15
   },
   flat: {
     flex: 1,

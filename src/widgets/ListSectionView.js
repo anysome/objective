@@ -4,7 +4,7 @@
 'use strict';
 import React from 'react'
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native'
-import {colors} from '../app'
+import {colors} from '../views/styles'
 
 class DataSource {
 

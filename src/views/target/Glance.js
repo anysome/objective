@@ -2,11 +2,11 @@
  * Created by Layman(http://github.com/anysome) on 16/3/11.
  */
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, PixelRatio} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Button from 'react-native-button';
 
-import {analytics, airloy, styles, colors, api, L, toast} from '../../app';
+import {analytics, styles, colors, px1} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
 
@@ -224,9 +224,9 @@ const style = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
     flexDirection: 'column',
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: px1,
     borderTopColor: colors.border,
-    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomWidth: px1,
     borderBottomColor: colors.border
   },
   link: {
