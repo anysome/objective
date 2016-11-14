@@ -1,11 +1,11 @@
-package com.objective;
+package com.exease.etd.objective;
 
 import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import in.esseak.react_native_umeng.UmengPackage;
-import co.fixt.wheel.WheelPackage;
+import com.heng.wheel.WheelPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;

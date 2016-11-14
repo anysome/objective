@@ -1,4 +1,4 @@
-package com.objective;
+package com.exease.etd.objective;
 
 import com.facebook.react.ReactActivity;
 import com.umeng.analytics.MobclickAgent;
