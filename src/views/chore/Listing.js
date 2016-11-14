@@ -75,7 +75,7 @@ export default class Listing extends React.Component {
     this.props.navigator.push({
       title: '修改',
       component: EditProject,
-      rightButtonIcon: this.props.trashIcon,
+      rightButtonIcon: require('../../../resources/icons/trash.png'),
       passProps: {
         data: rowData,
         onUpdated: (rowData) => this.updateRow(rowData),
@@ -88,11 +88,10 @@ export default class Listing extends React.Component {
     this.props.navigator.push({
       title: rowData.title,
       component: Project,
-      rightButtonIcon: this.props.plusIcon,
+      rightButtonIcon: require('../../../resources/icons/create.png'),
       passProps: {
         data: rowData,
         today: this.today,
-        nextIcon: this.props.trashIcon,
         onUpdated: (rowData) => this.updateRow(rowData)
       }
     });

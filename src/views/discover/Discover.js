@@ -45,10 +45,7 @@ export default class Discover extends Controller {
     this.forward({
       title: '我的反馈',
       component: Feedback,
-      navigationBarHidden: false,
-      passProps: {
-        nextIcon: this.getIcon('ios-trash-outline')
-      }
+      navigationBarHidden: false
     });
   }
 

@@ -43,14 +43,14 @@ export default class Agenda extends Controller {
 
   componentWillMount() {
     if (this.route) {// Logout and then login cause currentRoute to be null. Maybe a bug.
-      this.route.leftButtonIcon = this.getIcon('ios-time-outline');
+      this.route.leftButtonIcon = require('../../../resources/icons/dones.png');
       this.route.onLeftButtonPress = () => {
         this.forward({
           title: '近期完成',
           component: Dones
         });
       };
-      this.route.rightButtonIcon = this.getIcon('ios-create-outline');
+      this.route.rightButtonIcon = require('../../../resources/icons/create.png');
       this.route.onRightButtonPress = () => {
         this.forward({
           title: '添加',
@@ -153,7 +153,7 @@ export default class Agenda extends Controller {
       this.forward({
         title: '修改',
         component: Edit,
-        rightButtonIcon: this.getIcon('ios-more-outline'),
+        rightButtonIcon: require('../../../resources/icons/more.png'),
         passProps: {
           today: this.today,
           data: rowData,

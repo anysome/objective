@@ -67,7 +67,7 @@ export default class HistoryTarget extends React.Component {
             this.props.navigator.push({
               title: '修改目标',
               component: Edit,
-              rightButtonIcon: this.props.nextIcon,
+              rightButtonIcon: require('../../../resources/icons/more.png'),
               passProps: {
                 data: rowData
               }

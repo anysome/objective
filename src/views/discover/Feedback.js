@@ -72,7 +72,7 @@ export default class Feedback extends React.Component {
     this.props.navigator.push({
       title: '回复反馈',
       component: FeedbackDetail,
-      rightButtonIcon: this.props.nextIcon,
+      rightButtonIcon: require('../../../resources/icons/trash.png'),
       onRightButtonPress: () => this.removeRow(rowData),
       navigationBarHidden: false,
       passProps: {

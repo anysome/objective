@@ -142,7 +142,7 @@ export default class Project extends React.Component {
     this.props.navigator.push({
       title: editable ? '修改子任务' : '查看子任务',
       component: EditTask,
-      rightButtonIcon: this.props.nextIcon,
+      rightButtonIcon: require('../../../resources/icons/trash.png'),
       passProps: {
         data: rowData,
         editable: editable,

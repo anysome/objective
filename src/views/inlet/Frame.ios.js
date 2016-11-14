@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import {NavigatorIOS, TabBarIOS, PushNotificationIOS, AppState, AlertIOS} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, styles, colors, api} from '../../app';
 import util from '../../libs/Util';
@@ -22,20 +21,14 @@ export default class Frame extends React.Component {
 		super();
 		this.lastPage = null;
 		this.state = {
-			currentPage: 'Discover'
+			currentPage: 'Agenda'
 		};
     this.iconSize = 28;
-		this.icons = new Map();
     this.today = util.getTodayStart();
 		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 	}
 
 	componentWillMount() {
-		// draw icon images for later use
-		['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
-      'ios-create-outline', 'ios-trash-outline', 'ios-list', 'ios-time-outline'].forEach(name => {
-				Icon.getImageSource(name, 32).then(source => this.icons.set(name, source));
-		});
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
     AppState.addEventListener('change', this._handleAppStateChange);
     this._autoSchedule();
@@ -101,7 +94,7 @@ export default class Frame extends React.Component {
 	}
 
 	getIcon(iconName) {
-		return this.icons.get(iconName);
+		return require(`../../../resources/icons/${iconName}.png`);
 	}
 
 	_openAdd() {
@@ -138,47 +131,36 @@ export default class Frame extends React.Component {
 		return (
 			<TabBarIOS tintColor={colors.accent}
 					   translucent={true}>
-				<Icon.TabBarItem
-					title="待办"
-					iconName="ios-star-outline"
-					selectedIconName="ios-star"
-					iconSize={this.iconSize}
-					selected={this.state.currentPage === 'Agenda'}
-					onPress={() => this._selectTab('Agenda')}>
-					{this._renderNavigator(Agenda, "待办")}
-				</Icon.TabBarItem>
-        <Icon.TabBarItem
-          title="目标"
-          iconName="ios-checkmark-circle-outline"
-          selectedIconName="md-checkmark-circle"
-          iconSize={this.iconSize}
-          selected={this.state.currentPage === 'Target'}
-          onPress={() => this._selectTab('Target')}>
+        <TabBarIOS.Item title="待办"
+                        selected={this.state.currentPage === 'Agenda'}
+                        icon={require('../../../resources/icons/agenda.png')}
+                        onPress={() => this._selectTab('Agenda')}>
+          {this._renderNavigator(Agenda, "待办")}
+        </TabBarIOS.Item>
+        <TabBarIOS.Item title="目标"
+                        selected={this.state.currentPage === 'Target'}
+                        icon={require('../../../resources/icons/target.png')}
+                        onPress={() => this._selectTab('Target')}>
           {this._renderNavigator(Target, "目标")}
-        </Icon.TabBarItem>
-				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize} iconColor={colors.action}
-								 selected={this.state.currentPage === 'Anything'}
-								 onPress={() => this._openAdd()}>
-					<Anything onClose={() => this.closeAdd()} />
-				</Icon.TabBarItem>
-        <Icon.TabBarItem
-          title="备忘"
-          iconName="ios-filing-outline"
-          selectedIconName="ios-filing"
-          iconSize={this.iconSize}
-          selected={this.state.currentPage === 'Chore'}
-          onPress={() => this._selectTab('Chore')}>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item title={null}
+                        selected={this.state.currentPage === 'Anything'}
+                        icon={require('../../../resources/icons/add.png')}
+                        onPress={() => this._openAdd()}>
+          <Anything onClose={() => this.closeAdd()} />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item title="备忘"
+                        selected={this.state.currentPage === 'Chore'}
+                        icon={require('../../../resources/icons/chore.png')}
+                        onPress={() => this._selectTab('Chore')}>
           {this._renderNavigator(Chore, "备忘")}
-        </Icon.TabBarItem>
-				<Icon.TabBarItem
-					title="发现"
-					iconName="ios-navigate-outline"
-					selectedIconName="ios-navigate"
-					iconSize={this.iconSize}
-					selected={this.state.currentPage === 'Discover'}
-					onPress={() => this._selectTab('Discover')}>
-					{this._renderNavigator(Discover, "发现")}
-				</Icon.TabBarItem>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item title="发现"
+                        selected={this.state.currentPage === 'Discover'}
+                        icon={require('../../../resources/icons/discover.png')}
+                        onPress={() => this._selectTab('Discover')}>
+          {this._renderNavigator(Discover, "发现")}
+        </TabBarIOS.Item>
 			</TabBarIOS>
 		);
 	}

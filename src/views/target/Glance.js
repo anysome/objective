@@ -38,7 +38,7 @@ export default class Glance extends React.Component {
       this.target && this.props.navigator.push({
         title: '修改目标',
         component: Edit,
-        rightButtonIcon: this.props.nextIcon,
+        rightButtonIcon: require('../../../resources/icons/more.png'),
         passProps: {
           data: this.target
         }

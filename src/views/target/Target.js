@@ -40,7 +40,7 @@ export default class Target extends Controller {
 
   componentWillMount() {
     if (this.route) {
-      this.route.rightButtonIcon = this.getIcon('ios-add');
+      this.route.rightButtonIcon = require('../../../resources/icons/create.png');
       this.route.onRightButtonPress = () => {
         let newTop = -100;
         if (util.isAndroid()) {
@@ -53,14 +53,13 @@ export default class Target extends Controller {
         });
         analytics.onEvent('click_check_add');
       };
-      this.route.leftButtonIcon = this.getIcon('ios-archive-outline');
+      this.route.leftButtonIcon = require('../../../resources/icons/archive.png');
       this.route.onLeftButtonPress = () => {
         this.forward({
           title: '过期目标',
           component: HistoryTarget,
           passProps: {
-            today: this.today,
-            nextIcon: this.getIcon('ios-more-outline')
+            today: this.today
           }
         });
       };
@@ -165,8 +164,7 @@ export default class Target extends Controller {
                 component: Glance,
                 passProps: {
                   data: rowData,
-                  today: this.today,
-                  nextIcon: this.getIcon('ios-more-outline')
+                  today: this.today
                 }
               });
               break;
@@ -194,8 +192,7 @@ export default class Target extends Controller {
         component: Glance,
         passProps: {
           data: rowData,
-          today: this.today,
-          nextIcon: this.getIcon('ios-more-outline')
+          today: this.today
         }
       });
     }
@@ -220,7 +217,7 @@ export default class Target extends Controller {
               this.forward({
                 title: '修改',
                 component: Edit,
-                rightButtonIcon: this.getIcon('ios-more-outline'),
+                rightButtonIcon: require('../../../resources/icons/more.png'),
                 passProps: {
                   data: rowData
                 }

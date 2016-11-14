@@ -37,7 +37,7 @@ export default class Chore extends Controller {
 
   componentWillMount() {
     if (this.route) {// Logout and then login cause currentRoute to be null. Maybe a bug.
-      this.route.rightButtonIcon = this.getIcon('ios-more-outline');
+      this.route.rightButtonIcon = require('../../../resources/icons/more.png');
       this.route.onRightButtonPress = () => {
         let BUTTONS = ['新备忘', '清空回收站', '取消'];
         ActionSheet.showActionSheetWithOptions({
@@ -71,16 +71,14 @@ export default class Chore extends Controller {
           }
         );
       };
-      this.route.leftButtonIcon = this.getIcon('ios-list');
+      this.route.leftButtonIcon = require('../../../resources/icons/folder.png');
       this.route.onLeftButtonPress = () => {
         this.forward({
           title: '分类清单',
           component: Listing,
-          rightButtonIcon: this.getIcon('ios-add'),
+          rightButtonIcon: require('../../../resources/icons/create.png'),
           passProps: {
-            today: this.today,
-            trashIcon: this.getIcon('ios-trash-outline'),
-            plusIcon: this.getIcon('ios-add')
+            today: this.today
           }
         });
       };
@@ -145,7 +143,7 @@ export default class Chore extends Controller {
     this.props.navigator.push({
       title: '修改',
       component: Edit,
-      rightButtonIcon: this.getIcon('ios-more-outline'),
+      rightButtonIcon: require('../../../resources/icons/more.png'),
       passProps: {
         data: rowData,
         onUpdated: (rowData) => this.updateRow(rowData),
