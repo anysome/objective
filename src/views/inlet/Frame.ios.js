@@ -148,20 +148,6 @@ export default class Frame extends React.Component {
 					{this._renderNavigator(Agenda, "待办")}
 				</Icon.TabBarItem>
         <Icon.TabBarItem
-          title="备忘"
-          iconName="ios-filing-outline"
-          selectedIconName="ios-filing"
-          iconSize={this.iconSize}
-          selected={this.state.currentPage === 'Chore'}
-          onPress={() => this._selectTab('Chore')}>
-          {this._renderNavigator(Chore, "备忘")}
-        </Icon.TabBarItem>
-				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize} iconColor={colors.action}
-								 selected={this.state.currentPage === 'Anything'}
-								 onPress={() => this._openAdd()}>
-					<Anything onClose={() => this.closeAdd()} />
-				</Icon.TabBarItem>
-        <Icon.TabBarItem
           title="目标"
           iconName="ios-checkmark-circle-outline"
           selectedIconName="md-checkmark-circle"
@@ -169,6 +155,20 @@ export default class Frame extends React.Component {
           selected={this.state.currentPage === 'Target'}
           onPress={() => this._selectTab('Target')}>
           {this._renderNavigator(Target, "目标")}
+        </Icon.TabBarItem>
+				<Icon.TabBarItem iconName="md-add" title={null} iconSize={this.iconSize} iconColor={colors.action}
+								 selected={this.state.currentPage === 'Anything'}
+								 onPress={() => this._openAdd()}>
+					<Anything onClose={() => this.closeAdd()} />
+				</Icon.TabBarItem>
+        <Icon.TabBarItem
+          title="备忘"
+          iconName="ios-filing-outline"
+          selectedIconName="ios-filing"
+          iconSize={this.iconSize}
+          selected={this.state.currentPage === 'Chore'}
+          onPress={() => this._selectTab('Chore')}>
+          {this._renderNavigator(Chore, "备忘")}
         </Icon.TabBarItem>
 				<Icon.TabBarItem
 					title="发现"

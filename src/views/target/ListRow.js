@@ -12,8 +12,6 @@ export default class ListRow extends React.Component {
 
   constructor(props) {
     super(props);
-    this.done = props.sectionId === 2;
-    this.arranged = props.sectionId == 1;
   }
 
   _transform(target) {
