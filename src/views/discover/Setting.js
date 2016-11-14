@@ -11,7 +11,7 @@ export default class Setting extends React.Component {
 
   constructor(props) {
     super(props);
-    this.sourceLink = 'https://github.com/anysome/objective';
+    this.sourceLink = 'https://github.com/airloy/objective';
     this.state = {
       linkText: '欢迎改进APP源码'
     };

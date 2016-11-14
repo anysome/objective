@@ -35,6 +35,10 @@ export default class Punch extends React.Component {
       hang(false);
       if (result.success) {
         toast('太给力了!');
+        this.setState({
+          output: '',
+          remark: ''
+        });
         airloy.event.emit(EventTypes.agendaChange);
         airloy.event.emit(EventTypes.targetChange);
         this.target.doneAmount = this.target.doneAmount + increasement;

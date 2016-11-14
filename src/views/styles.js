@@ -176,13 +176,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.border
   },
-  inputR: {
-    flex: 1,
-    height: util.isAndroid() ? 40 : 25,
-    marginLeft: util.isAndroid() ? 0 : 16,
-    marginTop: null,
-    textAlign: 'right'
-  },
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',

@@ -186,7 +186,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.lasting}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -253,7 +253,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -324,7 +324,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -377,7 +377,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -438,7 +438,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -525,7 +525,7 @@ export default class Edit extends React.Component {
               placeholder={'' + this.target.requiredAmount}
               returnKeyType="done"
               keyboardType={this.keyboardType}
-              style={styles.inputR}
+              style={style.inputR}
             />
           </View>
           <View style={styles.separator}/>
@@ -715,6 +715,14 @@ const style = StyleSheet.create({
     paddingBottom: 5,
     color: colors.dark2,
     fontSize: 14
+  },
+  inputR: {
+    flex: 1,
+    height: util.isAndroid() ? 40 : 25,
+    marginLeft: util.isAndroid() ? 0 : 16,
+    marginTop: null,
+    color: colors.accent,
+    textAlign: 'right'
   },
   footer: {
     height: 300
