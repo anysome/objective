@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid} from 'react-native';
+import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabNavigator from 'react-native-tab-navigator';
 import NavigatorWithBar from '../../widgets/NavigatorWithBar';
@@ -111,42 +111,42 @@ export default class Main extends React.Component {
           selected={this.state.currentPage === 'Agenda'}
           title="待办"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-star-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-star' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Image source={require('../../../resources/icons/agenda.png')} style={style.iconUnselected} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/agenda.png')} />}
           onPress={() => this._selectTab('Agenda')}>
           <NavigatorWithBar component={Agenda} navigationBarHidden={false} title='待办' frame={this}/>
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.currentPage === 'Chore'}
-          title="备忘"
-          selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-filing-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-filing' size={this.iconSize} color={colors.accent} />}
-          onPress={() => this._selectTab('Chore')}>
-          <NavigatorWithBar component={Chore} navigationBarHidden={false} title='备忘' frame={this}/>
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.currentPage === 'Anything'}
-          renderIcon={() => <Icon name='md-add' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='md-add' size={this.iconSize} color={colors.accent} />}
-          onPress={() => this._openAdd()}>
-          <Anything onClose={() => this.closeAdd()}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Target'}
           title="目标"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-checkmark-circle-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='md-checkmark-circle' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Image source={require('../../../resources/icons/target.png')} style={style.iconUnselected} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/target.png')} />}
           onPress={() => this._selectTab('Target')}>
           <NavigatorWithBar component={Target} navigationBarHidden={false} title='目标' frame={this}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={this.state.currentPage === 'Anything'}
+          renderIcon={() => <Image source={require('../../../resources/icons/add.png')} style={style.iconUnselected} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/add.png')} />}
+          onPress={() => this._openAdd()}>
+          <Anything onClose={() => this.closeAdd()}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={this.state.currentPage === 'Chore'}
+          title="备忘"
+          selectedTitleStyle={style.tabSelected}
+          renderIcon={() => <Image source={require('../../../resources/icons/chore.png')} style={style.iconUnselected} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/chore.png')} />}
+          onPress={() => this._selectTab('Chore')}>
+          <NavigatorWithBar component={Chore} navigationBarHidden={false} title='备忘' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Discover'}
           title="发现"
           selectedTitleStyle={style.tabSelected}
-          renderIcon={() => <Icon name='ios-navigate-outline' size={this.iconSize} color={colors.border} />}
-          renderSelectedIcon={() => <Icon name='ios-navigate' size={this.iconSize} color={colors.accent} />}
+          renderIcon={() => <Image source={require('../../../resources/icons/discover.png')} style={style.iconUnselected} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/discover.png')} />}
           onPress={() => this._selectTab('Discover')}>
           <NavigatorWithBar component={Discover} navigationBarHidden={false} title='发现' frame={this}/>
         </TabNavigator.Item>
@@ -156,6 +156,9 @@ export default class Main extends React.Component {
 }
 
 const style = StyleSheet.create({
+  iconUnselected: {
+    tintColor: colors.border
+  },
   tabSelected: {
     color: colors.accent
   }
