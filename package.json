@@ -23,7 +23,7 @@
     "react-native-weibo": "^2.0.1",
     "react-native-wheel": "^1.1.3",
     "react-native-wheel-picker": "^1.1.1",
-    "rn-umeng": "^1.0.4"
+    "rn-umeng": "anysome/rn-umeng"
   },
   "jest": {
     "preset": "jest-react-native"
