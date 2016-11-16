@@ -2,8 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/3/4.
  */
 import React from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Linking} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Linking, Image} from 'react-native';
 
 import {analytics, styles, colors, airloy} from '../../app';
 
@@ -44,7 +43,7 @@ export default class Setting extends React.Component {
 
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._linkClick()}>
           <Text style={styles.navText}>{this.state.linkText}</Text>
-          <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+          <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
         </TouchableOpacity>
       </ScrollView>
     );

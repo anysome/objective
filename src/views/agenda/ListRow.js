@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/29.
  */
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
@@ -22,7 +22,7 @@ export default class ListRow extends React.Component {
   _transform(data) {
     if (this.done) {
       return {
-        icon: {name: 'md-checkbox', color: colors.bright2},
+        icon: <Image source={require(`../../../resources/icons/checked.png`)} style={{tintColor: colors.bright2}} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -30,7 +30,7 @@ export default class ListRow extends React.Component {
       };
     } else if (this.future) {
       return {
-        icon: {name: 'md-arrow-round-up', color: objective.getPriorityColor(data.priority)},
+        icon: <Image source={require(`../../../resources/icons/up.png`)} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -39,7 +39,7 @@ export default class ListRow extends React.Component {
       };
     } else {
       return {
-        icon: {color: objective.getPriorityColor(data.priority), name: 'md-square-outline'},
+        icon: <Image source={require(`../../../resources/icons/checkbox.png`)} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -53,14 +53,9 @@ export default class ListRow extends React.Component {
     var transform = this._transform(this.props.data);
     return (
       <TouchableOpacity style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
-        { util.isAndroid() ?
-          <TouchableOpacity onPress={this.props.onIconClick} style={style.icon}>
-            <Icon size={28} name={transform.icon.name} color={transform.icon.color}/>
-          </TouchableOpacity>
-          :
-          <Icon size={28} style={style.icon} name={transform.icon.name} color={transform.icon.color}
-                onPress={this.props.onIconClick}/>
-        }
+        <TouchableOpacity onPress={this.props.onIconClick} style={style.icon}>
+          {transform.icon}
+        </TouchableOpacity>
         <Text style={[styles.title, style.body]}>
           { transform.priority > 8 ? <Text style={[style.alert, {color: transform.icon.color}]}>!! </Text> :
             transform.priority > 3 ? <Text style={[style.alert, {color: transform.icon.color}]}>! </Text> : null }

@@ -8,7 +8,7 @@ import MobclickAgent from 'rn-umeng';
 import config from './config.json';
 import api from './api.json';
 import airloy, {configure, use} from 'airloy/src';
-import airloyReactNative from 'airloy-react-native';
+import airloyReactNative from 'airloy-react-native/src';
 import {colors, styles, px1} from './views/styles';
 
 configure(config.airloy);

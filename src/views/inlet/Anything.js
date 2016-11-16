@@ -3,8 +3,7 @@
  */
 
 import React from 'react';
-import {View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity, Image} from 'react-native';
 import Button from 'react-native-button';
 import moment from 'moment';
 
@@ -251,8 +250,7 @@ export default class Anything extends React.Component {
                   autoFocus={true}/>
               <View style={style.pin}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => this._pin()}>
-                  <Icon name={this.state.pin ? 'ios-pin' : 'ios-pin-outline'} size={32}
-                        color={ this.state.pin ? colors.accent : colors.bright2}/>
+                  <Image source={require('../../../resources/icons/pin.png')} style={{tintColor: this.state.pin ? colors.accent : colors.bright2}} />
                 </TouchableOpacity>
                 <Text style={style.hint}>{this.state.tip}</Text>
               </View>

@@ -4,7 +4,6 @@
 
 import React from 'react';
 import {StyleSheet, Navigator, TouchableOpacity, View, Text, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {colors, styles, px1} from '../views/styles';
 
@@ -39,10 +38,9 @@ class NavigationBarRouteMapper {
 
   LeftButton(route, navigator, index, navState) {
     // console.log('left route %o', route);
-    let btnText = route.leftButtonIcon ? <Image source={route.leftButtonIcon}></Image> :
+    let btnText = route.leftButtonIcon ? <Image source={route.leftButtonIcon} style={style.icon} /> :
       route.leftButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.leftButtonTitle}</Text> :
-        index === 0 ? null :
-          <Icon name="ios-arrow-back" size={24} color={colors.accent}/>;
+        index === 0 ? null : <Image source={require('../../resources/icons/backward.png')} style={style.icon} />;
     return (
       <TouchableOpacity style={style.navBarLeftButton}
                         onPress={() => {route.onLeftButtonPress ? route.onLeftButtonPress() : navigator.pop();} }>
@@ -52,9 +50,9 @@ class NavigationBarRouteMapper {
   }
 
   RightButton(route, navigator, index, navState) {
-    let btnText = route.rightButtonIcon ? <Image source={route.rightButtonIcon}></Image> :
+    let btnText = route.rightButtonIcon ? <Image source={route.rightButtonIcon} style={style.icon} /> :
       route.rightButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.rightButtonTitle}</Text>
-        : <Icon name="md-more" size={24} color={colors.accent}/>;
+        : <Image source={require('../../resources/icons/more.png')} style={style.icon} />;
     return route.onRightButtonPress ? (
       <TouchableOpacity style={style.navBarRightButton}
                         onPress={()=> route.onRightButtonPress()}>
@@ -88,6 +86,9 @@ const style = StyleSheet.create({
   },
   navBarText: {
     fontSize: 14,
+  },
+  icon: {
+    tintColor: colors.dark2
   },
   navBarLeftButton: {
     paddingTop: 10,

@@ -112,7 +112,7 @@ export default class Main extends React.Component {
           title="待办"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Image source={require('../../../resources/icons/agenda.png')} style={style.iconUnselected} />}
-          renderSelectedIcon={() => <Image source={require('../../../resources/icons/agenda.png')} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/agenda.png')} style={style.iconSelected} />}
           onPress={() => this._selectTab('Agenda')}>
           <NavigatorWithBar component={Agenda} navigationBarHidden={false} title='待办' frame={this}/>
         </TabNavigator.Item>
@@ -121,14 +121,14 @@ export default class Main extends React.Component {
           title="目标"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Image source={require('../../../resources/icons/target.png')} style={style.iconUnselected} />}
-          renderSelectedIcon={() => <Image source={require('../../../resources/icons/target.png')} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/target.png')} style={style.iconSelected} />}
           onPress={() => this._selectTab('Target')}>
           <NavigatorWithBar component={Target} navigationBarHidden={false} title='目标' frame={this}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Anything'}
-          renderIcon={() => <Image source={require('../../../resources/icons/add.png')} style={style.iconUnselected} />}
-          renderSelectedIcon={() => <Image source={require('../../../resources/icons/add.png')} />}
+          renderIcon={() => <Image source={require('../../../resources/icons/idea.png')} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/idea.png')} style={style.iconUnselected} />}
           onPress={() => this._openAdd()}>
           <Anything onClose={() => this.closeAdd()}/>
         </TabNavigator.Item>
@@ -137,7 +137,7 @@ export default class Main extends React.Component {
           title="备忘"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Image source={require('../../../resources/icons/chore.png')} style={style.iconUnselected} />}
-          renderSelectedIcon={() => <Image source={require('../../../resources/icons/chore.png')} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/chore.png')} style={style.iconSelected} />}
           onPress={() => this._selectTab('Chore')}>
           <NavigatorWithBar component={Chore} navigationBarHidden={false} title='备忘' frame={this}/>
         </TabNavigator.Item>
@@ -146,7 +146,7 @@ export default class Main extends React.Component {
           title="发现"
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Image source={require('../../../resources/icons/discover.png')} style={style.iconUnselected} />}
-          renderSelectedIcon={() => <Image source={require('../../../resources/icons/discover.png')} />}
+          renderSelectedIcon={() => <Image source={require('../../../resources/icons/discover.png')} style={style.iconSelected} />}
           onPress={() => this._selectTab('Discover')}>
           <NavigatorWithBar component={Discover} navigationBarHidden={false} title='发现' frame={this}/>
         </TabNavigator.Item>
@@ -158,6 +158,9 @@ export default class Main extends React.Component {
 const style = StyleSheet.create({
   iconUnselected: {
     tintColor: colors.border
+  },
+  iconSelected: {
+    tintColor: colors.accent
   },
   tabSelected: {
     color: colors.accent

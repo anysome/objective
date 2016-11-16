@@ -2,8 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {ScrollView, View, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
 
 import {analytics, config, airloy, styles, colors, api, L, toast} from '../../app';
 
@@ -88,30 +87,30 @@ export default class Discover extends Controller {
         { this.state.accountType === 'astmp' ?
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toUpgrade()}>
             <Text style={styles.navText}>安家落户</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
           </TouchableOpacity>
           : [
           <TouchableOpacity style={styles.sectionRow} key={'1'} onPress={() => this._toHappiness()}>
             <Text style={styles.navText}>幸福指数</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
           </TouchableOpacity> ,
           <View style={styles.hr} key={'2'}/> ,
           <TouchableOpacity style={styles.sectionRow} key={'3'} onPress={() => this._toFeedback()}>
             <Text style={styles.navText}>意见反馈</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
           </TouchableOpacity>
           ]
         }
           <View style={styles.hr}/>
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._toArticle()}>
             <Text style={styles.navText}>鸡汤文章</Text>
-            <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('设置', Setting)}>
           <Text style={styles.navText}>设置</Text>
-          <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+          <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
         </TouchableOpacity>
 
       </ScrollView>

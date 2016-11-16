@@ -6,7 +6,6 @@ import {
   StyleSheet, ListView, RefreshControl,
   Image, View, Text, TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {airloy, styles, colors, config, api, toast, L} from '../../app';
 import Browser from './Browser';
@@ -63,7 +62,7 @@ export default class ArticleList extends React.Component {
           <Text style={styles.title}>{rowData.title}</Text>
           <Text style={style.hint}>{rowData.subTitle}</Text>
         </View>
-        <Icon size={20} name="ios-arrow-forward" color={colors.bright2}/>
+        <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
       </TouchableOpacity>
     );
   }

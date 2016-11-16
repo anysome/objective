@@ -187,6 +187,11 @@ const styles = StyleSheet.create({
   },
   spaceV: {
     height: 70
+  },
+  iconSmall: {
+    tintColor: colors.bright2,
+    width: 20,
+    height: 20
   }
 });
 
