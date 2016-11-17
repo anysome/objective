@@ -1,5 +1,7 @@
 package com.exease.etd.objective;
 
+import android.content.Intent;
+
 import com.facebook.react.ReactActivity;
 import com.umeng.analytics.MobclickAgent;
 
