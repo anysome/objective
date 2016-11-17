@@ -39,7 +39,7 @@ class NavigationBarRouteMapper {
   LeftButton(route, navigator, index, navState) {
     // console.log('left route %o', route);
     let btnText = route.leftButtonIcon ? <Image source={route.leftButtonIcon} style={style.icon} /> :
-      route.leftButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.leftButtonTitle}</Text> :
+      route.leftButtonTitle ? <Text style={style.navBarText}>{route.leftButtonTitle}</Text> :
         index === 0 ? null : <Image source={require('../../resources/icons/backward.png')} style={style.icon} />;
     return (
       <TouchableOpacity style={style.navBarLeftButton}
@@ -51,7 +51,7 @@ class NavigationBarRouteMapper {
 
   RightButton(route, navigator, index, navState) {
     let btnText = route.rightButtonIcon ? <Image source={route.rightButtonIcon} style={style.icon} /> :
-      route.rightButtonTitle ? <Text style={[style.navBarText, styles.link]}>{route.rightButtonTitle}</Text>
+      route.rightButtonTitle ? <Text style={style.navBarText}>{route.rightButtonTitle}</Text>
         : <Image source={require('../../resources/icons/more.png')} style={style.icon} />;
     return route.onRightButtonPress ? (
       <TouchableOpacity style={style.navBarRightButton}
@@ -86,6 +86,7 @@ const style = StyleSheet.create({
   },
   navBarText: {
     fontSize: 14,
+    color: colors.dark2
   },
   icon: {
     tintColor: colors.dark2
