@@ -93,10 +93,6 @@ export default class Frame extends React.Component {
 		return this.state.currentPage === tabPage || this.lastPage === tabPage;
 	}
 
-	getIcon(iconName) {
-		return require(`../../../resources/icons/${iconName}.png`);
-	}
-
 	_openAdd() {
 		this.lastPage = this.state.currentPage;
 		this.setState({currentPage: 'Anything'});

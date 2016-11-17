@@ -29,10 +29,6 @@ export default class Controller extends React.Component {
     return this.frame.getToday();
   }
 
-  getIcon(iconName) {
-    return this.frame.getIcon(iconName);
-  }
-
   forward(route) {
     this.props.navigator.push(route);
   }

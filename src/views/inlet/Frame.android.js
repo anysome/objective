@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import TabNavigator from 'react-native-tab-navigator';
 import NavigatorWithBar from '../../widgets/NavigatorWithBar';
 
@@ -25,18 +24,11 @@ export default class Main extends React.Component {
     this.state = {
       currentPage: 'Agenda'
     };
-    this.iconSize = 24;
-    this.icons = new Map();
     this.today = util.getTodayStart();
     this._handleAppStateChange = this._handleAppStateChange.bind(this);
   }
 
   componentWillMount() {
-    // draw icon images for later use case
-    ['ios-archive-outline', 'ios-more-outline', 'ios-add', 'ios-filing-outline',
-      'ios-create-outline', 'ios-trash-outline', 'ios-list', 'ios-time-outline'].forEach(
-          name => this.icons.set(name, <Icon name={name} size={24} color={colors.accent}/>)
-    );
     AppState.addEventListener('change', this._handleAppStateChange);
     this._autoSchedule();
 
@@ -90,10 +82,6 @@ export default class Main extends React.Component {
     return this.state.currentPage === tabPage || this.lastPage === tabPage;
   }
 
-  getIcon(iconName) {
-    return this.icons.get(iconName);
-  }
-
   _openAdd() {
     this.lastPage = this.state.currentPage;
     this.setState({currentPage: 'Anything'});
@@ -110,6 +98,7 @@ export default class Main extends React.Component {
         <TabNavigator.Item
           selected={this.state.currentPage === 'Agenda'}
           title="待办"
+          titleStyle={style.tabUnselected}
           selectedTitleStyle={style.tabSelected}
           renderIcon={() => <Image source={require('../../../resources/icons/agenda.png')} style={style.iconUnselected} />}
           renderSelectedIcon={() => <Image source={require('../../../resources/icons/agenda.png')} style={style.iconSelected} />}
@@ -157,12 +146,15 @@ export default class Main extends React.Component {
 
 const style = StyleSheet.create({
   iconUnselected: {
-    tintColor: colors.border
+    tintColor: colors.dark2
   },
   iconSelected: {
     tintColor: colors.accent
   },
   tabSelected: {
     color: colors.accent
+  },
+  tabUnselected: {
+    color: colors.dark2
   }
 });
