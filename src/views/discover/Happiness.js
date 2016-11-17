@@ -55,21 +55,21 @@ export default class Happiness extends React.Component {
         <View style={style.containerR}>
           {rowData.fruit9 > 0 &&
           <Image style={style.fruitSmall}
-                 source={require('../../../resources/images/Apple64.png')}/>
+                 source={require('../../../resources/images/apple.png')}/>
           }
         </View>
         <View style={style.containerR}>
           {rowData.fruit8 > 0 && [
             <Text key={rowData.id + '-txt'} style={styles.text}>{rowData.fruit8}</Text>,
             <Image key={rowData.id + '-img'} style={style.fruitSmall}
-                   source={require('../../../resources/images/Strawberry64.png')}/>
+                   source={require('../../../resources/images/berry.png')}/>
           ]}
         </View>
         <View style={style.containerR}>
           {rowData.fruit1 > 0 && [
             <Text key={rowData.id + '-txt'} style={styles.text}>{rowData.fruit1}</Text>,
             <Image key={rowData.id + '-img'} style={style.fruitSmall}
-                   source={require('../../../resources/images/Pear64.png')}/>
+                   source={require('../../../resources/images/pear.png')}/>
           ]}
         </View>
         <Text style={styles.hint}>{moment(rowData.today).format('YYYY-MM-DD')}</Text>
@@ -93,17 +93,17 @@ export default class Happiness extends React.Component {
             <View style={style.containerH}>
               <Text style={styles.text}>{this.state.reward.fruit9}</Text>
               <Image style={style.fruit}
-                     source={require('../../../resources/images/Apple64.png')}/>
+                     source={require('../../../resources/images/apple.png')}/>
             </View>
             <View style={style.containerH}>
               <Text style={styles.text}>{this.state.reward.fruit8}</Text>
               <Image style={style.fruit}
-                     source={require('../../../resources/images/Strawberry64.png')}/>
+                     source={require('../../../resources/images/berry.png')}/>
             </View>
             <View style={style.containerH}>
               <Text style={styles.text}>{this.state.reward.fruit1}</Text>
               <Image style={style.fruit}
-                     source={require('../../../resources/images/Pear64.png')}/>
+                     source={require('../../../resources/images/pear.png')}/>
             </View>
           </View>
         </View>
@@ -158,10 +158,8 @@ const style = StyleSheet.create({
     marginRight: 32
   },
   fruit: {
-    width: 24,
-    height: 24,
-    marginLeft: 8,
-    opacity: 0.5
+    marginLeft: 4,
+    tintColor: colors.action
   },
   hint: {
     fontSize: 12,
@@ -170,10 +168,10 @@ const style = StyleSheet.create({
     marginBottom: 12
   },
   fruitSmall: {
-    width: 16,
-    height: 16,
-    marginLeft: 4,
-    opacity: 0.5
+    width: 20,
+    height: 20,
+    marginLeft: 2,
+    tintColor: colors.action
   },
   score: {
     width: 50,

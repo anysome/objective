@@ -75,7 +75,7 @@ export default class Punch extends React.Component {
               containerStyle={styles.button}
               activeOpacity={0.5}
               onPress={()=>this._commit()}>
-              <Image source={require(`../../../resources/icons/checked.png`)} style={{tintColor: 'white'}} />  打卡
+              <Image source={require('../../../resources/icons/checked.png')} style={{tintColor: 'white'}} />  打卡
             </Button>
           </View>
         </View>

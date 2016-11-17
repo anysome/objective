@@ -97,7 +97,7 @@ export default class Timer extends React.Component {
               containerStyle={styles.button}
               activeOpacity={0.5}
               onPress={()=>this._setup()}>
-              <Image source={require(`../../../resources/icons/bell.png`)} style={{tintColor: 'white'}} />  设定
+              <Image source={require('../../../resources/icons/bell.png')} style={{tintColor: 'white'}} />  设定
             </Button>
           </View>
         </View>

@@ -59,7 +59,7 @@ export default class ListRow extends React.Component {
             transform.priority > 3 ? <Text style={style.alert}>! </Text> : null }
           {transform.title}
         </Text>
-        {transform.reminder && <Image source={require(`../../../resources/icons/bell.png`)} style={styles.iconSmall} />}
+        {transform.reminder && <Image source={require('../../../resources/icons/bell.png')} style={styles.iconSmall} />}
         {transform.arrangeDate && <Text style={style.hint}>{transform.arrangeDate}</Text>}
       </TouchableOpacity>
     );

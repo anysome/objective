@@ -81,7 +81,7 @@ export default class Dones extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <View style={style.container}>
-        <Image source={require(`../../../resources/icons/checked.png`)} style={styles.iconSmall} />
+        <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />
         <View style={style.body}>
           <Text style={styles.title}>{rowData.title}</Text>
           <Text style={style.hint} numberOfLines={1}>{rowData.detail}</Text>
