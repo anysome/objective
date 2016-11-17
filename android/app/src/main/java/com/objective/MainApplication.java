@@ -8,7 +8,6 @@ import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import in.esseak.react_native_umeng.UmengPackage;
 import com.heng.wheel.WheelPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import cn.reactnative.modules.weibo.WeiboPackage;
@@ -38,7 +37,6 @@ public class MainApplication extends Application implements ReactApplication {
           new UmengPackage(),
           new WheelPackage(),
           new ReactNativeWheelPickerPackage(),
-          new VectorIconsPackage(),
           new RNSpinkitPackage(),
           new WeiboPackage(),
           new ReactNativeI18n()

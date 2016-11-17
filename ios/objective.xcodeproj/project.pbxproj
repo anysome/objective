@@ -32,13 +32,11 @@
 		772501AC1DD3660E00AAF491 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772501AB1DD3660E00AAF491 /* CoreText.framework */; };
 		77CEC8EF1DD7EA3700F8B19E /* libRCTUmeng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CEC8E41DD7E88B00F8B19E /* libRCTUmeng.a */; };
 		77D89C0D1DD842E10024144F /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77D89C0C1DD842E10024144F /* WeiboSDK.bundle */; };
-		77F5AE9B1DD6B80200CD0710 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5AE9A1DD6B62400CD0710 /* libRNVectorIcons.a */; };
 		77F5AE9C1DD6B81500CD0710 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5AE971DD6B62400CD0710 /* libRNSpinkit.a */; };
 		77F5AE9D1DD6B82600CD0710 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E4195A1DD36086007B9556 /* libRCTWeiboAPI.a */; };
 		77F5AE9E1DD6B83B00CD0710 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E419621DD36086007B9556 /* libRNI18n.a */; };
 		77F5AEAA1DD6BBF200CD0710 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5AEA61DD6BA0600CD0710 /* libRCTPushNotification.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		C2B16A12927A40C0839814BF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFDEAD38577E43299804B5FB /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,13 +194,6 @@
 			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
 			remoteInfo = RNSpinkit;
 		};
-		77F5AE991DD6B62400CD0710 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9ED9061E83CB43C08C5C75D2 /* RNVectorIcons.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
-			remoteInfo = RNVectorIcons;
-		};
 		77F5AEA51DD6BA0600CD0710 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 77F5AEA01DD6BA0600CD0710 /* RCTPushNotification.xcodeproj */;
@@ -270,8 +261,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		97078B2E0A424F6CBE9DCB3F /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
-		9ED9061E83CB43C08C5C75D2 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
-		FFDEAD38577E43299804B5FB /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,7 +298,6 @@
 				77F5AE9E1DD6B83B00CD0710 /* libRNI18n.a in Frameworks */,
 				77F5AE9D1DD6B82600CD0710 /* libRCTWeiboAPI.a in Frameworks */,
 				77F5AE9C1DD6B81500CD0710 /* libRNSpinkit.a in Frameworks */,
-				77F5AE9B1DD6B80200CD0710 /* libRNVectorIcons.a in Frameworks */,
 				77CEC8EF1DD7EA3700F8B19E /* libRCTUmeng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,7 +409,6 @@
 		6D546159C76E4CEB856962AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FFDEAD38577E43299804B5FB /* Ionicons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -473,14 +460,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		77F5AE7D1DD6B62400CD0710 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				77F5AE9A1DD6B62400CD0710 /* libRNVectorIcons.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		77F5AE7F1DD6B62400CD0710 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,7 +504,6 @@
 				97078B2E0A424F6CBE9DCB3F /* RNI18n.xcodeproj */,
 				65B1E2FB16C14AB181FCD5D5 /* RCTWeiboAPI.xcodeproj */,
 				66688E50B7654C8684C9B779 /* RNSpinkit.xcodeproj */,
-				9ED9061E83CB43C08C5C75D2 /* RNVectorIcons.xcodeproj */,
 				26A4E76D29C04377803B7365 /* RCTUmeng.xcodeproj */,
 			);
 			name = Libraries;
@@ -702,10 +680,6 @@
 					ProductGroup = 77F5AE7F1DD6B62400CD0710 /* Products */;
 					ProjectRef = 66688E50B7654C8684C9B779 /* RNSpinkit.xcodeproj */;
 				},
-				{
-					ProductGroup = 77F5AE7D1DD6B62400CD0710 /* Products */;
-					ProjectRef = 9ED9061E83CB43C08C5C75D2 /* RNVectorIcons.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -863,13 +837,6 @@
 			remoteRef = 77F5AE961DD6B62400CD0710 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		77F5AE9A1DD6B62400CD0710 /* libRNVectorIcons.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNVectorIcons.a;
-			remoteRef = 77F5AE991DD6B62400CD0710 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		77F5AEA61DD6BA0600CD0710 /* libRCTPushNotification.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -915,7 +882,6 @@
 				77D89C0D1DD842E10024144F /* WeiboSDK.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				C2B16A12927A40C0839814BF /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,7 +1007,6 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
@@ -1074,7 +1039,6 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
@@ -1138,7 +1102,6 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1186,7 +1149,6 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-weibo/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-umeng/ios/RCTUmeng/RCTUmeng/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
