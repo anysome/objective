@@ -25,4 +25,12 @@ public class MainActivity extends ReactActivity {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
+    @Override
+      public void invokeDefaultOnBackPressed() {
+          Intent setIntent = new Intent(Intent.ACTION_MAIN);
+          setIntent.addCategory(Intent.CATEGORY_HOME);
+          setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(setIntent);
+      }
 }
