@@ -2,8 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/3/9.
  */
 import React from 'react';
-import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Image} from 'react-native';
+import Button from 'react-native-button';
 
 import {analytics, styles, colors, px1, airloy, api, L, toast, hang} from '../../app';
 import EventTypes from '../../logic/EventTypes';
@@ -70,12 +70,13 @@ export default class Punch extends React.Component {
                        defaultValue={this.state.output}
                        keyboardType='number-pad'
                        onChangeText={text => this.setState({output: text})}/>
-            <Icon.Button name='md-checkmark' color={'white'}
-                         underlayColor={'white'}
-                         backgroundColor={colors.action}
-                         onPress={()=> this._commit()}>
-              <Text style={styles.buttonText}>打卡</Text>
-            </Icon.Button>
+            <Button
+              style={styles.buttonText}
+              containerStyle={styles.button}
+              activeOpacity={0.5}
+              onPress={()=>this._commit()}>
+              <Image source={require(`../../../resources/icons/checked.png`)} style={{tintColor: 'white'}} />  打卡
+            </Button>
           </View>
         </View>
         <TouchableWithoutFeedback onPress={() => this.props.onFeedback()}>
@@ -112,9 +113,9 @@ const style = StyleSheet.create({
     marginRight: 16
   },
   bar: {
-    height: 50,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   bg: {
     flex: 1,

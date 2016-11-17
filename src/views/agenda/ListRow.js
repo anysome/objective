@@ -3,11 +3,9 @@
  */
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
 import {colors, styles} from '../../app';
-import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 
 
@@ -22,7 +20,7 @@ export default class ListRow extends React.Component {
   _transform(data) {
     if (this.done) {
       return {
-        icon: <Image source={require(`../../../resources/icons/checked.png`)} style={{tintColor: colors.bright2}} />,
+        icon: <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -30,7 +28,7 @@ export default class ListRow extends React.Component {
       };
     } else if (this.future) {
       return {
-        icon: <Image source={require(`../../../resources/icons/up.png`)} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
+        icon: <Image source={require('../../../resources/icons/up.png')} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -39,7 +37,7 @@ export default class ListRow extends React.Component {
       };
     } else {
       return {
-        icon: <Image source={require(`../../../resources/icons/checkbox.png`)} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
+        icon: <Image source={require('../../../resources/icons/checkbox.png')} style={{tintColor: objective.getPriorityColor(data.priority)}} />,
         priority: data.priority,
         title: data.title,
         detail: data.detail,
@@ -57,11 +55,11 @@ export default class ListRow extends React.Component {
           {transform.icon}
         </TouchableOpacity>
         <Text style={[styles.title, style.body]}>
-          { transform.priority > 8 ? <Text style={[style.alert, {color: transform.icon.color}]}>!! </Text> :
-            transform.priority > 3 ? <Text style={[style.alert, {color: transform.icon.color}]}>! </Text> : null }
+          { transform.priority > 8 ? <Text style={style.alert}>!! </Text> :
+            transform.priority > 3 ? <Text style={style.alert}>! </Text> : null }
           {transform.title}
         </Text>
-        {transform.reminder && <Icon size={20} name='ios-notifications-outline' color={colors.dark2}/>}
+        {transform.reminder && <Image source={require(`../../../resources/icons/bell.png`)} style={styles.iconSmall} />}
         {transform.arrangeDate && <Text style={style.hint}>{transform.arrangeDate}</Text>}
       </TouchableOpacity>
     );

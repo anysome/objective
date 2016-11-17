@@ -134,7 +134,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     color: 'transparent',
-    fontSize: 15
+    fontSize: 16
   },
   flat: {
     flex: 1,

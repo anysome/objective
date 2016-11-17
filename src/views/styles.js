@@ -138,11 +138,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.action
   },
   button: {
-    // flex: 1,
+    paddingLeft: 12,
+    paddingRight: 12,
     justifyContent: 'center',
     alignItems: 'center',
     height: 40,
-    marginTop: 10,
+    marginTop: 5,
     overflow: 'hidden',
     borderRadius: 5,
     backgroundColor: colors.action
@@ -189,9 +190,7 @@ const styles = StyleSheet.create({
     height: 70
   },
   iconSmall: {
-    tintColor: colors.bright2,
-    width: 20,
-    height: 20
+    tintColor: colors.bright2
   }
 });
 

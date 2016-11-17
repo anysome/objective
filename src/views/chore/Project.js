@@ -3,8 +3,7 @@
  */
 
 import React from 'react';
-import {StyleSheet, ListView, RefreshControl, View, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, ListView, RefreshControl, View, Text, TouchableOpacity, Image} from 'react-native';
 
 import {analytics, styles, colors, px1, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -156,32 +155,30 @@ export default class Project extends React.Component {
     let transform, arrangable = true, editable = true;
     if (rowData.status === '1') {
       transform = {
-        iconName: 'md-checkmark',
-        color: colors.bright2,
+        icon: <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />,
         titleColor: colors.border,
         detailColor: colors.border
       };
       arrangable = editable = false;
     } else if (rowData.arranged) {
       transform = {
-        iconName: 'md-calendar',
-        color: colors.bright2,
+        icon: <Image source={require('../../../resources/icons/arranged.png')} style={styles.iconSmall} />,
         titleColor: colors.dark2,
         detailColor: colors.dark2
       };
       arrangable = false;
     } else {
       transform = {
-        iconName: 'ios-calendar-outline',
-        color: colors.border,
+        icon: <Image source={require('../../../resources/icons/arrange.png')} style={style.arrange} />,
         titleColor: colors.dark1,
         detailColor: colors.dark2
       };
     }
     return (
       <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, editable)}>
-        <Icon size={28} name={transform.iconName} style={style.icon} color={transform.color}
-              onPress={() => this._toArrange(rowData, arrangable)}/>
+        <TouchableOpacity onPress={() => this._toArrange(rowData, arrangable)} style={style.icon}>
+          {transform.icon}
+        </TouchableOpacity>
         <View style={styles.flex}>
           <Text style={[styles.title, {color: transform.titleColor}]}>{rowData.title}</Text>
           {rowData.detail ? <Text style={[styles.text, {color: transform.detailColor}]}>{rowData.detail}</Text> : null}
@@ -246,9 +243,10 @@ const style = StyleSheet.create({
     backgroundColor: 'white'
   },
   icon: {
-    marginLeft: util.isAndroid() ? 16 : 0,
-    paddingLeft: util.isAndroid() ? 0 : 16,
-    marginRight: util.isAndroid() ? 10 : 0,
-    paddingRight: util.isAndroid() ? 0 : 10
+    paddingLeft: 16,
+    paddingRight: 10
+  },
+  arrange: {
+    tintColor: colors.dark2
   }
 });

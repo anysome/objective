@@ -23,7 +23,6 @@ export default class Frame extends React.Component {
 		this.state = {
 			currentPage: 'Agenda'
 		};
-    this.iconSize = 28;
     this.today = util.getTodayStart();
 		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 	}

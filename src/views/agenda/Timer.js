@@ -2,8 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/3/21.
  */
 import React from 'react';
-import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Image} from 'react-native';
+import Button from 'react-native-button';
 import moment from 'moment';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
@@ -85,24 +85,20 @@ export default class Timer extends React.Component {
                       visible={true}
                       onDateChange={date => this._onSelectedDate(date)} />
           <View style={style.bar}>
-            <Icon.Button name='md-close' color='white'
-                         underlayColor='white'
-                         backgroundColor={colors.border}
-                         onPress={() => this.props.onFeedback()}>
-              <Text style={style.text}>取消</Text>
-            </Icon.Button>
-            <Icon.Button name='md-notifications-off' color='white'
-                         underlayColor='white'
-                         backgroundColor={colors.accent}
-                         onPress={()=> this._cancel()}>
-              <Text style={style.text}>删除提醒</Text>
-            </Icon.Button>
-            <Icon.Button name='md-notifications' color='white'
-                         underlayColor='white'
-                         backgroundColor={colors.action}
-                         onPress={()=> this._setup()}>
-              <Text style={style.text}>设定</Text>
-            </Icon.Button>
+            <Button
+              style={styles.buttonText}
+              containerStyle={[styles.button, {backgroundColor: colors.accent}]}
+              activeOpacity={0.5}
+              onPress={()=>this._cancel()}>
+              删除提醒
+            </Button>
+            <Button
+              style={styles.buttonText}
+              containerStyle={styles.button}
+              activeOpacity={0.5}
+              onPress={()=>this._setup()}>
+              <Image source={require(`../../../resources/icons/bell.png`)} style={{tintColor: 'white'}} />  设定
+            </Button>
           </View>
         </View>
       </Modal>

@@ -5,10 +5,11 @@
 import {PushNotificationIOS} from 'react-native';
 import moment from 'moment';
 
+PushNotificationIOS.requestPermissions();
+
 export default class LocalNotifications {
 
   static scheduleAgenda(agenda) {
-    PushNotificationIOS.requestPermissions();
     // cancel old
     PushNotificationIOS.cancelLocalNotifications({agenda: agenda.id});
     // schedule new if necessary

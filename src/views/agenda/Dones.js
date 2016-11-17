@@ -2,12 +2,10 @@
  * Created by Layman(http://github.com/anysome) on 16/5/14.
  */
 import React from 'react';
-import {StyleSheet, View, ListView, Text, RefreshControl} from 'react-native';
+import {StyleSheet, View, ListView, Text, RefreshControl, Image} from 'react-native';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {analytics, airloy, styles, colors, api, toast, L} from '../../app';
-import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
 
@@ -83,12 +81,12 @@ export default class Dones extends React.Component {
   _renderRow(rowData, sectionId, rowId) {
     return (
       <View style={style.container}>
-        <Icon size={28} name='md-checkbox' style={style.icon} color={colors.bright2} />
+        <Image source={require(`../../../resources/icons/checked.png`)} style={styles.iconSmall} />
         <View style={style.body}>
           <Text style={styles.title}>{rowData.title}</Text>
-          {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
+          <Text style={style.hint} numberOfLines={1}>{rowData.detail}</Text>
         </View>
-        <Text style={styles.hint}>{moment(rowData.doneTime).format('H:mm')}</Text>
+        <Text style={style.text}>{moment(rowData.doneTime).format('H:mm')}</Text>
       </View>
     );
   }
@@ -132,15 +130,12 @@ const style = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flex: 1,
+    paddingLeft: 16,
     paddingRight: 16,
     paddingTop: 8,
     paddingBottom: 8,
     alignItems: 'center',
     backgroundColor: 'white'
-  },
-  icon: {
-    marginLeft: util.isAndroid() ? 16 : 0,
-    paddingLeft: util.isAndroid() ? 0 : 16
   },
   body: {
     flex: 1,
@@ -153,7 +148,8 @@ const style = StyleSheet.create({
     fontSize: 12,
     color: colors.border
   },
-  tail: {
-    alignItems: 'flex-end'
-  }
+  text: {
+    color: colors.dark2,
+    fontSize: 14
+  },
 });

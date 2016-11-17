@@ -3,8 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, RefreshControl, ListView,
-  View, Text, LayoutAnimation, TouchableOpacity, Alert} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+  View, Text, LayoutAnimation, TouchableOpacity, Alert, Image} from 'react-native';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -138,8 +137,9 @@ export default class Listing extends React.Component {
     return (
       <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
                         onLongPress={() => this._addTask(rowData)}>
-        <Icon size={28} name='ios-create-outline' style={style.icon} color={colors.border}
-              onPress={() => this._toProject(rowData)}/>
+        <TouchableOpacity onPress={() => this._toProject(rowData)} style={style.icon}>
+          <Image source={require('../../../resources/icons/create.png')} style={style.edit} />
+        </TouchableOpacity>
         <Text style={styles.title}>{rowData.title}</Text>
         <Text style={styles.hint}>{rowData.subTodo} / {rowData.subTotal}</Text>
       </TouchableOpacity>
@@ -185,9 +185,10 @@ const style = StyleSheet.create({
     backgroundColor: 'white'
   },
   icon: {
-    marginLeft: util.isAndroid() ? 16 : 0,
-    paddingLeft: util.isAndroid() ? 0 : 16,
-    marginRight: util.isAndroid() ? 10 : 0,
-    paddingRight: util.isAndroid() ? 0 : 10
+    paddingLeft: 16,
+    paddingRight: 10
+  },
+  edit: {
+    tintColor: colors.dark2
   }
 });

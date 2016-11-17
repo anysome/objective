@@ -3,8 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, RefreshControl, ListView,
-  View, Text, LayoutAnimation, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+  View, Text, LayoutAnimation, TouchableOpacity, Image} from 'react-native';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -230,8 +229,9 @@ export default class Chore extends Controller {
     return (
       <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
                         onLongPress={() => this._longPressRow(rowData)}>
-        <Icon size={28} name='ios-calendar-outline' style={style.icon} color={colors.border}
-              onPress={() => this._toArrange(rowData)}/>
+        <TouchableOpacity onPress={() => this._toArrange(rowData)} style={style.icon}>
+          <Image source={require('../../../resources/icons/arrange.png')} style={style.arrange} />
+        </TouchableOpacity>
         <View style={styles.flex}>
           <Text style={styles.title}>{rowData.title}</Text>
           {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
@@ -285,9 +285,10 @@ const style = StyleSheet.create({
     backgroundColor: 'white'
   },
   icon: {
-    marginLeft: util.isAndroid() ? 16 : 0,
-    paddingLeft: util.isAndroid() ? 0 : 16,
-    marginRight: util.isAndroid() ? 10 : 0,
-    paddingRight: util.isAndroid() ? 0 : 10
+    paddingLeft: 16,
+    paddingRight: 10
+  },
+  arrange: {
+    tintColor: colors.dark2
   }
 });
