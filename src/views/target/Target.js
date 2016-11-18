@@ -177,6 +177,7 @@ export default class Target extends Controller {
               if (result.success) {
                 airloy.event.emit(EventTypes.agendaAdd, result.info);
                 rowData.arranged = true;
+                rowData.doneAmount = 0;
                 this.listSource.update(rowData);
                 this._sortList();
               } else {
