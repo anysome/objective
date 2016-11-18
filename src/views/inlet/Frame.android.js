@@ -116,7 +116,7 @@ export default class Main extends React.Component {
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Anything'}
-          renderIcon={() => <Image source={require('../../../resources/icons/idea.png')} />}
+          renderIcon={() => <Image source={require('../../../resources/icons/idea.png')} style={style.main}/>}
           renderSelectedIcon={() => <Image source={require('../../../resources/icons/idea.png')} style={style.iconUnselected} />}
           onPress={() => this._openAdd()}>
           <Anything onClose={() => this.closeAdd()}/>
@@ -156,5 +156,8 @@ const style = StyleSheet.create({
   },
   tabUnselected: {
     color: colors.dark2
+  },
+  main: {
+    tintColor: colors.action
   }
 });

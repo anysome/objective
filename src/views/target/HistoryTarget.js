@@ -136,12 +136,13 @@ export default class HistoryTarget extends React.Component {
                   pageSize={5}
                   dataSource={this.state.dataSource}
                   renderRow={this._renderRow}
-                  refreshControl={<RefreshControl refreshing={this.state.isRefreshing}
-                                                             onRefresh={() => this.reload()}
-                                                             tintColor={colors.accent}
-                                                             title="加载中..."
-                                                             colors={['#ff0000', '#00ff00', '#0000ff']}
-                                                             progressBackgroundColor="#EBEBEB" />}
+                  refreshControl={<RefreshControl
+                                      refreshing={this.state.isRefreshing}
+                                      onRefresh={() => this.reload()}
+                                      tintColor={colors.accent}
+                                      title="加载中..."
+                                      colors={[colors.accent, colors.action]}
+                                      progressBackgroundColor={colors.bright1} />}
         />
       </View>
     );

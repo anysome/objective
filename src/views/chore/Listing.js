@@ -165,8 +165,8 @@ export default class Listing extends React.Component {
                             onRefresh={() => this.reload()}
                             tintColor={colors.accent}
                             title={'加载中...'}
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="#EBEBEB"
+                            colors={[colors.accent, colors.action]}
+                            progressBackgroundColor={colors.bright1}
                           />}
       />
     );
