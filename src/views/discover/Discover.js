@@ -2,10 +2,10 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+import {ScrollView, View, Text, TouchableOpacity, Image, Linking} from 'react-native';
 
 import {analytics, config, airloy, styles, colors, api, L, toast} from '../../app';
-
+import util from '../../libs/Util';
 import Controller from '../Controller';
 import ArticleList from './ArticleList';
 import Happiness from './Happiness';
@@ -19,6 +19,9 @@ export default class Discover extends Controller {
     super(props);
     this.name = 'Discover';
     this.user = airloy.auth.getUser();
+    this.storeLink = util.isAndroid() ? 'market://details?id=com.exease.etd.objective'
+      : 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=931153512&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8';
+    // market://details?id=myandroidappid
     this.state = {
       accountType: this.user.accountType
     };
@@ -75,6 +78,18 @@ export default class Discover extends Controller {
     });
   }
 
+  _toStore() {
+    Linking.canOpenURL(this.storeLink).then(supported => {
+      if (supported) {
+        Linking.openURL(this.storeLink);
+      } else {
+        console.log('url = ' + this.storeLink);
+        toast('抱歉，暂时无法跳转进商店');
+      }
+    });
+    analytics.onEvent('click_to_store');
+  }
+
   async reload() {
     console.log('nothing to reload');
   }
@@ -108,10 +123,17 @@ export default class Discover extends Controller {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.row} activeOpacity={0.5} onPress={() => this._forward('设置', Setting)}>
-          <Text style={styles.navText}>设置</Text>
-          <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
-        </TouchableOpacity>
+        <View style={styles.section}>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._toStore()}>
+            <Text style={styles.navText}>夸个海口</Text>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
+          </TouchableOpacity>
+          <View style={styles.hr}/>
+          <TouchableOpacity style={styles.sectionRow} onPress={() => this._forward('设置', Setting)}>
+            <Text style={styles.navText}>设置</Text>
+            <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
+          </TouchableOpacity>
+        </View>
 
       </ScrollView>
     );

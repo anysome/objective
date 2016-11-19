@@ -2,12 +2,13 @@
  * Created by Layman(http://github.com/anysome) on 16/5/14.
  */
 import React from 'react';
-import {StyleSheet, View, ListView, Text, RefreshControl, Image} from 'react-native';
+import {StyleSheet, View, ListView, Text, RefreshControl, TouchableOpacity, Image} from 'react-native';
 import moment from 'moment';
 
 import {analytics, airloy, styles, colors, api, toast, L} from '../../app';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
+import Edit from './Edit';
 
 export default class Dones extends React.Component {
 
@@ -80,15 +81,26 @@ export default class Dones extends React.Component {
 
   _renderRow(rowData, sectionId, rowId) {
     return (
-      <View style={style.container}>
+      <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData)}>
         <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />
         <View style={style.body}>
           <Text style={styles.title}>{rowData.title}</Text>
           <Text style={style.hint} numberOfLines={1}>{rowData.detail}</Text>
         </View>
         <Text style={style.text}>{moment(rowData.doneTime).format('H:mm')}</Text>
-      </View>
+      </TouchableOpacity>
     );
+  }
+
+  _pressRow(rowData) {
+    this.props.navigator.push({
+      title: '查看',
+      component: Edit,
+      passProps: {
+        today: this.today,
+        data: rowData
+      }
+    });
   }
 
   _renderSectionHeader(sectionData, sectionId) {
