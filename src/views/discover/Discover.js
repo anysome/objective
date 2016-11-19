@@ -21,7 +21,6 @@ export default class Discover extends Controller {
     this.user = airloy.auth.getUser();
     this.storeLink = util.isAndroid() ? 'market://details?id=com.exease.etd.objective'
       : 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=931153512&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8';
-    // market://details?id=myandroidappid
     this.state = {
       accountType: this.user.accountType
     };

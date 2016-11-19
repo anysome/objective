@@ -240,7 +240,7 @@ export default class Anything extends React.Component {
     return (
       <View style={styles.flex}>
         <Modal animationType='slide' transparent={false} onRequestClose={()=>this._onClose()} visible={this.state.modalVisible}>
-          <ScrollView style={styles.modal} keyboardDismissMode='on-drag' keyboardShouldPersistTaps={!util.isAndroid()}>
+          <ScrollView style={styles.modal} keyboardDismissMode='on-drag' keyboardShouldPersistTaps>
             <View style={style.body}>
                 <TextArea
                   ref={(c)=> this._input = c}

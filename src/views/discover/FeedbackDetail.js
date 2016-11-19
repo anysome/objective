@@ -88,7 +88,7 @@ export default class FeedbackDetail extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
+      <ScrollView style={styles.container} keyboardDismissMode='on-drag' keyboardShouldPersistTaps>
         <TextArea
           ref={(c)=> this._input = c}
           defaultValue={this.state.input}
