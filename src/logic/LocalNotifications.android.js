@@ -3,6 +3,7 @@
  */
 
 import Notification from 'react-native-system-notification';
+import moment from 'moment';
 
 function hash(str) {
   let hash = 0, i, chr, len;
@@ -17,7 +18,6 @@ function hash(str) {
 
 function noop() {
   // do nothing for promise chain
-  console.log('not found notification');
 }
 
 Notification.addListener('press', function(e) {
@@ -25,58 +25,46 @@ Notification.addListener('press', function(e) {
   // stop repeating when user click notification
   let payload = e.payload;
   if ( payload ) {
-    let nid = hash(payload.type + ": " + payload.id);
     // cancel
     Notification.find(payload.id).then(function(notification) {
-      Notification.delete(payload.id);
+      Notification.delete(payload.id).then(noop, noop);
     });
   } else {
-    Notification.deleteAll();
+    Notification.clearAll().then(noop, noop);
   }
 });
 
 export default class LocalNotifications {
 
   static scheduleAgenda(agenda) {
-    let nid = hash('agenda: ' + agenda.id);
-    console.log('notification id = ' + agenda.title);
     // cancel old
     LocalNotifications.cancelAgenda(agenda.id);
-    console.log('to schedule id = ' + agenda.title);
     // schedule new if necessary
     if (agenda.reminder) {
       let now = new Date();
-      let tzOffset = (now).getTimezoneOffset() * 60000;
-      // fix bug for timezone offset
-      let alarmTime = agenda.today + agenda.reminder - tzOffset;
+      let alarmTime = moment(moment(agenda.today).format('YYYY-MM-DD ') + agenda.reminder).toDate().getTime();
       // check future time
       if ( alarmTime < now ) {
         return;
       }
       let fireDate = new Date(alarmTime);
       fireDate.setSeconds(0);
-      console.debug('create notification id = ' + agenda.id);
       Notification.create({
         id: agenda.id,
         subject: agenda.title,
         message: agenda.detail || '行事易提醒您该干活了哦~',
         payload: {type:'agenda', id: agenda.id},
         sendAt: fireDate,
-        endAt: fireDate,
-        when: fireDate,
         repeatEvery: 'minute',
-        repeatCount: 1,
-        delay: 1
-      }).then(()=>console.info('------------- created notification'), (e)=> console.log('can not create notification. %o', e));
+        repeatCount: 2
+      }).then(()=>console.log('created notification will fire at ' + fireDate), (e)=> console.log('can not create notification. %o', e));
       console.log('do schedule id = ' + agenda.title);
     }
   }
 
   static cancelAgenda(id) {
-    // let nid = hash('agenda: ' + id);
-    console.log('notification id = ' + id);
     Notification.find(id).then(function(notification) {
-      Notification.delete(id);
+      Notification.delete(id).then(noop, noop);
     }, noop);
   }
 };

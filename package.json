@@ -18,7 +18,7 @@
     "react-native-i18n": "^0.1.1",
     "react-native-root-toast": "^1.0.3",
     "react-native-spinkit": "^0.1.3",
-    "react-native-system-notification": "^0.2.1",
+    "react-native-system-notification": "anysome/react-native-system-notification",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-weibo": "^2.0.1",
     "react-native-wheel": "^1.1.3",
