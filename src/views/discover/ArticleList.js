@@ -2,10 +2,8 @@
  * Created by Layman <anysome@gmail.com> (http://github.com/anysome) on 16/7/9.
  */
 import React from 'react';
-import {
-  StyleSheet, ListView, RefreshControl,
-  Image, View, Text, TouchableOpacity
-} from 'react-native';
+import { StyleSheet, ListView, RefreshControl, Image, View,
+  Text, TouchableOpacity, InteractionManager} from 'react-native';
 
 import {airloy, styles, colors, config, api, toast, L} from '../../app';
 import Browser from './Browser';
@@ -24,7 +22,7 @@ export default class ArticleList extends React.Component {
   }
 
   componentDidMount() {
-    this.reload();
+    InteractionManager.runAfterInteractions(() => this.reload());
   }
 
   async reload() {

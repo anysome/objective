@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, Image, TouchableOpacity,
-  RefreshControl, ListView} from 'react-native';
+  RefreshControl, ListView, InteractionManager} from 'react-native';
 import moment from 'moment';
 
 import objective from '../../logic/Objective';
@@ -30,7 +30,7 @@ export default class HistoryTarget extends React.Component {
   }
 
   componentDidMount() {
-    this.reload();
+    InteractionManager.runAfterInteractions(() => this.reload());
   }
 
   async reload() {

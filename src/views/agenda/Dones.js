@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/5/14.
  */
 import React from 'react';
-import {StyleSheet, View, ListView, Text, RefreshControl, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, ListView, Text, RefreshControl, TouchableOpacity, Image, InteractionManager} from 'react-native';
 import moment from 'moment';
 
 import {analytics, airloy, styles, colors, api, toast, L} from '../../app';
@@ -34,7 +34,7 @@ export default class Dones extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_dones');
-    this.reload();
+    InteractionManager.runAfterInteractions(() => this.reload());
   }
 
   async reload() {

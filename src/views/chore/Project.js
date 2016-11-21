@@ -3,7 +3,8 @@
  */
 
 import React from 'react';
-import {StyleSheet, ListView, RefreshControl, View, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, ListView, RefreshControl, View, Text,
+  TouchableOpacity, Image, InteractionManager} from 'react-native';
 
 import {analytics, styles, colors, px1, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -46,8 +47,7 @@ export default class Project extends React.Component {
     };
     // so many bugs on android T_T
     util.isAndroid() ?
-      this.props.navigator.replaceAtIndex(route, -1) :
-      this.props.navigator.replace(route);
+      this.props.navigator.replaceAtIndex(route, -1) : this.props.navigator.replace(route);
     airloy.event.on(EventTypes.taskChange, ()=> {
       this.reload();
     });
@@ -55,7 +55,7 @@ export default class Project extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_project');
-    this.reload();
+    InteractionManager.runAfterInteractions(() => this.reload());
   }
 
   componentWillUnmount() {

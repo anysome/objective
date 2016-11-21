@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/8/20.
  */
 import React from 'react';
-import {StyleSheet, RefreshControl, ListView,
+import {StyleSheet, RefreshControl, ListView, InteractionManager,
   View, Text, LayoutAnimation, TouchableOpacity, Alert, Image} from 'react-native';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
@@ -44,7 +44,7 @@ export default class Listing extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_listing');
-    this.reload();
+    InteractionManager.runAfterInteractions(() => this.reload());
   }
 
   componentWillUnMount() {
