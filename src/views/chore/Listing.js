@@ -44,7 +44,7 @@ export default class Listing extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_listing');
-    InteractionManager.runAfterInteractions(() => this.reload());
+    util.isAndroid() ? InteractionManager.runAfterInteractions(() => this.reload()) : this.reload();
   }
 
   componentWillUnMount() {

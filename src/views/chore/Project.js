@@ -55,7 +55,7 @@ export default class Project extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_project');
-    InteractionManager.runAfterInteractions(() => this.reload());
+    util.isAndroid() ? InteractionManager.runAfterInteractions(() => this.reload()) : this.reload();
   }
 
   componentWillUnmount() {

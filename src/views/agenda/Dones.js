@@ -4,7 +4,7 @@
 import React from 'react';
 import {StyleSheet, View, ListView, Text, RefreshControl, TouchableOpacity, Image, InteractionManager} from 'react-native';
 import moment from 'moment';
-
+import util from '../../libs/Util';
 import {analytics, airloy, styles, colors, api, toast, L} from '../../app';
 import ListSource from '../../logic/ListSource';
 import ListSectionView from '../../widgets/ListSectionView';
@@ -34,7 +34,7 @@ export default class Dones extends React.Component {
 
   componentDidMount() {
     analytics.onPageStart('page_dones');
-    InteractionManager.runAfterInteractions(() => this.reload());
+    util.isAndroid() ? InteractionManager.runAfterInteractions(() => this.reload()) : this.reload();
   }
 
   async reload() {

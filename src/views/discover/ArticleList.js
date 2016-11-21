@@ -4,7 +4,7 @@
 import React from 'react';
 import { StyleSheet, ListView, RefreshControl, Image, View,
   Text, TouchableOpacity, InteractionManager} from 'react-native';
-
+import util from '../../libs/Util';
 import {airloy, styles, colors, config, api, toast, L} from '../../app';
 import Browser from './Browser';
 
@@ -22,7 +22,7 @@ export default class ArticleList extends React.Component {
   }
 
   componentDidMount() {
-    InteractionManager.runAfterInteractions(() => this.reload());
+    util.isAndroid() ? InteractionManager.runAfterInteractions(() => this.reload()) : this.reload();
   }
 
   async reload() {

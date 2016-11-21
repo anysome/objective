@@ -5,7 +5,7 @@ import React from 'react';
 import {StyleSheet, ScrollView, View, Text, Image, TouchableOpacity,
   RefreshControl, ListView, InteractionManager} from 'react-native';
 import moment from 'moment';
-
+import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 import {airloy, styles, px1, colors, api, L, toast} from '../../app';
 import ListSource from '../../logic/ListSource';
@@ -30,7 +30,7 @@ export default class HistoryTarget extends React.Component {
   }
 
   componentDidMount() {
-    InteractionManager.runAfterInteractions(() => this.reload());
+    util.isAndroid() ? InteractionManager.runAfterInteractions(() => this.reload()) : this.reload();
   }
 
   async reload() {
