@@ -7,20 +7,19 @@
 
 ## iOS Snapshot
 
-<img src="http://ww4.sinaimg.cn/mw690/005LSYBWgw1f9yaghb6azj30yi1pc0z3.jpg" alt="todo" width="250">
-<img src="http://ww2.sinaimg.cn/mw690/005LSYBWgw1f9yak7at4nj30yi1pcqa5.jpg" alt="progress" width="250">
-<img src="http://ww3.sinaimg.cn/mw690/005LSYBWgw1f9yakrbrxcj30yi1pc7dj.jpg" alt="calendar" width="250">
-<img src="http://ww1.sinaimg.cn/mw690/005LSYBWgw1f9yal0zrjpj30yi1pcdq2.jpg" alt="discover" width="250">
-<img src="http://ww3.sinaimg.cn/mw690/005LSYBWgw1f9yalao5x7j30yi1pcag8.jpg" alt="check" width="250">
+<img src="http://ww4.sinaimg.cn/mw690/005LSYBWgw1f9yaghb6azj30yi1pc0z3.jpg" alt="record" width="250">
+<img src="http://ww2.sinaimg.cn/mw690/005LSYBWgw1f9yak7at4nj30yi1pcqa5.jpg" alt="target" width="250">
+<img src="http://ww3.sinaimg.cn/mw690/005LSYBWgw1f9yakrbrxcj30yi1pc7dj.jpg" alt="glance" width="250">
+<img src="http://ww1.sinaimg.cn/mw690/005LSYBWgw1f9yal0zrjpj30yi1pcdq2.jpg" alt="calendar" width="250">
+<img src="http://ww3.sinaimg.cn/mw690/005LSYBWgw1f9yalao5x7j30yi1pcag8.jpg" alt="todo list" width="250">
 
 ## Android Snapshot
 
-<img src="https://cloud.githubusercontent.com/assets/233960/14515683/ddc43fb0-022e-11e6-99f8-f17f3136546a.png" alt="todo" width="250">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515840/05e2a526-0230-11e6-9b8c-7b7871398bb5.png" alt="progress" width="250">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515841/0e0ea470-0230-11e6-9d6d-c588b50f7bac.png" alt="calendar" width="250">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515715/136220f6-022f-11e6-96e1-495b908d7d36.png" alt="discover" width="250">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515738/4f20b5b2-022f-11e6-9f67-5cbfb206f3c8.png" alt="me" width="250">
-<img src="https://cloud.githubusercontent.com/assets/233960/14515745/5d81af94-022f-11e6-8ba1-84c8b234843f.png" alt="add" width="250">
+<img src="http://ww2.sinaimg.cn/mw690/005LSYBWgw1fa0191inhjj30u01hc0x5.jpg" alt="record" width="250">
+<img src="http://ww2.sinaimg.cn/mw690/005LSYBWgw1fa019s4rafj30u01hcgr9.jpg" alt="target" width="250">
+<img src="http://ww2.sinaimg.cn/mw690/005LSYBWgw1fa01bc3apnj30u01hc44i.jpg" alt="glance" width="250">
+<img src="http://ww1.sinaimg.cn/mw690/005LSYBWgw1fa01blq5yoj30u01hctee.jpg" alt="calendar" width="250">
+<img src="http://ww4.sinaimg.cn/mw690/005LSYBWgw1fa01bwg44wj30u01hcjwi.jpg" alt="todo list" width="250">
 
 ### Install
 
