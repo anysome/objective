@@ -2,7 +2,8 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid, Image} from 'react-native';
+import {StyleSheet, Navigator, TouchableOpacity, AppState, BackAndroid, Image,
+  LayoutAnimation, Keyboard} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import NavigatorWithBar from '../../widgets/NavigatorWithBar';
 
@@ -22,19 +23,11 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      tabBarHeight: 49,
       currentPage: 'Agenda'
     };
     this.today = util.getTodayStart();
     this._handleAppStateChange = this._handleAppStateChange.bind(this);
-  }
-
-  componentWillMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
-    this._autoSchedule();
-
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      return false;
-    });
   }
 
   async _autoSchedule() {
@@ -46,8 +39,34 @@ export default class Main extends React.Component {
     }
   }
 
+  componentWillMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+    this._autoSchedule();
+
+    BackAndroid.addEventListener('hardwareBackPress', function() {
+      return false;
+    });
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', e => {
+      this.setState({
+        tabBarHeight: 0
+      });
+    });
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', e => {
+      this.setState({
+        tabBarHeight: 49
+      });
+    });
+  }
+
+  componentWillUpdate(props, state) {
+    // animate
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }
+
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
     console.log(`-------- ${this.name} unmounting`);
   }
 
@@ -94,7 +113,7 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <TabNavigator>
+      <TabNavigator tabBarStyle={{height: this.state.tabBarHeight}} sceneStyle={{paddingBottom: this.state.tabBarHeight}}>
         <TabNavigator.Item
           selected={this.state.currentPage === 'Agenda'}
           title="待办"

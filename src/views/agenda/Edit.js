@@ -171,6 +171,7 @@ export default class Edit extends React.Component {
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.agenda.title || '想做什么...'}
             returnKeyType="done"
+            autoFocus={this.agenda.title == null}
           />
           <View style={styles.separator}/>
           <TextArea

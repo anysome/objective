@@ -157,6 +157,7 @@ export default class Edit extends React.Component {
             onChangeText={(text) => this.setState({title:text})}
             placeholder={this.data.title || '先记下来...'}
             returnKeyType="done"
+            autoFocus={this.data.title === ''}
           />
           <View style={styles.separator}/>
                     <TextArea
