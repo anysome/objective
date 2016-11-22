@@ -10,7 +10,7 @@ import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app'
 import util from '../../libs/Util';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 
 export default class Edit extends React.Component {
 

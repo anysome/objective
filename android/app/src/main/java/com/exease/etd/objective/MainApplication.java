@@ -4,7 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import io.neson.react.notification.NotificationPackage;
+import com.actionsheet.ActionSheetPackage;
+import com.exease.react.notification.NotificationPackage;
 import in.esseak.react_native_umeng.UmengPackage;
 import com.heng.wheel.WheelPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+          new ActionSheetPackage(),
           new NotificationPackage(),
           new RNSpinkitPackage(),
           new MainReactPackage(),

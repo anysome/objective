@@ -9,7 +9,7 @@ import util from '../../libs/Util';
 import objective from '../../logic/Objective';
 import {airloy, styles, px1, colors, api, L, toast} from '../../app';
 import ListSource from '../../logic/ListSource';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 
 import Calendar from './Calendar';
 import Timeline from './Timeline';

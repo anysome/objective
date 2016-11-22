@@ -14,7 +14,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 import ListRow from './ListRow';
 import Glance from './Glance';
 import Edit from './Edit';
@@ -214,18 +214,14 @@ export default class Target extends Controller {
             this._toDelete(rowData);
             break;
           default:
-            if ( result.success ) {
-              this.forward({
-                title: '修改',
-                component: Edit,
-                rightButtonIcon: require('../../../resources/icons/more.png'),
-                passProps: {
-                  data: rowData
-                }
-              });
-            } else {
-              toast(L(result.message));
-            }
+            this.forward({
+              title: '修改',
+              component: Edit,
+              rightButtonIcon: require('../../../resources/icons/more.png'),
+              passProps: {
+                data: rowData
+              }
+            });
         }
       }
     );

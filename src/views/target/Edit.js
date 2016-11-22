@@ -15,7 +15,7 @@ import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
 import OptionsPicker from '../../widgets/OptionsPicker';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 
 export default class Edit extends React.Component {
 

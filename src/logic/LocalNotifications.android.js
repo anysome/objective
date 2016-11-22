@@ -2,7 +2,7 @@
  * Created by Layman(http://github.com/anysome) on 16/3/21.
  */
 
-import Notification from 'react-native-system-notification';
+import Notification from 'react-native-pure-notification';
 import moment from 'moment';
 
 function hash(str) {

@@ -12,7 +12,7 @@ import EventTypes from '../../logic/EventTypes';
 
 import Controller from '../Controller';
 import ListSectionView from '../../widgets/ListSectionView';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 
 import Edit from './Edit';
 import Listing from './Listing';

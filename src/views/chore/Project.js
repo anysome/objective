@@ -9,7 +9,7 @@ import {StyleSheet, ListView, RefreshControl, View, Text,
 import {analytics, styles, colors, px1, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
-import ActionSheet from '../../widgets/ActionSheet';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 import EventTypes from '../../logic/EventTypes';
 
 import EditTask from './EditTask';
