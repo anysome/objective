@@ -27,6 +27,7 @@ export default class Main extends React.Component {
       currentPage: 'Agenda'
     };
     this.today = util.getTodayStart();
+    this.controllers = [];
     this._handleAppStateChange = this._handleAppStateChange.bind(this);
   }
 
@@ -43,8 +44,15 @@ export default class Main extends React.Component {
     AppState.addEventListener('change', this._handleAppStateChange);
     this._autoSchedule();
 
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      return false;
+    this.backListenerHandler = BackAndroid.addEventListener('hardwareBackPress', () => {
+      let navigator = this.controllers[this.state.currentPage].navigator;
+      console.log('length = %o', navigator.getCurrentRoutes().length);
+      if (navigator.getCurrentRoutes().length > 1) {
+        navigator.pop();
+        return true;
+      } else {
+        return false;
+      }
     });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', e => {
       this.setState({
@@ -65,6 +73,7 @@ export default class Main extends React.Component {
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
+    this.backListenerHandler.remove();
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
     console.log(`-------- ${this.name} unmounting`);
@@ -85,6 +94,11 @@ export default class Main extends React.Component {
 
   getToday() {
     return this.today;
+  }
+
+  pushController(controller) {
+    console.log('name = ' + controller.name);
+    this.controllers[controller.name] = controller;
   }
 
   _selectTab(tabPage) {

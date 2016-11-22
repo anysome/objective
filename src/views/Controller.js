@@ -20,6 +20,10 @@ export default class Controller extends React.Component {
     return this.props.navigator.navigationContext.currentRoute;
   }
 
+  get navigator() {
+    return this.props.navigator;
+  }
+
   get visible() {
     // DO NOT USE this.constructor.name , minify js bundle will get wrong name.
     return this.frame.isPageActive(this.name);
@@ -55,6 +59,7 @@ export default class Controller extends React.Component {
   }
 
   componentDidMount() {
+    this.frame.pushController(this);
     airloy.event.on(EventTypes.tabChange, (tabPage)=> {
       if (this.stale && tabPage === this.name) {
         console.log(`stale tab "${tabPage}" reload while showing`);

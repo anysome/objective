@@ -65,6 +65,10 @@ export default class Frame extends React.Component {
 		return this.today;
 	}
 
+  pushController(controller) {
+	  // api for android, noop in ios
+  }
+
 	_onNotification(notification) {
 		console.log(JSON.stringify(notification));
 		AlertIOS.alert(
