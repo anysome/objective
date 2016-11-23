@@ -11,7 +11,7 @@ import {colors, airloy, api} from '../../app';
 import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
-import Agenda from '../agenda/Agenda';
+import Agenda from '../agenda/SwipeAgenda';
 import Target from '../target/Target';
 import Anything from './Anything';
 import Chore from '../chore/Chore';

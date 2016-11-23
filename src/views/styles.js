@@ -191,6 +191,20 @@ const styles = StyleSheet.create({
   },
   iconSmall: {
     tintColor: colors.bright2
+  },
+  rowActions: {
+    backgroundColor: colors.accent
+  },
+  rowAction: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  rowText: {
+    color: 'white',
+    fontSize: 16
   }
 });
 

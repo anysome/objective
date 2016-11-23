@@ -4,6 +4,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import moment from 'moment';
+import TouchableBounce from 'TouchableBounce';
 
 import {colors, styles} from '../../app';
 import objective from '../../logic/Objective';
@@ -50,7 +51,7 @@ export default class ListRow extends React.Component {
   render() {
     var transform = this._transform(this.props.data);
     return (
-      <TouchableOpacity style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
+      <TouchableBounce style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
         <TouchableOpacity onPress={this.props.onIconClick} style={style.icon}>
           {transform.icon}
         </TouchableOpacity>
@@ -61,7 +62,7 @@ export default class ListRow extends React.Component {
         </Text>
         {transform.reminder && <Image source={require('../../../resources/icons/bell.png')} style={styles.iconSmall} />}
         {transform.arrangeDate && <Text style={style.hint}>{transform.arrangeDate}</Text>}
-      </TouchableOpacity>
+      </TouchableBounce>
     );
   }
 }
