@@ -193,63 +193,6 @@ export default class SwipeAgenda extends Controller {
     }
   }
 
-  _moreActions(rowData, sectionId) {
-    if (sectionId !== 2) {
-      let isToday = sectionId === 0;
-      let BUTTONS = isToday ? ['删除', '推迟到明天', '取消'] : ['删除', '取消'];
-      ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          destructiveButtonIndex: 0,
-          cancelButtonIndex: isToday ? 2 : 1,
-          tintColor: colors.dark2
-        },
-        async (buttonIndex) => {
-          switch (buttonIndex) {
-            case 0:
-              hang();
-              let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
-              hang(false);
-              if (result.success) {
-                if (rowData.targetId) {
-                  airloy.event.emit(EventTypes.targetChange);
-                } else if (rowData.projectId) {
-                  airloy.event.emit(EventTypes.taskChange);
-                } else {
-                  airloy.event.emit(EventTypes.choreChange);
-                }
-                rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
-                this.listSource.remove(rowData);
-                this._sortList();
-              } else {
-                toast(L(result.message));
-              }
-              break;
-            case 1:
-              if (isToday) {
-                hang();
-                let newDate = new Date(this.today + 86400000);
-                let result = await airloy.net.httpPost(api.agenda.update, {
-                    id: rowData.id,
-                    today: newDate
-                  }
-                );
-                hang(false);
-                if (result.success) {
-                  this._updateData(result.info);
-                } else {
-                  toast(L(result.message));
-                }
-                analytics.onEvent('click_agenda_schedule');
-              }
-              break;
-            default :
-              console.log('cancel options');
-          }
-        }
-      );
-    }
-  }
-
   updateRow(rowData) {
     this._updateData(rowData);
     this.backward();
@@ -299,21 +242,89 @@ export default class SwipeAgenda extends Controller {
   _renderActions(rowData, sectionId) {
     return (
       <SwipeableQuickActions style={styles.rowActions}>
+        { sectionId !== 2 &&
         <SwipeableQuickActionButton imageSource={{}} text={"更多"}
                                     onPress={() => this._moreActions(rowData, sectionId)}
                                     style={styles.rowAction} textStyle={styles.rowText}/>
-        <SwipeableQuickActionButton imageSource={{}} text={"提醒"}
-                                    onPress={() => this._alarm(rowData)}
-                                    style={styles.rowAction} textStyle={styles.rowText}/>
+        }
+        <SwipeableQuickActionButton imageSource={{}} text={"删除"}
+                                    onPress={() => this._delete(rowData)}
+                                    style={styles.rowActionDestructive} textStyle={styles.rowText}/>
       </SwipeableQuickActions>
     );
   }
 
-  _alarm(rowData) {
-    this.setState({
-      showTimer: true,
-      selectedRow: rowData
-    });
+  _moreActions(rowData, sectionId) {
+    let isToday = sectionId === 0;
+    let BUTTONS = isToday ? ['提醒', '推迟到明天', '取消'] : ['提醒', '提前到今天', '取消'];
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        destructiveButtonIndex: 0,
+        cancelButtonIndex: 2,
+        tintColor: colors.dark2
+      },
+      async (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            this.setState({
+              showTimer: true,
+              selectedRow: rowData
+            });
+            break;
+          case 1:
+            if (isToday) {
+              hang();
+              let newDate = new Date(this.today + 86400000);
+              let result = await airloy.net.httpPost(api.agenda.update, {
+                  id: rowData.id,
+                  today: newDate
+                }
+              );
+              hang(false);
+              if (result.success) {
+                this._updateData(result.info);
+              } else {
+                toast(L(result.message));
+              }
+            } else {
+              let result = await airloy.net.httpPost(api.agenda.update, {
+                id: rowData.id,
+                today: new Date(this.today)
+              });
+              if (result.success) {
+                rowData.today = this.today;
+                this.updateRow(rowData);
+              } else {
+                toast(L(result.message));
+              }
+            }
+            analytics.onEvent('click_agenda_schedule');
+            break;
+          default :
+            console.log('cancel options');
+        }
+      }
+    );
+  }
+
+  async _delete(rowData) {
+    hang();
+    let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
+    hang(false);
+    if (result.success) {
+      if (rowData.targetId) {
+        airloy.event.emit(EventTypes.targetChange);
+      } else if (rowData.projectId) {
+        airloy.event.emit(EventTypes.taskChange);
+      } else {
+        airloy.event.emit(EventTypes.choreChange);
+      }
+      rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
+      this.listSource.remove(rowData);
+      this._sortList();
+    } else {
+      toast(L(result.message));
+    }
   }
 
   render() {

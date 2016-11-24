@@ -1,19 +1,22 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/8/20.
+ * Created by Layman(http://github.com/anysome) on 16/11/24.
  */
 import React from 'react';
-import {StyleSheet, RefreshControl, ListView, InteractionManager,
-  View, Text, LayoutAnimation, TouchableOpacity, Alert, Image} from 'react-native';
+import {RefreshControl, InteractionManager, View, Text} from 'react-native';
+
+import SwipeableListView from 'SwipeableListView';
+import SwipeableQuickActions from 'SwipeableQuickActions';
+import SwipeableQuickActionButton from 'SwipeableQuickActionButton';
+import TouchableBounce from 'TouchableBounce';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
 import ListSource from '../../logic/ListSource';
 
 import EditProject from './EditProject';
-import Project from './Project';
-import EditTask from './EditTask';
+import Project from './SwipeProject';
 
-export default class Listing extends React.Component {
+export default class SwipeListing extends React.Component {
 
   constructor(props) {
     super(props);
@@ -21,9 +24,7 @@ export default class Listing extends React.Component {
     this.today = props.today;
     this.state = {
       isRefreshing: true,
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2
-      })
+      dataSource: SwipeableListView.getNewDataSource()
     };
     this.rightButtonIcon = null;
   }
@@ -59,7 +60,7 @@ export default class Listing extends React.Component {
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas),
+        dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null),
         isRefreshing: false
       });
     } else {
@@ -96,26 +97,6 @@ export default class Listing extends React.Component {
     });
   }
 
-  _addTask(rowData) {
-    this.props.navigator.push({
-      title: '添加子任务',
-      component: EditTask,
-      passProps: {
-        projectId: rowData.id,
-        editable: true,
-        onUpdated: (task) => {
-          rowData.subTodo = rowData.subTodo + 1;
-          rowData.subTotal = rowData.subTotal + 1;
-          this.props.navigator.pop();
-          this.listSource.update(util.clone(rowData));
-          this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
-          });
-        }
-      }
-    });
-  }
-
   updateRow(rowData) {
     // also for add
     this.listSource.update(rowData);
@@ -135,14 +116,11 @@ export default class Listing extends React.Component {
 
   _renderRow(rowData, sectionId, rowId) {
     return (
-      <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
-                        onLongPress={() => this._addTask(rowData)}>
-        <TouchableOpacity onPress={() => this._toProject(rowData)} style={style.icon}>
-          <Image source={require('../../../resources/icons/create.png')} style={style.edit} />
-        </TouchableOpacity>
+      <TouchableBounce style={styles.listRow}
+                       onPress={() => this._pressRow(rowData, sectionId)}>
         <Text style={styles.title}>{rowData.title}</Text>
         <Text style={styles.hint}>{rowData.subTodo} / {rowData.subTotal}</Text>
-      </TouchableOpacity>
+      </TouchableBounce>
     );
   }
 
@@ -150,9 +128,21 @@ export default class Listing extends React.Component {
     return <View key={rowId + '_separator'} style={styles.hr}></View>
   }
 
+  _renderActions(rowData, sectionId) {
+    return (
+      <SwipeableQuickActions style={styles.rowActions}>
+        <SwipeableQuickActionButton imageSource={{}} text={"修改"}
+                                    onPress={() => this._toProject(rowData)}
+                                    style={styles.rowAction} textStyle={styles.rowText}/>
+      </SwipeableQuickActions>
+    );
+  }
+
   render() {
     return (
-      <ListView
+      <SwipeableListView
+        maxSwipeDistance={60}
+        renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
         enableEmptySections={true}
         initialListSize={10}
         pageSize={5}
@@ -172,23 +162,3 @@ export default class Listing extends React.Component {
     );
   }
 }
-
-
-const style = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flex: 1,
-    paddingRight: 16,
-    paddingTop: 8,
-    paddingBottom: 8,
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-  icon: {
-    paddingLeft: 16,
-    paddingRight: 10
-  },
-  edit: {
-    tintColor: colors.dark2
-  }
-});

@@ -192,15 +192,33 @@ const styles = StyleSheet.create({
   iconSmall: {
     tintColor: colors.bright2
   },
+  listRow: {
+    flexDirection: 'row',
+    flex: 1,
+    paddingRight: 16,
+    paddingLeft: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
   rowActions: {
     backgroundColor: colors.accent
   },
   rowAction: {
     flex: 1,
-    padding: 10,
+    padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  rowActionDestructive: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red'
   },
   rowText: {
     color: 'white',

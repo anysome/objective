@@ -14,7 +14,7 @@ import EventTypes from '../../logic/EventTypes';
 import Agenda from '../agenda/SwipeAgenda';
 import Target from '../target/Target';
 import Anything from './Anything';
-import Chore from '../chore/Chore';
+import Chore from '../chore/SwipeChore';
 import Discover from '../discover/Discover';
 
 
