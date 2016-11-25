@@ -40,6 +40,7 @@ export default class EditProject extends React.Component {
                 let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
                 if (result.success) {
                   this.data.subTodo && airloy.event.emit(EventTypes.choreChange);
+                  this.props.navigator.pop();
                   this.props.onDeleted(this.data);
                 } else {
                   toast(L(result.message));

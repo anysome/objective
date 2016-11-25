@@ -2,9 +2,9 @@
  * Created by Layman(http://github.com/anysome) on 16/3/10.
  */
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import moment from 'moment';
-
+import TouchableBounce from 'TouchableBounce';
 import {colors, styles, px1} from '../../app';
 import objective from '../../logic/Objective';
 
@@ -71,7 +71,7 @@ export default class ListRow extends React.Component {
   render() {
     var transform = this._transform(this.props.data);
     return (
-      <TouchableOpacity style={[style.container, {borderLeftColor: transform.priorityColor}]}
+      <TouchableBounce style={[style.container, {borderLeftColor: transform.priorityColor}]}
                         onPress={this.props.onPress}
                         onLongPress={this.props.onLongPress}>
         <Text style={style.title}>「+{transform.progress}」{transform.title}</Text>
@@ -82,7 +82,7 @@ export default class ListRow extends React.Component {
           <Text style={style.hint}>{transform.detail}</Text>
           <Text style={[styles.text, {color: transform.doneColor}]}>{transform.timeLeft}</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableBounce>
     );
   }
 }

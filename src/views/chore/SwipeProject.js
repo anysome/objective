@@ -110,7 +110,7 @@ export default class SwipeProject extends React.Component {
             rowData.arranged = true;
             this.listSource.update(util.clone(rowData));
             this.setState({
-              dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+              dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
             });
             toast('已安排到待办列表中');
           } else {
@@ -136,20 +136,18 @@ export default class SwipeProject extends React.Component {
   updateRow(rowData) {
     this.listSource.update(rowData);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
-    this.props.navigator.pop();
   }
 
   deleteRow(rowData) {
     this.listSource.remove(rowData);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
     this.project.subTotal--;
     rowData.status === '0' && this.project.subTodo--;
     this.countChanged = true;
-    this.props.navigator.pop();
   }
 
   _pressRow(rowData, editable) {

@@ -9,7 +9,7 @@ import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
 import Agenda from '../agenda/SwipeAgenda';
-import Target from '../target/Target';
+import Target from '../target/SwipeTarget';
 import Anything from './Anything';
 import Chore from '../chore/SwipeChore';
 import Discover from '../discover/Discover';

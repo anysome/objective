@@ -220,6 +220,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'red'
   },
+  rowActionConstructive: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.action
+  },
   rowText: {
     color: 'white',
     fontSize: 16

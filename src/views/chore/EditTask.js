@@ -39,6 +39,7 @@ export default class EditTask extends React.Component {
                 let result = await airloy.net.httpGet(api.task.remove, {id: this.data.id});
                 hang(false);
                 if (result.success) {
+                  this.props.navigator.pop();
                   this.props.onDeleted(this.data);
                 } else {
                   toast(L(result.message));
@@ -82,6 +83,7 @@ export default class EditTask extends React.Component {
     }
     if (result.success) {
       this.data.arranged && airloy.event.emit(EventTypes.agendaChange);
+      this.props.navigator.pop();
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));

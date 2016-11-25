@@ -52,9 +52,9 @@ export default class ListRow extends React.Component {
     var transform = this._transform(this.props.data);
     return (
       <TouchableBounce style={style.container} onPress={this.props.onPress} onLongPress={this.props.onLongPress}>
-        <TouchableOpacity onPress={this.props.onIconClick} style={style.icon}>
+        <TouchableBounce onPress={this.props.onIconClick} style={style.icon}>
           {transform.icon}
-        </TouchableOpacity>
+        </TouchableBounce>
         <Text style={[styles.title, style.body]}>
           { transform.priority > 8 ? <Text style={style.alert}>!! </Text> :
             transform.priority > 3 ? <Text style={style.alert}>! </Text> : null }

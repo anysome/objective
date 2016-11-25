@@ -106,7 +106,6 @@ export default class Listing extends React.Component {
         onUpdated: (task) => {
           rowData.subTodo = rowData.subTodo + 1;
           rowData.subTotal = rowData.subTotal + 1;
-          this.props.navigator.pop();
           this.listSource.update(util.clone(rowData));
           this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)

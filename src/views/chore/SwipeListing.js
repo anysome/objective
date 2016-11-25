@@ -15,6 +15,7 @@ import ListSource from '../../logic/ListSource';
 
 import EditProject from './EditProject';
 import Project from './SwipeProject';
+import EditTask from './EditTask';
 
 export default class SwipeListing extends React.Component {
 
@@ -84,6 +85,25 @@ export default class SwipeListing extends React.Component {
     });
   }
 
+  _addTask(rowData) {
+    this.props.navigator.push({
+      title: '添加子任务',
+      component: EditTask,
+      passProps: {
+        projectId: rowData.id,
+        editable: true,
+        onUpdated: (task) => {
+          rowData.subTodo = rowData.subTodo + 1;
+          rowData.subTotal = rowData.subTotal + 1;
+          this.listSource.update(util.clone(rowData));
+          this.setState({
+            dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
+          });
+        }
+      }
+    });
+  }
+
   _pressRow(rowData, sectionId) {
     this.props.navigator.push({
       title: rowData.title,
@@ -102,15 +122,14 @@ export default class SwipeListing extends React.Component {
     this.listSource.update(rowData);
     this.props.navigator.pop();
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
   }
 
   deleteRow(rowData) {
     this.listSource.remove(rowData);
-    this.props.navigator.pop();
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
   }
 
@@ -134,6 +153,9 @@ export default class SwipeListing extends React.Component {
         <SwipeableQuickActionButton imageSource={{}} text={"修改"}
                                     onPress={() => this._toProject(rowData)}
                                     style={styles.rowAction} textStyle={styles.rowText}/>
+        <SwipeableQuickActionButton imageSource={{}} text={"+任务"}
+                                    onPress={() => this._addTask(rowData)}
+                                    style={styles.rowActionConstructive} textStyle={styles.rowText}/>
       </SwipeableQuickActions>
     );
   }
@@ -141,7 +163,7 @@ export default class SwipeListing extends React.Component {
   render() {
     return (
       <SwipeableListView
-        maxSwipeDistance={60}
+        maxSwipeDistance={120}
         renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
         enableEmptySections={true}
         initialListSize={10}

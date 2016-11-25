@@ -123,7 +123,6 @@ export default class Project extends React.Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
     });
-    this.props.navigator.pop();
   }
 
   deleteRow(rowData) {
@@ -134,7 +133,6 @@ export default class Project extends React.Component {
     this.project.subTotal--;
     rowData.status === '0' && this.project.subTodo--;
     this.countChanged = true;
-    this.props.navigator.pop();
   }
 
   _pressRow(rowData, editable) {
