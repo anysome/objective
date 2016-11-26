@@ -7,8 +7,6 @@ import {StyleSheet, ScrollView, View, Text, TouchableOpacity, Alert} from 'react
 import Button from 'react-native-button';
 
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
-import util from '../../libs/Util';
-import EventTypes from '../../logic/EventTypes';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 
@@ -25,37 +23,6 @@ export default class EditProject extends React.Component {
   }
 
   componentWillMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => {
-        Alert.alert(
-          '确认删除 ?',
-          this.data.subTodo > 0 ? '未完成的任务可在回收站里找到.' : '彻底删除了哦!',
-          [
-            {text: '不了'},
-            {
-              text: '删除',
-              onPress: async () => {
-                hang();
-                let result = await airloy.net.httpGet(api.project.remove, {id: this.data.id});
-                if (result.success) {
-                  this.data.subTodo && airloy.event.emit(EventTypes.choreChange);
-                  this.props.navigator.pop();
-                  this.props.onDeleted(this.data);
-                } else {
-                  toast(L(result.message));
-                }
-                hang(false);
-              }
-            }
-          ]
-        );
-      };
-      // so many bugs on android T_T
-      util.isAndroid() ?
-        this.props.navigator.replaceAtIndex(route, -1) :
-        this.props.navigator.replace(route);
-    }
   }
 
   async _save() {
@@ -78,6 +45,7 @@ export default class EditProject extends React.Component {
     }
     hang(false);
     if (result.success) {
+      this.props.navigator.pop();
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));

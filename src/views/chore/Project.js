@@ -1,10 +1,16 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/3/17.
+ * Created by Layman(http://github.com/anysome) on 16/11/24.
  */
 
 import React from 'react';
 import {StyleSheet, ListView, RefreshControl, View, Text,
   TouchableOpacity, Image, InteractionManager} from 'react-native';
+
+import SwipeableListViewDataSource from 'SwipeableListViewDataSource';
+import SwipeableListView from 'SwipeableListView';
+import SwipeableQuickActions from 'SwipeableQuickActions';
+import SwipeableQuickActionButton from 'SwipeableQuickActionButton';
+import TouchableBounce from 'TouchableBounce';
 
 import {analytics, styles, colors, px1, airloy, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -21,10 +27,9 @@ export default class Project extends React.Component {
     this.listSource = new ListSource();
     this.project = props.data;
     this.today = props.today;
-    this.countChanged = false;
     this.state = {
       isRefreshing: true,
-      dataSource: new ListView.DataSource({
+      dataSource: new SwipeableListViewDataSource({
         getSectionHeaderData: (dataBlob, sectionId) => this.project,
         rowHasChanged: (row1, row2) => row1 !== row2,
         sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -41,7 +46,7 @@ export default class Project extends React.Component {
         passProps: {
           projectId: this.project.id,
           editable: true,
-          onUpdated: (rowData) => this.updateRow(rowData)
+          onUpdated: (rowData) => this.updateRow(rowData, true)
         }
       });
     };
@@ -71,7 +76,7 @@ export default class Project extends React.Component {
     if (result.success) {
       this.listSource = new ListSource(result.info);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas),
+        dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null),
         isRefreshing: false
       });
     } else {
@@ -82,106 +87,130 @@ export default class Project extends React.Component {
     }
   }
 
-  _toArrange(rowData, arrangable) {
-    if (arrangable) {
-      let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
-      let CANCEL_INDEX = 3;
-      ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          cancelButtonIndex: CANCEL_INDEX,
-          tintColor: colors.dark2
-        },
-        async (buttonIndex) => {
-          if (buttonIndex !== CANCEL_INDEX) {
-            hang();
-            let newDate = new Date(this.today + 86400000 * buttonIndex);
-            let result = await airloy.net.httpGet(api.task.arrange, {
-                id: rowData.id,
-                date: newDate
-              }
-            );
-            if (result.success) {
-              airloy.event.emit(EventTypes.agendaAdd, result.info);
-              rowData.arranged = true;
-              this.listSource.update(util.clone(rowData));
-              this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
-              });
-              toast('已安排到待办列表中');
-            } else {
-              toast(L(result.message));
+  _toArrange(rowData) {
+    let BUTTONS = ['安排到今天', '安排到明天', '安排到后天', '取消'];
+    let CANCEL_INDEX = 3;
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        tintColor: colors.dark2
+      },
+      async (buttonIndex) => {
+        if (buttonIndex !== CANCEL_INDEX) {
+          hang();
+          let newDate = new Date(this.today + 86400000 * buttonIndex);
+          let result = await airloy.net.httpGet(api.task.arrange, {
+              id: rowData.id,
+              date: newDate
             }
-            hang(false);
+          );
+          if (result.success) {
+            airloy.event.emit(EventTypes.agendaAdd, result.info);
+            rowData.arranged = true;
+            this.state.dataSource.setOpenRowID(null);
+            this.listSource.update(util.clone(rowData));
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
+            });
+            toast('已安排到待办列表中');
+          } else {
+            toast(L(result.message));
           }
+          hang(false);
         }
-      );
+      }
+    );
+  }
+
+  _moreActions(rowData) {
+    let BUTTONS = ['删除', '取消'];
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        cancelButtonIndex: 1,
+        destructiveButtonIndex: 0,
+        tintColor: colors.dark2
+      },
+      async(buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            this._toDelete(rowData);
+            break;
+          default:
+            console.log('cancel options');
+        }
+      }
+    );
+  }
+
+  async _toDelete(rowData) {
+    hang();
+    let result = await airloy.net.httpGet(api.task.remove, {id: rowData.id});
+    hang(false);
+    if (result.success) {
+      this.deleteRow(rowData);
+    } else {
+      toast(L(result.message));
     }
   }
 
-  updateRow(rowData) {
+  updateRow(rowData, isNew) {
     this.listSource.update(rowData);
+    isNew && this.project.subTodo++ && this.project.subTotal++;
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
   }
 
   deleteRow(rowData) {
     this.listSource.remove(rowData);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.listSource.datas)
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({s1:this.listSource.datas}, ['s1'], null)
     });
     this.project.subTotal--;
     rowData.status === '0' && this.project.subTodo--;
-    this.countChanged = true;
   }
 
   _pressRow(rowData, editable) {
     this.props.navigator.push({
       title: editable ? '修改子任务' : '查看子任务',
       component: EditTask,
-      rightButtonIcon: require('../../../resources/icons/trash.png'),
       passProps: {
         data: rowData,
         editable: editable,
-        onUpdated: (rowData) => this.updateRow(rowData),
-        onDeleted: (rowData) => this.deleteRow(rowData)
+        onUpdated: (rowData) => this.updateRow(rowData)
       }
     });
   }
 
   _renderRow(rowData, sectionId, rowId) {
-    let transform, arrangable = true, editable = true;
+    let transform, editable = true;
     if (rowData.status === '1') {
       transform = {
-        icon: <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />,
         titleColor: colors.border,
         detailColor: colors.border
       };
-      arrangable = editable = false;
+      editable = false;
     } else if (rowData.arranged) {
       transform = {
-        icon: <Image source={require('../../../resources/icons/arranged.png')} style={styles.iconSmall} />,
         titleColor: colors.dark2,
-        detailColor: colors.dark2
+        detailColor: colors.border
       };
-      arrangable = false;
     } else {
       transform = {
-        icon: <Image source={require('../../../resources/icons/arrange.png')} style={style.arrange} />,
         titleColor: colors.dark1,
         detailColor: colors.dark2
       };
     }
     return (
-      <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, editable)}>
-        <TouchableOpacity onPress={() => this._toArrange(rowData, arrangable)} style={style.icon}>
-          {transform.icon}
-        </TouchableOpacity>
+      <TouchableBounce style={styles.listRow} onPress={() => this._pressRow(rowData, editable)}>
+        {rowData.status === '1' &&
+        <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />
+        }
         <View style={styles.flex}>
           <Text style={[styles.title, {color: transform.titleColor}]}>{rowData.title}</Text>
           {rowData.detail ? <Text style={[styles.text, {color: transform.detailColor}]}>{rowData.detail}</Text> : null}
         </View>
-      </TouchableOpacity>
+      </TouchableBounce>
     );
   }
 
@@ -197,9 +226,26 @@ export default class Project extends React.Component {
       : null;
   }
 
+  _renderActions(rowData, sectionId) {
+    return (
+      <SwipeableQuickActions style={styles.rowActions}>
+        <SwipeableQuickActionButton imageSource={{}} text={"更多"}
+                                    onPress={() => this._moreActions(rowData)}
+                                    style={styles.rowAction} textStyle={styles.rowText}/>
+        { rowData.status === '0' && !rowData.arranged &&
+        <SwipeableQuickActionButton imageSource={{}} text={"安排"}
+                                    onPress={() => this._toArrange(rowData, sectionId)}
+                                    style={styles.rowActionConstructive} textStyle={styles.rowText}/>
+        }
+      </SwipeableQuickActions>
+    );
+  }
+
   render() {
     return (
-      <ListView
+      <SwipeableListView
+        maxSwipeDistance={120}
+        renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
         enableEmptySections={true}
         initialListSize={10}
         pageSize={5}
@@ -230,21 +276,5 @@ const style = StyleSheet.create({
     borderBottomWidth: px1,
     borderBottomColor: colors.bright2,
     backgroundColor: colors.bright1
-  },
-  container: {
-    flexDirection: 'row',
-    flex: 1,
-    paddingRight: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-  icon: {
-    paddingLeft: 16,
-    paddingRight: 10
-  },
-  arrange: {
-    tintColor: colors.dark2
   }
 });

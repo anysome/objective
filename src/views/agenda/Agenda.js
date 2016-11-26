@@ -1,9 +1,14 @@
 /**
- * Created by Layman(http://github.com/anysome) on 16/2/19.
+ * Created by Layman(http://github.com/anysome) on 16/11/26.
  */
 import React from 'react';
-import {View, ListView, RefreshControl} from 'react-native';
+import {View, RefreshControl, StyleSheet} from 'react-native';
 import moment from 'moment';
+
+import SwipeableListViewDataSource from 'SwipeableListViewDataSource';
+import SwipeableListView from 'SwipeableListView';
+import SwipeableQuickActions from 'SwipeableQuickActions';
+import SwipeableQuickActionButton from 'SwipeableQuickActionButton';
 
 import {analytics, airloy, styles, colors, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
@@ -32,7 +37,7 @@ export default class Agenda extends Controller {
       showCommit: false,
       showTimer: false,
       selectedRow: {},
-      dataSource: new ListView.DataSource({
+      dataSource: new SwipeableListViewDataSource({
         getSectionHeaderData: (dataBlob, sectionId) => dataBlob[sectionId],
         getRowData: (dataBlob, sectionId, rowId) => dataBlob[sectionId].getRow(rowId),
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -135,8 +140,7 @@ export default class Agenda extends Controller {
   _renderRow(rowData, sectionId, rowId) {
     return <ListRow data={rowData} sectionId={sectionId} today={this.today}
                     onPress={() => this._pressRow(rowData)}
-                    onIconClick={() => this._pressRowIcon(rowData, sectionId)}
-                    onLongPress={() => this._longPressRow(rowData, sectionId)}/>;
+                    onIconClick={() => this._pressRowIcon(rowData, sectionId)}/>;
   }
 
   _pressRow(rowData) {
@@ -153,12 +157,10 @@ export default class Agenda extends Controller {
       this.forward({
         title: '修改',
         component: Edit,
-        rightButtonIcon: require('../../../resources/icons/more.png'),
         passProps: {
           today: this.today,
           data: rowData,
-          onFeedback: (agenda) => this.updateRow(agenda),
-          onDelete: (agenda) => this.deleteRow(agenda)
+          onFeedback: (agenda) => this.updateRow(agenda)
         }
       });
     }
@@ -189,69 +191,6 @@ export default class Agenda extends Controller {
     }
   }
 
-  _longPressRow(rowData, sectionId) {
-    if (sectionId !== 2) {
-      let isToday = sectionId === 0;
-      let BUTTONS = isToday ? ['删除', '定时提醒', '推迟到明天', '取消'] : ['删除', '定时提醒', '取消'];
-      ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          destructiveButtonIndex: 0,
-          cancelButtonIndex: isToday ? 3 : 2,
-          tintColor: colors.dark2
-        },
-        async (buttonIndex) => {
-          switch (buttonIndex) {
-            case 0:
-              hang();
-              let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
-              hang(false);
-              if (result.success) {
-                if (rowData.targetId) {
-                  airloy.event.emit(EventTypes.targetChange);
-                } else if (rowData.projectId) {
-                  airloy.event.emit(EventTypes.taskChange);
-                } else {
-                  airloy.event.emit(EventTypes.choreChange);
-                }
-                rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
-                this.listSource.remove(rowData);
-                this._sortList();
-              } else {
-                toast(L(result.message));
-              }
-              break;
-            case 1:
-              this.setState({
-                showTimer: true,
-                selectedRow: rowData
-              });
-              break;
-            case 2:
-              if (isToday) {
-                hang();
-                let newDate = new Date(this.today + 86400000);
-                let result = await airloy.net.httpPost(api.agenda.update, {
-                    id: rowData.id,
-                    today: newDate
-                  }
-                );
-                hang(false);
-                if (result.success) {
-                  this._updateData(result.info);
-                } else {
-                  toast(L(result.message));
-                }
-                analytics.onEvent('click_agenda_schedule');
-              }
-              break;
-            default :
-              console.log('cancel options');
-          }
-        }
-      );
-    }
-  }
-
   updateRow(rowData) {
     this._updateData(rowData);
     this.backward();
@@ -265,10 +204,9 @@ export default class Agenda extends Controller {
   }
 
   deleteRow(rowData) {
-    LocalNotifications.cancelAgenda(rowData.id);
+    rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
     this.listSource.remove(rowData);
     this._sortList();
-    this.backward();
   }
 
   commitRow(rowData) {
@@ -298,10 +236,110 @@ export default class Agenda extends Controller {
     return <View key={rowId + '_separator'} style={styles.hr}></View>
   }
 
+  _renderActions(rowData, sectionId) {
+    return (
+      <SwipeableQuickActions style={styles.rowActions}>
+        { sectionId !== 2 &&
+        <SwipeableQuickActionButton imageSource={{}} text={"更多"}
+                                    onPress={() => this._moreActions(rowData, sectionId)}
+                                    style={styles.rowAction} textStyle={styles.rowText}/>
+        }
+        <SwipeableQuickActionButton imageSource={{}} text={"删除"}
+                                    onPress={() => this._delete(rowData)}
+                                    style={styles.rowActionDestructive} textStyle={styles.rowText}/>
+      </SwipeableQuickActions>
+    );
+  }
+
+  _moreActions(rowData, sectionId) {
+    let isToday = sectionId === 0;
+    let scheduleOption = isToday ? '推迟到明天' : '提前到今天';
+    let priorityOption = rowData.priority === 9 ? '没那么重要' : '当日第一优先';
+    let BUTTONS = ['提醒', scheduleOption, priorityOption, '取消'];
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        cancelButtonIndex: 3,
+        tintColor: colors.dark2
+      },
+      async (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            this.setState({
+              showTimer: true,
+              selectedRow: rowData
+            });
+            this.state.dataSource.setOpenRowID(null);
+            break;
+          case 1:
+            let newDate;
+            if (isToday) {
+              newDate = new Date(this.today + 86400000);
+            } else {
+              newDate = new Date(this.today);
+            }
+            hang();
+            let result = await airloy.net.httpPost(api.agenda.update, {
+                id: rowData.id,
+                today: newDate
+              }
+            );
+            hang(false);
+            if (result.success) {
+              this._updateData(result.info);
+            } else {
+              toast(L(result.message));
+            }
+            analytics.onEvent('click_agenda_schedule');
+            break;
+          case 2:
+            hang();
+            let result2 = await airloy.net.httpPost(api.agenda.update, {
+                id: rowData.id,
+                priority: rowData.priority === 9 ? 1 : 9
+              }
+            );
+            hang(false);
+            if (result2.success) {
+              this.state.dataSource.setOpenRowID(null);
+              this._updateData(result2.info);
+            } else {
+              toast(L(result2.message));
+            }
+            analytics.onEvent('click_agenda_priority');
+            break;
+          default :
+            console.log('cancel options');
+        }
+      }
+    );
+  }
+
+  async _delete(rowData) {
+    hang();
+    let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
+    hang(false);
+    if (result.success) {
+      if (rowData.targetId) {
+        airloy.event.emit(EventTypes.targetChange);
+      } else if (rowData.projectId) {
+        airloy.event.emit(EventTypes.taskChange);
+      } else {
+        airloy.event.emit(EventTypes.choreChange);
+      }
+      rowData.reminder && LocalNotifications.cancelAgenda(rowData.id);
+      this.listSource.remove(rowData);
+      this._sortList();
+    } else {
+      toast(L(result.message));
+    }
+  }
+
   render() {
     return (
       <View style={styles.flex}>
-        <ListView
+        <SwipeableListView
+          maxSwipeDistance={120}
+          renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
           enableEmptySections={true}
           initialListSize={10}
           pageSize={10}

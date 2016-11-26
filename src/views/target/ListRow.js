@@ -91,18 +91,13 @@ const style = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    marginBottom: 20,
     paddingRight: 16,
     paddingLeft: 10,
     paddingTop: 8,
     paddingBottom: 8,
     backgroundColor: 'white',
     borderLeftWidth: 6,
-    borderLeftColor: colors.border,
-    borderTopWidth: px1,
-    borderTopColor: colors.bright2,
-    borderBottomWidth: px1,
-    borderBottomColor: colors.bright2
+    borderLeftColor: colors.border
   },
   title: {
     flex: 1,

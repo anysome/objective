@@ -8,13 +8,10 @@ import Button from 'react-native-button';
 import {analytics, styles, colors, airloy, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
 import Objective from '../../logic/Objective';
-import EventTypes from '../../logic/EventTypes';
-import LocalNotifications from '../../logic/LocalNotifications';
 import TextField from '../../widgets/TextField';
 import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
-import ActionSheet from '@yfuks/react-native-action-sheet';
 
 export default class Edit extends React.Component {
 
@@ -43,64 +40,7 @@ export default class Edit extends React.Component {
   }
 
   componentDidMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => this._showOptions();
-      // so many bugs on android T_T
-      util.isAndroid() ?
-        this.props.navigator.replaceAtIndex(route, -1) :
-        this.props.navigator.replace(route);
-    }
   }
-
-  _showOptions() {
-    let isFuture = this.today < this.agenda.today;
-    let BUTTONS = [isFuture ? '安排到今天' : '推迟到明天', '删除', '取消'];
-    ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
-        cancelButtonIndex: 2,
-        destructiveButtonIndex: 1,
-        tintColor: colors.dark2
-      },
-      async (buttonIndex) => {
-        if (buttonIndex === 0) {
-          hang();
-          let newDate = isFuture ? new Date(this.today) : new Date(this.today + 86400000);
-          let result = await airloy.net.httpPost(api.agenda.update, {
-              id: this.agenda.id,
-              today: newDate
-            }
-          );
-          hang(false);
-          if (result.success) {
-            this.agenda.today = isFuture ? this.today : this.today + 86400000;
-            this.props.onFeedback(this.agenda);
-          } else {
-            toast(L(result.message));
-          }
-        }
-        if (buttonIndex === 1) {
-          hang();
-          let result = await airloy.net.httpGet(api.agenda.remove, {id: this.agenda.id});
-          hang(false);
-          if (result.success) {
-            if (this.agenda.targetId) {
-              airloy.event.emit(EventTypes.targetChange);
-            } else if (this.agenda.projectId) {
-              airloy.event.emit(EventTypes.taskChange);
-            } else {
-              airloy.event.emit(EventTypes.choreChange);
-            }
-            this.props.onDelete(this.agenda);
-            this.agenda.reminder && LocalNotifications.cancelAgenda(this.agenda.id);
-          } else {
-            toast(L(result.message));
-          }
-        }
-      }
-    );
-  }
-
 
   _selectDate() {
     this.setState({

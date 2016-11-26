@@ -26,97 +26,6 @@ export default class Edit extends React.Component {
   }
 
   componentWillMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => this._showOptions();
-      // so many bugs on android T_T
-      util.isAndroid() ?
-        this.props.navigator.replaceAtIndex(route, -1) :
-        this.props.navigator.replace(route);
-    }
-  }
-
-  _showOptions() {
-    let BUTTONS = ['转入清单...', '做为新清单', '删除', '取消'];
-    ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
-        cancelButtonIndex: 3,
-        destructiveButtonIndex: 2,
-        tintColor: colors.dark2
-      },
-      async (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0 :
-            this._selectProjects();
-            break;
-          case 1 :
-            hang();
-            let result = await airloy.net.httpGet(api.chore.to.project, {id: this.data.id});
-            hang(false);
-            if (result.success) {
-              this.props.onDeleted(this.data);
-            } else {
-              toast(L(result.message));
-            }
-            break;
-          case 2 :
-            let isTrash = this.data.catalog === 'recycled';
-            hang();
-            let result2 = await airloy.net.httpGet(api.chore.remove, {id: this.data.id});
-            hang(false);
-            if (result2.success) {
-              if (isTrash) {
-                this.props.onDeleted(this.data);
-              } else {
-                this.data.catalog = 'trash';
-                this.props.onUpdated(this.data);
-              }
-            } else {
-              toast(L(result2.message));
-            }
-            break;
-        }
-      }
-    );
-  }
-
-  async _selectProjects() {
-    let BUTTONS = [];
-    if ( this.projects.length === 0) {
-      let result = await airloy.net.httpGet(api.project.list.focus);
-      if (result.success) {
-        this.projects = result.info;
-      } else {
-        toast(L(result.message));
-        return;
-      }
-    }
-    for (let project of this.projects) {
-      BUTTONS.push(project.title);
-    }
-    BUTTONS.push('取消');
-    let CANCEL_INDEX = this.projects.length;
-    ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
-        cancelButtonIndex: CANCEL_INDEX,
-        tintColor: colors.dark2
-      },
-      async (buttonIndex) => {
-        if (buttonIndex !== CANCEL_INDEX) {
-          hang();
-          let result = await airloy.net.httpGet(api.chore.to.task, {
-            id: this.data.id,
-            projectId: this.projects[buttonIndex].id
-          });
-          hang(false);
-          if (result.success) {
-            this.props.onDeleted(this.data);
-          } else {
-            toast(L(result.message));
-          }
-        }
-      }
-    );
   }
 
   async _save() {
@@ -139,6 +48,7 @@ export default class Edit extends React.Component {
     }
     hang(false);
     if (result.success) {
+      this.props.navigator.pop();
       this.props.onUpdated(result.info);
     } else {
       toast(L(result.message));

@@ -8,10 +8,10 @@ import {airloy, styles, colors, api} from '../../app';
 import util from '../../libs/Util';
 import EventTypes from '../../logic/EventTypes';
 
-import Agenda from '../agenda/SwipeAgenda';
-import Target from '../target/SwipeTarget';
+import Agenda from '../agenda/Agenda';
+import Target from '../target/Target';
 import Anything from './Anything';
-import Chore from '../chore/SwipeChore';
+import Chore from '../chore/Chore';
 import Discover from '../discover/Discover';
 
 

@@ -2,10 +2,13 @@
  * Created by Layman(http://github.com/anysome) on 16/2/19.
  */
 import React from 'react';
-import {
-  StyleSheet, View, ScrollView, ListView,
-  RefreshControl, TouchableOpacity, Text, Alert
-} from 'react-native';
+import {StyleSheet, View, ScrollView, RefreshControl, TouchableOpacity,
+  Text, Alert} from 'react-native';
+
+import SwipeableListViewDataSource from 'SwipeableListViewDataSource';
+import SwipeableListView from 'SwipeableListView';
+import SwipeableQuickActions from 'SwipeableQuickActions';
+import SwipeableQuickActionButton from 'SwipeableQuickActionButton';
 
 import {analytics, airloy, styles, colors, px1, api, L, toast, hang} from '../../app';
 import util from '../../libs/Util';
@@ -29,7 +32,7 @@ export default class Target extends Controller {
     this.state = {
       isRefreshing: true,
       panelTop: util.isAndroid() ? -100 : -36,
-      dataSource: new ListView.DataSource({
+      dataSource: new SwipeableListViewDataSource({
         getSectionHeaderData: (dataBlob, sectionId) => dataBlob[sectionId],
         getRowData: (dataBlob, sectionId, rowId) => dataBlob[sectionId].getRow(rowId),
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -131,97 +134,81 @@ export default class Target extends Controller {
   }
 
   _pressRow(rowData, sectionId) {
-    if (sectionId === 0) {
-      let BUTTONS = [];
-      let CANCEL_INDEX = 1, DESTRUCTIVE_INDEX = 0;
-      let ms = rowData.roundDateEnd - this.today;
-      if (ms > -1) {
-        BUTTONS.push('安排到今天');
-        CANCEL_INDEX = 2, DESTRUCTIVE_INDEX = 1;
+    this.forward({
+      title: '完成情况',
+      component: Glance,
+      passProps: {
+        data: rowData,
+        today: this.today
       }
-      if (ms > 0) {
-        BUTTONS.push('安排到明天');
-        CANCEL_INDEX = 3, DESTRUCTIVE_INDEX = 2;
-      }
-      if (ms > 86400000) {
-        BUTTONS.push('安排到后天');
-        CANCEL_INDEX = 4, DESTRUCTIVE_INDEX = 3;
-      }
-      BUTTONS.push('完成情况', '取消');
-
-      ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          cancelButtonIndex: CANCEL_INDEX,
-          tintColor: colors.dark2
-        },
-        async(buttonIndex) => {
-          switch (buttonIndex) {
-            case CANCEL_INDEX:
-              break;
-            case DESTRUCTIVE_INDEX:
-              this.forward({
-                title: '完成情况',
-                component: Glance,
-                passProps: {
-                  data: rowData,
-                  today: this.today
-                }
-              });
-              break;
-            default:
-              let result = await airloy.net.httpGet(api.target.arrange, {
-                  id: rowData.id,
-                  date: new Date(this.today + buttonIndex * 86400000)
-                }
-              );
-              if (result.success) {
-                airloy.event.emit(EventTypes.agendaAdd, result.info);
-                rowData.arranged = true;
-                rowData.doneAmount = 0;
-                this.listSource.update(rowData);
-                this._sortList();
-              } else {
-                toast(L(result.message));
-              }
-              analytics.onEvent('click_check_arrange');
-          }
-        }
-      );
-    } else {
-      this.forward({
-        title: '完成情况',
-        component: Glance,
-        passProps: {
-          data: rowData,
-          today: this.today
-        }
-      });
-    }
+    });
   }
 
-  _longPressRow(rowData, sectionId) {
+  _toArrange(rowData) {
+    let BUTTONS = [];
+    let CANCEL_INDEX = 0;
+    let ms = rowData.roundDateEnd - this.today;
+    if (ms > -1) {
+      BUTTONS.push('安排到今天');
+      CANCEL_INDEX = 1;
+    }
+    if (ms > 0) {
+      BUTTONS.push('安排到明天');
+      CANCEL_INDEX = 2;
+    }
+    if (ms > 86400000) {
+      BUTTONS.push('安排到后天');
+      CANCEL_INDEX = 3;
+    }
+    BUTTONS.push('取消');
     ActionSheet.showActionSheetWithOptions({
-        options: ['修改', '删除', '取消'],
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        tintColor: colors.dark2
+      },
+      async(buttonIndex) => {
+        switch (buttonIndex) {
+          case CANCEL_INDEX:
+            break;
+          default:
+            let result = await airloy.net.httpGet(api.target.arrange, {
+                id: rowData.id,
+                date: new Date(this.today + buttonIndex * 86400000)
+              }
+            );
+            if (result.success) {
+              airloy.event.emit(EventTypes.agendaAdd, result.info);
+              rowData.arranged = true;
+              rowData.doneAmount = 0;
+              this.listSource.update(rowData);
+              this._sortList();
+            } else {
+              toast(L(result.message));
+            }
+            analytics.onEvent('click_check_arrange');
+        }
+      }
+    );
+  }
+
+  _moreActions(rowData, sectionId) {
+    let BUTTONS = ['修改', '删除 ?', '取消'];
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
         cancelButtonIndex: 2,
         destructiveButtonIndex: 1,
         tintColor: colors.dark2
       },
       async(buttonIndex) => {
         switch (buttonIndex) {
-          case 2:
+          case 0:
+            this._toEdit(rowData);
             break;
           case 1:
             this._toDelete(rowData);
             break;
           default:
-            this.forward({
-              title: '修改',
-              component: Edit,
-              rightButtonIcon: require('../../../resources/icons/more.png'),
-              passProps: {
-                data: rowData
-              }
-            });
+            console.log('cancel options');
         }
       }
     );
@@ -238,24 +225,35 @@ export default class Target extends Controller {
           onPress: async () => {
             hang();
             let result = await airloy.net.httpGet(api.target.remove, {id: rowData.id});
+            console.debug("to delete target id = " + rowData.id);
+            hang(false);
             if (result.success) {
-              airloy.event.emit(EventTypes.agendaChange);
+              airloy.event.emit(EventTypes.targetChange);
+              rowData.arranged && airloy.event.emit(EventTypes.agendaChange);
               this.listSource.remove(rowData);
               this._sortList();
             } else {
               toast(L(result.message));
             }
-            hang(false);
           }
         }
       ]
     );
   }
 
+  _toEdit(rowData) {
+    this.forward({
+      title: '修改',
+      component: Edit,
+      passProps: {
+        data: rowData
+      }
+    });
+  }
+
   _renderRow(rowData, sectionId, rowId) {
     return <ListRow data={rowData} sectionId={sectionId} today={this.today}
-                    onPress={() => this._pressRow(rowData, sectionId)}
-                    onLongPress={() => this._longPressRow(rowData, sectionId)}/>;
+                    onPress={() => this._pressRow(rowData, sectionId)}/>;
   }
 
   _renderSectionHeader(sectionData, sectionId) {
@@ -281,24 +279,56 @@ export default class Target extends Controller {
     });
   }
 
+  _renderActions(rowData, sectionId) {
+    let buttons = [];
+    if (sectionId === 0) {
+      buttons.push(<SwipeableQuickActionButton key='btn-1' imageSource={{}} text={"更多"}
+                                               onPress={() => this._moreActions(rowData, sectionId)}
+                                               style={styles.rowAction} textStyle={styles.rowText}/>);
+      buttons.push(<SwipeableQuickActionButton key='btn-2' imageSource={{}} text={"安排"}
+                                               onPress={() => this._toArrange(rowData)}
+                                               style={styles.rowActionConstructive} textStyle={styles.rowText}/>);
+    } else {
+      buttons.push(<SwipeableQuickActionButton key='btn-1' imageSource={{}} text={"修改"}
+                                               onPress={() => this._toEdit(rowData)}
+                                               style={styles.rowAction} textStyle={styles.rowText}/>);
+      buttons.push(<SwipeableQuickActionButton key='btn-2' imageSource={{}} text={"删除"}
+                                               onPress={() => this._toDelete(rowData)}
+                                               style={styles.rowActionDestructive} textStyle={styles.rowText}/>);
+    }
+    return (
+      <SwipeableQuickActions style={styles.rowActions}>
+        {buttons}
+      </SwipeableQuickActions>
+    );
+  }
+
+  _renderSeparator(sectionId, rowId, adjacentRowHighlighted) {
+    return <View key={rowId + '_separator'} style={style.separator}></View>
+  }
+
   render() {
     return (
       <View style={styles.flex}>
-        <ListView enableEmptySections={true}
-                  initialListSize={10}
-                  pageSize={5}
-                  dataSource={this.state.dataSource}
-                  renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
-                  renderSectionHeader={this._renderSectionHeader}
-                  refreshControl={
-                          <RefreshControl
-                            refreshing={this.state.isRefreshing}
-                            onRefresh={() => this.reload()}
-                            tintColor={colors.accent}
-                            title={'加载中...'}
-                            colors={[colors.accent, colors.action]}
-                            progressBackgroundColor={colors.bright1}
-                          />}
+        <SwipeableListView
+          maxSwipeDistance={120}
+          renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
+          enableEmptySections={true}
+          initialListSize={10}
+          pageSize={5}
+          dataSource={this.state.dataSource}
+          renderRow={(rowData, sectionId, rowId) => this._renderRow(rowData, sectionId, rowId)}
+          renderSectionHeader={this._renderSectionHeader}
+          renderSeparator={this._renderSeparator}
+          refreshControl={
+                  <RefreshControl
+                    refreshing={this.state.isRefreshing}
+                    onRefresh={() => this.reload()}
+                    tintColor={colors.accent}
+                    title={'加载中...'}
+                    colors={[colors.accent, colors.action]}
+                    progressBackgroundColor={colors.bright1}
+                  />}
         />
         <View style={[style.panel, {top: this.state.panelTop}]}>
           <View style={style.line}>
@@ -351,5 +381,12 @@ const style = StyleSheet.create({
   cell: {
     color: colors.accent,
     fontSize: 16
+  },
+  separator: {
+    height: 20,
+    borderTopWidth: px1,
+    borderTopColor: colors.bright2,
+    borderBottomWidth: px1,
+    borderBottomColor: colors.bright2
   }
 });

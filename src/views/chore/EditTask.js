@@ -24,36 +24,6 @@ export default class EditTask extends React.Component {
   }
 
   componentWillMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => {
-        Alert.alert(
-          '确认删除 ?',
-          '删除后可在回收站里找到.',
-          [
-            {text: '不了'},
-            {
-              text: '删除',
-              onPress: async () => {
-                hang();
-                let result = await airloy.net.httpGet(api.task.remove, {id: this.data.id});
-                hang(false);
-                if (result.success) {
-                  this.props.navigator.pop();
-                  this.props.onDeleted(this.data);
-                } else {
-                  toast(L(result.message));
-                }
-              }
-            }
-          ]
-        );
-      };
-      // so many bugs on android T_T
-      util.isAndroid() ?
-        this.props.navigator.replaceAtIndex(route, -1) :
-        this.props.navigator.replace(route);
-    }
   }
 
   async _save() {
@@ -101,7 +71,7 @@ export default class EditTask extends React.Component {
             flat={true}
             defaultValue={this.state.title}
             onChangeText={(text) => this.setState({title:text})}
-            placeholder={this.data.title || '清单子项...'}
+            placeholder={this.data.title || '子任务...'}
             returnKeyType="done"
             autoFocus={this.data.title === ''}
           />

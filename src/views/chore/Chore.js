@@ -1,9 +1,14 @@
 /**
- * Created by Layman <anysome@gmail.com> (http://github.com/anysome) on 16/8/20.
+ * Created by Layman <anysome@gmail.com> (http://github.com/anysome) on 16/11/24.
  */
 import React from 'react';
-import {StyleSheet, RefreshControl, ListView,
-  View, Text, LayoutAnimation, TouchableOpacity, Image} from 'react-native';
+import {RefreshControl, View, Text} from 'react-native';
+
+import SwipeableListViewDataSource from 'SwipeableListViewDataSource';
+import SwipeableListView from 'SwipeableListView';
+import SwipeableQuickActions from 'SwipeableQuickActions';
+import SwipeableQuickActionButton from 'SwipeableQuickActionButton';
+import TouchableBounce from 'TouchableBounce';
 
 import {analytics, airloy, styles, colors, api, toast, L, hang} from '../../app';
 import util from '../../libs/Util';
@@ -22,10 +27,11 @@ export default class Chore extends Controller {
   constructor(props) {
     super(props);
     this.name = 'Chore';
+    this.projects = [];
     this.listSource = null;
     this.state = {
       isRefreshing: true,
-      dataSource: new ListView.DataSource({
+      dataSource: new SwipeableListViewDataSource({
         getSectionHeaderData: (dataBlob, sectionId) => dataBlob[sectionId],
         getRowData: (dataBlob, sectionId, rowId) => dataBlob[sectionId].getRow(rowId),
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -138,48 +144,108 @@ export default class Chore extends Controller {
     section.push(rowData);
   }
 
-  _pressRow(rowData, sectionId) {
-    this.props.navigator.push({
-      title: '修改',
-      component: Edit,
-      rightButtonIcon: require('../../../resources/icons/more.png'),
-      passProps: {
-        data: rowData,
-        onUpdated: (rowData) => this.updateRow(rowData),
-        onDeleted: (rowData) => this.deleteRow(rowData)
-      }
-    });
-  }
-
-  _longPressRow(rowData) {
-    let BUTTONS = ['删除', '取消'];
+  _moreActions(rowData) {
+    let buttons = ['删除', '移入清单...', '作为新清单', '取消'];
     ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
+        options: buttons,
         destructiveButtonIndex: 0,
-        cancelButtonIndex: 1,
+        cancelButtonIndex: 3,
         tintColor: colors.dark2
       },
       async (buttonIndex) => {
-        if (buttonIndex === 0) {
-          let isTrash = rowData.catalog === 'recycled';
+        switch (buttonIndex) {
+          case 0:
+            this._toDelete(rowData);
+            break;
+          case 1:
+            this._selectProjects(rowData);
+            break;
+          case 2:
+            this._asProject(rowData);
+            break;
+          default:
+            console.log('cancel options');
+        }
+      }
+    );
+  }
+
+  updateRow(rowData) {
+    // also for add
+    this.listSource.update(rowData);
+    this._sortList();
+  }
+
+  deleteRow(rowData) {
+    this.listSource.remove(rowData);
+    this._sortList();
+  }
+
+  async _toDelete(rowData) {
+    let isTrash = rowData.catalog === 'recycled';
+    hang();
+    let result2 = await airloy.net.httpGet(api.chore.remove, {id: rowData.id});
+    hang(false);
+    if (result2.success) {
+      if (isTrash) {
+        this.deleteRow(rowData);
+      } else {
+        rowData.catalog = 'recycled';
+        this.listSource.update(rowData);
+        this._sortList();
+      }
+    }
+  }
+
+  async _selectProjects(rowData) {
+    let BUTTONS = [];
+    if ( this.projects.length === 0) {
+      let result = await airloy.net.httpGet(api.project.list.focus);
+      if (result.success) {
+        this.projects = result.info;
+      } else {
+        toast(L(result.message));
+        return;
+      }
+    }
+    for (let project of this.projects) {
+      BUTTONS.push(project.title);
+    }
+    BUTTONS.push('取消');
+    let CANCEL_INDEX = this.projects.length;
+    ActionSheet.showActionSheetWithOptions({
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        tintColor: colors.dark2
+      },
+      async (buttonIndex) => {
+        if (buttonIndex !== CANCEL_INDEX) {
           hang();
-          let result2 = await airloy.net.httpGet(api.chore.remove, {id: rowData.id});
+          let result = await airloy.net.httpGet(api.chore.to.task, {
+            id: rowData.id,
+            projectId: this.projects[buttonIndex].id
+          });
           hang(false);
-          if (result2.success) {
-            if (isTrash) {
-              this.listSource.remove(rowData);
-              this._sortList();
-            } else {
-              rowData.catalog = 'recycled';
-              this.listSource.update(rowData);
-              this._sortList();
-            }
+          if (result.success) {
+            this.deleteRow(rowData);
           } else {
-            toast(L(result2.message));
+            toast(L(result.message));
           }
         }
       }
     );
+  }
+
+  async _asProject(rowData) {
+    hang();
+    let result = await airloy.net.httpGet(api.chore.to.project, {id: rowData.id});
+    hang(false);
+    if (result.success) {
+      this.deleteRow(rowData);
+      this.projects = [];
+    } else {
+      toast(L(result.message));
+    }
   }
 
   _toArrange(rowData) {
@@ -202,8 +268,7 @@ export default class Chore extends Controller {
           hang(false);
           if (result.success) {
             airloy.event.emit(EventTypes.agendaAdd, result.info);
-            this.listSource.remove(rowData);
-            this._sortList();
+            this.deleteRow(rowData);
           } else {
             toast(L(result.message));
           }
@@ -212,32 +277,27 @@ export default class Chore extends Controller {
     );
   }
 
-  updateRow(rowData) {
-    // also for add
-    this.listSource.update(rowData);
-    this.props.navigator.pop();
-    this._sortList();
-  }
-
-  deleteRow(rowData) {
-    this.listSource.remove(rowData);
-    this.props.navigator.pop();
-    this._sortList();
-  }
-
   _renderRow(rowData, sectionId, rowId) {
     return (
-      <TouchableOpacity style={style.container} onPress={() => this._pressRow(rowData, sectionId)}
-                        onLongPress={() => this._longPressRow(rowData)}>
-        <TouchableOpacity onPress={() => this._toArrange(rowData)} style={style.icon}>
-          <Image source={require('../../../resources/icons/arrange.png')} style={style.arrange} />
-        </TouchableOpacity>
+      <TouchableBounce style={styles.listRow}
+                        onPress={() => this._pressRow(rowData, sectionId)} >
         <View style={styles.flex}>
           <Text style={styles.title}>{rowData.title}</Text>
           {rowData.detail ? <Text style={styles.text}>{rowData.detail}</Text> : null}
         </View>
-      </TouchableOpacity>
+      </TouchableBounce>
     );
+  }
+
+  _pressRow(rowData, sectionId) {
+    this.props.navigator.push({
+      title: '修改',
+      component: Edit,
+      passProps: {
+        data: rowData,
+        onUpdated: (rowData) => this.updateRow(rowData)
+      }
+    });
   }
 
   _renderSectionHeader(sectionData, sectionId) {
@@ -248,9 +308,24 @@ export default class Chore extends Controller {
     return <View key={rowId + '_separator'} style={styles.hr}></View>
   }
 
+  _renderActions(rowData, sectionId) {
+    return (
+      <SwipeableQuickActions style={styles.rowActions}>
+        <SwipeableQuickActionButton imageSource={{}} text={"更多"}
+                                    onPress={() => this._moreActions(rowData)}
+                                    style={styles.rowAction} textStyle={styles.rowText}/>
+        <SwipeableQuickActionButton imageSource={{}} text={"安排"}
+                                    onPress={() => this._toArrange(rowData, sectionId)}
+                                    style={styles.rowActionConstructive} textStyle={styles.rowText}/>
+      </SwipeableQuickActions>
+    );
+  }
+
   render() {
     return (
-      <ListView
+      <SwipeableListView
+        maxSwipeDistance={120}
+        renderQuickActions={(rowData, sectionId, rowId) => this._renderActions(rowData, sectionId)}
         enableEmptySections={true}
         initialListSize={10}
         pageSize={5}
@@ -271,24 +346,3 @@ export default class Chore extends Controller {
     );
   }
 }
-
-
-
-const style = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flex: 1,
-    paddingRight: 16,
-    paddingTop: 8,
-    paddingBottom: 8,
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-  icon: {
-    paddingLeft: 16,
-    paddingRight: 10
-  },
-  arrange: {
-    tintColor: colors.dark2
-  }
-});

@@ -15,7 +15,6 @@ import TextArea from '../../widgets/TextArea';
 import PriorityPicker from '../../widgets/PriorityPicker';
 import DatePicker from '../../widgets/DatePicker';
 import OptionsPicker from '../../widgets/OptionsPicker';
-import ActionSheet from '@yfuks/react-native-action-sheet';
 
 export default class Edit extends React.Component {
 
@@ -89,32 +88,6 @@ export default class Edit extends React.Component {
       showPickerDateEnd: false
     };
     this._title = null;
-  }
-
-  _toDelete() {
-    Alert.alert(
-      '确认删除 ?',
-      '将彻底删除该目标和它所有产生的待办.',
-      [
-        {text: '不了'},
-        {
-          text: '删除',
-          onPress: async () => {
-            hang();
-            let result = await airloy.net.httpGet(api.target.remove, {id: this.target.id});
-            console.debug("to delete target id = " + this.target.id);
-            hang(false);
-            if (result.success) {
-              airloy.event.emit(EventTypes.targetChange);
-              this.target.arranged && airloy.event.emit(EventTypes.agendaChange);
-              this.props.navigator.popToTop();
-            } else {
-              toast(L(result.message));
-            }
-          }
-        }
-      ]
-    );
   }
 
   async _save() {
@@ -668,43 +641,6 @@ export default class Edit extends React.Component {
   }
 
   componentDidMount() {
-    let route = this.props.navigator.navigationContext.currentRoute;
-    if (route.rightButtonIcon) {
-      route.onRightButtonPress = () => {
-        ActionSheet.showActionSheetWithOptions({
-            // options: ['共享', '删除', '取消'],
-            options: ['删除', '取消'],
-            cancelButtonIndex: 1,
-            destructiveButtonIndex: 0,
-            tintColor: colors.dark2
-          },
-          async(buttonIndex) => {
-            switch (buttonIndex) {
-              case 1:
-                break;
-              case 0:
-                this._toDelete();
-                break;
-              default:
-                let result = await airloy.net.httpGet(api.discover.target.share, {
-                    checkTargetId: this.target.id
-                  }
-                );
-                if (result.success) {
-                  toast('目标已共享, 请稍候两天');
-                } else {
-                  toast(L(result.message));
-                }
-                analytics.onEvent('click_target_share');
-            }
-          }
-        );
-      };
-      // so many bugs on android T_T
-      util.isAndroid() ?
-        this.props.navigator.replaceAtIndex(route, -1) :
-        this.props.navigator.replace(route);
-    }
   }
 }
 
