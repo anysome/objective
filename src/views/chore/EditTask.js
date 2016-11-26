@@ -96,12 +96,3 @@ export default class EditTask extends React.Component {
     );
   }
 }
-
-const style = StyleSheet.create({
-  text: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    color: colors.dark2,
-    fontSize: 14
-  }
-});

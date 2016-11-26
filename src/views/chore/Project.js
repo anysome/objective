@@ -148,6 +148,7 @@ export default class Project extends React.Component {
     hang(false);
     if (result.success) {
       this.deleteRow(rowData);
+      airloy.event.emit(EventTypes.choreChange);
     } else {
       toast(L(result.message));
     }
@@ -204,7 +205,7 @@ export default class Project extends React.Component {
     return (
       <TouchableBounce style={styles.listRow} onPress={() => this._pressRow(rowData, editable)}>
         {rowData.status === '1' &&
-        <Image source={require('../../../resources/icons/checked.png')} style={styles.iconSmall} />
+        <Image source={require('../../../resources/icons/checked.png')} style={style.icon} />
         }
         <View style={styles.flex}>
           <Text style={[styles.title, {color: transform.titleColor}]}>{rowData.title}</Text>
@@ -268,6 +269,10 @@ export default class Project extends React.Component {
 
 
 const style = StyleSheet.create({
+  icon: {
+    tintColor: colors.bright2,
+    marginRight: 4
+  },
   header: {
     paddingTop: 16,
     paddingLeft: 24,

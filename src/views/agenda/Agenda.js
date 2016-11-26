@@ -245,7 +245,7 @@ export default class Agenda extends Controller {
                                     style={styles.rowAction} textStyle={styles.rowText}/>
         }
         <SwipeableQuickActionButton imageSource={{}} text={"删除"}
-                                    onPress={() => this._delete(rowData)}
+                                    onPress={() => this._toDelete(rowData)}
                                     style={styles.rowActionDestructive} textStyle={styles.rowText}/>
       </SwipeableQuickActions>
     );
@@ -314,7 +314,7 @@ export default class Agenda extends Controller {
     );
   }
 
-  async _delete(rowData) {
+  async _toDelete(rowData) {
     hang();
     let result = await airloy.net.httpGet(api.agenda.remove, {id: rowData.id});
     hang(false);

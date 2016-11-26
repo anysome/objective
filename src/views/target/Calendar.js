@@ -29,7 +29,7 @@ export default class Calendar extends React.Component {
     this.today = moment();
     this.actives = new Map();
     this.notes = new Map();
-    this.actives.set(new Date().getTime(), 'border');
+    // this.actives.set(new Date().getTime(), 'border');
     this.state = {
       loaded: false
     };
@@ -53,7 +53,7 @@ export default class Calendar extends React.Component {
       for (let punch of result.info) {
         switch (punch.doneAmount) {
           case 0:
-            this.actives.set(punch.today, 'border');
+            punch.today && this.actives.set(punch.today, 'border');
             break;
           case 1:
             this.actives.set(punch.today, 'fill');
