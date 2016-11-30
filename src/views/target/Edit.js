@@ -70,7 +70,6 @@ export default class Edit extends React.Component {
           break;
       }
     }
-    this.type = this.target.type;
     this.state = {
       title: this.target.title,
       detail: this.target.detail,
