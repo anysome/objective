@@ -89,6 +89,17 @@ export default class Discover extends Controller {
     analytics.onEvent('click_to_store');
   }
 
+  _toDiaryStore() {
+    let link = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1208169858&mt=8";
+    Linking.canOpenURL(link).then(supported => {
+      if (supported) {
+        Linking.openURL(link);
+      } else {
+        toast('抱歉，暂时无法跳转进商店');
+      }
+    });
+  }
+
   async reload() {
     console.log('nothing to reload');
   }
@@ -128,6 +139,14 @@ export default class Discover extends Controller {
             <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
           </TouchableOpacity>
           <View style={styles.hr}/>
+          {!util.isAndroid() && [
+            <TouchableOpacity style={styles.sectionRow} key={'4'} onPress={() => this._toDiaryStore()}>
+              <Text style={styles.navText}>洒脱日记</Text>
+              <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
+            </TouchableOpacity> ,
+            <View style={styles.hr} key={'5'} />
+           ]
+          }
           <TouchableOpacity style={styles.sectionRow} onPress={() => this._forward('设置', Setting)}>
             <Text style={styles.navText}>设置</Text>
             <Image source={require('../../../resources/icons/forward.png')} style={styles.iconSmall} />
