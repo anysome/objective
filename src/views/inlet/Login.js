@@ -67,7 +67,7 @@ export default class Login extends React.Component {
         if (result.success) {
           await airloy.auth.saveUser(result.info);
           analytics.onProfileSignIn('' + result.info.id);
-          this.onSigned(result.info.transfer);
+          this.onSigned();
         } else {
           toast(L(result.message), 70);
         }
@@ -95,7 +95,7 @@ export default class Login extends React.Component {
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       analytics.onProfileSignIn('' + result.info.id);
-      this.onSigned(result.info.transfer);
+      this.onSigned();
     } else {
       toast(L(result.message), 70);
     }
@@ -109,7 +109,7 @@ export default class Login extends React.Component {
     if (result.success) {
       await airloy.auth.saveUser(result.info);
       analytics.onProfileSignIn('' + result.info.id);
-      this.onSigned(result.info.transfer);
+      this.onSigned();
     } else {
       toast(L(result.message), 70);
     }

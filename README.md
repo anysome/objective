@@ -43,15 +43,6 @@ iOS 还需要把ART和Notification在xcode中配置.
 es6 first!
 
 
-### TODO
-
-- [x] Android 2.0 release
-- [x] User login and profile enhance
-- [ ] Hot Update
-- [ ] Local cache and db
-- [x] I18n
-
-
 ### Welcome
 
 反馈、建议、pr、star、share ……
